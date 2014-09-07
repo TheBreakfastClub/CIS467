@@ -25,12 +25,37 @@ Creating a game with a resolution-changing engine, what we call our *Pixelinator
 The presence of enemies within a video game necessitates giving these enemies some sort of artificial intelligence.  While many of us have had some minor exposure to the concepts of A.I. and machine learning, none of us have implemented any complex level of game A.I.  We plan to research and implement different well-known artificial intelligence algorithms and also to create some of our own in order to grow our expertise in this fascinating area of computer science and to make our game more fun to play.  We are all very excited to dive into the field of A.I.  However, we plan to implement A.I. rather late in our development cycle, and we are well aware that due to the scope of this project, we may only have time to implement basic A.I. algorithms.
 
 
+Backlog
+-----------------------------
+1. Game Engine
+	1. basic game engine
+		1. see things move
+		2. static collision detection
+	2. api structure definition
+2. Visual/Audio Design
+	1. visuals/pixellation
+		1. Determine Algorithm to pixalate
+	2. game world
+		1. Design levels
+	3. sprites/items
+		1. Charactor Design
+			1. Main Charactor
+			2. Enemies
+		2. Items
+			1. Main Charactor Items/Weapons
+			2. 6 Tokens
+	4. enemy placement
+	5. music/sfx
+3. Game Design
+	1. specific game mechanics 
+		1. how things move
+		2. How things interact
+	2. character definition
+		1. Main charactor behavior
+	3. controls
+	4. enemy AI
 
 
-
-
-
-
-
+-----------------------------
 _Info on TheBreakfastClub's Waffle icon:_
 <i>Waffle designed by <a href="http://www.thenounproject.com/jacob">Jacob Halton</a> from the <a href="http://www.thenounproject.com">Noun Project</a></i>
