@@ -61,6 +61,34 @@ Backlog
 	3. Controls
 	4. Enemy AI
 
+8 Code of Ethics Principles
+-----------------------------
+After reviewing and assessing  the Software Engineering Code of Ethics and Professional Practice; we have decided on the following 8 principles are the most relevant to our project:
+
+1.01 Accept full responsibility for their own work
+	Each group member must take responsibility for their assigned tasks. For our team to work
+
+3.02. Ensure proper and achievable goals and objectives for any project on which they work or propose.
+	Although our group aims to create the best project we can; we also realize that if we attempt to much we might fall short of our goals and create an undesirable product.
+
+6.01. Help develop an organizational environment favorable to acting ethically.
+	The group environment must foster ethical principles.
+
+6.08. Take responsibility for detecting, correcting, and reporting errors in software and associated documents on which they work.
+	Group members must make have accountability for their work. It is beneficial to the team if everyone understands the current state of the project.
+
+7.01. Encourage colleagues to adhere to this Code.
+	Group members must not only follow the code of ethics, but must also encourage others to act ethically.
+
+7.02. Assist colleagues in professional development.
+	Group members should professionally review work done by other group members.
+7.05. Give a fair hearing to the opinions, concerns, or complaints of a colleague.
+	All opinions must be taken into account during the project to promote an equal environment.
+
+8.09. Recognize that personal violations of this Code are inconsistent with being a professional software engineer.
+	Group members will understand that not following the code of ethics is unprofessional.
+
+
 
 -----------------------------
 _Info on TheBreakfastClub's Waffle icon:_
