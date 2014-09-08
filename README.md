@@ -5,6 +5,12 @@ Grand Valley State University, Fall 2014
 
 This repo holds the Breakfast Club's project for CIS 467 - Computer Science Capstone.
 
+Introduction
+------------
+
+When 2D games were first created, developers/designers worried about hardware constraints. Indeed, many features of games during this era required clever strategies and methods for squeezing every bit of performance out of whatever given platform the game was to be run on. The minutea of the hardware implementation, such as memory management, were managed by the game programmer. Given the computing hardware of today, one would be hard-pressed to truly test hardware limits in two dimensions. Now, game programming libraries and engines run on top of sophisticated operating systems that manage these aspects, shifting the focus of the programmer almost entirely on the mechanics of the game itself. The evolution of computer hardware and the software running on them has also given rise to more powerful development environments in which a game producer can leverage. A 2D game created today can take advantage of preexisting libraries, sophisticated AI, high-resolution graphics, and much more.
+
+This project attempts to take advantage of modern computer hardware and software in order to demonstrate that a 2D game of moderate complexity can be created in one semester by a small team of programmers with relatively little game programming experience. We plan to create a puzzle-based game in which the solution lies in changing the screen resolution. Players will be able to move from one area to another, gain more abilities, and defeat enemies using their power to change the resultion. To do so, we will also be creating our own game engine. Provided that there is time, enemies will be added randomly and given some basic AI to help add complexity to the gameplay.
 
 Areas of Technical Innovation
 -----------------------------
