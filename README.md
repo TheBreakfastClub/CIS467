@@ -8,9 +8,9 @@ This repo holds the Breakfast Club's project for CIS 467 - Computer Science Caps
 Introduction
 ------------
 
-When 2D games were first created, developers/designers worried about hardware constraints. Indeed, many features of games during this era required clever strategies and methods for squeezing every bit of performance out of whatever given platform the game was to be run on. The minutea of the hardware implementation, such as memory management, were managed by the game programmer. Given the computing hardware of today, one would be hard-pressed to truly test hardware limits in two dimensions. Now, game programming libraries and engines run on top of sophisticated operating systems that manage these aspects, shifting the focus of the programmer almost entirely on the mechanics of the game itself. The evolution of computer hardware and the software running on them has also given rise to more powerful development environments in which a game producer can leverage. A 2D game created today can take advantage of preexisting libraries, sophisticated AI, high-resolution graphics, and much more.
+When 2D games were first created, developers/designers worried about hardware constraints. Indeed, many features of games during this era required clever strategies and methods for squeezing every bit of performance out of whatever given platform the game was to be run on. The minutia of the hardware implementation, such as memory management, were managed by the game programmer. Given the computing hardware of today, one would be hard-pressed to truly test hardware limits in two dimensions. Now, game programming libraries and engines run on top of sophisticated operating systems that manage these aspects, shifting the focus of the programmer almost entirely on the mechanics of the game itself. The evolution of computer hardware and the software running on them has also given rise to more powerful development environments in which a game producer can leverage. A 2D game created today can take advantage of preexisting libraries, sophisticated AI, high-resolution graphics, and much more.
 
-This project attempts to take advantage of modern computer hardware and software in order to demonstrate that a 2D game of moderate complexity can be created in one semester by a small team of programmers with relatively little game programming experience. We plan to create a puzzle-based game in which the solution lies in changing the screen resolution. Players will be able to move from one area to another, gain more abilities, and defeat enemies using their power to change the resultion. To do so, we will also be creating our own game engine. Provided that there is time, enemies will be added randomly and given some basic AI to help add complexity to the gameplay.
+This project attempts to take advantage of modern computer hardware and software in order to demonstrate that a 2D game of moderate complexity can be created in one semester by a small team of programmers with relatively little game programming experience. We plan to create a puzzle-based game in which the solution lies in changing the screen resolution. Players will be able to move from one area to another, gain more abilities, and defeat enemies using their power to change the resolution. To do so, we will also be creating our own game engine. Provided that there is time, enemies will be added randomly and given some basic AI to help add complexity to the gameplay.
 
 Areas of Technical Innovation
 -----------------------------
@@ -65,28 +65,29 @@ Backlog
 -----------------------------
 After reviewing and assessing  the Software Engineering Code of Ethics and Professional Practice; we have decided on the following 8 principles are the most relevant to our project:
 
-1.01 Accept full responsibility for their own work
-	Each group member must take responsibility for their assigned tasks. For our team to work
+> 1.01 Accept full responsibility for their own work
+	Each group member must take responsibility for their assigned tasks.
 
-3.02. Ensure proper and achievable goals and objectives for any project on which they work or propose.
-	Although our group aims to create the best project we can; we also realize that if we attempt to much we might fall short of our goals and create an undesirable product.
+> 3.02. Ensure proper and achievable goals and objectives for any project on which they work or propose.
+	Although our group aims to create the best project we can; we also realize that if we attempt too much we might fall short of our goals and create an undesirable product and learning experience.
 
-6.01. Help develop an organizational environment favorable to acting ethically.
-	The group environment must foster ethical principles.
+> 6.01. Help develop an organizational environment favorable to acting ethically.
+	The group will address either one-on-one or in meetings any ethical concerns individuals have.
 
-6.08. Take responsibility for detecting, correcting, and reporting errors in software and associated documents on which they work.
-	Group members must make have accountability for their work. It is beneficial to the team if everyone understands the current state of the project.
+> 6.08. Take responsibility for detecting, correcting, and reporting errors in software and associated documents on which they work.
+	Group members will review and test each other's code for errors. It is beneficial to the team if everyone understands the current state of the project.
 
-7.01. Encourage colleagues to adhere to this Code.
-	Group members must not only follow the code of ethics, but must also encourage others to act ethically.
+> 8.02. Software Engineers shall improve their ability to create safe, reliable, and useful quality software at reasonable cost and within a reasonable time. 
+	We will use all resources available to create our project.
 
-7.02. Assist colleagues in professional development.
-	Group members should professionally review work done by other group members.
-7.05. Give a fair hearing to the opinions, concerns, or complaints of a colleague.
+> 7.02. Assist colleagues in professional development.
+	Group members should professionally review work done by other group members. Each group member will attempt to fully address all questions about their current work to better the education of others.
+
+> 7.05. Give a fair hearing to the opinions, concerns, or complaints of a colleague.
 	All opinions must be taken into account during the project to promote an equal environment.
 
-8.09. Recognize that personal violations of this Code are inconsistent with being a professional software engineer.
-	Group members will understand that not following the code of ethics is unprofessional.
+> 8.09. Recognize that personal violations of this Code are inconsistent with being a professional software engineer.
+	Group members understand that not following the code of ethics is unprofessional and will be conscious of the code while working.
 
 
 
