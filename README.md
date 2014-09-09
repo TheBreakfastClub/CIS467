@@ -20,7 +20,7 @@ Our project aims to use the knowledge we have accumulated while attaining our Co
 
 We will develop a single player, 2-dimensional top-down action adventure game in the style of the the classic Zelda series. 
 
-The game engine will be written in C++ using [SDL 2.0]http://www.libsdl.org for audio, video, and input. Rendering will most likely all be done in software, using SDL simply to blit frames to the screen, though we may end up using openGL if we decide to implement rotation and/or scaling. Although we are only targetting Linux directly, the game engine itself will be quite portable.
+The game engine will be written in C++ using <a href=http://www.libsdl.org>SDL 2.0</a> for audio, video, and input. Rendering will most likely all be done in software, using SDL simply to blit frames to the screen, though we may end up using openGL if we decide to implement rotation and/or scaling. Although we are only targetting Linux directly, the game engine itself will be quite portable.
 
 Game maps will most likely be tile based, though we will experiment with large, image based maps as well. Game sprites and tiles will be drawn by hand. Tile based maps will be authored manually with an editor of our making, while image based maps may be created in photoshop or generated algorithmically. We will experiment with, but not rely on, automatic map generation.
 
