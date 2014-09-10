@@ -18,27 +18,28 @@ Our project aims to use the knowledge we have accumulated while attaining our Co
 
 ### - Video Game Development
 
-We will develop a single player, 2-dimensional top-down action adventure game in the style of the the classic Zelda series. 
+We will develop a single player, 2-dimensional, top-down action, adventure game in the style of the the classic Zelda series. 
 
 The game engine will be written in C++ using <a href=http://www.libsdl.org>SDL 2.0</a> for audio, video, and input. Rendering will most likely all be done in software, using SDL simply to blit frames to the screen, though we may end up using openGL if we decide to implement rotation and/or scaling. Although we are only targetting Linux directly, the game engine itself will be quite portable.
 
-Game maps will most likely be tile based, though we will experiment with large, image based maps as well. Game sprites and tiles will be drawn by hand. Tile based maps will be authored manually with an editor of our making, while image based maps may be created in photoshop or generated algorithmically. We will experiment with, but not rely on, automatic map generation.
+Game maps will most likely be tile based, though we may experiment with large, image based maps as well. Game sprites and tiles will be drawn by hand, perhaps through Photoshop or the like. Tile based maps will be authored manually with an editor of our making, while image based maps may be created in Photoshop or generated algorithmically. We may experiment with, but not rely on, automatic map generation.
 
-Pixel perfect collision detection will be implemented, with physical properties determined directly by pixel color and opacity.
+Pixel perfect collision detection may be implemented, with physical properties determined directly by pixel color and opacity.
 
-### - Variable Detail World
+### - Variable Detail World: Creating a Multi-Resolution Interface
 
-A primary gameplay element we would like to explore is that of variable detail. The player may pixelate or refine the world around them at will, with collision detection based on currently visible details. Pixelation may be implemented by several different algorithms, such as point sampling, mean or median color, min/max for each primary color, and so on. Key colors or opacities in tiles or enemy sprites may be used to override the algorithm's default behaviour as well.
+When designing a video game, the graphics used in the game can be highly important to the player.  Some prefer high resolution, well-crafted graphics while others prefer a more simplified and pixelated game world, creating a retro feel that imitates the low resolution screens used during the genesis of 2D games.  For this project, we will be investigating an innovative new approach: rather than make a game in only low resolution or only in high resolution, we will create a game that experiments with changing the resolution throughout the game. Changing the resolution of the game world will change the level of detail in which the world is presented to the player.  In this way, the user would begin the game in a highly pixelated, low resolution world. However, as the player progresses, they gain the ability to increase the resolution of the world around them or to decrease it back to the original resolution.
 
-Depending on the algorithm chosen, the player may open or block paths on the map based on the current detail level. When increasing resolution, the player may find that what they thought was a solid wall actually contains a small door.  When decreasing resolution, the player sees the logs in a river grow into a pixelated bridge. Enemies might do different amounts of damage depending on their detail level, possibly affecting their AI.
+This ability allows the player to pixelate or refine the world around them at will, with collision detection based on currently visible details. We plan to only create the highest resolution world by hand and develop a pixelation algorithm to create the lower resolution worlds from there. Pixelation may be implemented by several different algorithms, such as taking the average tile type within a region, point sampling, mean or median color, min/max for each primary color, and so on. The algorithm's default behaviour may also be overridden at times for special circumstances; for instance, certain colors or opacities in tiles or enemy sprites may be used to tell the algorithm to pixelate in a unique way.
 
-We don't know how many detail levels are desirable. We can devise cases where any number of detail levels are useful using point sampled pixelation, but this may prove too unpredictable and frustrating in practice. We would like to develop game dynamics which favor several levels of detail.
+Because of the ability to change resolutions, the player may open or block paths on the map based on the current detail level. When increasing resolution, the player may find that what they thought was a solid wall actually contains a small door.  When decreasing resolution, the player sees the logs in a river fade into a pixelated bridge. Enemies might do different amounts of damage depending on their detail level or operate under different levels of intelligence.
+
+We do not yet know how many detail levels are desirable. We can devise cases where any number of detail levels are useful using point sampled pixelation, but this may prove too unpredictable and frustrating in practice. We would like to develop game dynamics which favor several levels of detail.
 
 
 ### - Artificial Intelligence
 
-Enemy AI will be saved for last; if we run out of time, this will be little more than a puzzle game. Time allowing, we would like to explore explicit AI algorithms, or implement machine learning algorithms, such as genetic algorithms and neural networks. AI need not be written in C++; we may interface other languages with the game engine.
-
+The presence of enemies within a video game necessitates giving these enemies some sort of artificial intelligence.  We plan to research and implement different well-known artificial intelligence algorithms and also to create some of our own.  We may also implement machine learning algorithms, such as genetic algorithms or neural networks.  However, we plan to implement A.I. rather late in our development cycle, and we are well aware that due to the scope of this project, we may only have time to implement basic A.I. algorithms.  If this is the case, the game may become more of a puzzle game than anything else. A.I. need not be written in C++; we may interface other languages with the game engine.
 
 Backlog
 -----------------------------
