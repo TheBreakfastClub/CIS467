@@ -75,7 +75,7 @@ Backlog
 -----------------------------
 After reviewing and assessing  the Software Engineering Code of Ethics and Professional Practice; we have decided on the following 8 principles are the most relevant to our project:
 
-> 1.01 Accept full responsibility for their own work
+> 1.01 Accept full responsibility for their own work.
 	Each group member must take responsibility for their assigned tasks.
 
 > 3.02. Ensure proper and achievable goals and objectives for any project on which they work or propose.
