@@ -21,3 +21,6 @@ To install SDL2 in your own home directory, follow these directions:
 
 6. Navigate to where the game code is and build it. For example:
    ``` g++ -Wall -g -L/home/uhenc/lib/SDL2/lib -I/home/uhenc/lib/SDL2/include -lSDL2 -std=c++11 game.cpp engine/*.cpp -o game ```
+
+7. Set LD_LIBRARY_PATH: 
+   ``` export LD_LIBRARY_PATH=~/lib/SDL2/lib:$LD_LIBRARY_PATH ```
