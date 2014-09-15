@@ -1,0 +1,62 @@
+$gridNum: 1;
+
+$resolutions: 1, 2, 4, 8, 16, 32;
+$percentages: 0, 1, 2, 3, 4, 5, 6;
+$x: 100/6;
+
+$colors: 0, 45, 85, 120, 145, 185, 210, 235, 260, 295, 315, 340;
+
+p.printout {
+	width: 400px;
+	float: left;
+}
+
+.pixalSmallx {
+	width: 3*32px;
+	height: 3*32px;
+}
+.pixalBigx {
+	width: 15*32px;
+	height: 15*32px;
+}
+.pixalSmallx, 
+.pixalBigx {
+	float: right;
+	margin-top: 100px;
+	border: 2px solid black;
+	padding: 0;
+	margin: 30px;
+
+}
+
+@each $per in $percentages {
+	@each $col in $colors {
+		.colorBox#{$col}#{$per} {
+			width: 50px;
+			height: 50px;
+			background-color: hsl($col, 100%, 100 - ($per * 100/8) - 3%);
+			display: inline-block;
+		}
+	}
+}
+
+@each $res in $resolutions {
+	.singlePixel#{$res} {
+		width: (1/$res)*100%;
+		height: (1/$res)*100%;
+		box-sizing: border-box;
+		float: left;	
+		margin: 0;
+		padding: 0;
+
+		&:hover {
+			border: 1px solid lightgray;
+		}
+
+		&.selected {
+			border: 1px solid darkgray;
+
+		}
+	}
+}
+

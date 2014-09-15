@@ -1,0 +1,1052 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"val",
+				"value"
+			],
+			[
+				"pix",
+				"pixel"
+			],
+			[
+				"color",
+				"colors"
+			],
+			[
+				"hue",
+				"hues"
+			],
+			[
+				"select",
+				"selectedColor"
+			],
+			[
+				"print",
+				"printout"
+			],
+			[
+				"ma",
+				"maxVal"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"a",
+				"avgColors"
+			],
+			[
+				"te",
+				"test"
+			],
+			[
+				"sel",
+				"selectedColor"
+			],
+			[
+				"chang",
+				"changeRes"
+			],
+			[
+				"pi",
+				"pix"
+			],
+			[
+				"tod",
+				"todos"
+			],
+			[
+				"comp",
+				"completed"
+			],
+			[
+				"b",
+				"b"
+			],
+			[
+				"chek",
+				"check_todo"
+			],
+			[
+				"che",
+				"check_todo"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 836,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "var selectedPixel = {};\nvar selectedColor = \"\";\nvar colors = [];\n\nvar maxVal = 32;\n\nfor (var j = 0; j < maxVal; j++) {\n	colors[j] = [];\n    for (var i = 0; i < maxVal; i++) {\n    	colors[j][i] = 97;\n	};\n};\n\n\nfunction avgColors (x, y, num) {      \n\n	var newColor = [0,0,0];\n\n	for (var j = 0; j < num; j++) {    \n\n	    for (var i = 0; i < num; i++) {\n	    	newColor[0] = newColor[0] + colors[(x*num)+j][(y*num)+i][0];\n	    	newColor[1] = newColor[1] + colors[(x*num)+j][(y*num)+i][1];\n	    	newColor[2] = newColor[2] + colors[(x*num)+j][(y*num)+i][2];\n		};\n	};\n\n	newColor[0] = Math.round(newColor[0]/(num*num)*8)/8;\n	newColor[1] = Math.round(newColor[1]/(num*num)*8)/8;\n	newColor[2] = Math.round(newColor[2]/(num*num)*8)/8;\n\n	return newColor;\n};\n\nfunction makeBigPixel (x, y, hue, shade) {\n	var pixel = {};\n\n	pixel['x'] = x;\n	pixel['y'] = y;\n	pixel['color'] = \"123456\";\n\n	pixel.pix = $('<div/>')\n    	.addClass(\"singlePixel\" + size);\n\n\n	$(\".pixalSmallx\").append(pixel.pix);\n\n	pixel.changeColor = function (value) {\n		pixel['color'] = value;\n		pixel.pix.css(\"background-color\", value);\n		// pixel.pix.css(\"background-color\", \"rgb(\"+(value[0]*256)+\",\"+(value[1]*256)+\",\"+(value[2]*256)+\")\");\n		colors[x][y] = value;\n	};\n\n\n\n	pixel.setColor = function () {\n		var value = avgColors(x, y, maxVal / size);\n		pixel.pix.css(\"background-color\", \"rgb(\"+(value[0]*256)+\",\"+(value[1]*256)+\",\"+(value[2]*256)+\")\");\n	};\n\n	pixel.pix.click(function(e) {\n		selectedPixel = pixel;\n		$(\".selected\").toggleClass(\"selected\", false);\n		pixel.pix.toggleClass(\"selected\", true);\n		pixel.changeColor(selectedColor);\n\n		// var print_area = $(\"#printout\");\n		// var print_string = \"\";\n		// for (var j = 0; j < maxVal; j++) {\n		// 	print_string += \"['\"+j+\"' => \"\n		//     for (var i = 0; i < maxVal; i++) {\n		//     	print_string += \"{\" + colors[j][i].toString() + \"} \";\n		// 	};\n		// 	print_string += \" *]\"\n		// };\n		// console.log(print_string);\n	})\n\n	nums = colors[x][y];\n	pixel.setColor();\n\n	return pixel;\n}\n\nfunction makeSmallPixel (x, y, size) {\n	var pixel = {};\n\n	pixel['x'] = x;\n	pixel['y'] = y;\n	pixel['color'] = \"123456\";\n\n	pixel.pix = $('<div/>')\n    	.addClass(\"singlePixel\" + size);\n\n\n	$(\".pixalSmallx\").append(pixel.pix);\n\n	pixel.changeColor = function (value) {\n		pixel['color'] = value;\n		pixel.pix.css(\"background-color\", value);\n		// pixel.pix.css(\"background-color\", \"rgb(\"+(value[0]*256)+\",\"+(value[1]*256)+\",\"+(value[2]*256)+\")\");\n		colors[x][y] = value;\n	};\n\n\n\n	pixel.setColor = function () {\n		var value = avgColors(x, y, maxVal / size);\n		pixel.pix.css(\"background-color\", \"rgb(\"+(value[0]*256)+\",\"+(value[1]*256)+\",\"+(value[2]*256)+\")\");\n	};\n\n	// pixel.pix.click(function(e) {\n	// 	selectedPixel = pixel;\n	// 	$(\".selected\").toggleClass(\"selected\", false);\n	// 	pixel.pix.toggleClass(\"selected\", true);\n	// 	pixel.changeColor(selectedColor);\n\n	// 	var print_area = $(\"#printout\");\n	// 	var print_string = \"\";\n	// 	for (var j = 0; j < maxVal; j++) {\n	// 		print_string += \"['\"+j+\"' => \"\n	// 	    for (var i = 0; i < maxVal; i++) {\n	// 	    	print_string += \"{\" + colors[j][i].toString() + \"} \";\n	// 		};\n	// 		print_string += \" *]\"\n	// 	};\n	// 	console.log(print_string);\n	// })\n\n	nums = colors[x][y];\n	pixel.setColor();\n\n	return pixel;\n}\n\nfunction makeColor (hue, shade) {\n	var colour = {};\n\n	colour.col = $('<div/>').addClass(\"colorBox\"+hue+shade).text(\"\" + (100 - (shade * 100/8) - 3) + \"%\");\n\n	$('#printout').append(colour.col);\n\n	colour.getColor = function () {\n		return \"hsl(\" + hue + \", 100%, \" + (100 - (shade * 100/8) - 3) + \"%)\";\n	};\n\n	colour.col.click(function(e) {\n		selectedColor = colour.getColor();\n	})\n\n	return colour;\n}\n\n\n\nfunction changeColor(input) {\n	selectedColor = [Math.round((input.rgb[0]*8))/8, Math.round((input.rgb[1]*8))/8, Math.round((input.rgb[2]*8))/8];\n}\n\nfunction changeRes(val) {\n	var box = $(\".pixalSmallx\");\n\n	box.empty();\n\n	for (var j = 0; j < val; j++) {\n	    for (var i = 0; i < val; i++) {\n			makeSmallPixel(j, i, val);\n		};\n	};\n\n};\n\nvar hues = [0, 45, 85, 120, 145, 185, 210, 235, 260, 295, 315, 340];\nvar shades = [0, 1, 2, 3, 4, 5, 6]\n\n\n$( document ).ready(function() {\n    // console.log( \"ready!\" );\n    var gridNum = 1;\n    for (var j = 0; j < gridNum; j++) {\n	    for (var i = 0; i < gridNum; i++) {\n			makeSmallPixel(j, i, gridNum);    \n		};\n	};\n\n	for (var j = 0; j < hues.length; j++) {\n		$(\"#printout\").append($('<p/>').text(\"Color: \" + hues[j]));\n	    for (var i = 0; i < shades.length; i++) {\n	    	// $(\"#printout\").append($('<div/>').addClass(\"colorBox\"+hues[j]+shades[i]));\n	    	makeColor(hues[j], shades[i]);\n		};\n		$(\"#printout\").append($('<br/>'));\n	};\n\n	var radios = $(\"input:radio[name=res]\");\n	for(var i = 0, max = radios.length; i < max; i++) {\n	    radios[i].onclick = function() {\n	        changeRes(this.value)\n	    }\n	}\n});\n         ",
+			"file": "main.js",
+			"file_size": 4793,
+			"file_write_time": 1410537373000000,
+			"settings":
+			{
+				"buffer_size": 4793,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "main2.js",
+			"settings":
+			{
+				"buffer_size": 2817,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/code/CIS467/README.md",
+			"settings":
+			{
+				"buffer_size": 9694,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "main.scss",
+			"settings":
+			{
+				"buffer_size": 875,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "main.css",
+			"settings":
+			{
+				"buffer_size": 10412,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/code/CIS467/Journals/Thomas-Journal.md",
+			"settings":
+			{
+				"buffer_size": 948,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 67.0,
+		"selected_items":
+		[
+			[
+				"setsphp",
+				"Set Syntax: PHP"
+			],
+			[
+				"setph",
+				"Set Syntax: PHP"
+			],
+			[
+				"key",
+				"FindKeyConflicts: All Conflicts"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"packin",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 584.0
+	},
+	"console":
+	{
+		"height": 276.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/Icebreakers/icebreakerThomasV.txt",
+		"/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/code/CIS467/Icebreakers/Thomas Verstraete - Icebreaker.txt",
+		"/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/code/CIS467/Journals/StevenHoffman-Journal.csv",
+		"/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/code/CIS467/Journals/tashi-journal.csv",
+		"/Users/thomasverstraete/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/core/base/config.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/core/assets/functions.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/modules/todos/api/ToDo.class.php",
+		"/Users/thomasverstraete/Library/Application Support/Sublime Text 2/Packages/Function Name Display/Function Name Display.sublime-settings",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/modules/todos/migrations/20140828143941_to_do_module_add_list_i_d.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/modules/todos/migrations/20140828142300_to_do_module_add_file_asset.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/modules/todos/migrations/20140828143845_add_todo_list_table_to_site.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/core/base/functions.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/config.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/bootstrap.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/core/base/mysql.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/core/base/paths.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/core/base/controllers/router.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/sites/default/variables.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/core/assets/htmls/file.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/modules/todos/controllers/fn-todo-list.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/modules/todos/htmls/fn-todo-list.php",
+		"/Users/thomasverstraete/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/thomasverstraete/projects/myproject.sublime-project",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/instance.config.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/modules/todos/migrations/20140827093526_add_todos_table_to_site.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/core/base/classes/foundationClasses/DBv2.class.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/core/base/classes/Base_Person.class.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/core/base/classes/foundationClasses/DB.class.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/index.php",
+		"/Users/thomasverstraete/.bash_profile",
+		"/Users/thomasverstraete/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/thomasverstraete/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/core/base/classes/foundationClasses/Config.class.php",
+		"/Users/thomasverstraete/projects/myproject/myproject.ddmnet.com/vendor/autoload.php",
+		"/Users/thomasverstraete/projects/myproject.ddmnet.com/kern.sql",
+		"/Users/thomasverstraete/.composer/config.json",
+		"/Users/thomasverstraete/Library/Application Support/Sublime Text 2/Packages/TestingGrounds/testing.py",
+		"/Users/thomasverstraete/Library/Application Support/Sublime Text 2/Packages/TestingGrounds/untitled.py"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"*.php",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"##### August 27, 2014\n* 5:00 PM - 5:30 PM\n* Group Meeting: Introduce ourselves\n",
+			"Met with group to ",
+			"gridNum",
+			"colors",
+			"Colors",
+			"colors",
+			"[0]",
+			"setColor",
+			"\n	",
+			"	pixel.pix = $('<div/>')\n    	.addClass(\"singlePixel\" + size);\n",
+			"makePixel",
+			"pixalx",
+			"pix",
+			"5",
+			"pixalx",
+			"96",
+			"80",
+			"320px",
+			"30",
+			"selectedColor",
+			"1",
+			"colors",
+			"Colors",
+			"colors",
+			"Colors",
+			"colors",
+			"gridNum",
+			"colorBox",
+			"percentages",
+			"[&",
+			"colors",
+			"gridNum",
+			"pixal",
+			"16",
+			"128",
+			"64",
+			"32",
+			"16",
+			"8",
+			"test",
+			"900px",
+			"console",
+			"// console",
+			"console",
+			"x",
+			"console",
+			"(ne",
+			"//Ma",
+			"nu",
+			"colors",
+			"];",
+			";",
+			"0",
+			"2",
+			"0",
+			"+j",
+			"consol",
+			"0",
+			"];\n",
+			"maxVal",
+			"nums",
+			"val",
+			"gridNum",
+			"resolutions",
+			"gridNum",
+			"innerHTML",
+			"<br>",
+			"32",
+			"8",
+			"female",
+			"sex",
+			"1024px",
+			"900px",
+			"1024",
+			"gridNum",
+			"256",
+			"i",
+			"input.rgb",
+			"input.rg",
+			"input.rgb",
+			"input.rgb[0] = ",
+			"256",
+			"0",
+			"244",
+			"false",
+			"64",
+			"changeColor",
+			"\"",
+			"x",
+			"$this->sql_resource",
+			"function return_sql",
+			"return_sql",
+			"function return_sql",
+			"return_sql",
+			"_get_select_sql",
+			"get_sql_for_args",
+			"function find",
+			"get_sql_for_args",
+			"function find",
+			"array",
+			"find",
+			"id",
+			"completed",
+			"check_todo",
+			"form",
+			"details",
+			"500",
+			"this",
+			"javascript",
+			"successFunc",
+			"find",
+			"*",
+			"belongsto",
+			"'",
+			"date",
+			"description",
+			"action",
+			"text",
+			"navigation"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"settings":
+					{
+						"buffer_size": 836,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								400,
+								400
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_name": "",
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"function_name_status_row": 0,
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "main.js",
+					"settings":
+					{
+						"buffer_size": 4793,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3965,
+								3965
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"function_name_status_row": 171,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2695.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "main2.js",
+					"settings":
+					{
+						"buffer_size": 2817,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2020,
+								2020
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"function_name_status_row": 99,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1318.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/code/CIS467/README.md",
+					"settings":
+					{
+						"buffer_size": 9694,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"function_name_status_row": 0,
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1167.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "main.scss",
+					"settings":
+					{
+						"buffer_size": 875,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								234,
+								234
+							],
+							[
+								252,
+								252
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"function_name_status_row": 0,
+							"syntax": "Packages/Rails/Ruby Haml.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "main.css",
+					"settings":
+					{
+						"buffer_size": 10412,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"function_name_status_row": 0,
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 686.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/code/CIS467/Journals/Thomas-Journal.md",
+					"settings":
+					{
+						"buffer_size": 948,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								513,
+								513
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"function_name_status_row": 0,
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"ma",
+				"main.css"
+			],
+			[
+				"dbv",
+				"myproject.ddmnet.com/core/base/classes/foundationClasses/DBv2.class.php"
+			],
+			[
+				"db",
+				"myproject.ddmnet.com/core/base/classes/foundationClasses/DB.class.php"
+			],
+			[
+				"con",
+				"myproject.ddmnet.com/config.php"
+			],
+			[
+				"function",
+				"myproject.ddmnet.com/core/base/functions.php"
+			],
+			[
+				"varib",
+				"myproject.ddmnet.com/sites/default/variables.php"
+			],
+			[
+				"mysql",
+				"myproject.ddmnet.com/core/base/mysql.php"
+			],
+			[
+				"confi",
+				"myproject.ddmnet.com/config.php"
+			],
+			[
+				"inst",
+				"myproject.ddmnet.com/instance.config.php"
+			],
+			[
+				"instanc",
+				"myproject.ddmnet.com/instance.config.php"
+			],
+			[
+				"config",
+				"myproject.ddmnet.com/config.php"
+			],
+			[
+				"mys",
+				"myproject.ddmnet.com/core/base/mysql.php"
+			],
+			[
+				"configclas",
+				"myproject.ddmnet.com/core/base/classes/foundationClasses/Config.class.php"
+			],
+			[
+				"bootst",
+				"myproject.ddmnet.com/bootstrap.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 313.0,
+	"status_bar_visible": true
+}
