@@ -18,6 +18,7 @@ Non-Trivail Requirements
 ------------------------
 - Program structure
 - pixalation algorithms
+The pixalation aspect of the game is one of the single most important part of the project. It is the central part that the user will intaract with and is the central aspect of gameplay. In our many meetings much of the conversation revolves around this part. We have discussed the algorthm to pixalate the colors and the collisions. We have discussed visual ques to inform the user of how things will pixalate before they choose to. We have discussed averaging out the red, blue and green values or choosing the max, min or mean value in the set. This part will evolve over the course of the project as we perform tests and have more conversations. 
 - game play
 - visual grammer (michelle)
 One of the important aspects of the game is how it looks. In regards to the class it might not seem like one of the requirements. However, the way the game looks, especially with the pixelation algorithm, determines how the game and code will be written. We have started to test ways to visuallize the different possible algorithms with a simple javascript web app. This is a preliminary way to look and test. The other aspect of the visual grammer is just simple how it looks. We have discussed working with a more realistic game with things like grass, water and humeniod characters. We have also discussed more abstract visuals like levels, aspects of levels and charactors based on colors or shapes. 
