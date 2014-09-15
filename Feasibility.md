@@ -4,6 +4,17 @@ Feasabilty Study
 
 Software Languages and Libraries
 --------------------------------
+- fill in please.
+
+Non-Trivail Requirements
+------------------------
+- Program Structure: 
+- Pixalation Algorithms: 
+The pixalation aspect of the game is one of the single most important part of the project. It is the central part that the user will intaract with and is the central aspect of gameplay. In our many meetings much of the conversation revolves around this part. We have discussed the algorthm to pixalate the colors and the collisions. We have discussed visual ques to inform the user of how things will pixalate before they choose to. We have discussed averaging out the red, blue and green values or choosing the max, min or mean value in the set. This part will evolve over the course of the project as we perform tests and have more conversations. 
+- Game Play: 
+- Visual Grammer: 
+One of the important aspects of the game is how it looks. In regards to the class it might not seem like one of the requirements. However, the way the game looks, especially with the pixelation algorithm, determines how the game and code will be written. We have started to test ways to visuallize the different possible algorithms with a simple javascript web app. This is a preliminary way to look and test. The other aspect of the visual grammer is just simple how it looks. We have discussed working with a more realistic game with things like grass, water and humeniod characters. We have also discussed more abstract visuals like levels, aspects of levels and charactors based on colors or shapes. 
+- A.I.: 
 
 Work Policy
 -----------
@@ -14,15 +25,7 @@ The one aspect that we agreed to is to have weekly in-person meetings as a whole
 The team has chosen to integrate the project with GitHub. Each member will contribute to the master branch in the GitHub repo only once the code has been well-tested, passes all tests, and everything functions as expected. Until that state has been acheived, new code will be written in separate branches. The branches will correspond to specific new features or tasks. Once the new feature has been implemented, the individual should pull from master and bring the most current code into the branch. All conflicts should be resolved and all tests passing before integrating the branch with master and pushing to the GitHub repository. At this time, the branch may also be deleted. This way, the master branch always has the latest green, working code that everyone can use and reference. It also will help to keep the repository clean by deleting branches once they are no longer in use. How each member chooses to use the branches created (beyond these instructions) will be up to the individual or the group that is working on any given feature. No member will be permitted to change code in a branch or delete a branch that he/she is not working with directly.
 
 
-Non-Trivail Requirements
-------------------------
-- Program structure
-- pixalation algorithms
-The pixalation aspect of the game is one of the single most important part of the project. It is the central part that the user will intaract with and is the central aspect of gameplay. In our many meetings much of the conversation revolves around this part. We have discussed the algorthm to pixalate the colors and the collisions. We have discussed visual ques to inform the user of how things will pixalate before they choose to. We have discussed averaging out the red, blue and green values or choosing the max, min or mean value in the set. This part will evolve over the course of the project as we perform tests and have more conversations. 
-- game play
-- visual grammer (michelle)
-One of the important aspects of the game is how it looks. In regards to the class it might not seem like one of the requirements. However, the way the game looks, especially with the pixelation algorithm, determines how the game and code will be written. We have started to test ways to visuallize the different possible algorithms with a simple javascript web app. This is a preliminary way to look and test. The other aspect of the visual grammer is just simple how it looks. We have discussed working with a more realistic game with things like grass, water and humeniod characters. We have also discussed more abstract visuals like levels, aspects of levels and charactors based on colors or shapes. 
-- A.I.
+
 
 Burndown Chart
 --------------
