@@ -4,17 +4,20 @@ Feasabilty Study
 
 Software Languages and Libraries
 --------------------------------
-- fill in please.
+- We are developing this game for Linux in C++ 11, using the [Simple Direct Media Layer 2.0](http://www.libsdl.org) to handle graphics, audio, and input.
 
 Non-Trivail Requirements
 ------------------------
 - Program Structure: 
+The game engine is responsible for collision detection, character/object interaction, graphics, and audio. The engine provides an API by which characters (human or A.I.) may query and interact with the game world. Characters may query the proximity of nearby enemies, objects, and obstactles. They may also query the game map by location within a certain distance of their current location.
 - Pixalation Algorithms: 
 The pixalation aspect of the game is one of the single most important part of the project. It is the central part that the user will intaract with and is the central aspect of gameplay. In our many meetings much of the conversation revolves around this part. We have discussed the algorthm to pixalate the colors and the collisions. We have discussed visual ques to inform the user of how things will pixalate before they choose to. We have discussed averaging out the red, blue and green values or choosing the max, min or mean value in the set. This part will evolve over the course of the project as we perform tests and have more conversations. 
-- Game Play: 
+- Game Play:
+Specifics of gameplay are yet to be determined, but will be based *very* loosely on the Zelda series of games. As mentioned above, pixelation dynamics are of prime importance to gameplay.
 - Visual Grammer: 
 One of the important aspects of the game is how it looks. In regards to the class it might not seem like one of the requirements. However, the way the game looks, especially with the pixelation algorithm, determines how the game and code will be written. We have started to test ways to visuallize the different possible algorithms with a simple javascript web app. This is a preliminary way to look and test. The other aspect of the visual grammer is just simple how it looks. We have discussed working with a more realistic game with things like grass, water and humeniod characters. We have also discussed more abstract visuals like levels, aspects of levels and charactors based on colors or shapes. 
-- A.I.: 
+- A.I.:
+Computer characters interact with the game engine via it's API in a manner orthogonal the manner by which the human player interacts with the game. For example, an A.I. character may query the state of it's surroundings up the the same distance that a human player would see on their screen. A.I. modules may be written in languages other than C++ if we provide glue by which to do so. We may also implement machine learning algorithms rather than explicit A.I. for game characters (time allowing).
 
 Work Policy
 -----------
