@@ -1,0 +1,16 @@
+Icebreaker for Thomas Verstraete
+CIS467 September 9, 2014
+
+I can easily be contacted by email on my school account or via text. I hate talking on the phone so calls will be grudgingly taken. I also have a Skype and google hangouts account for any video chats if need be. I will make sure to have Slack open as much as possible and try to use that the most and respond quickly. 
+
+As for my strengths and interests. A lot of it comes from my previous degree. I have a bachelors in visual art from Grand Valley. I have a good design sense however I am not the greatest when it comes to color theory. I will tend to focus on the way things appear to the user because of this and will think about problems from the user experience and visual side of things. Even when it comes to the algorithms and programing problems I think visually and will draw pictures to better understand and articulate the solutions. I have a great interest in this project because of the visual dynamics and experience of resolution shifting.
+
+Because I am also getting a CS degree I have a great interest in programming as well. I feel like it is very similar in that it is the act of creation. I love the problem solving aspect of software engineering, and I have the ability to look at problems from different perspectives to come to a better/creative resolution to any problem. In the software engineering side of things I want to learn about and apply more design patterns to organize and abstract difficult concepts. Design patterns, for me, are a visual way of understanding a program.
+
+For the languages and such, I know C, have done C++, learning Objective-C this semester, forgotten more about Java then I know about Python, and have done a lot of web programming (PHP, ruby on rails, HTML, Javascript and CSS). 
+
+As a returning student I also have a great desire to get the most out of my education. I will strive for and attempt to help others strive to do the best work possible. Other group projects I have been a part of I have tended to lead and push more then is required. This has bit me hard on a few projects but it is all part of the learning experience. I want this project to be the best work we can do in the short time we have to do it. 
+
+Playing off that, one of my weaknesses has been to over scope a school project. I have learned over several projects that I need to hold back the grand vision of things that the project could be and attempt to be more realistic. If you look at the last statement it references a grand vision that I tend to think of for any project. This vision makes me want to take over the project to fulfill the vision. I have learned over many projects that I want to have things a certain way and this will cause conflicts. I am aware of this and will need to remind myself of the validity of others opinions. 
+
+Lastly, I wouldn’t say this is a weakness, but it is a preference, and my not be too applicable to this project, however, I do not want to work on nor learn more about programming for embedded systems. If there is not user interface to program I am not interested.
