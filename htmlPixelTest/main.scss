@@ -6,6 +6,10 @@ $x: 100/6;
 
 $colors: 0, 45, 85, 120, 145, 185, 210, 235, 260, 295, 315, 340;
 
+body {
+	width: 70%;
+}
+
 p.printout {
 	width: 400px;
 	float: left;
@@ -27,6 +31,15 @@ p.printout {
 	padding: 0;
 	margin: 30px;
 
+}
+
+.usedColors {
+	margin: 20px;
+}
+
+.usedColor {
+	padding: 5px;
+	width: 200px;
 }
 
 @each $per in $percentages {
@@ -58,5 +71,9 @@ p.printout {
 
 		}
 	}
+}
+
+.clear {
+	clear: both;
 }
 
