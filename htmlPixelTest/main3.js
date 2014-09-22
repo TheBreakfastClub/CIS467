@@ -8,241 +8,250 @@ var maxVal = 32;
 var pixelAlg = avgColors;
 
 // for (var j = 0; j < maxVal; j++) {
-// 	colorArray[j] = [];
+//  colorArray[j] = [];
 //     for (var i = 0; i < maxVal; i++) {
-//     	colorArray[j][i] = [255,255,255];//[Math.round((Math.random()*255)/8)*8, Math.round((Math.random()*255)/8)*8, Math.round((Math.random()*255)/8)*8];
-    	
+//      colorArray[j][i] = [255,255,255];//[Math.round((Math.random()*255)/8)*8, Math.round((Math.random()*255)/8)*8, Math.round((Math.random()*255)/8)*8];
+        
 
-//     	Math.random() *100;
-// 	};
+//      Math.random() *100;
+//  };
 // };
+
+
+// TODO: 
+// add clear button
+// be able to clear the colors
+// display array
+
+
+
 
 
 $( document ).ready(function() {
     var gridNum = maxVal;
 
     for (var j = 0; j < gridNum; j++) {
-    	smallArray[j] = [];
-	    for (var i = 0; i < gridNum; i++) {
-			smallArray[j][i] = makeShiftPixel(j, i, gridNum);
-		};
-	};
+        smallArray[j] = [];
+        for (var i = 0; i < gridNum; i++) {
+            smallArray[j][i] = makeShiftPixel(j, i, gridNum);
+        };
+    };
 
-	for (var j = 0; j < gridNum; j++) {
-    	bigArray[j] = [];
-	    for (var i = 0; i < gridNum; i++) {
-			bigArray[j][i] = makeColorPixel(j, i);
-		};
-	};
+    for (var j = 0; j < gridNum; j++) {
+        bigArray[j] = [];
+        for (var i = 0; i < gridNum; i++) {
+            bigArray[j][i] = makeColorPixel(j, i);
+        };
+    };
 
-	var radios = $("input:radio[name=res]");
-	for(var i = 0, max = radios.length; i < max; i++) {
-	    radios[i].onclick = function() {
-	        changeRes(this.value);
-	    };
-	}
+    var radios = $("input:radio[name=res]");
+    for(var i = 0, max = radios.length; i < max; i++) {
+        radios[i].onclick = function() {
+            changeRes(this.value);
+        };
+    }
 
-	var radios = $("input:radio[name=alg]");
-	for(var i = 0, max = radios.length; i < max; i++) {
-	    radios[i].onclick = function() {
-	        changeAlg(this.value);
-	    };
-	}
+    var radios = $("input:radio[name=alg]");
+    for(var i = 0, max = radios.length; i < max; i++) {
+        radios[i].onclick = function() {
+            changeAlg(this.value);
+        };
+    }
 });
 
 function changeAlg(value) {
-	if (value == 1) {
-		pixelAlg = avgColors;
-	} else if (value == 2) {
-		pixelAlg = maxColors;
-	} else {
-		pixelAlg = minColors;
-	}
+    if (value == 1) {
+        pixelAlg = avgColors;
+    } else if (value == 2) {
+        pixelAlg = maxColors;
+    } else {
+        pixelAlg = minColors;
+    }
 };
 
 function selectColor(color) {
-	console.log(document.getElementById("myColor").value);
-	console.log(color.rgb);
-	selectedColor = [Math.round((color.rgb[0]*255)/8)*8, Math.round((color.rgb[1]*255)/8)*8, Math.round((color.rgb[2]*255)/8)*8];
-	makeUsedColor(selectedColor);
+    console.log(document.getElementById("myColor").value);
+    console.log(color.rgb);
+    selectedColor = [Math.round((color.rgb[0]*255)/8)*8, Math.round((color.rgb[1]*255)/8)*8, Math.round((color.rgb[2]*255)/8)*8];
+    makeUsedColor(selectedColor);
 };
 
 function mixColors (x, y, num) {
-	return pixelAlg(x, y, num);
+    return pixelAlg(x, y, num);
 };
 
 function avgColors(x, y, num) {      
-	console.log("avgColors");
-	var newColor = [0,0,0];
-	var counter = 0
+    console.log("avgColors");
+    var newColor = [0,0,0];
+    var counter = 0
 
-	for (var j = 0; j < num; j++) {    
+    for (var j = 0; j < num; j++) {    
 
-	    for (var i = 0; i < num; i++) {
-	    	newColor[0] = newColor[0] + colorArray[(x*num)+j][(y*num)+i][0];
-	    	newColor[1] = newColor[1] + colorArray[(x*num)+j][(y*num)+i][1];
-	    	newColor[2] = newColor[2] + colorArray[(x*num)+j][(y*num)+i][2];
-	    	counter++;
-		};
-	};
+        for (var i = 0; i < num; i++) {
+            newColor[0] = newColor[0] + colorArray[(x*num)+j][(y*num)+i][0];
+            newColor[1] = newColor[1] + colorArray[(x*num)+j][(y*num)+i][1];
+            newColor[2] = newColor[2] + colorArray[(x*num)+j][(y*num)+i][2];
+            counter++;
+        };
+    };
 
-	newColor[0] = Math.round(newColor[0]/(counter)/8)*8;
-	newColor[1] = Math.round(newColor[1]/(counter)/8)*8;
-	newColor[2] = Math.round(newColor[2]/(counter)/8)*8;
+    newColor[0] = Math.round(newColor[0]/(counter)/8)*8;
+    newColor[1] = Math.round(newColor[1]/(counter)/8)*8;
+    newColor[2] = Math.round(newColor[2]/(counter)/8)*8;
 
-	console.log(newColor);
+    console.log(newColor);
 
-	return newColor;
+    return newColor;
 };
 
 function maxColors (x, y, num) {
-	console.log("max");
+    console.log("max");
 
-	var newColor = 0;
+    var newColor = 0;
 
-	for (var j = 0; j < num; j++) {
+    for (var j = 0; j < num; j++) {
 
-	    for (var i = 0; i < num; i++) {
-	    	if (colorArray[(x*num)+j][(y*num)+i] > newColor) {
-	    		newColor = colorArray[(x*num)+j][(y*num)+i];
-	    	}
-		};
-	};
+        for (var i = 0; i < num; i++) {
+            if (colorArray[(x*num)+j][(y*num)+i] > newColor) {
+                newColor = colorArray[(x*num)+j][(y*num)+i];
+            }
+        };
+    };
 
-	return newColor;
+    return newColor;
 };
 
 function minColors (x, y, num) {
-	console.log("min");
+    console.log("min");
 
-	var newColor = 100;
+    var newColor = 100;
 
-	for (var j = 0; j < num; j++) {
+    for (var j = 0; j < num; j++) {
 
-	    for (var i = 0; i < num; i++) {
-	    	if (colorArray[(x*num)+j][(y*num)+i] < newColor) {
-	    		newColor = colorArray[(x*num)+j][(y*num)+i];
-	    	}
-		};
-	};
+        for (var i = 0; i < num; i++) {
+            if (colorArray[(x*num)+j][(y*num)+i] < newColor) {
+                newColor = colorArray[(x*num)+j][(y*num)+i];
+            }
+        };
+    };
 
-	return newColor;
+    return newColor;
 };
 
 function changeRes(val) {
-	var box = $(".pixalSmallx");
+    var box = $(".pixalSmallx");
 
-	box.empty();
+    box.empty();
 
-	for (var j = 0; j < val; j++) {
-	    for (var i = 0; i < val; i++) {
-			makeShiftPixel(j, i, val);
-		};
-	};
+    for (var j = 0; j < val; j++) {
+        for (var i = 0; i < val; i++) {
+            makeShiftPixel(j, i, val);
+        };
+    };
 };
 
 function printArray() {
-	// $("p.printout").empty();
-	// var print = "["
+    // $("p.printout").empty();
+    // var print = "["
 
-	// for (var j = 0; j < maxVal; j++) {
-	// 	if (j !== 0) {
-	// 		print = print + ",";
-	// 	}
-	// 	print = print + "[";
-	// 	var i=0;
-	//     for (; i < maxVal; i++) {
-	// 		if (i !== 0) {
-	// 			print = print + ",";
-	// 		}
-	// 		print = print + "[" + colorArray[j][i] + "]";
-	// 	};
-	// 	print = print + "]";
-	// };
-	// print = print + "]";
+    // for (var j = 0; j < maxVal; j++) {
+    //  if (j !== 0) {
+    //      print = print + ",";
+    //  }
+    //  print = print + "[";
+    //  var i=0;
+    //     for (; i < maxVal; i++) {
+    //      if (i !== 0) {
+    //          print = print + ",";
+    //      }
+    //      print = print + "[" + colorArray[j][i] + "]";
+    //  };
+    //  print = print + "]";
+    // };
+    // print = print + "]";
 
-	// $("p.printout").text(print);
+    // $("p.printout").text(print);
 };
 
 
 
 function makeShiftPixel (x, y, size) {
-	var pixel = {};	
+    var pixel = {}; 
 
-	pixel.value = mixColors(x, y, maxVal / size);
-	pixel.pix = $('<div/>')
-    	.addClass("singlePixel" + size)
-    	.css("background-color", "rgb("+pixel.value[0]+","+pixel.value[1]+","+pixel.value[2]+")");
+    pixel.value = mixColors(x, y, maxVal / size);
+    pixel.pix = $('<div/>')
+        .addClass("singlePixel" + size)
+        .css("background-color", "rgb("+pixel.value[0]+","+pixel.value[1]+","+pixel.value[2]+")");
 
-	$(".pixalSmallx").append(pixel.pix);
+    $(".pixalSmallx").append(pixel.pix);
 
-	pixel.changeColor = function (value) {
-		pixel.pix.css("background-color", "rgb("+value[0]+","+value[1]+","+value[2]+")");
-	};
+    pixel.changeColor = function (value) {
+        pixel.pix.css("background-color", "rgb("+value[0]+","+value[1]+","+value[2]+")");
+    };
 
-	return pixel;
+    return pixel;
 };
 
 function makeUsedColor (color) {
-	var usedColor = {};
+    var usedColor = {};
 
-	usedColor.pix = $('<div/>')
-		.addClass("usedColor")
-		.css("background-color", "rgb("+color[0]+","+color[1]+","+color[2]+")")
-		.text("rgb("+color[0]+","+color[1]+","+color[2]+")");
+    usedColor.pix = $('<div/>')
+        .addClass("usedColor")
+        .css("background-color", "rgb("+color[0]+","+color[1]+","+color[2]+")")
+        .text("rgb("+color[0]+","+color[1]+","+color[2]+")");
 
-	$(".usedColors").append(usedColor.pix);
+    $(".usedColors").append(usedColor.pix);
 
-	usedColor.pix.click(function (e) {
-		selectedColor = color;
-	});
+    usedColor.pix.click(function (e) {
+        selectedColor = color;
+    });
 
 };
 
 var mDown = false;
 
 function makeColorPixel (x, y) {
-	var pixel = {};
+    var pixel = {};
 
-	pixel.pix = $('<div/>')
-    	.addClass("singlePixel" + maxVal);
+    pixel.pix = $('<div/>')
+        .addClass("singlePixel" + maxVal);
 
-	$(".pixalBigx").append(pixel.pix);
+    $(".pixalBigx").append(pixel.pix);
 
-	pixel.changeColor = function (value) {
-		pixel['color'] = value;
-		pixel.pix.css("background-color", "rgb("+value[0]+","+value[1]+","+value[2]+")");
-		smallArray[x][y].changeColor(value);
-		colorArray[x][y] = value;
-	};
+    pixel.changeColor = function (value) {
+        pixel['color'] = value;
+        pixel.pix.css("background-color", "rgb("+value[0]+","+value[1]+","+value[2]+")");
+        smallArray[x][y].changeColor(value);
+        colorArray[x][y] = value;
+    };
 
 
-	pixel.pix.click(function(e) {
-		selectedPixel = pixel;
-		$(".selected").toggleClass("selected", false);
-		pixel.pix.toggleClass("selected", true);
-		pixel.changeColor(selectedColor);
-		printArray();
+    pixel.pix.click(function(e) {
+        selectedPixel = pixel;
+        $(".selected").toggleClass("selected", false);
+        pixel.pix.toggleClass("selected", true);
+        pixel.changeColor(selectedColor);
+        printArray();
 
-	});
+    });
 
-	pixel.pix.mouseover(function (e) {
-		if (mDown) {
-			pixel.changeColor(selectedColor);
-		}
-	})
+    pixel.pix.mouseover(function (e) {
+        if (mDown) {
+            pixel.changeColor(selectedColor);
+        }
+    })
 
-	pixel.pix.mousedown(function (e) {
-		mDown = true;
-	})
+    pixel.pix.mousedown(function (e) {
+        mDown = true;
+    })
 
-	pixel.pix.mouseup(function (e) {
-		mDown = false;
-	})
+    pixel.pix.mouseup(function (e) {
+        mDown = false;
+    })
 
-	pixel.changeColor(colorArray[x][y]);
+    pixel.changeColor(colorArray[x][y]);
 
-	return pixel;
+    return pixel;
 };
 
 var testarray = [];
