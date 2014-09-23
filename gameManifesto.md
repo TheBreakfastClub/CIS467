@@ -29,6 +29,10 @@ The map will have to be predefined by us. There might possibly be many maps for 
   * High Res: it is glass and can be broken through
   * Medium Res: plexy glass can be broken with effort
   * Low Res: steel, can not be broken through.
+* **Barred Windows:** This is able to section off areas after the user is upgraded.
+  * High Res: the bars are fully defined, blocking any passage
+  * Medium Res: ?
+  * Low Res: bars have been blurred out to the point that the user can pass through
 
 ## Pixelation
 The current idea is that there will be three different levels of pixelation. This is a somewhat arbitrary constraint do to time, however the three levels adds a nice high, middle and low that is easier to design to. The three levels are to be worked out by the design group.
@@ -86,3 +90,28 @@ There will be different types of enemies. The definition of the enemies should b
   * Low Res: It is ice. If it hits the hero it will freeze her. But can be broken apart easily.
 
 * **Gnats:** small enemies
+  * Design: a small block or circle that is capable of small amounts of damage
+  * High Res: The gnat is well-defined and is can harm the user
+  * Medium Res: ?
+  * Low Res: The gnat has been blurred out to the point that it no longer exists
+
+* **Worm Snake:** snake-like enemy
+  * Design: a cylindrical enemy that slithers through the terrain
+  * High Res: a large snake capable of doing a lot of damage
+  * Medium Res: a smaller snale capable of doing some damage
+  * Low Res: a worm that is merely a nuisance (may cause some damage)
+
+* **Dragon:** a large, fire-breathing dragon!! (or some other large enemy)
+  * Design: a red dragon capable of breathing fire. Eggs have no effect.
+  * High Res: a detailed dragon capable of doing large amounts of damage
+  * Medium Res: a burred block that can still spread fire or otherwise do large amounts of damage. It is still impervious to eggs.
+  * Low Res: a solid block that stomps around trying to hurt the user, but is now succeptible to attacks
+
+
+* **Empty Block:** an empty box that tries to hurt the user
+  * Design: a white box with clearly defined borders
+  * High Res: the box is filled with different colors to indicate that the box is full. The box can only move slowly, but does more damage.
+  * Medium Res: The box moves more quickly and still does some damage. The interior of the box is lighter.
+  * Low Res: The box is empty. While the box can move more nimbly, it is easy to destroy.
+  
+  
