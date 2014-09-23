@@ -2,7 +2,7 @@
 ## Journal for CIS 467
 
 ##### August 25, 2014
-* 5:45 - 6:30 
+* 5:45 - 6:30
     * Group Meeting: discuss the an idea
 
 ##### August 27, 2014
@@ -58,6 +58,14 @@
 * 3:00 PM - 4:00 PM
     * Refactored Pixal tester to use rgb values and drew up mario
 * 6:30 PM - 8:00PM
-    * Design Group Meeting: 
-    * Started formal discussions on how the game will look. 
+    * Design Group Meeting:
+    * Started formal discussions on how the game will look.
     * Talked about items, enemies and hero.
+
+#### September 21, 2014
+* 9:00 PM - 10:30 PM
+    * Working on the Pixel Designer.
+
+#### September 22, 2014
+* 3:15 PM - 4:30 PM
+    * Writing up the game manifesto.
