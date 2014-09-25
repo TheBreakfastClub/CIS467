@@ -21,6 +21,6 @@ Grid::Grid(int dim_x, int dim_y, int tile_dim) : grid()
 // Access the Grid as though it were the data structure behind the Grid
 std::vector<Tile>& Grid::operator[](int index)
 {
-	assert(index >= 0 && index < grid.size());
+	assert(index >= 0 && ((unsigned)index) < grid.size());
 	return grid[index];
 }

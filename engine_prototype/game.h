@@ -1,3 +1,7 @@
+/**
+ * The main controller of the game.
+ */
+
 #pragma once
  
 #include <SDL2/SDL.h>

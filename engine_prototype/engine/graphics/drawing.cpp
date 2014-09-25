@@ -1,18 +1,36 @@
+/**
+ * This class handles the main elements of the graphics engine.
+ */
+
 #include "drawing.h"
 #include <iostream>
 
-Drawing::Drawing(){}
+/**
+ * The constructor. You must call setupSDL() before using any SDL functionality.
+  */
+Drawing::Drawing(){
 
-Drawing::~Drawing()
-{
-	cleanup();
+    // Set SDL Members to NULL for now
+    window = NULL;
+    screen = NULL;
+    renderer = NULL;               
 }
 
 /**
- * This function initializes the necessary SDL members and other graphics assets, returning
+ * The destructor. It frees up SDL objects and quits SDL.
+ */
+Drawing::~Drawing(){
+
+    // Deallocate SDL Members and quit SDL
+    cleanupSDL();
+}
+
+
+/**
+ * This function initializes the necessary SDL members, returning
  * true if there were no errors, false if there were errors.
  */
-bool Drawing::setup(int screen_width, int screen_height)
+bool Drawing::setupSDL(int screen_width, int screen_height)
 {
 	// Initialize SDL
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
@@ -56,13 +74,13 @@ bool Drawing::setup(int screen_width, int screen_height)
 /**
  * This function deallocates the SDL members and other instance variables.
  */
-void Drawing::cleanup()
+void Drawing::cleanupSDL()
 {
     if (window != NULL) {
     
         SDL_DestroyWindow(window);
         SDL_DestroyRenderer(renderer);
-        SDL_FreeSurface(screen);
+        // SDL_FreeSurface(screen); SDL_DestroyWindow() takes care of freeing the window's surface (aka. the screen)
 
         window = NULL;
         screen = NULL;
@@ -97,7 +115,7 @@ void Drawing::draw_world(Grid& grid)
 {
 	clear_screen();
 
-	// Draw grid -- TODO: move this into graphics engine
+	// Draw grid 
 	for (int x = 0; x < grid.dim_x; x++) {
 		for (int y = 0; y < grid.dim_y; y++) {
 			draw_rect(x * grid.tile_dim, y * grid.tile_dim, grid.tile_dim, grid.tile_dim, x*y % 256, x*y % 256, x*y % 256);

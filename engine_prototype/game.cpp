@@ -1,3 +1,7 @@
+/**
+ * The main controller of the game.
+ */
+
 #include <cstdlib>
 #include "game.h"
 
@@ -66,25 +70,32 @@ int Game::run()
 		drawing.draw_world(grid);
 		handle_input();
 		update();
-		SDL_Delay(30);
+		SDL_Delay(1000);
 	}
 	return 0;
 }
 
 bool Game::setup()
 {
-	return drawing.setup(GRID_X * TILE_DIM, GRID_Y * TILE_DIM);
+	return drawing.setupSDL(GRID_X * TILE_DIM, GRID_Y * TILE_DIM);
 }
 
 void Game::cleanup()
 {
 	// probably not necessary since each specific part of the engine cleans itself up. thoughts?
+    /**
+     * Steven's Thoughts: may not be important now. But if Game ever
+     * allocates its own data, it will have to deallocate. We can always
+     * re-add the cleanup method then, or just deallocate directly in
+     * Game's destructor.
+     */
 }
 
 int main(int argc, char* argv[])
 {
 	Game game(GRID_X, GRID_Y);
 	if (!game.setup()) {
+        std::cerr << "Error in setting up the game. Game is exiting.\n";
 		return 1;
 	}
 

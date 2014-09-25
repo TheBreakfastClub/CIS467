@@ -1,10 +1,12 @@
+/**
+ * This class handles the main elements of the graphics engine.
+ */
+
 #pragma once
 
 #include <SDL2/SDL.h>
 #include "../grid.h"
 
-/* So I've actually started on something that would take care of the drawing.
-   Eventually It'd have the "draw_world" function I mentioned */
 class Drawing {
 
 private:
@@ -18,8 +20,8 @@ public:
 	Drawing();
 	~Drawing();
 	
-	bool setup(int screen_width, int screen_height);
-	void cleanup();
+	bool setupSDL(int screen_width, int screen_height);
+	void cleanupSDL();
 	
 	void clear_screen();
 	void update_screen();
