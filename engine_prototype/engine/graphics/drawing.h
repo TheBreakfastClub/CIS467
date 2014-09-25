@@ -5,7 +5,7 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include "../grid.h"
+#include "../world_definition/grid.h"
 
 class Drawing {
 

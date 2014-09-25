@@ -6,7 +6,7 @@
  
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "engine/grid.h"
+#include "engine/world_definition/grid.h"
 #include "engine/graphics/drawing.h"
 
 class Game {

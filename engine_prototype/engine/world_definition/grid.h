@@ -13,4 +13,7 @@ class Grid {
 		Grid(int dim_x, int dim_y, int tile_dim);
 		std::vector<Tile>& operator[](int index);
 
+    private:
+        std::vector<TileType> tileTypes;
+
 };
