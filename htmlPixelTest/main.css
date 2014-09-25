@@ -12,8 +12,8 @@ header {
   width: 225px;
   overflow-y: auto;
   height: 600px;
-  background-color: #ff9090;
-  float: left; }
+  float: left;
+  border-right: 2px solid black; }
   .left_side_bar .section {
     padding-top: 10px;
     padding-bottom: 10px;

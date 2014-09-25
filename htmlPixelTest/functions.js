@@ -147,8 +147,17 @@ function refactorColors() {
     }
 }
 
+function setErase() {
+    selectedColor = [255,255,255,0];
+    opacity = 0;
+    $('#myOpacity').val(0);
+    solidity = 0;
+    $('input[name="solid"][value="0"]').prop('checked', true);
+}
+
 function selectOpacity (value) {
-    opacity = parseInt($(value).text);
+    opacity = parseFloat($(value).val());
+    console.log(opacity);
 }
 
 
