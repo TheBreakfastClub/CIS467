@@ -1,79 +1,108 @@
-$gridNum: 1;
-
 $resolutions: 1, 2, 4, 8, 16, 32;
-$percentages: 0, 1, 2, 3, 4, 5, 6;
-$x: 100/6;
 
-$colors: 0, 45, 85, 120, 145, 185, 210, 235, 260, 295, 315, 340;
 
-body {
-	width: 70%;
+body, h3, h1 {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    height: 10%;
+    width: 100%;
+    background-color: rgb(256,96,96);
+    padding: 1em;
+}
+
+.left_side_bar {
+    width: 225px;
+    overflow-y: auto;
+    height: 600px;
+    background-color: rgb(256,144,144);
+    float: left;
+
+    .section{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid black;
+    }
+}
+
+
+
+.controls {
+    margin: 1em;
+}
+
+.edit_area {
+    float: left;
+    width: 710px;
+}
+
+#printout {
+    float: left;
+    width: 400px;
+    height: 700px;
+    overflow-y: scroll;
+    
+
 }
 
 p.printout {
-	width: 400px;
-	float: left;
 }
 
 .pixalSmallx {
-	width: 3*32px;
-	height: 3*32px;
+    width: 3*32px;
+    height: 3*32px;
 }
 .pixalBigx {
-	width: 15*32px;
-	height: 15*32px;
+    width: 15*32px;
+    height: 15*32px;
 }
 .pixalSmallx, 
 .pixalBigx {
-	float: right;
-	margin-top: 100px;
-	border: 2px solid black;
-	padding: 0;
-	margin: 30px;
+    float: left;
+    margin-top: 100px;
+    border: 2px solid black;
+    padding: 0;
+    margin: 30px;
 
-}
-
-.usedColors {
-	margin: 20px;
 }
 
 .usedColor {
-	padding: 5px;
-	width: 200px;
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
 }
 
-@each $per in $percentages {
-	@each $col in $colors {
-		.colorBox#{$col}#{$per} {
-			width: 50px;
-			height: 50px;
-			background-color: hsl($col, 100%, 100 - ($per * 100/8) - 3%);
-			display: inline-block;
-		}
-	}
+.usedColorClose {
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    padding: 0;
 }
+
 
 @each $res in $resolutions {
-	.singlePixel#{$res} {
-		width: (1/$res)*100%;
-		height: (1/$res)*100%;
-		box-sizing: border-box;
-		float: left;	
-		margin: 0;
-		padding: 0;
+    .singlePixel#{$res} {
+        width: (1/$res)*100%;
+        height: (1/$res)*100%;
+        box-sizing: border-box;
+        float: left;    
+        margin: 0;
+        padding: 0;
 
-		&:hover {
-			border: 1px solid lightgray;
-		}
+        &:hover {
+            border: 1px solid lightgray;
+        }
 
-		&.selected {
-			border: 1px solid darkgray;
+        &.selected {
+            border: 1px solid darkgray;
 
-		}
-	}
+        }
+    }
 }
 
 .clear {
-	clear: both;
+    clear: both;
 }
-

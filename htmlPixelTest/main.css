@@ -1,9 +1,36 @@
-body {
-  width: 70%; }
+body, h3, h1 {
+  margin: 0;
+  padding: 0; }
 
-p.printout {
-  width: 400px;
+header {
+  height: 10%;
+  width: 100%;
+  background-color: #ff6060;
+  padding: 1em; }
+
+.left_side_bar {
+  width: 225px;
+  overflow-y: auto;
+  height: 600px;
+  background-color: #ff9090;
   float: left; }
+  .left_side_bar .section {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid black; }
+
+.controls {
+  margin: 1em; }
+
+.edit_area {
+  float: left;
+  width: 710px; }
+
+#printout {
+  float: left;
+  width: 400px;
+  height: 700px;
+  overflow-y: scroll; }
 
 .pixalSmallx {
   width: 96px;
@@ -15,522 +42,23 @@ p.printout {
 
 .pixalSmallx,
 .pixalBigx {
-  float: right;
+  float: left;
   margin-top: 100px;
   border: 2px solid black;
   padding: 0;
   margin: 30px; }
 
-.usedColors {
-  margin: 20px; }
-
 .usedColor {
-  padding: 5px;
-  width: 200px; }
-
-.colorBox00 {
-  width: 50px;
-  height: 50px;
-  background-color: #fff0f0;
-  display: inline-block; }
-
-.colorBox450 {
-  width: 50px;
-  height: 50px;
-  background-color: #fffbf0;
-  display: inline-block; }
-
-.colorBox850 {
-  width: 50px;
-  height: 50px;
-  background-color: #f9fff0;
-  display: inline-block; }
-
-.colorBox1200 {
-  width: 50px;
-  height: 50px;
-  background-color: honeydew;
-  display: inline-block; }
-
-.colorBox1450 {
-  width: 50px;
-  height: 50px;
-  background-color: #f0fff6;
-  display: inline-block; }
-
-.colorBox1850 {
-  width: 50px;
-  height: 50px;
-  background-color: #f0feff;
-  display: inline-block; }
-
-.colorBox2100 {
-  width: 50px;
-  height: 50px;
-  background-color: #f0f7ff;
-  display: inline-block; }
-
-.colorBox2350 {
-  width: 50px;
-  height: 50px;
-  background-color: #f0f1ff;
-  display: inline-block; }
-
-.colorBox2600 {
-  width: 50px;
-  height: 50px;
-  background-color: #f5f0ff;
-  display: inline-block; }
-
-.colorBox2950 {
-  width: 50px;
-  height: 50px;
-  background-color: #fef0ff;
-  display: inline-block; }
-
-.colorBox3150 {
-  width: 50px;
-  height: 50px;
-  background-color: #fff0fb;
-  display: inline-block; }
-
-.colorBox3400 {
-  width: 50px;
-  height: 50px;
-  background-color: lavenderblush;
-  display: inline-block; }
-
-.colorBox01 {
-  width: 50px;
-  height: 50px;
-  background-color: #ffb0b0;
-  display: inline-block; }
-
-.colorBox451 {
-  width: 50px;
-  height: 50px;
-  background-color: #ffebb0;
-  display: inline-block; }
-
-.colorBox851 {
-  width: 50px;
-  height: 50px;
-  background-color: #deffb0;
-  display: inline-block; }
-
-.colorBox1201 {
-  width: 50px;
-  height: 50px;
-  background-color: #b0ffb0;
-  display: inline-block; }
-
-.colorBox1451 {
-  width: 50px;
-  height: 50px;
-  background-color: #b0ffd1;
-  display: inline-block; }
-
-.colorBox1851 {
-  width: 50px;
-  height: 50px;
-  background-color: #b0f8ff;
-  display: inline-block; }
-
-.colorBox2101 {
-  width: 50px;
-  height: 50px;
-  background-color: #b0d7ff;
-  display: inline-block; }
-
-.colorBox2351 {
-  width: 50px;
-  height: 50px;
-  background-color: #b0b7ff;
-  display: inline-block; }
-
-.colorBox2601 {
-  width: 50px;
-  height: 50px;
-  background-color: #cab0ff;
-  display: inline-block; }
-
-.colorBox2951 {
-  width: 50px;
-  height: 50px;
-  background-color: #f8b0ff;
-  display: inline-block; }
-
-.colorBox3151 {
-  width: 50px;
-  height: 50px;
-  background-color: #ffb0eb;
-  display: inline-block; }
-
-.colorBox3401 {
-  width: 50px;
-  height: 50px;
-  background-color: #ffb0ca;
-  display: inline-block; }
-
-.colorBox02 {
-  width: 50px;
-  height: 50px;
-  background-color: #ff7070;
-  display: inline-block; }
-
-.colorBox452 {
-  width: 50px;
-  height: 50px;
-  background-color: #ffdb70;
-  display: inline-block; }
-
-.colorBox852 {
-  width: 50px;
-  height: 50px;
-  background-color: #c3ff70;
-  display: inline-block; }
-
-.colorBox1202 {
-  width: 50px;
-  height: 50px;
-  background-color: #70ff70;
-  display: inline-block; }
-
-.colorBox1452 {
-  width: 50px;
-  height: 50px;
-  background-color: #70ffac;
-  display: inline-block; }
-
-.colorBox1852 {
-  width: 50px;
-  height: 50px;
-  background-color: #70f3ff;
-  display: inline-block; }
-
-.colorBox2102 {
-  width: 50px;
-  height: 50px;
-  background-color: #70b8ff;
-  display: inline-block; }
-
-.colorBox2352 {
-  width: 50px;
-  height: 50px;
-  background-color: #707cff;
-  display: inline-block; }
-
-.colorBox2602 {
-  width: 50px;
-  height: 50px;
-  background-color: #a070ff;
-  display: inline-block; }
-
-.colorBox2952 {
-  width: 50px;
-  height: 50px;
-  background-color: #f370ff;
-  display: inline-block; }
-
-.colorBox3152 {
-  width: 50px;
-  height: 50px;
-  background-color: #ff70db;
-  display: inline-block; }
-
-.colorBox3402 {
-  width: 50px;
-  height: 50px;
-  background-color: #ff70a0;
-  display: inline-block; }
-
-.colorBox03 {
-  width: 50px;
-  height: 50px;
-  background-color: #ff3030;
-  display: inline-block; }
-
-.colorBox453 {
-  width: 50px;
-  height: 50px;
-  background-color: #ffcb30;
-  display: inline-block; }
-
-.colorBox853 {
-  width: 50px;
-  height: 50px;
-  background-color: #a9ff30;
-  display: inline-block; }
-
-.colorBox1203 {
-  width: 50px;
-  height: 50px;
-  background-color: #30ff30;
-  display: inline-block; }
-
-.colorBox1453 {
-  width: 50px;
-  height: 50px;
-  background-color: #30ff87;
-  display: inline-block; }
-
-.colorBox1853 {
-  width: 50px;
-  height: 50px;
-  background-color: #30eeff;
-  display: inline-block; }
-
-.colorBox2103 {
-  width: 50px;
-  height: 50px;
-  background-color: #3098ff;
-  display: inline-block; }
-
-.colorBox2353 {
-  width: 50px;
-  height: 50px;
-  background-color: #3042ff;
-  display: inline-block; }
-
-.colorBox2603 {
-  width: 50px;
-  height: 50px;
-  background-color: #7530ff;
-  display: inline-block; }
-
-.colorBox2953 {
-  width: 50px;
-  height: 50px;
-  background-color: #ee30ff;
-  display: inline-block; }
-
-.colorBox3153 {
-  width: 50px;
-  height: 50px;
-  background-color: #ff30cb;
-  display: inline-block; }
-
-.colorBox3403 {
-  width: 50px;
-  height: 50px;
-  background-color: #ff3075;
-  display: inline-block; }
-
-.colorBox04 {
-  width: 50px;
-  height: 50px;
-  background-color: #f00000;
-  display: inline-block; }
-
-.colorBox454 {
-  width: 50px;
-  height: 50px;
-  background-color: #f0b400;
-  display: inline-block; }
-
-.colorBox854 {
-  width: 50px;
-  height: 50px;
-  background-color: #8cf000;
-  display: inline-block; }
-
-.colorBox1204 {
-  width: 50px;
-  height: 50px;
-  background-color: #00f000;
-  display: inline-block; }
-
-.colorBox1454 {
-  width: 50px;
-  height: 50px;
-  background-color: #00f064;
-  display: inline-block; }
-
-.colorBox1854 {
-  width: 50px;
-  height: 50px;
-  background-color: #00dcf0;
-  display: inline-block; }
-
-.colorBox2104 {
-  width: 50px;
-  height: 50px;
-  background-color: #0078f0;
-  display: inline-block; }
-
-.colorBox2354 {
-  width: 50px;
-  height: 50px;
-  background-color: #0014f0;
-  display: inline-block; }
-
-.colorBox2604 {
-  width: 50px;
-  height: 50px;
-  background-color: #5000f0;
-  display: inline-block; }
-
-.colorBox2954 {
-  width: 50px;
-  height: 50px;
-  background-color: #dc00f0;
-  display: inline-block; }
-
-.colorBox3154 {
-  width: 50px;
-  height: 50px;
-  background-color: #f000b4;
-  display: inline-block; }
-
-.colorBox3404 {
-  width: 50px;
-  height: 50px;
-  background-color: #f00050;
-  display: inline-block; }
-
-.colorBox05 {
-  width: 50px;
-  height: 50px;
-  background-color: #b00000;
-  display: inline-block; }
-
-.colorBox455 {
-  width: 50px;
-  height: 50px;
-  background-color: #b08400;
-  display: inline-block; }
-
-.colorBox855 {
-  width: 50px;
-  height: 50px;
-  background-color: #67b000;
-  display: inline-block; }
-
-.colorBox1205 {
-  width: 50px;
-  height: 50px;
-  background-color: #00b000;
-  display: inline-block; }
-
-.colorBox1455 {
-  width: 50px;
-  height: 50px;
-  background-color: #00b049;
-  display: inline-block; }
-
-.colorBox1855 {
-  width: 50px;
-  height: 50px;
-  background-color: #00a1b0;
-  display: inline-block; }
-
-.colorBox2105 {
-  width: 50px;
-  height: 50px;
-  background-color: #0058b0;
-  display: inline-block; }
-
-.colorBox2355 {
-  width: 50px;
-  height: 50px;
-  background-color: #000fb0;
-  display: inline-block; }
-
-.colorBox2605 {
-  width: 50px;
-  height: 50px;
-  background-color: #3b00b0;
-  display: inline-block; }
-
-.colorBox2955 {
-  width: 50px;
-  height: 50px;
-  background-color: #a100b0;
-  display: inline-block; }
-
-.colorBox3155 {
-  width: 50px;
-  height: 50px;
-  background-color: #b00084;
-  display: inline-block; }
-
-.colorBox3405 {
-  width: 50px;
-  height: 50px;
-  background-color: #b0003b;
-  display: inline-block; }
-
-.colorBox06 {
-  width: 50px;
-  height: 50px;
-  background-color: #700000;
-  display: inline-block; }
-
-.colorBox456 {
-  width: 50px;
-  height: 50px;
-  background-color: #705400;
-  display: inline-block; }
-
-.colorBox856 {
-  width: 50px;
-  height: 50px;
-  background-color: #417000;
-  display: inline-block; }
-
-.colorBox1206 {
-  width: 50px;
-  height: 50px;
-  background-color: #007000;
-  display: inline-block; }
-
-.colorBox1456 {
-  width: 50px;
-  height: 50px;
-  background-color: #00702f;
-  display: inline-block; }
-
-.colorBox1856 {
-  width: 50px;
-  height: 50px;
-  background-color: #006770;
-  display: inline-block; }
-
-.colorBox2106 {
-  width: 50px;
-  height: 50px;
-  background-color: #003870;
-  display: inline-block; }
-
-.colorBox2356 {
-  width: 50px;
-  height: 50px;
-  background-color: #000970;
-  display: inline-block; }
-
-.colorBox2606 {
-  width: 50px;
-  height: 50px;
-  background-color: #250070;
-  display: inline-block; }
-
-.colorBox2956 {
-  width: 50px;
-  height: 50px;
-  background-color: #670070;
-  display: inline-block; }
-
-.colorBox3156 {
-  width: 50px;
-  height: 50px;
-  background-color: #700054;
-  display: inline-block; }
-
-.colorBox3406 {
-  width: 50px;
-  height: 50px;
-  background-color: #700025;
-  display: inline-block; }
+  width: 100%;
+  padding: 1em;
+  box-sizing: border-box; }
+
+.usedColorClose {
+  float: right;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0; }
 
 .singlePixel1 {
   width: 100%;

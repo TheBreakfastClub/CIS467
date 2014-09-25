@@ -2,48 +2,78 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="" content="">
-    <title></title>
+    <meta name="Pixel Game Tile Creator" content="Pixel Game Tile Creator">
+    <title>Pixel Game Tile Creator</title>
     <link href="main.css" rel="stylesheet">
     <script src="jqueryLibraryMini.min.js"></script>
     <script type="text/javascript" src="jscolor/jscolor.js"></script>
-    <script type="text/javascript" src="main2.js"></script>
+    <script type="text/javascript" src="characters.js"></script>
+    <script type="text/javascript" src="functions.js"></script>
+    <script type="text/javascript" src="pixels.js"></script>
+    <script type="text/javascript" src="algorithms.js"></script>
+
 </head>
 <body>
-<h1>HSL Colors</h1>
-<!-- <input id="myColor" type="text" onchange="selectedColor()"> -->
-hue (0-359) <input type="text" id="myHue" onchange="selectHue()"></br>
-value (0-100) <input type="text" id="myColor" onchange="selectShade()">
+<header>
+<h1>Pixel Game Tile Creator</h1>
+<a href="#" onclick="clearBoard()">Clear Tile</a>
+</header>    
+<div class="left_side_bar">
+    <div class="controls">
 
-	<form name="">
-	<input type="radio" name="res" value="1">1
-	<input type="radio" name="res" value="2">2
-	<input type="radio" name="res" value="4">4
-	<input type="radio" name="res" value="8">8
-	<input type="radio" name="res" value="16">16
-	<input type="radio" name="res" value="32" checked="checked">32
-	</form>
+        <div class="section">
+            <form name="">
+            <input type="radio" name="alg" value="1" checked="checked">Average Without surround
+            <input type="radio" name="alg" value="2">Average With surround
+            <!-- <input type="radio" name="alg" value="2">Lightest
+            <input type="radio" name="alg" value="3">Darkest -->
+            </form>
+        </div>
 
-	<form name="">
-	<input type="radio" name="alg" value="1" checked="checked">Average
-	<input type="radio" name="alg" value="2">Lightest
-	<input type="radio" name="alg" value="3">Darkest
-	</form>
-<a href="indexRGB.html">RGB</a></br>
+        <div class="section">
+            <h3>Colors</h3>
+            <form name="">
+            <input type="radio" name="res" value="1">1
+            <input type="radio" name="res" value="2">2
+            <input type="radio" name="res" value="4">4
+            <input type="radio" name="res" value="8">8
+            <input type="radio" name="res" value="16">16
+            <input type="radio" name="res" value="32" checked="checked">32
+            </form>
 
+            <a onclick="refactorColors()" href="#">Refactor Colors</a>
+        </div>
 
-<p class="printout"></p>
+        <div class="section">
+            <br/>color <input class="color {onImmediateChange:'selectColor(this);'}" id="myColor" type="text" >
+        </div>
 
+        <div class="section">
+            <h3>Solidity</h3>
+            <form name="">
+            <input type="radio" name="solid" value="0">Not
+            <input type="radio" name="solid" value="1" checked="checked">Is
+            </form>
 
+        <br/>Opacity (0-1) <input onchange="selectOpacity(this)" id="myOpacity" type="text" value="1">
+        </div>
+    </div>
+    <div class="currentColor"></div>
+    <div class="usedColors"></div>
 
-	<div class="pixalSmallx">
-	</div>
+</div>
 
-	<div class="pixalBigx">
-	</div>
+<div class="edit_area">
+    <div class="pixalBigx"></div>
+    <div class="pixalSmallx"></div>
+</div>
 
-	<div id="printout">
-	</div>
-
+        
+<div id="printout">
+    <p class="printout"></p>
+</div>
+        
+        
+        
 </body>
 </html>
