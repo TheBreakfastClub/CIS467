@@ -11,7 +11,7 @@
 
 
 Game::Game(int dim_x, int dim_y) 
-	: world(dim_x, dim_y, TILE_DIM), drawing()
+	: world(dim_x, dim_y, TILE_DIM, dim_x, dim_y), drawing()
 {
 	running = true;
 	//z = 0;

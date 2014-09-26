@@ -8,15 +8,26 @@ Description:    Holds the data defining the world
 #pragma once
 
 // Includes
-#include "grid.h"
+#include "gameMap.h"
 
 class GameWorld {
     
     public:
-        GameWorld(int dim_x, int dim_y, int tile_dim);
+        GameWorld(int dim_x, int dim_y, int tile_dim, int hRes_x, int hRes_y);
+        
+        /** World properties */
+        int dim_x;
+        int dim_y;
+        int tile_dim;
         
         /** Defines the world environment */
-        Grid world;
+        GameMap highRes;
+        GameMap medRes;
+        GameMap lowRes;
+        GameMap *currentRes;
+        int currentResLevel;
+
+
         // Add items such as array of enemies, the hero, items, etc.
 
 };
