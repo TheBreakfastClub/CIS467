@@ -11,7 +11,7 @@
 
 
 Game::Game(int dim_x, int dim_y) 
-	: grid(dim_x, dim_y, TILE_DIM), drawing()
+	: world(dim_x, dim_y, TILE_DIM), drawing()
 {
 	running = true;
 	//z = 0;
@@ -67,7 +67,7 @@ void Game::handle_input()
 int Game::run()
 {
 	while (running) {
-		drawing.draw_world(grid);
+		drawing.draw_world(world);
 		handle_input();
 		update();
 		SDL_Delay(1000);

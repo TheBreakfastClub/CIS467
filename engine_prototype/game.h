@@ -6,7 +6,7 @@
  
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "engine/world_definition/grid.h"
+#include "engine/world_definition/gameWorld.h"
 #include "engine/graphics/drawing.h"
 
 class Game {
@@ -17,7 +17,7 @@ class Game {
         Drawing drawing;
 
 		/* Game engine */
-		Grid grid;
+		GameWorld world;
 		bool running;
  
     public:

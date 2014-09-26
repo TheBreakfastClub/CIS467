@@ -5,7 +5,7 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include "../world_definition/grid.h"
+#include "../world_definition/gameWorld.h"
 
 class Drawing {
 
@@ -29,6 +29,6 @@ public:
 	void draw_rect(int start_x, int start_y, int width, int height, int r, int g, int b);
 
 	/* this is really just an example of how this could look */
-	void draw_world(Grid& grid);
+	void draw_world(GameWorld& world);
 
 };

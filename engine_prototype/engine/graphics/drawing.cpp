@@ -111,9 +111,11 @@ void Drawing::draw_rect(int start_x, int start_y, int width, int height, int r, 
 	SDL_RenderFillRect(renderer, &location_rect);
 }
 
-void Drawing::draw_world(Grid& grid)
+void Drawing::draw_world(GameWorld& world)
 {
 	clear_screen();
+    
+    Grid grid = world.world;
 
 	// Draw grid 
 	for (int x = 0; x < grid.dim_x; x++) {
