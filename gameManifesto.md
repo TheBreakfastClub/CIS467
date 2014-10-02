@@ -126,3 +126,9 @@ There will be different types of enemies. The definition of the enemies should b
   * High Res: the box is filled with different colors to indicate that the box is full. The box can only move slowly, but does more damage.
   * Medium Res: The box moves more quickly and still does some damage. The interior of the box is lighter.
   * Low Res: The box is empty. While the box can move more nimbly, it is easy to destroy.
+
+* **Empy Box:** an empy box that tries to trap the user and prevent him/her from changing resulutions
+  * Design: a blank box (nothing inside) with one side of the box left open. The box would rotate and try to trap the user within the box.
+  * High Res: the box is open along the one side
+  * Medium Res: the box is still open, but becoming very constricting. The box may give damage if the user is inside at this point.
+  * Low Res: The box is solid and has no opening
