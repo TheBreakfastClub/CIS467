@@ -115,36 +115,14 @@ void Drawing::draw_world(GameWorld& world)
 {
 	clear_screen();
     
-    Grid grid = world.world;
 
-	// Draw grid 
-	for (int x = 0; x < grid.dim_x; x++) {
-		for (int y = 0; y < grid.dim_y; y++) {
-
-            // TODO: Check the type of tile in this grid location and draw the image for that tile type at the current resolution 
-            // ( we will have to load in the images for each tile type at each resolution during the Drawing setup )
-            TileSet type = grid.grid[x][y].type->type;
+	// TODO: Draw layers
+	for (int x = 0; x < world.dim_x; x++) {
+		for (int y = 0; y < world.dim_y; y++) {
+                
             int r, g, b;
-            switch(type) {
-            
-            case TileSet::TILE_FLOOR :
-                r = 192; // Silver!
-                g = 192;
-                b = 192; 
-                break;
-             
-            case TileSet::TILE_WATER :
-                r = 0;   // CYAN!
-                g = 255;
-                b = 255;
-                break;
-            
-            default: 
-                r = g = b = x*y % 256;
-            }
-
-            
-			draw_rect(x * grid.tile_dim, y * grid.tile_dim, grid.tile_dim, grid.tile_dim, r, g, b);
+            r = g = b = x*y % 256;
+            draw_rect(x * world.tile_dim, y * world.tile_dim, world.tile_dim, world.tile_dim, r, g, b);
 		}
 	}
 	update_screen();
