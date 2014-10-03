@@ -1,5 +1,5 @@
 /*********************************************************
-File Name:      enemySet.h
+File Name:      PixelSet.h
 Author:		    The Breakfast Club
 Creation Date:  09-25-2014
 Description:	Enum that defines the types of tiles possible.
@@ -7,7 +7,7 @@ Description:	Enum that defines the types of tiles possible.
 
 #pragma once
 
-enum TileSet {
+enum PixelSet {
     ENEMY_Spikeball,
     ENEMY_IceWaterCloud,
     ENEMY_Gnats,
