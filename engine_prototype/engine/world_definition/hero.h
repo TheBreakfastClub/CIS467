@@ -15,7 +15,7 @@ class hero{
 
     public:
         
-        TileType(std::string pname = "null", TileSet ptype = TileSet::COUNT);
+        SpriteType(std::string pname = "null", SpriteSet ptype = SpriteSet::COUNT);
 
         /** A short name describing the type of hero (e.g. "mainCharacter") */
         std::string name;
