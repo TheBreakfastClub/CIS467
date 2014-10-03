@@ -9,13 +9,11 @@
 
 class Drawing {
 
-private:
+public:
 
 	SDL_Renderer* renderer;
 	SDL_Window* window;
 	SDL_Surface* screen;
-
-public:
 
 	Drawing();
 	~Drawing();

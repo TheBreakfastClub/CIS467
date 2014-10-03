@@ -6,15 +6,14 @@
 #include "game.h"
 
 #define TILE_DIM 16
-#define GRID_X 50
-#define GRID_Y 50
+#define GRID_X 32
+#define GRID_Y 32
 
 
 Game::Game(int dim_x, int dim_y) 
 	: world(dim_x, dim_y, TILE_DIM, dim_x, dim_y), drawing()
 {
 	running = true;
-	//z = 0;
 }
 
 /* Update game logic at each iteration of the loop */
@@ -46,9 +45,11 @@ void Game::handle_input()
     		switch (event.key.keysym.sym) {
     			case SDLK_UP:
     				std::cout << "UP\n";
+                    world.next_resolution();
     				break;
     			case SDLK_DOWN:
     				std::cout << "DOWN\n";
+                    world.prev_resolution();
     				break;
     			case SDLK_RIGHT:
     				std::cout << "RIGHT\n";
@@ -70,14 +71,14 @@ int Game::run()
 		drawing.draw_world(world);
 		handle_input();
 		update();
-		SDL_Delay(1000);
+		SDL_Delay(30);
 	}
 	return 0;
 }
 
 bool Game::setup()
 {
-	return drawing.setupSDL(GRID_X * TILE_DIM, GRID_Y * TILE_DIM);
+	return drawing.setupSDL(GRID_X * TILE_DIM, GRID_Y * TILE_DIM) && world.setup(drawing.renderer);
 }
 
 void Game::cleanup()

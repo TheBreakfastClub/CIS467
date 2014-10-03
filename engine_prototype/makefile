@@ -1,14 +1,15 @@
 # Template found on: http://mrbook.org/tutorials/make/
 CC=g++
 CFLAGS=-Wall -std=c++11 -g
-LDFLAGS=-L ~/lib/SDL2/lib -I ~/lib/SDL2/include -lSDL2
+SDL_LINKER_FLAGS = -L ~/lib/SDL2/lib -I ~/lib/SDL2/include -lSDL2 -I ~/lib/SDL2/include/SDL2
+SDL_IMAGE_LINKER_FLAGS = -L ~/lib/SDL2_image/lib -I ~/lib/SDL2_image/include -lSDL2_image
 SOURCES=game.cpp engine/world_definition/*.cpp engine/graphics/*.cpp
 EXECUTABLE=game
 
 all: $(EXECUTABLE)
 	
 $(EXECUTABLE): $(SOURCES)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(SOURCES) -o $(EXECUTABLE)
+	$(CC) $(CFLAGS) $(SDL_LINKER_FLAGS) $(SDL_IMAGE_LINKER_FLAGS) $(SOURCES) -o $(EXECUTABLE)
 
 clean:
 	rm $(EXECUTABLE)

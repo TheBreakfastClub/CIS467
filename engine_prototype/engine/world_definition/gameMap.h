@@ -9,6 +9,8 @@ Description:	Holds definitions about the pixels that make
 
 #pragma once
 
+#include <SDL2/SDL.h>
+#include <vector>
 #include "pixel.h"
 
 typedef Pixel* MapLayer; // 2D array of Pixels
@@ -24,9 +26,15 @@ class GameMap {
         MapLayer collisionLayer;
         MapLayer backgroundLayer;
 
+        // for testing
+        std::vector<Pixel> test_layer;
+
         /** Size of each layer, in terms of the Pixel class */
         int width;
         int height;
+
+        // square dimension of each individual Pixel, in terms of physical pixels
+        int phys_dim;
 
 };
 

@@ -3,6 +3,7 @@
  */
 
 #include "drawing.h"
+#include "../world_definition/pixel.h"
 #include <iostream>
 
 /**
@@ -111,20 +112,25 @@ void Drawing::draw_rect(int start_x, int start_y, int width, int height, int r, 
 	SDL_RenderFillRect(renderer, &location_rect);
 }
 
-void Drawing::draw_world(GameWorld& world)
+void Drawing::draw_world(GameWorld &world)
 {
 	clear_screen();
     
-
-	// TODO: Draw layers
-	for (int x = 0; x < world.dim_x; x++) {
-		for (int y = 0; y < world.dim_y; y++) {
-                
-            int r, g, b;
-            r = g = b = x*y % 256;
-            draw_rect(x * world.tile_dim, y * world.tile_dim, world.tile_dim, world.tile_dim, r, g, b);
+	if (world.currentRes != NULL) {
+		for (int pix_y = 0; pix_y < world.currentRes->height; pix_y++) {
+			for (int pix_x = 0; pix_x < world.currentRes->width; pix_x++) {
+				Pixel p = world.currentRes->test_layer[pix_y * world.currentRes->width + pix_x];
+				draw_rect(pix_x * world.currentRes->phys_dim, pix_y * world.currentRes->phys_dim, 
+						  (int) world.currentRes->phys_dim, (int) world.currentRes->phys_dim, (int) p.r, (int) p.g, (int) p.b);
+			}
 		}
 	}
+	else {
+		SDL_RenderCopy(renderer, world.highRes, NULL, NULL);
+	}
+	// TODO: else, just blit the original image to screen (world.highRes, an SDL_Surface*)
+	// TODO: Draw layers
+
 	update_screen();
 }
 

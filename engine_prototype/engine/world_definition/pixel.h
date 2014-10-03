@@ -9,6 +9,7 @@ Description:	Holds definitions about the pixels that make
 #pragma once
 
 #include <string>
+#include <SDL2/SDL.h>
 
 /**
  * Defines one pixel.
@@ -16,9 +17,9 @@ Description:	Holds definitions about the pixels that make
  * 32-bit int.
  */
 union Pixel {
-    unsigned int argb;
+    Uint32 argb;
     struct {
-        unsigned char a,r,g,b;
+        Uint8 a,r,g,b;
     };
 };
 

@@ -10,7 +10,7 @@ Description:	Holds definitions about the pixels that make
 #include "gameMap.h"
 
 
-GameMap::GameMap(int width, int height) : width(width), height(height) {
+GameMap::GameMap(int width, int height) : width(width), height(height), test_layer() {
 
     int size = width * height * sizeof(Pixel);
     topLayer = (Pixel*) malloc(size);
