@@ -8,27 +8,29 @@ Description:	Defines the different types of sprites that can
 
 #pragma once
 
-// Includes
-#include <string>
+#include "spriteType.h"
+#include <utility>
 
-class SpriteType{
+class Sprite {
+
+    private:
+        std::pair<int,int> xy;
 
     public:
-        
-        SpriteType(std::string pname = "null", SpriteSet ptype = SpriteSet::COUNT);
+        Sprite(int x, int y, SpriteType *type);
 
-        /** A short name describing the type of sprite (e.g. "spikeBall") */
-        std::string name;
-        
-        /** Defines the kind of sprite this is so that other classes may
-         * easily tell what type of sprite they are working with */
-        sprite type; 
+        SpriteType *type;
 
-	/** The amount of hitpoints the sprite has **/
-        std::int hitpoints;
+        /** Defines the amount of hitpoints a sprite has **/
+	    int hitPoints;
 
+    	/** Defines if a sprite is invincible **/
+	    bool invincible;
 
-        // Add here other properties that all tiles of a single type should have
-
+	    /** Defines the speed of a sprite **/
+	    int speed;
+	    
+        /** Defines the attack damage of a sprite **/
+	    int attackDmg;
 };
 
