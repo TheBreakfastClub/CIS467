@@ -1,8 +1,8 @@
 /*********************************************************
 File Name:	    item.h
 Author:		    The Breakfast Club
-Creation Date:  09-25-2014
-Description:	Defines the item attributes.
+Creation Date: 	    09-25-2014
+Description:	    Defines the item attributes.
 ************************************************************/
 
 #pragma once
@@ -15,7 +15,7 @@ class item{
 
     public:
         
-        TileType(std::string pname = "null", TileSet ptype = TileSet::COUNT);
+        SpriteType(std::string pname = "null", SpriteSet ptype = SpriteSet::COUNT);
 
         /** A short name describing the type of item (e.g. "eggs") */
         std::string name;
