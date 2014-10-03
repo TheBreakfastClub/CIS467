@@ -11,11 +11,11 @@ Description:	Defines the different types of sprites that can
 // Includes
 #include <string>
 
-class TileType{
+class SpriteType{
 
     public:
         
-        TileType(std::string pname = "null", TileSet ptype = TileSet::COUNT);
+        SpriteType(std::string pname = "null", SpriteSet ptype = SpriteSet::COUNT);
 
         /** A short name describing the type of sprite (e.g. "spikeBall") */
         std::string name;
