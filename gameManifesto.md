@@ -16,11 +16,19 @@
 * **Pixalation Algorithm:** The way the pixelation is computed. Taking the highest resolution to compute the other two levels. There are to be a generic algorithm and possibly character, item, and map specific algorithms
 
 ## Overall Design Ideas
-The overall design is still up in the air as we need to see what possibilies there are with the pixelation. Mainly we are waiting to see what the pixelation algorithms will do to the designs. For humeniod characters it might just blur them and make them look bad. So because of that we are thinking of taking the design into a more abstract way of thinking of characters and worlds.
+The overall design is still up in the air as we need to see what possibilies there are with the pixelation. Mainly we are waiting to see what the pixelation algorithms will do to the designs. For humenoid characters it might just blur them and make them look bad. So because of that we are thinking of taking the design into a more abstract way of thinking of characters and worlds.
 
 
 ## Map
 The map will be a large set of tiles or pixels, and the hero will remain in the center of the screen as the map scrolls under them. If the hero reaches an edge of the map then will move from the center to the edge so that there isn't any weird void space showing.
+
+**Other ideas:**
+* **Large central room with adjoining rooms:**
+  * The cenral room would have the user centered as they move about the room
+  * At least four rooms would be connected to the central room, each with their own unique design or element. For example, each room could be designed to look like one of the main elements (e.g. fire, water, earth, air) or each room could pertain to one of the four seasons (e.g. the atumn room would have a lot of orange blocks and be very windy, making it difficult for the user to move against the wind, but easier with the wind).
+  * Eash room would have its own unique set of puzzles to solve, including puzzles at different resoltions.
+  * The central room could be a maze or puzzle of sorts on its own, helping to prevent the user from progressing to areas too soon or making the game more fun/challenging overall. However, there would probably be fewer enemies to help keep the game simpler and easier for users who are just starting the game (and do not yet have eggs to throw at the enemies).
+
 
 The map will have to be predefined by us. There might possibly be many maps for the different levels. However at first there will be just one.
 
@@ -49,7 +57,7 @@ All algorithms will ignore invisible pixels unless stated otherwise. Not all the
 
 
 ## Hero
-Not too much going on now with the Hero. It will be a her as there are not enough female heros in games, however you might be ever be able to tell when the game is being played.
+Not too much going on now with the Hero. It will be a her as there are not enough female heros in games, however you might not be able to tell when the game is being played.
 
 ### Actions
 We want the hero to be able to pick up items, attack enemies, and move up down left and right

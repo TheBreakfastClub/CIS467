@@ -69,3 +69,11 @@
 #### September 22, 2014
 * 3:15 PM - 4:30 PM
     * Writing up the game manifesto.
+
+#### September 23, 2014
+* 9:00 PM - 10:30 PM
+    * Working on the Pixel Designer.
+
+#### September 24, 2014
+* 9:00 PM - 11:30 PM
+    * Working on the Pixel Designer.
