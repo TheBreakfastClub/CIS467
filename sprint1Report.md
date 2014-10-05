@@ -20,6 +20,10 @@ At the end of the first sprint, we have been able to define our main character, 
 ### Problems Encountered
 We did not anticipate how closely linked the game design decisions were to the game mechanic decisions. This was the biggest hurdle we encountered since we all wanted to have a say in the game mechanics, and thus the end result of the game. Ultimately, the game mechanics has been started in the Game Design Team so that progress could be made unhindered. This also led to a reallocation of points and changes to stories in the backlog to accurately reflect where we are going and what we have been able to accomplish thus far.
 
+Another unanticipated problem is the difficulty of giving enough work to each group member when creating the basic game engine. Although the group was split up, leaving 4 group members to work on the game engine; it was still difficult to give each group member enough work. To help with this, members of the game engine group who weren't as well versed with SDL 2.0 were given the task of following tutorials until there was enough work was available to them within the sprint. Allowing the more experienced game engine group members work on the basic game engine will now allow all group members work on further enhancing different parts of the game engine.
+
+The game engine group also found it slightly difficult to meet up for paired programming when creating the game engine. Although the whole group has found that meeting on Fridays works, it was difficult to find a seperate time during the week which worked for the game engine group. This problem was solved by using Skype for group members to talk to each other and collabedit.com to work on the same code document simultaniously. 
+
 ### Projected Progress
 After this sprint we need to finalize how many levels, and how many enemies we need to design. We also need to refine the design language. We think we will start by concentrating on a single level and learning what we can from that experience.
 
