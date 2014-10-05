@@ -1,4 +1,4 @@
-# Sprint 1 Report 
+# Sprint 1 Report
 Prepared by All Members.
 
 ## Game Engine
@@ -18,10 +18,10 @@ Another change in our backlog is that we originally projected to create a game p
 At the end of the first sprint, we have been able to define our main character, a number of our enemies and how they will act, and what the main items will be and how they will be used. Everything will have an abstract design and feel to it, including the game world and rooms. The game world will likely consist of one central room with four adjoining rooms, each with a distinct element and set of puzzles attributed with it. However, making these decisions entailed making many decisions regarding game mechanics and how to interact with the game engine.
 
 ### Problems Encountered
-We did not anticipate how closely linked the game design decisions were to the game mechanic decisions. This was the biggest hurdle we encountered since we all wanted to have a say in the game mechanics, and thus the end result of the game. Ultimately, the game mechanics had to be left up to the Game Design Team so that progress could be made unhindered. This also led to a reallocation of points and changes to stories in the backlog to accurately reflect where we are going and what we have been able to accomplish thus far.
+We did not anticipate how closely linked the game design decisions were to the game mechanic decisions. This was the biggest hurdle we encountered since we all wanted to have a say in the game mechanics, and thus the end result of the game. Ultimately, the game mechanics has been started in the Game Design Team so that progress could be made unhindered. This also led to a reallocation of points and changes to stories in the backlog to accurately reflect where we are going and what we have been able to accomplish thus far.
 
 ### Projected Progress
-
+After this sprint we need to finalize how many levels, and how many enemies we need to design. We also need to refine the design language. We think we will start by concentrating on a single level and learning what we can from that experience.
 
 ## Burn Down Chart
 https://docs.google.com/a/mail.gvsu.edu/spreadsheets/d/1uitcA24i01bWN-nSk-oQuyQdOlVkBoMgaBmvMvjDXoA/edit#gid=0
