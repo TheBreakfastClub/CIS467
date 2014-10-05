@@ -27,6 +27,7 @@ We did not anticipate how closely linked the game design decisions were to the g
 After this sprint we need to finalize how many levels, and how many enemies we need to design. We also need to refine the design language. We think we will start by concentrating on a single level and learning what we can from that experience.
 
 ## Burn Down Chart
+An updated version of our burndown chart can be seen here:
 https://docs.google.com/a/mail.gvsu.edu/spreadsheets/d/1uitcA24i01bWN-nSk-oQuyQdOlVkBoMgaBmvMvjDXoA/edit#gid=0
 
 ## Conclusion
