@@ -140,8 +140,8 @@
 
 
 
-### Week 6: September 28 - October 5
-* Week Total: 
+### Week 6: September 28 - October 4
+* Week Total: 9.75
 
 
 
@@ -154,4 +154,25 @@
 * 9:00 PM - 11:30 PM
     * Using the prototype game to design the test level and figuring out different pixelation algorithms
 
+
+##### October 3, 2014
+* 3:00 PM - 5:15 PM
+    * Group Meeting discussing the sprint 1 presentation
+
+##### October 4, 2014
+* 9:00 PM - 11:30 PM
+    * Working on game level design. Trying a new program to see if I can use that instead of photoshop.
+
+
+
+
+
+    
+### Week 7: October 5 - October 11
+* Week Total: 
+
+
+##### October 5, 2014
+* 9:00 PM - 11:30 PM
+    * Setting up game in xcode for presentation
 
