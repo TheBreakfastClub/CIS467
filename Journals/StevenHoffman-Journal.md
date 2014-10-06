@@ -2,9 +2,9 @@ Steven Hoffman
 =====================
 CIS 467: The Breakfast Club
 ----------------------------
-Journal Date: 9/17/2014   
-Journal Period - FROM: 8/25/2014 TO: 9/17/2014   
-Total hours worked this period: **38.18**   
+Journal Date: 10/6/2014   
+Journal Period - FROM: 8/25/2014 TO: 10/6/2014   
+Total hours worked this period: **70.17**   
 
 
 
@@ -140,12 +140,111 @@ Class: presentations on feasibility. Also met with game engine group.
 Worked on getting SDL2 to work on EOS over VNC, using Colin's instructions. Also sent messages to group.
 
 
-#### Wednesday, 9/17/2014 (2.32 hours)
+#### Wednesday, 9/17/2014 (2.98 hours)
+
+4:30 pm - 5:10 pm    
+Attended class and helped give feasibility presentation.
 
 10:15 pm - 11:37 pm    
 Worked on Team Evaluation Report
 
 11:37 pm - 0:35 am    
 Worked on formatting journal entries and submitted new journal.
+
+
+#### Friday, 9/19/2014 (1.83 hours)
+
+2:10 pm - 4:00 pm    
+Attended meeting
+
+
+#### Saturday, 9/20/2014 (3.47 hours)
+
+3:42 pm - 5:35 pm    
+Took SDL Tutorials
+
+6:54 pm - 8:29 pm    
+Took SDL Tutorials and reviewed Colin's prototype code
+
+
+#### Sunday, 9/21/2014 (1.73 hours)
+
+5:19 pm - 7:04 pm    
+Took SDL Tutorials and asked team members a question.
+
+
+#### Monday, 9/22/2014 (0.27 hours)
+
+2:24 pm - 2:40 pm    
+Messaged group members about meeting times.
+
+
+#### Wednesday, 9/24/2014 (2.43 hours)
+
+2:30 pm - 4:57 pm    
+Worked on game engine design with Tyler and Colin. Came up with graphics engine starting code and began defining game engine world details
+
+
+#### Thursday, 9/25/2014 (4.33 hours)
+
+3:56 pm - 8:17 pm    
+Refactored code, added in tile types and tile definitions, and encapsulated game world in a more concrete way.
+
+
+#### Friday, 9/26/2014 (6.37 hours)
+
+12:57 noon - 5:05 pm    
+Met with group to flesh out game world definition. Assigned tasks for moving forward.
+
+5:06 pm - 7:21 pm    
+Re- wrote files defining the game world so that they are now image-based rather than tile based.
+
+
+#### Wednesday, 10/1/2014 (0.12 hours)
+
+5:38 pm - 5:46 pm    
+Read and responded to messages.
+
+
+#### Thursday, 10/2/2014 (3.35 hours)
+
+12:34 noon - 12:56 noon    
+Messaged Group members about various aspects of the git repo
+
+1:40 pm - 4:39 pm    
+Studied Tashi's code, sent messages, and tried to create a plan for coherent coding amongst the team
+
+
+#### Friday, 10/3/2014 (5.25 hours)
+
+3:03 pm - 8:18 pm    
+Met with team,  discussing roles for sprint. Helped distribute roles. Discussed git branch structure with teammates. Merged all the branches after the group meeting and cleaned up some of the code.
+
+
+#### Saturday, 10/4/2014 (0.97 hours)
+
+3:40 pm - 4:38 pm    
+Worked on Sprint 1 Report, specifically the Projected Progress. Also updated backlog a bit.
+
+
+#### Sunday, 10/5/2014 (0.83 hours)
+
+0:22 am - 0:29 am    
+Worked on Sprint 1 Presentation, specifically the Projected Progress.
+
+6:50 pm - 7:24 pm    
+Checked status of Sprint 1 report and messaged group members about the report.
+
+10:37 pm - 10:46 pm    
+Responded to message and updated burn down chart
+
+
+#### Monday, 10/6/2014 (0.30 hours)
+
+12:05 noon - 12:12 noon    
+Read through messages and updates.
+
+3:03 pm - 3:14 pm    
+Read through messages and updates. Also updated Journal and PowerPoint for Sprint1
 
 
