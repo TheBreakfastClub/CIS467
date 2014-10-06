@@ -34,3 +34,4 @@ An updated version of our burndown chart can be seen here:
 https://docs.google.com/a/mail.gvsu.edu/spreadsheets/d/1uitcA24i01bWN-nSk-oQuyQdOlVkBoMgaBmvMvjDXoA/edit#gid=0
 
 ## Conclusion
+We've had a rough start thus far, each of us with different, often incompatible ideas as to how the game should work, and how work should be delegated. Out of frustration, several of us have started our own prototypes, with hope to resolve this stagnation. We now have some artwork, design, and working code, and seem to be coming to an understanding on how to proceed. By the end of the second sprint, we expect to be in a much better spot, working more cooperatively than competitively with one another, and perhaps even to develop good rapport.
