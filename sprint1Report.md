@@ -4,6 +4,9 @@ Prepared by All Members.
 ## Game Engine
 
 ### Progress Reflection
+Given the difficulty of dividing tasks between six people in a project starting from scratch, total progress on the game has been made in two separate areas. The first area is a prototype of the game from a structured perspective, where the separation of the different aspects of the game are made as clearly as possible. These distinct areas include the game world/engine, graphics engine, and design resources. It is the intention that this deliberate structure will allow code and content to be created and plugged into the overall engine in a modular fashion, thus allowing progress to be made on the game without each member being involved in every process.
+
+The second area is a prototype which showcases the design and intended gameplay in a more functional, feature complete form without having to worry about a deliberate structure of code for the purposes stated above. This has allowed us to rapidly develop algorithms and approaches for a working game in these early stages of the project. 
 
 ### Problems Encountered
 The main problem encountered when developing the game engine was the difficulty of giving enough work to each group member when creating the basic game engine. Although the group was split up, leaving 4 group members to work on the game engine; it was still difficult to give each group member enough work. To help with this, members of the game engine group who weren't as well versed with SDL 2.0 were given the task of following tutorials until there was enough work was available to them within the sprint. Allowing the more experienced game engine group members work on the basic game engine will now allow all group members work on further enhancing different parts of the game engine.
