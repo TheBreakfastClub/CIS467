@@ -14,17 +14,40 @@ We need to figure out the structure of the game level.
 
 
 # The items
-I have been debating the worth of keeping to the waffle idea, and there is still validity to not doing it. But I am still getting good ideas with the items.
-1. Not using the waffle items as the main items to collect. Not sure what the items would be.
-2. keeping the waffle items. But having these items skattered around and you cna pick them up and use them. There is a list of their uses in the manifesto. With this you will need to collect all and enough of the items to make the waffle. Could then have one item that is really had to get.
-3. Keeping the waffle items. Having these items scattered around the one main level or in each separate level. but not having the items do anything.
-4. or a mix of 2 and 3 where eggs and milk are usable items and having the others just pick up items.
+I have been debating the worth of keeping to the waffle idea, and there is still validity to not doing it. But I am still getting good ideas with the items.    
+1. Not using the waffle items as the main items to collect. Not sure what the items would be.    
+2. keeping the waffle items. But having these items skattered around and you cna pick them up and use them. There is a list of their uses in the manifesto. With this you will need to collect all and enough of the items to make the waffle. Could then have one item that is really had to get.    
+3. Keeping the waffle items. Having these items scattered around the one main level or in each separate level. but not having the items do anything.    
+4. or a mix of 2 and 3 where eggs and milk are usable items and having the others just pick up items.   
 
 
 # Pixelation
-There are different things that the pixelation could do for the game mechanics.
-1. After the player collects an item they gain a new pixelation algorithm to change the world differently.
-2. There are several different collision layers that pixelate with different algorithms and then composite them together to make up the world.
-3. each sublevel has their own pixelation algorithm giving the levels different kinds of obsiticels and puzzles to solve.
+There are different things that the pixelation could do for the game mechanics.   
+1. After the player collects an item they gain a new pixelation algorithm to change the world differently.    
+2. There are several different collision layers that pixelate with different algorithms and then composite them together to make up the world.    
+3. each sublevel has their own pixelation algorithm giving the levels different kinds of obsiticels and puzzles to solve.    
 
 there are other possibilies that could be done.
+
+--------------------------------------------------------------------------------
+
+The Decisions
+=============
+* Game World
+  * We will have four sub-worlds with a central hub
+  * World themes will be decided by game design team.
+  * Each world has its own pixelation algorithm used within it (a max of 5 algorithms).
+* Items
+  * Use waffle themed items
+  * Use the items already defined
+  * Pick all items up once and keep for whole game
+  * You use an item and then cannot use it for a set amount of time (i.e. a refresh rate).
+  * Eggs and Milk are acquired easily or at the beginning, then one item per sublevel
+  * After every two items collected, you can get a new pixelation level
+	  * e.g. a wall disappears around a gem in the central hub. the gem gives new pixelation level.
+* Abilities
+  * Pixelation algorithms: These will be defined on a per world bases.
+  * Pixelation levels: These are used to solve puzzles involving the world/environment/physical space.
+  * Item abilities: These are used to solve puzzles with enemies and so that you don't die by enemies.  These will be implemented last and only if time allows.
+
+* Insert WKS
