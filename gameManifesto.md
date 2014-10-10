@@ -24,9 +24,9 @@ The map will be a large set of tiles or pixels, and the hero will remain in the 
 
 **Other ideas:**
 * **Large central room with adjoining rooms:**
-  * The cenral room would have the user centered as they move about the room
-  * At least four rooms would be connected to the central room, each with their own unique design or element. For example, each room could be designed to look like one of the main elements (e.g. fire, water, earth, air) or each room could pertain to one of the four seasons (e.g. the atumn room would have a lot of orange blocks and be very windy, making it difficult for the user to move against the wind, but easier with the wind).
-  * Eash room would have its own unique set of puzzles to solve, including puzzles at different resoltions.
+  * The central room would have the user centered as they move about the room
+  * At least four rooms would be connected to the central room, each with their own unique design or element. For example, each room could be designed to look like one of the main elements (e.g. fire, water, earth, air) or each room could pertain to one of the four seasons (e.g. the autumn room would have a lot of orange blocks and be very windy, making it difficult for the user to move against the wind, but easier with the wind).
+  * Each room would have its own unique set of puzzles to solve, including puzzles at different resolutions.
   * The central room could be a maze or puzzle of sorts on its own, helping to prevent the user from progressing to areas too soon or making the game more fun/challenging overall. However, there would probably be fewer enemies to help keep the game simpler and easier for users who are just starting the game (and do not yet have eggs to throw at the enemies).
 
 
@@ -72,7 +72,7 @@ you are given a grid of slots you can put items. As you pick up things you place
 
 
 ## Items
-The items the hero can pick up and use are all the ingredients to make a waffle. Not sure if they will be laying around and you pick them up with a limited number of uses or if these there is only one of each and you have an infinite (but limited) number of uses.
+The items the hero can pick up and use are all the ingredients to make a waffle. Not sure if they will be laying around and you pick them up with a limited number of uses or if these there is only one of each and you have an infinite (but limited) number of uses. Aside from the pinch of salt the basic recipe comes from http://www.foodnetwork.com/recipes/simple-waffles-from-scratch-recipe.html
 * **Butter:** Makes hero run fast but makes her run like on ice.
 * **Suger:** Make hero run fast but a straight shot in one direction
 * **Flour:** Throwing item, when it hits the enemy it makes them transparent similar to a ghost. They can not hurt you. Lasts for a specified duration.
