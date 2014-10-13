@@ -9,7 +9,7 @@ Description:	Defines the hero attributes.
 
 // Includes
 #include <string>
-#include "sprite.h"
+#include "character.h"
 
 class Hero: public Character{
 

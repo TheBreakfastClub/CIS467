@@ -11,6 +11,7 @@ Description:	Defines the different types of enemies in
 // Includes
 #include <string>
 #include "sprite.h"
+#include "character.h"
 
 class Enemy: public Character {
 
