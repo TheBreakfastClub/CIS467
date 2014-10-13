@@ -1,0 +1,92 @@
+# gfx.h #
+
+/***************************************************
+ * Loads the image from the given filename, returning
+ * a pointer to the image.  It stores the image in the
+ * needed format.
+ *
+ * @return A pointer to the Image that has been loaded.
+ * Because this allocates memory, you must call delete()
+ * on the pointer when done using it. Returns null if there
+ * is an error
+ ***************************************************/
+Image* loadImage(const char* filename);
+// e.g. Image *background = loadImage(argv[1]);
+
+/***************************************************************************************************************
+*** How to get a reference to the screen in image format ***
+SDL_Window *window = 
+		SDL_CreateWindow("waffles", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
+			min(WINDOW_WIDTH, world_map->w), min(WINDOW_HEIGHT, world_map->h), 0);
+if(!window) {
+	cout << "Unable  create game window.\n";
+	return 1;
+}
+SDL_Surface *surface =
+	SDL_GetWindowSurface(window);
+cout << "Created window: " << SDL_GetPixelFormatName(surface->format->format) << endl;
+	
+Image screen(surface->w, surface->h, surface->pixels); 
+// This gives screen a reference to the pixels in the SDL_Surface making up the screen
+// now, when you blit to screen, it will blit to the SDL_Screen
+
+// TODO: Paint to screen using (a)blit
+
+SDL_UpdateWindowSurface(window); // This displays what we drew on the screen to the window
+************************************************************************************************************/
+
+# image.h #
+
+/*************************************************
+ * This function paints the image at src onto the
+ * image class that this method is being called on.
+ * It paints it with its top left corner at x,y (in
+ * the coordinates of the calling image).
+ *
+ * blit: Will clip off the src image if it goes outside
+ *       the bounds of the image it is being painted to
+ *       (it cuts off whatever doesn't fit). It treats the
+ *       image as 100% opaque.
+ * ablit: Same as blit but uses alpha blending for transparency.
+ *
+ * Do blit of background then ablit of everything on top.
+ *************************************************/
+void blit (Image *src, int x, int y);
+void ablit (Image *src, int x, int y);
+// e.g. screen->blit(hero, x, y); Puts hero on screen with its top left corner at x,y on screen
+
+/****************************************************
+ * This function does the same thing as blit, except it
+ * scales the src image to take up the entire destination
+ * image.
+ ****************************************************/
+void scaleblit(Image *src);
+void ascaleblit(Image *src);
+
+
+/********************************************************
+ * Determines whether src would collide with the destination
+ * (calling image) when mapped to x,y in the coordinates of the
+ * destination image.  It checks to see if two pixels that are solid
+ * (currently, more than half opaque) collide.
+ *
+ * BETA: It currently doesn't do clipping
+ *
+ * Overlap tells you how many pixels collide. Just use overlap or
+ * collide, depending on what you need.
+ ********************************************************/
+bool collides (Image *src, int x, int y);
+// e.g. if(map->collides(hero.img, hero.xy.x, hero.xy.y))
+int overlap (Image *src, int x, int y);
+
+/*************************************************
+ * BETA:
+ * Paints src to the destination image similar to ablit
+ * Except it rotates it at the specified angle to the
+ * specified scale. It rotates in degrees counter clockwise.
+ * Cx and cy define the location in the destination image
+ * that the CENTER of src should be mapped to. Autocrops
+ * the image.
+ *************************************************/
+void ablit (Image *src, double cx, double cy, double angle, double scale = 1.0);
+
