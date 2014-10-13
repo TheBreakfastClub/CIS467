@@ -10,7 +10,7 @@ be in the world.
 
 using namespace std;
 
-class Character {
+class Character: public Sprite {
   public:
     /** Defines the amount of hitpoints a sprite has **/
     int hitPoints;
