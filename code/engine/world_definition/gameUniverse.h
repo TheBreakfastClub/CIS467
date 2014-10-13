@@ -10,5 +10,5 @@
 class GameUniverse{
   public:
     GameWorld[Sublevel::COUNT] sublevels;
-    
+    Hero hero;
 };
