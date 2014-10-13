@@ -20,17 +20,5 @@ class Sprite {
         Sprite(int x, int y, SpriteType *type);
 
         SpriteType *type;
-
-        /** Defines the amount of hitpoints a sprite has **/
-	    int hitPoints;
-
-    	/** Defines if a sprite is invincible **/
-	    bool invincible;
-
-	    /** Defines the speed of a sprite **/
-	    int speed;
-	    
-        /** Defines the attack damage of a sprite **/
-	    int attackDmg;
 };
 
