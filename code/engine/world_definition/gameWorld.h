@@ -2,14 +2,20 @@
 File Name:	    gameWorld.h
 Author:		    The Breakfast Club
 Creation Date:  09-25-2014
-Description:    Holds the data defining the world
+Description:    Holds the data defining the sublevel
 ************************************************************/
 
 #pragma once
 
 // Includes
 #include "gameMap.h"
+#include "item.h"
+#include "enemy.h"
 #include <SDL2/SDL_image.h>
+#include <string>
+#include <vector>
+
+using namespace std;
 
 class GameWorld {
     
@@ -22,6 +28,10 @@ class GameWorld {
         int pix_length;
         int pix_height;
         int pix_dim;
+        string worldName;
+        vector<Item> item;
+        vector<Enemy> enemy;
+        //TODO: Pixelation algorithm
         
         /** Defines the world environment */
         //GameMap highRes;
