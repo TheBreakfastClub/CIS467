@@ -11,7 +11,7 @@ Description:	    Defines the item attributes.
 #include <string>
 #include "item.h"
 
-class Item{
+class Item: public Sprite{
 
     public:
         
