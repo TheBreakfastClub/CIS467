@@ -12,7 +12,7 @@ Description:	Defines the different types of enemies in
 #include <string>
 #include "sprite.h"
 
-class Enemy: public Sprite {
+class Enemy: public Character {
 
     public:
         
