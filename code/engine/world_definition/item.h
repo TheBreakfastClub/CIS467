@@ -12,7 +12,7 @@ Description:	    Defines the item attributes.
 #include "item.h"
 #include "spriteSet.h"
 
-class Item{
+class Item: public Sprite{
 
     public:
         

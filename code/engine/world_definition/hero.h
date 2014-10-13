@@ -11,7 +11,7 @@ Description:	Defines the hero attributes.
 #include <string>
 #include "sprite.h"
 
-class Hero: public Sprite{
+class Hero: public Character{
 
     public:
 
