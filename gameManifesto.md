@@ -41,11 +41,11 @@ The different levels described below (currently in no particular order):
   * level that contains the Flour item.
   * description of which TBD
   * Visual Style: TBD
-  * Pixelation Levels: TBD
-  * Algorithm: TBD
-  * Designed by: TBD
-* Sugar Level
-  * level that contains the Sugar item.
+  * Pixelation Levels: Low
+  * Algorithm: Average
+  * Designed by: Michelle
+* Butter Level
+  * level that contains the Butter item.
   * description of which TBD
   * Visual Style: TBD
   * Pixelation Levels: TBD
@@ -58,8 +58,8 @@ The different levels described below (currently in no particular order):
   * Pixelation Levels: TBD
   * Algorithm: TBD
   * Designed by: TBD
-* Butter Level
-  * level that contains the Butter item.
+* Sugar Level
+  * level that contains the Sugar item.
   * description of which TBD
   * Visual Style: TBD
   * Pixelation Levels: TBD
@@ -119,42 +119,42 @@ As you pick up the items an icom appears on the screen to indicate that you got 
 
 ## Items
 The items the hero can pick up and use are all the ingredients to make a waffle. These items will be picked up once and when you get them you can use them unlimited number of times with a set refresh time frame. Aside from the pinch of salt the basic recipe comes from http://www.foodnetwork.com/recipes/simple-waffles-from-scratch-recipe.html
-* **Butter**
-  * Makes hero move fast but makes her run like on ice.
-  * Rejuvenation Time: TBD
-  * Pick up Order: TBD
-  * Key Command: TBD
-  * Level Location: Butter Level
-* **Suger**
-  * Makes hero run fast but a straight shot in one direction
-  * Rejuvenation Time: TBD
-  * Pick up Order: TBD
-  * Key Command: TBD
-  * Level Location: Sugar Level
-* **Flour**
-  * Throwing item, when it hits the enemy it makes them transparent similar to a ghost. They can not hurt you. Lasts for a specified duration.
-  * Rejuvenation Time: TBD
-  * Pick up Order: TBD
-  * Key Command: TBD
-  * Level Location: Flour Level
-* **Baking Powder**
-  * Makes Hero transparent like a ghost. You can not get hurt by enemies and can pass through obsticals.
-  * Rejuvenation Time: TBD
-  * Pick up Order: TBD
-  * Key Command: TBD
-  * Level Location: Baking Powder Level
 * **Eggs**
   * Throwing item, primary weapon. Just hits enemies and hurts them. Possible upgrade items to be different kinds of eggs.
   * Rejuvenation Time: TBD
-  * Pick up Order: TBD
+  * Pick up Order: 1st
   * Key Command: TBD
   * Level Location: Hub Level
+* **Flour**
+  * Throwing item, when it hits the enemy it makes them transparent similar to a ghost. They can not hurt you. Lasts for a specified duration.
+  * Rejuvenation Time: TBD
+  * Pick up Order: 2nd
+  * Key Command: TBD
+  * Level Location: Flour Level
 * **Milk**
   * Healing item. Possible upgrades to organic milk for better healing, or use the percents to have different levels of healing.
   * Rejuvenation Time: TBD
-  * Pick up Order: TBD
+  * Pick up Order: 3rd
   * Key Command: TBD
   * Level Location: Hub Level
+* **Butter**
+  * Makes hero move fast but makes her run like on ice.
+  * Rejuvenation Time: TBD
+  * Pick up Order: 4th
+  * Key Command: TBD
+  * Level Location: Butter Level
+* **Baking Powder**
+  * Makes Hero transparent like a ghost. You can not get hurt by enemies and can pass through obsticals.
+  * Rejuvenation Time: TBD
+  * Pick up Order: 5th
+  * Key Command: TBD
+  * Level Location: Baking Powder Level
+* **Suger**
+  * Makes hero run fast but a straight shot in one direction
+  * Rejuvenation Time: TBD
+  * Pick up Order: 6th
+  * Key Command: TBD
+  * Level Location: Sugar Level
 
 ### Pixelation Items
 The pixelation leveling up will be done when the Hero collects the pixelation item for that resolution. The visual look of that item will be a varient on how the hero will look at that level of resolution. I was thinking that they could be grayed out versions of hero like a statue. When the Hero goes up to the item it changes or something...TBD.
