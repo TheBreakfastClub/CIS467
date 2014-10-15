@@ -11,31 +11,24 @@ Description:	Holds definitions about the pixels that make
 
 #include <SDL2/SDL.h>
 #include <vector>
-#include "pixel.h"
-
-typedef Pixel* MapLayer; // 2D array of Pixels
-                         // mapLayer[row][col] = mapLayer[row * width + col];
+#include "../render/image.h"
 
 class GameMap {
 
     public:
-        GameMap(int width, int height);
+        GameMap();
         ~GameMap();
         
-        MapLayer topLayer;
-        MapLayer collisionLayer;
-        MapLayer backgroundLayer;
+        Image *backgroundLayer;
+        Image *collisionLayer;
+        Image *topLayer;
 
-        // for testing
-        std::vector<Pixel> test_layer;
+        bool loadBackgroundLayer(const char* filename);
+        bool loadCollisionLayer(const char* filename);
+        bool loadTopLayer(const char* filename);
 
-        /** Size of each layer, in terms of the Pixel class */
-        int width;
-        int height;
-
-        // square dimension of each individual Pixel, in terms of physical pixels
-        int phys_dim;
-
+        int w();
+        int h();
 };
 
 

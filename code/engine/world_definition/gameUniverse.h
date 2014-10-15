@@ -1,5 +1,11 @@
-// A collection of all sublevls including the hub.
-
+/*********************************************************
+File Name:	    gameUniverse.h
+Author:		    The Breakfast Club
+Creation Date:  10-13-2014
+Description:    This class holds the different sublevels/subworlds
+                and other items common to the whole gameUniverse,
+                such as the hero.
+************************************************************/
 
 #pragma once
 
