@@ -8,7 +8,7 @@ Description:	Holds definitions about the pixels that make
 ************************************************************/
 
 #include "gameMap.h"
-#include "gfx.h"
+#include "../render/gfx.h"
 
 // The constructor
 GameMap::GameMap() {
@@ -45,7 +45,7 @@ bool GameMap::loadBackgroundLayer(const char* filename) {
     if (backgroundLayer) {
         delete(backgroundLayer);
     }
-    backgroundLayer = loadImage(filename);
+    backgroundLayer = Gfx::loadImage(filename);
     return (backgroundLayer != NULL);
 }
 
@@ -61,7 +61,7 @@ bool GameMap::loadCollisionLayer(const char* filename) {
     if (collisionLayer) {
         delete(collisionLayer);
     }
-    collisionLayer = loadImage(filename);
+    collisionLayer = Gfx::loadImage(filename);
     return (collisionLayer != NULL);
 }
 
@@ -77,8 +77,62 @@ bool GameMap::loadTopLayer(const char* filename) {
     if (topLayer) {
         delete(topLayer);
     }
-    topLayer = loadImage(filename);
+    topLayer = Gfx::loadImage(filename);
     return (topLayer != NULL);
+}
+
+/**
+ * If img is not null, this function sets the current
+ * background layer to img, freeing the previous
+ * background layer if one exists. 
+ *
+ * This GameMap now gets complete control over the
+ * Image pointed to by img and GameMap becomes responsible
+ * for freeing its memory when it is no longer needed.
+ */
+void GameMap::setBackgroundLayer(Image *img) {
+    
+    if (img == NULL) return;
+    if (backgroundLayer) {
+        delete(backgroundLayer);
+    }
+    backgroundLayer = img;
+}
+
+/**
+ * If img is not null, this function sets the current
+ * collision layer to img, freeing the previous
+ * collision layer if one exists. 
+ *
+ * This GameMap now gets complete control over the
+ * Image pointed to by img and GameMap becomes responsible
+ * for freeing its memory when it is no longer needed.
+ */
+void GameMap::setCollisionLayer(Image *img) {
+    
+    if (img == NULL) return;
+    if (collisionLayer) {
+        delete(collisionLayer);
+    }
+    collisionLayer = img;
+}
+
+/**
+ * If img is not null, this function sets the current
+ * top layer to img, freeing the previous
+ * top layer if one exists. 
+ *
+ * This GameMap now gets complete control over the
+ * Image pointed to by img and GameMap becomes responsible
+ * for freeing its memory when it is no longer needed.
+ */
+void GameMap::setTopLayer(Image *img) {
+    
+    if (img == NULL) return;
+    if (topLayer) {
+        delete(topLayer);
+    }
+    topLayer = img;
 }
 
 /**

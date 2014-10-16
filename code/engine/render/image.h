@@ -3,12 +3,16 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
-#include "font.h"
 #include "types.h"
 #include "util.h"
 #include "color.h"
 #include "point.h"
 
+#undef HAVE_FONT // Defining HAVE_FONT causes a multiple declaration error when compiling currently..
+
+#if HAVE_FONT	
+    #include "font.h"
+#endif
 
 using namespace std;
 
@@ -295,7 +299,8 @@ class Image {
 			}
 		}
 	}
-	
+
+#if HAVE_FONT
 	void putchar(unsigned char c, int x, int y, u32 color)
 	{
 		if(x < 0 || x > w - 8 || y < 0 || y > h - 16) return;
@@ -327,4 +332,5 @@ class Image {
 			x += 8;
 		}
 	}
+#endif
 };

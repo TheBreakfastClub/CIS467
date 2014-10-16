@@ -11,13 +11,7 @@ Description:    This class holds the code needed to create
 // Includes
 #include <SDL2/SDL_image.h>
 #include "../render/image.h"
-#include "../render/gfx.h"
 #include "../world_definition/gameWorld.h"
-
-#define GAME_NAME "One Rad Waffle Game"
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
-
 
 using namespace std;
 
@@ -27,6 +21,7 @@ public:
 
     GraphicsEngine();
     ~GraphicsEngine();
+    bool init(const char *gameName, int width, int height);
 
     void refreshScreen();
     void drawGameWorld(const GameWorld &world, const int &pan_x, const int &pan_y);
@@ -38,7 +33,7 @@ private:
     SDL_Surface *surface;
     Image *screen;
 
-    bool setupSDL();
+    bool setupSDL(const char *gameName, int width, int height);
     void cleanupSDL();
 
 };

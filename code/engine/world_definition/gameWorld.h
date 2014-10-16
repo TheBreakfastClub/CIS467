@@ -20,26 +20,33 @@ class GameWorld {
     
     public:
         GameWorld(string world_name);
+        ~GameWorld();
+        bool init(const char *background_filename, 
+                  const char *collision_filename,
+                  const char *top_filename); // TODO: Add pixelation algorithm parameter
         
+        /** Properties of the world */
         string worldName;
+        //TODO: Pixelation algorithm
 
         /** The entities that will inhabit the world */
         vector<Item> item;
         vector<Enemy> enemy;
-        //TODO: Pixelation algorithm
-        
-        /** Defines the world environment */
-        GameMap highRes;
-        GameMap medRes;
-        GameMap lowRes;
+
+        /** Pointer to the GameMap that currently defines the world */ 
         GameMap *currentRes;
-        int currentResLevel;
 
         // Methods to change the resolution
         void next_resolution(); // selects the next GameMap
         void prev_resolution(); //             prev
     private:
         void _set_current_res();
+        
+        /** Defines the world environment */
+        GameMap *highRes;
+        GameMap *medRes;
+        GameMap *lowRes;
+        int currentResLevel;
 
 };
 

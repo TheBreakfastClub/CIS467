@@ -27,6 +27,10 @@ class GameMap {
         bool loadCollisionLayer(const char* filename);
         bool loadTopLayer(const char* filename);
 
+        void setBackgroundLayer(Image *img);
+        void setCollisionLayer(Image *img);
+        void setTopLayer(Image *img);
+
         int w();
         int h();
 };

@@ -1,34 +1,37 @@
-/**
- * The main controller of the game.
- */
+/*********************************************************
+File Name:	    game.cpp
+Author:		    The Breakfast Club
+Description:    The main controller of the game.
+************************************************************/
 
-#include <cstdlib>
+//#include <cstdlib>
 #include "game.h"
 
-#define TILE_DIM 16
-#define GRID_X 32
-#define GRID_Y 32
+#define GAME_NAME "One Rad Waffle Game"
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
 
+#define BACKGROUND_IMG "resources/background.png"
+#define COLLISION_IMG "resources/test4cl.png"
+#define TOP_IMG NULL
 
-Game::Game(int dim_x, int dim_y) 
-	: world(dim_x, dim_y, TILE_DIM, dim_x, dim_y), drawing()
-{
-	running = true;
+// The default constructor
+Game::Game() : world("The Hub") {
+	gameIsRunning = true;
 }
 
 /* Update game logic at each iteration of the loop */
 void Game::update()
 {
-	// check for collision, events, etc. TODO: Move this stuff (generally) to engine
+	// check for collision, events, etc. 
+    // TODO: Move this stuff (generally) to engine
 }
 
-// TESTING event timing
-//Uint32 Game::inc_z(Uint32 interval, void* param)
-//{
-//	z++;
-//	return 1000;
-//}
-
+/**
+ * This method handles the inputs from the keyboard.
+ * Make sure that the Graphics Engine has been initialized
+ * before calling this method.
+ */
 void Game::handle_input()
 {
 	SDL_Event event;
@@ -36,7 +39,7 @@ void Game::handle_input()
 
 		// Quit (through close window decoration)
     	if (event.type == SDL_QUIT) {
-    		running = false;
+    		gameIsRunning = false;
     		return;
     	}
 
@@ -67,8 +70,9 @@ void Game::handle_input()
 /* Main game loop */
 int Game::run()
 {
-	while (running) {
-		drawing.draw_world(world);
+	while (gameIsRunning) {
+        graphics.drawGameWorld(world, 0, 0);
+        graphics.refreshScreen();
 		handle_input();
 		update();
 		SDL_Delay(30);
@@ -76,31 +80,45 @@ int Game::run()
 	return 0;
 }
 
-bool Game::setup()
+/**
+ * This function sets up the needed components for the game to run
+ * and returns true if setup completed error free, false otherwise.
+ *
+ * @param gameName The name of the game to display on the game's window.
+ * @param width The width of the game's window.
+ * @param height The height of the game's window.
+ * @return True if setup was completed successfully, false otherwise.
+ */
+bool Game::setup(const char *gameName, int width, int height)
 {
-	return drawing.setupSDL(GRID_X * TILE_DIM, GRID_Y * TILE_DIM) && world.setup(drawing.renderer);
+    // Setup the Graphics Engine
+    if (!graphics.init(gameName, width, height)) {
+        std::cerr << "Error initializing graphics engine\n";
+        return false;
+    }
+
+    // Setup the Game Universe
+    // TODO: Setup a universe, rather than one world
+    if (!world.init(BACKGROUND_IMG, COLLISION_IMG, TOP_IMG)) {
+        std::cerr << "Error initializing game world\n";
+        return false;
+    }
+    
+	return true;
 }
 
-void Game::cleanup()
-{
-	// probably not necessary since each specific part of the engine cleans itself up. thoughts?
-    /**
-     * Steven's Thoughts: may not be important now. But if Game ever
-     * allocates its own data, it will have to deallocate. We can always
-     * re-add the cleanup method then, or just deallocate directly in
-     * Game's destructor.
-     */
-}
-
+/**
+ * The main method. Instantiates and runs a game.
+ */
 int main(int argc, char* argv[])
 {
-	Game game(GRID_X, GRID_Y);
-	if (!game.setup()) {
+	Game game;
+	if (!game.setup(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT)) {
         std::cerr << "Error in setting up the game. Game is exiting.\n";
 		return 1;
 	}
 
 	int signal = game.run();
-	game.cleanup();
 	return signal;
 }
+

@@ -7,19 +7,19 @@ Description:    This class holds the code needed to create
 ************************************************************/
 
 // The includes
-#include "graphicsEngine.cpp"
+#include "graphicsEngine.h"
 #include <iostream>
 #include <stdlib.h>
 
 /**
- * Default constructor. Exits program if error loading SDL.
+ * Default constructor. User needs to call init before using
+ * the engine.
  */
 GraphicsEngine::GraphicsEngine()
 {
-    if (!setupSDL()) {
-        cerr << "Error loading SDL. Game exiting...\n";
-        exit(1);
-    }
+    window = NULL;
+    surface = NULL;
+    screen = NULL;
 }
 
 /**
@@ -30,10 +30,21 @@ GraphicsEngine::~GraphicsEngine() {
 }
 
 /**
+ * This function initializes the graphics engine, returning true
+ * if it is successful or if it is already initialized. Otherwise,
+ * returns false.
+ */
+bool GraphicsEngine::init(const char *gameName, int width, int height) {
+
+    if (window != NULL) return true; 
+    return setupSDL(gameName, width, height);
+}
+
+/**
  * Sets up SDL to use for graphics. Returns false if there
  * was an error initializing.
  */
-bool GraphicsEngine::setupSDL() {
+bool GraphicsEngine::setupSDL(const char *gameName, int width, int height) {
 
     // Initialize SDL
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
@@ -42,7 +53,7 @@ bool GraphicsEngine::setupSDL() {
     }
 
     // Create the SDL window to draw on
-    window = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow(gameName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
     if (window == NULL) {
         std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
         return false;
@@ -67,9 +78,11 @@ bool GraphicsEngine::setupSDL() {
  */
 void GraphicsEngine::cleanupSDL() {
     
-    delete (screen);
-    SDL_DestroyWindow(window); // frees window and its associated surface
-    SDL_Quit();
+    if (window) {
+        delete (screen);
+        SDL_DestroyWindow(window); // frees window and its associated surface
+        SDL_Quit();
+    }
 }
 
 /**
@@ -93,7 +106,7 @@ void GraphicsEngine::refreshScreen() {
  *      of the game map indicating the top-left corner of the area
  *      of the game map that should be drawn to the screen.
  */
-void drawGameWorld(const GameWorld &world, const int &pan_x, const int &pan_y) {
+void GraphicsEngine::drawGameWorld(const GameWorld &world, const int &pan_x, const int &pan_y) {
 
     // Grab the current map to draw to 
     // and create an image to paint the map to
@@ -102,9 +115,14 @@ void drawGameWorld(const GameWorld &world, const int &pan_x, const int &pan_y) {
 
     // Draw the background and collision layer
     mapImg->scaleblit(map->backgroundLayer);
-    mapImg->scaleblit(map->collisionLayer);
+    mapImg->ascaleblit(map->collisionLayer);
 
     // TODO: Draw Sprites (e.g. hero, enemies, items) onto mapImg
+
+    // Draw the top layer, if it exists
+    if (map->topLayer) {
+        mapImg->ascaleblit(map->topLayer);
+    }
 
     // Draw the map to the screen, panning the map to the correct area
     // TODO: see if we can paint directly to the screen, only painting
