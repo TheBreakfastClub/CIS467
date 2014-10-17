@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdio.h>
 #include <iostream>
 #include <algorithm>
 #include <cmath>
@@ -7,12 +8,7 @@
 #include "util.h"
 #include "color.h"
 #include "point.h"
-
-#undef HAVE_FONT // Defining HAVE_FONT causes a multiple declaration error when compiling currently..
-
-#if HAVE_FONT	
-    #include "font.h"
-#endif
+#include "font.h"
 
 using namespace std;
 
@@ -112,11 +108,12 @@ class Image {
 	}	
 	
   void blit(Image *src, int x, int y) {
+
 		int x1 = max(x, 0);
 		int x2 = min(x + src->w, w);
 		int y1 = max(y, 0);
 		int y2 = min(y + src->h, h);
-		
+
 		for(int b=y1; b < y2; b++) {
 			int i = (b-y)*src->w + x1 - x;
 			for(int a = b*w + x1; a < b*w + x2; a++)
@@ -300,7 +297,6 @@ class Image {
 		}
 	}
 
-#if HAVE_FONT
 	void putchar(unsigned char c, int x, int y, u32 color)
 	{
 		if(x < 0 || x > w - 8 || y < 0 || y > h - 16) return;
@@ -332,5 +328,4 @@ class Image {
 			x += 8;
 		}
 	}
-#endif
 };

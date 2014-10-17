@@ -4,12 +4,11 @@ Author:		    The Breakfast Club
 Description:    The main controller of the game.
 ************************************************************/
 
-//#include <cstdlib>
 #include "game.h"
 
 #define GAME_NAME "One Rad Waffle Game"
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#define WINDOW_WIDTH 500
+#define WINDOW_HEIGHT 500
 
 #define BACKGROUND_IMG "resources/background.png"
 #define COLLISION_IMG "resources/test4cl.png"

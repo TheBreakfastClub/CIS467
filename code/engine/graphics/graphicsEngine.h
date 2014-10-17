@@ -33,6 +33,9 @@ private:
     SDL_Surface *surface;
     Image *screen;
 
+    /** Used when determining if screen pixel format needs to be converted */
+    bool convert;
+
     bool setupSDL(const char *gameName, int width, int height);
     void cleanupSDL();
 

@@ -65,10 +65,27 @@ bool GraphicsEngine::setupSDL(const char *gameName, int width, int height) {
         std::cout << "SDL_GetWindowSurface Error: " << SDL_GetError() << std::endl;
         return false;
     }
-
+    
+    // new:
+    cout << "Created window: " << SDL_GetPixelFormatName(surface->format->format) << '\n';
+    cout << (int)surface->format->BitsPerPixel << " bits per pixel\n";
+    cout << (int)surface->format->BytesPerPixel << " bytes per pixel\n";
+    
     // Save a reference to the pixels in the SDL surface into an Image,
-    // so that we can manipulate the pixels directly.
-    screen = new Image(surface->w, surface->h, surface->pixels);
+    // so that we can manipulate the pixels directly. If video card is not the right
+    // pixel format, however, just allocate pixel memory for an Image directly.
+    if(surface->format->Rmask == 0xff0000 && surface->format->Gmask == 0xff00 && 
+			surface->format->Bmask == 0xff && surface->format->BytesPerPixel == 4 && 
+			surface->pitch == 4*surface->w) {
+				cout << "Compatible window format, drawing directly to SDL Surface.\n";
+				convert = 0;
+				screen = new Image(surface->w, surface->h, surface->pixels); // image stores reference to the actual pixels on the screen
+    }
+    else {
+			cout << "Incompatible window format, using conversion.\n";
+			convert = 1;	
+			screen = new Image(surface->w, surface->h); // image actually allocates its own pixels
+    }
     
     return true;
 }
@@ -90,6 +107,15 @@ void GraphicsEngine::cleanupSDL() {
  * the screen.
  */
 void GraphicsEngine::refreshScreen() {
+    
+    // Paint pixels to SDL Surface if video card's format is not consistent
+    // with the pixel format in the Image class
+    if(convert) {
+        SDL_ConvertPixels(screen->w, screen->h, SDL_PIXELFORMAT_ARGB8888, screen->pixels,
+				4*screen->w, surface->format->format, surface->pixels, surface->pitch);
+    }
+
+    // Display drawn Image to screen/window
     SDL_UpdateWindowSurface(window);
 }
 
