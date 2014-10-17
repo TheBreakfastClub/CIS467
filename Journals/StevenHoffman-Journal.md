@@ -2,9 +2,9 @@ Steven Hoffman
 =====================
 CIS 467: The Breakfast Club
 ----------------------------
-Journal Date: 10/6/2014   
-Journal Period - FROM: 8/25/2014 TO: 10/6/2014   
-Total hours worked this period: **70.17**   
+Journal Date: 10/16/2014   
+Journal Period - FROM: 8/25/2014 TO: 10/16/2014   
+Total hours worked this period: **91.72**   
 
 
 
@@ -239,12 +239,93 @@ Checked status of Sprint 1 report and messaged group members about the report.
 Responded to message and updated burn down chart
 
 
-#### Monday, 10/6/2014 (0.30 hours)
+#### Monday, 10/6/2014 (2.55 hours)
 
 12:05 noon - 12:12 noon    
 Read through messages and updates.
 
 3:03 pm - 3:14 pm    
 Read through messages and updates. Also updated Journal and PowerPoint for Sprint1
+
+4:30 pm - 5:45 pm    
+Attended class and gave part of Sprint 1 presentation.
+
+5:45 pm - 6:45 pm    
+Attended meeting of game engine group to define direction for engine.
+
+
+#### Wednesday, 10/8/2014 (0.98 hours)
+
+4:06 pm - 4:31 pm    
+Worked on team evaluation reports and responded to group messages.
+
+4:30 pm - 5:05 pm    
+Attended class.
+
+
+#### Thursday, 10/9/2014 (0.60 hours)
+
+11:00 am - 11:19 am    
+Messaged game engine group and discussed next steps
+
+11:54 am - 12:12 noon    
+Read through messages.
+
+
+#### Friday, 10/10/2014 (5.28 hours)
+
+1:15 am - 1:37 am    
+Read through messages, game manifesto, and the list of things we need to decide on soon.
+
+12:13 noon - 1:00 pm    
+Reviewed existing code base for project
+
+1:23 pm - 5:31 pm    
+Met with game engine team to discuss direction and distribute work.  Also met with full team to make key game mechanic decisions.  Then I typed up the decisions made and put them on Git.
+
+
+#### Monday, 10/13/2014 (3.70 hours)
+
+12:01 noon - 1:49 pm    
+Met with Tyler to add to world definition and determine next steps.
+
+4:13 pm - 4:39 pm    
+Read through and responded to messages.  Also scheduled meeting with Tashi to define Graphics API
+
+4:58 pm - 6:28 pm    
+Met with Tashi to determine API for his graphics engine.
+
+
+#### Tuesday, 10/14/2014 (0.20 hours)
+
+12:34 noon - 12:42 noon    
+Read through updates to code base and sent a message to the group.
+
+3:04 pm - 3:09 pm    
+Messaged Group members
+
+
+#### Wednesday, 10/15/2014 (6.37 hours)
+
+2:38 pm - 2:55 pm    
+Worked on integrating Tashi's graphics code into the structured prototype.
+
+3:27 pm - 5:12 pm    
+Worked on integrating Tashi's graphics code into the structured prototype.
+
+10:26 pm - 2:46 am    
+Worked on integrating Tashi's graphics code into the structured prototype.  Tried debugging code with Tashi's help.
+
+
+#### Thursday, 10/16/2014 (2.08 hours)
+
+1:16 pm - 1:29 pm    
+Searched for error in SDL code
+
+2:13 pm - 2:31 pm    
+Searched for error in SDL code, looking at the revisions to SDL code that Tashi provided.
+
+8:29 pm - 10:03 pm    
+Fixed SDL code based on Tashi's help.  Also sent messages to group, updated Trello, and updated journal.
 
 
