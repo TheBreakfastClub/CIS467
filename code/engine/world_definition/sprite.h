@@ -14,7 +14,8 @@ Description:	Defines the different types of sprites that can
 class Sprite {
 
     private:
-        std::pair<int,int> xy;
+        int x;
+        int y;
 
     public:
         Sprite(int x, int y, SpriteType *type);
