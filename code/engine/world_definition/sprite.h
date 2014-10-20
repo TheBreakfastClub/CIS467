@@ -8,6 +8,7 @@ Description:	Defines the different types of sprites that can
 
 #pragma once
 
+#include "../render/image.h"
 #include "spriteType.h"
 #include <utility>
 

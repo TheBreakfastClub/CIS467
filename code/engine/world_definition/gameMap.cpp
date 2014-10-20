@@ -8,7 +8,6 @@ Description:	Holds definitions about the pixels that make
 ************************************************************/
 
 #include "gameMap.h"
-#include "../render/gfx.h"
 
 // The constructor
 GameMap::GameMap() {

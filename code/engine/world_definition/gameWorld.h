@@ -36,6 +36,9 @@ class GameWorld {
         /** Pointer to the GameMap that currently defines the world */ 
         GameMap *currentRes;
 
+        int w;
+        int h;
+
         // Methods to change the resolution
         void next_resolution(); // selects the next GameMap
         void prev_resolution(); //             prev
