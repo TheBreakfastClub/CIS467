@@ -14,12 +14,13 @@ Description:	Defines the different types of sprites that can
 class Sprite {
 
     private:
-        int x;
-        int y;
+        
 
     public:
-        Sprite(int x, int y, SpriteType *type);
-
+        Sprite(int x, int y, SpriteType *type, Image *spriteImage);
         SpriteType *type;
+        int x;
+        int y;
+        Image *spriteImage;
 };
 
