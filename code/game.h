@@ -10,6 +10,7 @@ Description:    The main controller of the game.
 #include <iostream>
 #include "engine/world_definition/gameWorld.h"
 #include "engine/graphics/graphicsEngine.h"
+#include "util/clock.h"
 
 class Game {
 
@@ -21,6 +22,9 @@ class Game {
 		/* Game engine */
 		GameWorld world;
 		bool gameIsRunning;
+
+        /* Utility */
+        Clock clock;
  
     public:
  
