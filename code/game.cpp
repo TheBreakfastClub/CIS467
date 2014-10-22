@@ -23,7 +23,7 @@ Game::Game() : world("The Hub"), clock()
 	gameIsRunning = true;
 
     // just showing off the types of things the event timer can do...
-    clock.add_event(new AutoPixEvent(&world));
+    //clock.add_event(new AutoPixEvent(&world));
 }
 
 /* Update game logic at each iteration of the loop */
@@ -80,10 +80,12 @@ void Game::handle_input()
 #endif
                 case SDLK_KP_PLUS:
                 case SDLK_PLUS:
+                case SDLK_2:
                     world.next_resolution();
                     break;
                 case SDLK_KP_MINUS:
                 case SDLK_MINUS:
+                case SDLK_1:
                     world.prev_resolution();
                     break;                    
                 case SDLK_q:
