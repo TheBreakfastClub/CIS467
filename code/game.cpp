@@ -11,8 +11,11 @@ Description:    The main controller of the game.
 #define WINDOW_HEIGHT 500
 
 #define BACKGROUND_IMG "resources/background.png"
-#define COLLISION_IMG "resources/test4cl.png"
+#define COLLISION_IMG "resources/fullBoardTest1.png"
 #define TOP_IMG NULL
+
+int pan_x, pan_y, step;
+
 
 // The default constructor
 Game::Game() : world("The Hub") {
@@ -33,6 +36,9 @@ void Game::update()
  */
 void Game::handle_input()
 {
+    int h = world.h - 1 - WINDOW_HEIGHT;
+    int w = world.w - 1 - WINDOW_WIDTH;
+
 	SDL_Event event;
 	while(SDL_PollEvent(&event)) {
 
@@ -46,19 +52,34 @@ void Game::handle_input()
     	else if (event.type == SDL_KEYDOWN) {
     		switch (event.key.keysym.sym) {
     			case SDLK_UP:
-    				std::cout << "UP\n";
-                    world.next_resolution();
+                    pan_y -= step;
+                    if (pan_y < 0) pan_y = 0;
     				break;
     			case SDLK_DOWN:
-    				std::cout << "DOWN\n";
-                    world.prev_resolution();
+                    pan_y += step;
+                    if (pan_y > h) pan_y = h;
     				break;
     			case SDLK_RIGHT:
-    				std::cout << "RIGHT\n";
+                    pan_x += step;
+                    if (pan_x > w) pan_x = w;
     				break;
     			case SDLK_LEFT:
-    				std::cout << "LEFT\n";
+                    pan_x -= step;
+                    if (pan_x < 0) pan_x = 0;
     				break;
+                case SDLK_KP_PLUS:
+                case SDLK_PLUS:
+                    world.next_resolution();
+                    break;
+                case SDLK_KP_MINUS:
+                case SDLK_MINUS:
+                    world.prev_resolution();
+                    break;                    
+                case SDLK_q:
+                case SDLK_e:
+                case SDLK_ESCAPE:
+                    gameIsRunning = false;
+                    break;
     			default:
     				std::cout << "INPUT: Unhandled input\n";
     		}
@@ -70,7 +91,7 @@ void Game::handle_input()
 int Game::run()
 {
 	while (gameIsRunning) {
-        graphics.drawGameWorld(world, 0, 0);
+        graphics.drawGameWorld(world, pan_x, pan_y);
         graphics.refreshScreen();
 		handle_input();
 		update();
@@ -102,6 +123,9 @@ bool Game::setup(const char *gameName, int width, int height)
         std::cerr << "Error initializing game world\n";
         return false;
     }
+
+    pan_x = pan_y = 0;
+    step = 20;
     
 	return true;
 }

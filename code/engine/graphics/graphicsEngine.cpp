@@ -137,7 +137,7 @@ void GraphicsEngine::drawGameWorld(const GameWorld &world, const int &pan_x, con
     // Grab the current map to draw to 
     // and create an image to paint the map to
     GameMap *map = world.currentRes;
-    Image *mapImg = new Image(map->w(), map->h());
+    Image *mapImg = new Image(world.w, world.h);
 
     // Draw the background and collision layer
     mapImg->scaleblit(map->backgroundLayer);

@@ -64,6 +64,9 @@ bool GameWorld::init(const char *background_filename,
         }
     }
 
+    w = highRes->w();
+    h = highRes->h();
+
     // Initialize Medium and Low Resolution Game Maps
     // TODO: Use pixelation to dynamically create and set these maps
     
