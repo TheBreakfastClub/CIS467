@@ -23,7 +23,7 @@ Game::Game() : world("The Hub"), clock()
 	gameIsRunning = true;
 
     // just showing off the types of things the event timer can do...
-    //clock.add_event(new AutoPixEvent(&world));
+    clock.add_event(new AutoPixEvent(&world));
 }
 
 /* Update game logic at each iteration of the loop */
