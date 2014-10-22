@@ -9,7 +9,6 @@ Description:	Defines the different types of sprites that can
 #pragma once
 
 #include "../render/image.h"
-#include "spriteType.h"
 #include <utility>
 
 class Sprite {
@@ -18,8 +17,7 @@ class Sprite {
         
 
     public:
-        Sprite(int x, int y, SpriteType *type, Image *spriteImage);
-        SpriteType *type;
+        Sprite(int x, int y, Image *spriteImage);
         int x;
         int y;
         Image *spriteImage;

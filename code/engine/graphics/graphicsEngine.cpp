@@ -136,6 +136,9 @@ void GraphicsEngine::drawGameWorld(const GameWorld &world, const int &pan_x, con
     screen->blit(map->mapImg, -pan_x, -pan_y);
 
     // TODO: Draw Sprites (e.g. hero, enemies, items) onto mapImg
+    for (Item i : world.items) {
+        mapImg->ablit(i.spriteImage, i.x, i.y);
+    }
 
     // Draw the top layer, if it exists
     if (map->topLayer) {

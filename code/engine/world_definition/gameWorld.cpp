@@ -11,12 +11,13 @@ Description:    Holds the data defining the world
 #include <SDL2/SDL.h>
 #include <iostream> 
 #include <numeric>
+#include <cstdlib>
 
 /**
  * Default constructor for the world. Must call GameWorld::init()
  * before using the GameWorld instance.
  */
-GameWorld::GameWorld(string world_name) : worldName(world_name) 
+GameWorld::GameWorld(string world_name) : worldName(world_name), items(), enemies() 
 {
     highRes = NULL;
     medRes = NULL;
@@ -110,6 +111,13 @@ bool GameWorld::init(const char *background_filename,
     // Set resolution
     currentRes = lowRes;
     currentResLevel = 0; // 0 -- Low, 1 -- Med, 2 -- High
+
+    // create some random items 
+    for (int i = 0; i < 12; i++) {
+        int x = rand() % w;
+        int y = rand() % h;
+        items.push_back(Item(x, y, Gfx::loadImage("resources/hero.png"), "hero"));
+    }
 
     return true;
 }

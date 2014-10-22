@@ -23,7 +23,7 @@ Game::Game() : world("The Hub"), clock()
 	gameIsRunning = true;
 
     // just showing off the types of things the event timer can do...
-    //clock.add_event(new AutoPixEvent(&world));
+    clock.add_event(new AutoPixEvent(&world));
 }
 
 /* Update game logic at each iteration of the loop */
@@ -145,6 +145,7 @@ int Game::run()
 		handle_input();
 		update();
 		clock.tick();
+        //std::cout << std::to_string(clock.avgFPS()) << std::endl;
 	}
 	return 0;
 }
