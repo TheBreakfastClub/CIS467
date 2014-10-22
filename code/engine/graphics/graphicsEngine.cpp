@@ -129,26 +129,20 @@ void GraphicsEngine::refreshScreen() {
  */
 void GraphicsEngine::drawGameWorld(const GameWorld &world, const int &pan_x, const int &pan_y) {
 
-    // Grab the current map to draw to 
-    // and create an image to paint the map to
+    // Grab the current map to draw 
     GameMap *map = world.currentRes;
-    Image *mapImg = new Image(world.w, world.h);
 
-    // Draw the background and collision layer
-    mapImg->scaleblit(map->backgroundLayer);
-    mapImg->ascaleblit(map->collisionLayer);
+    // Draw the map to the screen, panning the map to the correct area
+    screen->blit(map->mapImg, -pan_x, -pan_y);
 
     // TODO: Draw Sprites (e.g. hero, enemies, items) onto mapImg
 
     // Draw the top layer, if it exists
     if (map->topLayer) {
-        mapImg->ascaleblit(map->topLayer);
+        screen->ascaleblit(map->topLayer);
     }
 
-    // Draw the map to the screen, panning the map to the correct area
     // TODO: see if we can paint directly to the screen, only painting
     // the items in the panned area.
-    screen->blit(mapImg, -pan_x, -pan_y);
-    delete mapImg;
 }
 

@@ -15,6 +15,7 @@ GameMap::GameMap() {
     backgroundLayer = NULL;
     collisionLayer = NULL;
     topLayer = NULL;
+    mapImg = NULL;
 }
 
 // The destructor
@@ -29,6 +30,9 @@ GameMap::~GameMap() {
     }
     if (topLayer) {
         delete(topLayer);
+    }
+    if (mapImg) {
+        delete(mapImg);
     }
 }
 
@@ -132,6 +136,21 @@ void GameMap::setTopLayer(Image *img) {
         delete(topLayer);
     }
     topLayer = img;
+}
+
+/**
+ * This method creates the map image containing the background and
+ * collision layers, scaled to the correct size of the world.
+ * If the background or collision layer is null, then this does nothing.
+ */
+void GameMap::createMapImage(int worldWidth, int worldHeight) {
+    
+    if (backgroundLayer && collisionLayer) {
+        if (mapImg) delete mapImg;
+        mapImg = new Image(worldWidth, worldHeight);
+        mapImg->scaleblit(backgroundLayer);
+        mapImg->ascaleblit(collisionLayer);
+    }
 }
 
 /**

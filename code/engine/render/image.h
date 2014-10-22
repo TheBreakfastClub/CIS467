@@ -1,5 +1,7 @@
 #pragma once
 
+#undef WARNING
+
 #include <stdio.h>
 #include <iostream>
 #include <algorithm>
@@ -223,10 +225,13 @@ class Image {
 		Point p[3] = {a,b,c};
 		int top, middle, bottom, left, right;
 		sort(p, p+3, point_compare);
-		
+#ifdef WARNING		
 		int ab, ac, bc; // slopes
 		int x,y,x1,y1,x2,y2;
-
+#else
+        int y;
+#endif
+        
 		top = max(0, p[0].y);
 		middle = min(h, p[1].y);
 		bottom = min(h, p[2].y);

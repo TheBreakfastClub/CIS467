@@ -65,61 +65,49 @@ bool GameWorld::init(const char *background_filename,
            return false;
         }
     }
-
+    
+    // Get the width and height of the world
     w = highRes->w();
     h = highRes->h();
 
-    // Initialize Medium and Low Resolution Game Maps
-    // TODO: Use pixelation to dynamically create and set these maps
-    
-    // Until pixelation algorithms get set, just create copies of highRes
+    // Amount to divide the dimensions by for resolutions
+    int medCut = 8;
+    int lowCut = 16;
+
+    // Initialize Medium Resolution
     medRes = new GameMap();
-
-    Image *tmp = Gfx::downsample(highRes->backgroundLayer, highRes->backgroundLayer->w/8, 
-        highRes->backgroundLayer->h/8, blend_average);
-    //Image *backMed = new Image(highRes->backgroundLayer->w, highRes->backgroundLayer->h);
-    //backMed->scaleblit(tmp);
-    //backMed->blit(highRes->backgroundLayer, 0, 0);
-    //medRes->setBackgroundLayer(backMed);
-    medRes->setBackgroundLayer(tmp);
-    //delete tmp;
-
-    //Image *collMed = new Image(highRes->collisionLayer->w, highRes->collisionLayer->h);
-    //collMed->blit(highRes->collisionLayer, 0, 0);
-
-    tmp = Gfx::downsample(highRes->collisionLayer, highRes->collisionLayer->w/8, 
-        highRes->collisionLayer->h/8, blend_average);
-    //Image *collMed = new Image(highRes->backgroundLayer->w, highRes->backgroundLayer->h);
-    //collMed->scaleblit(tmp);
-    //medRes->setCollisionLayer(collMed);
-    medRes->setCollisionLayer(tmp);
-    //delete tmp;
-
+    medRes->setBackgroundLayer(Gfx::downsample(highRes->backgroundLayer, 
+        highRes->backgroundLayer->w/medCut, highRes->backgroundLayer->h/medCut, 
+        blend_average));
+    medRes->setCollisionLayer(Gfx::downsample(highRes->collisionLayer,
+        highRes->collisionLayer->w/medCut, highRes->collisionLayer->h/medCut,
+        blend_average));
     if (top_filename) {
-        Image *topMed = new Image(highRes->topLayer->w, highRes->topLayer->h);
-        topMed->blit(highRes->topLayer, 0, 0);
-        medRes->setTopLayer(topMed);
+        medRes->setTopLayer(Gfx::downsample(highRes->topLayer,
+            highRes->topLayer->w/medCut, highRes->topLayer->h/medCut, 
+            blend_average));
     }
 
-
+    // Initialize Low Resolution
     lowRes = new GameMap();
-
-    //Image *backLow = new Image(highRes->backgroundLayer->w, highRes->backgroundLayer->h);
-    //backLow->blit(highRes->backgroundLayer, 0, 0);
-    lowRes->setBackgroundLayer(Gfx::downsample(highRes->backgroundLayer, highRes->backgroundLayer->w/16, 
-        highRes->backgroundLayer->h/16, blend_average));
-
-    //Image *collLow = new Image(highRes->collisionLayer->w, highRes->collisionLayer->h);
-    //collLow->blit(highRes->collisionLayer, 0, 0);
-    lowRes->setCollisionLayer(Gfx::downsample(highRes->collisionLayer, highRes->collisionLayer->w/16,
-        highRes->collisionLayer->h/16, blend_average));
-
+    lowRes->setBackgroundLayer(Gfx::downsample(highRes->backgroundLayer,
+        highRes->backgroundLayer->w/lowCut, highRes->backgroundLayer->h/lowCut,
+        blend_average));
+    lowRes->setCollisionLayer(Gfx::downsample(highRes->collisionLayer,
+        highRes->collisionLayer->w/lowCut, highRes->collisionLayer->h/lowCut,
+        blend_average));
     if (top_filename) {
-        Image *topLow = new Image(highRes->topLayer->w, highRes->topLayer->h);
-        topLow->blit(highRes->topLayer, 0, 0);
-        lowRes->setTopLayer(topLow);
+        lowRes->setTopLayer(Gfx::downsample(highRes->topLayer,
+            highRes->topLayer->w/lowCut, highRes->topLayer->h/lowCut, 
+            blend_average));
     }
+
+    // Create map images
+    highRes->createMapImage(w,h);
+    medRes->createMapImage(w,h);
+    lowRes->createMapImage(w,h);
     
+    // Set resolution
     currentRes = lowRes;
     currentResLevel = 0; // 0 -- Low, 1 -- Med, 2 -- High
 

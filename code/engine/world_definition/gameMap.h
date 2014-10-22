@@ -24,6 +24,10 @@ class GameMap {
         Image *collisionLayer;
         Image *topLayer;
 
+        /** Image containing the background and collision layers,
+         * scaled to the correct size of the world */
+        Image *mapImg;
+
         bool loadBackgroundLayer(const char* filename);
         bool loadCollisionLayer(const char* filename);
         bool loadTopLayer(const char* filename);
@@ -31,6 +35,8 @@ class GameMap {
         void setBackgroundLayer(Image *img);
         void setCollisionLayer(Image *img);
         void setTopLayer(Image *img);
+
+        void createMapImage(int worldWidth, int worldHeight);
 
         int w();
         int h();
