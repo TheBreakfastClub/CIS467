@@ -7,6 +7,6 @@ Description:	Defines the different types of sprites that can
 ************************************************************/
 
 #include "character.h"
-Character::Character() : Sprite(0, 0, NULL, NULL) {}
+Character::Character() : Sprite(0, 0, NULL) {}
 
 
