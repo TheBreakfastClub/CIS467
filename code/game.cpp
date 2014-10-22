@@ -7,7 +7,7 @@ Description:    The main controller of the game.
 #include "game.h"
 
 #define GAME_NAME "One Rad Waffle Game"
-#define WINDOW_WIDTH 500
+#define WINDOW_WIDTH 1000
 #define WINDOW_HEIGHT 500
 
 #define BACKGROUND_IMG "resources/background.png"
@@ -36,9 +36,14 @@ void Game::update()
  */
 void Game::handle_input()
 {
+    // Get max height and width to pan to
     int h = world.h - 1 - WINDOW_HEIGHT;
     int w = world.w - 1 - WINDOW_WIDTH;
 
+    // Grab reference to the keys
+    u8 *keys = (u8*)SDL_GetKeyboardState(0);
+
+    // Handle non-movement keyboard events
 	SDL_Event event;
 	while(SDL_PollEvent(&event)) {
 
@@ -51,6 +56,7 @@ void Game::handle_input()
     	// Keyboard
     	else if (event.type == SDL_KEYDOWN) {
     		switch (event.key.keysym.sym) {
+#if 0
     			case SDLK_UP:
                     pan_y -= step;
                     if (pan_y < 0) pan_y = 0;
@@ -67,6 +73,7 @@ void Game::handle_input()
                     pan_x -= step;
                     if (pan_x < 0) pan_x = 0;
     				break;
+#endif
                 case SDLK_KP_PLUS:
                 case SDLK_PLUS:
                     world.next_resolution();
@@ -80,11 +87,47 @@ void Game::handle_input()
                 case SDLK_ESCAPE:
                     gameIsRunning = false;
                     break;
-    			default:
-    				std::cout << "INPUT: Unhandled input\n";
     		}
     	}
     }
+    
+    // Handle keyboard events
+    int dx = 0, dy = 0;
+    int speed = step;
+    //process movements keys multiple times, depending on speed
+    for(int i = 0; i < speed; i++) {
+        if(keys[SDL_SCANCODE_UP] && !keys[SDL_SCANCODE_DOWN]) dy += -1;
+        if(keys[SDL_SCANCODE_DOWN] && !keys[SDL_SCANCODE_UP]) dy += 1;
+        if(keys[SDL_SCANCODE_LEFT] && !keys[SDL_SCANCODE_RIGHT]) dx += -1;
+        if(keys[SDL_SCANCODE_RIGHT] && !keys[SDL_SCANCODE_LEFT]) dx += 1;
+#if 0
+        // This code will help when we start handling collisions
+        // You will have to change the += above to just = though
+        if(dx && dy) {
+            if(!map->collision(hero, cx+dx, cy+dy)) cx+=dx, cy+=dy, redraw=true;
+            else if(!map->collision(hero, cx+dx, cy)) cx+=dx, redraw=true;
+            else if(!map->collision(hero, cx, cy+dy)) cy+=dy, redraw=true;
+        }
+        else if(dx) {
+            if(!map->collision(hero, cx+dx, cy)) cx+=dx, redraw=true;
+            else if(!map->collision(hero, cx+dx, cy-1)) cx+=dx, cy--, redraw=true;
+            else if(!map->collision(hero, cx+dx, cy+1)) cx+=dx, cy++, redraw=true;
+        }
+        else if(dy) {
+            if(!map->collision(hero, cx, cy+dy)) cy+=dy, redraw=true;
+            else if(!map->collision(hero, cx-1, cy+dy)) cx--, cy+=dy, redraw=true;
+            else if(!map->collision(hero, cx+1, cy+dy)) cx++, cy+=dy, redraw=true;
+        }
+#endif
+    }
+    
+    // Update movement
+    pan_x += dx;
+    pan_y += dy;
+    if (pan_y < 0) pan_y = 0;
+    else if (pan_y > h) pan_y = h;
+    if (pan_x < 0) pan_x = 0;
+    else if (pan_x > w) pan_x = w;
 }
 
 /* Main game loop */
