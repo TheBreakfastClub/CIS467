@@ -14,7 +14,7 @@ Description:	Defines the hero attributes.
 class Hero: public Character{
 
     public:
-
+    Hero();
 
         // Add here other properties that the hero of a single type should have
 
