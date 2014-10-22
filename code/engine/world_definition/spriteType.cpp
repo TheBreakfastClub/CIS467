@@ -8,6 +8,7 @@ Description:	Defines the different sprites that can
 
 // Includes
 #include "sprite.h"
+#include "spriteType.h"
 
 /**
  * The Constructor. The name should be specified.

@@ -10,14 +10,15 @@ Description:	    Defines the item attributes.
 // Includes
 #include <string>
 #include "item.h"
-#include "spriteSet.h"
 #include "sprite.h"
+#include "../render/image.h"
+#include "../render/gfx.h"
 
-class Item: public Sprite{
+class Item: public Sprite {
 
     public:
         
-        Item(std::string pname = "null", SpriteSet ptype = SpriteSet::COUNT);
+        Item(int x, int y, Image *image, std::string pname = "null", bool obtainable=false);
 
         /** A short name describing the type of item (e.g. "eggs") */
         std::string name;

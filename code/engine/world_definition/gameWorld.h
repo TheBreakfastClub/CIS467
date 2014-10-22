@@ -30,8 +30,8 @@ class GameWorld {
         //TODO: Pixelation algorithm
 
         /** The entities that will inhabit the world */
-        vector<Item> item;
-        vector<Enemy> enemy;
+        vector<Item> items;
+        vector<Enemy> enemies;
 
         /** Pointer to the GameMap that currently defines the world */ 
         GameMap *currentRes;

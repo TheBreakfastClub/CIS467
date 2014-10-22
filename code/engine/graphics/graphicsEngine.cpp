@@ -139,6 +139,9 @@ void GraphicsEngine::drawGameWorld(const GameWorld &world, const int &pan_x, con
     mapImg->ascaleblit(map->collisionLayer);
 
     // TODO: Draw Sprites (e.g. hero, enemies, items) onto mapImg
+    for (Item i : world.items) {
+        mapImg->ablit(i.spriteImage, i.x, i.y);
+    }
 
     // Draw the top layer, if it exists
     if (map->topLayer) {
@@ -149,5 +152,6 @@ void GraphicsEngine::drawGameWorld(const GameWorld &world, const int &pan_x, con
     // TODO: see if we can paint directly to the screen, only painting
     // the items in the panned area.
     screen->blit(mapImg, -pan_x, -pan_y);
+    delete mapImg;
 }
 

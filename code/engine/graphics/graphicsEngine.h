@@ -13,6 +13,7 @@ Description:    This class holds the code needed to create
 #include "../render/image.h"
 #include "../render/gfx.h"
 #include "../world_definition/gameWorld.h"
+#include "../world_definition/item.h"
 
 using namespace std;
 

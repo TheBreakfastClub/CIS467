@@ -143,6 +143,7 @@ int Game::run()
 		handle_input();
 		update();
 		clock.tick();
+        //std::cout << std::to_string(clock.avgFPS()) << std::endl;
 	}
 	return 0;
 }

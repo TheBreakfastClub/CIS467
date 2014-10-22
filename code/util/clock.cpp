@@ -47,20 +47,24 @@ void Clock::tick()
 		}
 	}
 
+	
 	// set new times and increment frame count
 	now = time();
 	counted_frames++;
 
+	/*
 	// limit frame rate if frame ended early
 	int frame_time = now - last_time;
-	//std::cout << "Frame time was: " << std::to_string(frame_time) << "(supposed to be " << std::to_string(ms_per_frame) << ")" << std::endl;
+	std::cout << "Frame time was: " << std::to_string(frame_time) << "(supposed to be " << std::to_string(ms_per_frame) << ")" << std::endl;
 	if (frame_time < ms_per_frame) {
-		//std::cout << "   Delaying for " << std::to_string(ms_per_frame - frame_time) << "ms\n";
+		std::cout << "   Delaying for " << std::to_string(ms_per_frame - frame_time) << "ms\n";
 		SDL_Delay(ms_per_frame - frame_time);
 	}
 	//else std::cout << "\nWE WENT OVER FRAME TIME\n" << std::endl;
-	//std::cout << "   Total time in frame: " << std::to_string(frame_time + (ms_per_frame - frame_time)) << std::endl;
+	std::cout << "   Total time in frame: " << std::to_string(frame_time + (ms_per_frame - frame_time)) << std::endl;
 	last_time = now;
+	*/
+	SDL_Delay(16);
 }
 
 float Clock::avgFPS()
