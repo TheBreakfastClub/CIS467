@@ -15,50 +15,17 @@ Description:    Holds the data defining the universe
  * Default constructor for the universe. Must call GameUniverse::init()
  * before using the GameUniverse instance.
  */
- 
- public:
- gameWorld** sublevels = new gameWorld*[Sublevel::COUNT];
- 
- sublevels[Sublevel::HUB] = new gameWorld("hub");
- sublevels[Sublevel::FLOUR] = new gameworld("flour");
- sublevels[Sublevel::SUGAR] = new gameworld("sugar");
- sublevels[Sublevel::BAKING_SODA] = new gameworld("baking_soda");
- sublevels[Sublevel::BUTER] = new gameworld("butter");
- 
- const char *hubBackground = "resources/background.png";
- const char *hubCollision = "resources/test4cl.png";
- const char *hubTop = NULL;
- 
- const char *flourBackground = "resources/background.png";
- const char *flourCollision = "resources/test4cl.png";
- const char *flourTop = NULL;
- 
- const char *sugarBackground = "resources/background.png";
- const char *sugarCollision = "resources/test4cl.png";
- const char *sugarTop = NULL;
-
- const char *baking_sodaBackground = "resources/background.png";
- const char *baking_sodaCollision = "resources/test4cl.png";
- const char *baking_sodaTop = NULL;
- 
- const char *butterBackground = "resources/background.png";
- const char *butterCollision = "resources/test4cl.png";
- const char *butterTop = NULL;
- 
- const char *heroImage = "resources/hero.png";
- 
- 
 GameUniverse::GameUniverse(string universe_name) : universeName(universe_name) 
 {
-  hero = NULL;
+  sublevels[Sublevel::HUB] = new GameWorld("hub");
+  sublevels[Sublevel::FLOUR] = new GameWorld("flour");
+  sublevels[Sublevel::SUGAR] = new GameWorld("sugar");
+  sublevels[Sublevel::BAKING_SODA] = new GameWorld("baking_soda");
+  sublevels[Sublevel::BUTTER] = new GameWorld("butter");
 }
 
 // The deconstructor
 GameUniverse::~GameUniverse() {
-
-    if (hero) {
-        delete(hero);
-    }
     if(sublevels[Sublevel::HUB])
       delete(sublevels[Sublevel::HUB]);
       
@@ -84,20 +51,14 @@ GameUniverse::~GameUniverse() {
  *
  * This method must be called before any other GameUniverse functions.
  */
-bool GameUniverse::init(Hero hero) {
+bool GameUniverse::init() {
   int heroHitpoints = 100;
   int heroAttackDmg = 0;
   int heroSpeed = 1;
   bool heroInvincible = false;
-    
-    // Do nothing if the universe is already initialized
-    if (universe != NULL) return true;
-
-    // Initialize the game universe
-    universe = new GameUniverse();
+  //Initialize game worlds
     
     // Initializing the hero attributes
-    hero = new Hero();
     hero.hitPoints = heroHitpoints;
     hero.invincible = heroInvincible;
     hero.speed = heroSpeed;

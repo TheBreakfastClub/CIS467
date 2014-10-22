@@ -7,11 +7,13 @@ be in the world.
 ************************************************************/
 #pragma once
 #include <utility>
+#include "sprite.h"
 
 using namespace std;
 
 class Character: public Sprite {
   public:
+    Character();
     /** Defines the amount of hitpoints a sprite has **/
     int hitPoints;
     /** Defines if a sprite is invincible **/
