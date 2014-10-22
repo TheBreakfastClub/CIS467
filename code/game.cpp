@@ -7,7 +7,7 @@ Description:    The main controller of the game.
 #include "game.h"
 
 #define GAME_NAME "One Rad Waffle Game"
-#define WINDOW_WIDTH 1000
+#define WINDOW_WIDTH 500
 #define WINDOW_HEIGHT 500
 
 #define BACKGROUND_IMG "resources/background.png"
