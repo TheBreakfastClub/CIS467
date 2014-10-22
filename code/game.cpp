@@ -18,8 +18,12 @@ int pan_x, pan_y, step;
 
 
 // The default constructor
-Game::Game() : world("The Hub") {
+Game::Game() : world("The Hub"), clock() 
+{
 	gameIsRunning = true;
+
+    // just showing off the types of things the event timer can do...
+    clock.add_event(new AutoPixEvent(&world));
 }
 
 /* Update game logic at each iteration of the loop */
@@ -138,7 +142,7 @@ int Game::run()
         graphics.refreshScreen();
 		handle_input();
 		update();
-		SDL_Delay(30);
+		clock.tick();
 	}
 	return 0;
 }

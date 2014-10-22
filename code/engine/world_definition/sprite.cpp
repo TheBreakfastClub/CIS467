@@ -8,6 +8,6 @@ Description:	Defines the different types of sprites that can
 
 #include "sprite.h"
 
-Sprite::Sprite(int x, int y, SpriteType *type) : xy(x,y), type(type) {}
+Sprite::Sprite(int x, int y, SpriteType *type, Image *spriteImage) : x(x), y(y), type(type), spriteImage(spriteImage) {}
 
 

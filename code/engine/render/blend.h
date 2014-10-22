@@ -2,6 +2,9 @@
 // It is safe to assume that at least one color is passed in.
 
 #pragma once
+#include <map>
+
+using namespace std;
 
 u32 blend_point_sample(u32 *colors, int count)
 {

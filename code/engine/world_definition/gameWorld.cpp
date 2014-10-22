@@ -6,6 +6,8 @@ Description:    Holds the data defining the world
 ************************************************************/
 
 #include "gameWorld.h"
+#include "../render/blend.h"
+#include "../render/gfx.h"
 #include <SDL2/SDL.h>
 #include <iostream> 
 #include <numeric>
@@ -73,13 +75,25 @@ bool GameWorld::init(const char *background_filename,
     // Until pixelation algorithms get set, just create copies of highRes
     medRes = new GameMap();
 
-    Image *backMed = new Image(highRes->backgroundLayer->w, highRes->backgroundLayer->h);
-    backMed->blit(highRes->backgroundLayer, 0, 0);
-    medRes->setBackgroundLayer(backMed);
+    Image *tmp = Gfx::downsample(highRes->backgroundLayer, highRes->backgroundLayer->w/8, 
+        highRes->backgroundLayer->h/8, blend_average);
+    //Image *backMed = new Image(highRes->backgroundLayer->w, highRes->backgroundLayer->h);
+    //backMed->scaleblit(tmp);
+    //backMed->blit(highRes->backgroundLayer, 0, 0);
+    //medRes->setBackgroundLayer(backMed);
+    medRes->setBackgroundLayer(tmp);
+    //delete tmp;
 
-    Image *collMed = new Image(highRes->collisionLayer->w, highRes->collisionLayer->h);
-    collMed->blit(highRes->collisionLayer, 0, 0);
-    medRes->setCollisionLayer(collMed);
+    //Image *collMed = new Image(highRes->collisionLayer->w, highRes->collisionLayer->h);
+    //collMed->blit(highRes->collisionLayer, 0, 0);
+
+    tmp = Gfx::downsample(highRes->collisionLayer, highRes->collisionLayer->w/8, 
+        highRes->collisionLayer->h/8, blend_average);
+    //Image *collMed = new Image(highRes->backgroundLayer->w, highRes->backgroundLayer->h);
+    //collMed->scaleblit(tmp);
+    //medRes->setCollisionLayer(collMed);
+    medRes->setCollisionLayer(tmp);
+    //delete tmp;
 
     if (top_filename) {
         Image *topMed = new Image(highRes->topLayer->w, highRes->topLayer->h);
@@ -88,16 +102,17 @@ bool GameWorld::init(const char *background_filename,
     }
 
 
-
     lowRes = new GameMap();
 
-    Image *backLow = new Image(highRes->backgroundLayer->w, highRes->backgroundLayer->h);
-    backLow->blit(highRes->backgroundLayer, 0, 0);
-    lowRes->setBackgroundLayer(backLow);
+    //Image *backLow = new Image(highRes->backgroundLayer->w, highRes->backgroundLayer->h);
+    //backLow->blit(highRes->backgroundLayer, 0, 0);
+    lowRes->setBackgroundLayer(Gfx::downsample(highRes->backgroundLayer, highRes->backgroundLayer->w/16, 
+        highRes->backgroundLayer->h/16, blend_average));
 
-    Image *collLow = new Image(highRes->collisionLayer->w, highRes->collisionLayer->h);
-    collLow->blit(highRes->collisionLayer, 0, 0);
-    lowRes->setCollisionLayer(collLow);
+    //Image *collLow = new Image(highRes->collisionLayer->w, highRes->collisionLayer->h);
+    //collLow->blit(highRes->collisionLayer, 0, 0);
+    lowRes->setCollisionLayer(Gfx::downsample(highRes->collisionLayer, highRes->collisionLayer->w/16,
+        highRes->collisionLayer->h/16, blend_average));
 
     if (top_filename) {
         Image *topLow = new Image(highRes->topLayer->w, highRes->topLayer->h);
@@ -106,7 +121,7 @@ bool GameWorld::init(const char *background_filename,
     }
     
     currentRes = lowRes;
-    currentResLevel = 0; // 0 -- Background, 1 -- Collision, 2 -- Top
+    currentResLevel = 0; // 0 -- Low, 1 -- Med, 2 -- High
 
     return true;
 }

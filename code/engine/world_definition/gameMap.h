@@ -12,6 +12,7 @@ Description:	Holds definitions about the pixels that make
 #include <SDL2/SDL.h>
 #include <vector>
 #include "../render/image.h"
+#include "../render/gfx.h"
 
 class GameMap {
 

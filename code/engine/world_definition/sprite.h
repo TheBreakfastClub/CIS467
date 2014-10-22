@@ -8,17 +8,20 @@ Description:	Defines the different types of sprites that can
 
 #pragma once
 
+#include "../render/image.h"
 #include "spriteType.h"
 #include <utility>
 
 class Sprite {
 
     private:
-        std::pair<int,int> xy;
+        
 
     public:
-        Sprite(int x, int y, SpriteType *type);
-
+        Sprite(int x, int y, SpriteType *type, Image *spriteImage);
         SpriteType *type;
+        int x;
+        int y;
+        Image *spriteImage;
 };
 

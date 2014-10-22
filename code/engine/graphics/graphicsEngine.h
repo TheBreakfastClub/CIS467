@@ -11,6 +11,7 @@ Description:    This class holds the code needed to create
 // Includes
 #include <SDL2/SDL_image.h>
 #include "../render/image.h"
+#include "../render/gfx.h"
 #include "../world_definition/gameWorld.h"
 
 using namespace std;
