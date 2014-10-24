@@ -110,7 +110,7 @@ bool GameWorld::init(const char *background_filename,
     
     // Set resolution
     currentRes = lowRes;
-    currentResLevel = 0; // 0 -- Low, 1 -- Med, 2 -- High
+    currentResLevel = Resolution::LOW;
 
     // create some random items 
     for (int i = 0; i < 12; i++) {
@@ -128,8 +128,14 @@ bool GameWorld::init(const char *background_filename,
  */
 void GameWorld::next_resolution()
 {
-	if (currentResLevel < 2)
-		currentResLevel++;
+	switch (currentResLevel) {
+		case Resolution::LOW:
+			currentResLevel = Resolution::MED; 
+            break;
+		case Resolution::MED:
+			currentResLevel = Resolution::HIGH; 
+            break;
+	}
 	_set_current_res();
 }
 
@@ -139,9 +145,24 @@ void GameWorld::next_resolution()
  */
 void GameWorld::prev_resolution()
 {
-	if (currentResLevel > 0)
-		currentResLevel--;
+	switch (currentResLevel) {
+		case Resolution::MED:
+			currentResLevel = Resolution::LOW; 
+            break;
+		case Resolution::HIGH:
+			currentResLevel = Resolution::MED; 
+            break;
+	}
 	_set_current_res();
+}
+
+/**
+ * This function sets the current resolution to the resolution
+ * passed in.
+ */
+void GameWorld::set_resolution(Resolution res) {
+    currentResLevel = res;
+    _set_current_res();
 }
 
 /**
@@ -151,13 +172,13 @@ void GameWorld::prev_resolution()
 void GameWorld::_set_current_res()
 {
 	switch (currentResLevel) {
-		case 0:
+		case Resolution::LOW:
 			currentRes = lowRes; 
             break;
-		case 1:
+		case Resolution::MED:
 			currentRes = medRes; 
             break;
-		case 2:
+		case Resolution::HIGH:
 			currentRes = highRes; 
             break;
 	}

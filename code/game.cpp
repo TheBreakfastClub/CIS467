@@ -10,20 +10,16 @@ Description:    The main controller of the game.
 #define WINDOW_WIDTH 500
 #define WINDOW_HEIGHT 500
 
-#define BACKGROUND_IMG "resources/background.png"
-#define COLLISION_IMG "resources/fullBoardTest1.png"
-#define TOP_IMG NULL
-
-int pan_x, pan_y, step;
+int step;
 
 
 // The default constructor
-Game::Game() : world("The Hub"), clock() 
+Game::Game() : universe(GAME_NAME), clock() 
 {
 	gameIsRunning = true;
 
     // just showing off the types of things the event timer can do...
-    clock.add_event(new AutoPixEvent(&world));
+    // clock.add_event(new AutoPixEvent(&world));
 }
 
 /* Update game logic at each iteration of the loop */
@@ -41,8 +37,8 @@ void Game::update()
 void Game::handle_input()
 {
     // Get max height and width to pan to
-    int h = world.h - 1 - WINDOW_HEIGHT;
-    int w = world.w - 1 - WINDOW_WIDTH;
+    int h = universe.currentWorld->h - 1 - WINDOW_HEIGHT;
+    int w = universe.currentWorld->w - 1 - WINDOW_WIDTH;
 
     // Grab reference to the keys
     u8 *keys = (u8*)SDL_GetKeyboardState(0);
@@ -81,12 +77,12 @@ void Game::handle_input()
                 case SDLK_KP_PLUS:
                 case SDLK_PLUS:
                 case SDLK_2:
-                    world.next_resolution();
+                    universe.currentWorld->next_resolution();
                     break;
                 case SDLK_KP_MINUS:
                 case SDLK_MINUS:
                 case SDLK_1:
-                    world.prev_resolution();
+                    universe.currentWorld->prev_resolution();
                     break;                    
                 case SDLK_q:
                 case SDLK_e:
@@ -128,19 +124,19 @@ void Game::handle_input()
     }
     
     // Update movement
-    pan_x += dx;
-    pan_y += dy;
-    if (pan_y < 0) pan_y = 0;
-    else if (pan_y > h) pan_y = h;
-    if (pan_x < 0) pan_x = 0;
-    else if (pan_x > w) pan_x = w;
+    universe.hero.x += dx;
+    universe.hero.y += dy;
+    if (universe.hero.y < 0) universe.hero.y = 0;
+    else if (universe.hero.y > h) universe.hero.y = h;
+    if (universe.hero.x < 0) universe.hero.x = 0;
+    else if (universe.hero.x > w) universe.hero.x = w;
 }
 
 /* Main game loop */
 int Game::run()
 {
 	while (gameIsRunning) {
-        graphics.drawGameWorld(world, pan_x, pan_y);
+        graphics.drawGameUniverse(universe);
         graphics.refreshScreen();
 		handle_input();
 		update();
@@ -168,13 +164,11 @@ bool Game::setup(const char *gameName, int width, int height)
     }
 
     // Setup the Game Universe
-    // TODO: Setup a universe, rather than one world
-    if (!world.init(BACKGROUND_IMG, COLLISION_IMG, TOP_IMG)) {
-        std::cerr << "Error initializing game world\n";
+    if (!universe.init()) {
+        std::cerr << "Error initializing game universe\n";
         return false;
     }
 
-    pan_x = pan_y = 0;
     step = 20;
     
 	return true;

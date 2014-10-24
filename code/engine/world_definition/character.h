@@ -23,3 +23,4 @@ class Character: public Sprite {
     /** Defines the attack damage of a sprite **/
     int attackDmg;
 };
+

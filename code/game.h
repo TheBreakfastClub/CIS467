@@ -8,7 +8,7 @@ Description:    The main controller of the game.
  
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "engine/world_definition/gameWorld.h"
+#include "engine/world_definition/gameUniverse.h"
 #include "engine/graphics/graphicsEngine.h"
 #include "util/clock.h"
 
@@ -20,7 +20,7 @@ class Game {
         GraphicsEngine graphics;
 
 		/* Game engine */
-		GameWorld world;
+        GameUniverse universe;
 		bool gameIsRunning;
 
         /* Utility */

@@ -16,6 +16,8 @@ Description:    Holds the data defining the sublevel
 
 using namespace std;
 
+enum Resolution { LOW, MED, HIGH };
+
 class GameWorld {
     
     public:
@@ -27,7 +29,6 @@ class GameWorld {
         
         /** Properties of the world */
         string worldName;
-        //TODO: Pixelation algorithm
 
         /** The entities that will inhabit the world */
         vector<Item> items;
@@ -42,6 +43,7 @@ class GameWorld {
         // Methods to change the resolution
         void next_resolution(); // selects the next GameMap
         void prev_resolution(); //             prev
+        void set_resolution(Resolution res);
     private:
         void _set_current_res();
         
@@ -49,7 +51,7 @@ class GameWorld {
         GameMap *highRes;
         GameMap *medRes;
         GameMap *lowRes;
-        int currentResLevel;
+        Resolution currentResLevel;
 
 };
 

@@ -12,7 +12,7 @@ Description:    This class holds the code needed to create
 #include <SDL2/SDL_image.h>
 #include "../render/image.h"
 #include "../render/gfx.h"
-#include "../world_definition/gameWorld.h"
+#include "../world_definition/gameUniverse.h"
 #include "../world_definition/item.h"
 
 using namespace std;
@@ -27,6 +27,7 @@ public:
 
     void refreshScreen();
     void drawGameWorld(const GameWorld &world, const int &pan_x, const int &pan_y);
+    void drawGameUniverse(const GameUniverse &universe);
 
 private:
    

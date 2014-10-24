@@ -7,6 +7,13 @@ Description:	Defines the hero of the game universe.
 
 #include "hero.h"
 
-Hero::Hero() {}
-
+Hero::Hero() {
+    hitPoints = 100;
+    invincible = false;
+    speed = 1;
+    attackDmg = 0;
+    x = 0;
+    y = 0;
+    spriteImage = NULL;
+}
 

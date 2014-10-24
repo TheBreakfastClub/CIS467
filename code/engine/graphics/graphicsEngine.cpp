@@ -149,3 +149,39 @@ void GraphicsEngine::drawGameWorld(const GameWorld &world, const int &pan_x, con
     // the items in the panned area.
 }
 
+/** 
+ * This method draws the GameUniverse to the screen. It does NOT 
+ * refresh the screen, allowing the caller to decide when to display
+ * what has been drawn.
+ *
+ * @param universe The game universe to draw to the screen
+ */
+void GraphicsEngine::drawGameUniverse(const GameUniverse &universe) {
+
+    // Grab references
+    GameWorld *world = universe.currentWorld;
+    GameMap *map = world->currentRes;
+    const Hero *hero = &universe.hero;
+
+    // Draw the map to the screen, panning the map to the correct area
+    int pan_x = clamp(hero->x - screen->w/2, 0, world->w - screen->w);
+    int pan_y = clamp(hero->y - screen->h/2, 0, world->h - screen->h);
+    screen->blit(map->mapImg, -pan_x, -pan_y);
+
+    // Draw the items to the screen
+    for (Item i : world->items) {
+        screen->ablit(i.spriteImage, i.x - pan_x, i.y - pan_y);
+    }
+
+    // Draw the hero to the screen
+    screen->ablit(hero->spriteImage, hero->x - pan_x, hero->y - pan_y);
+
+    // Draw the top layer, if it exists
+    if (map->topLayer) {
+        screen->ascaleblit(map->topLayer);
+    }
+
+    // TODO: see if we can paint directly to the screen, only painting
+    // the items in the panned area.
+}
+
