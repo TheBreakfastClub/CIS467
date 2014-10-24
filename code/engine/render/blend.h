@@ -41,7 +41,6 @@ u32 blend_average_opaque(u32 *colors, int count)
 
 u32 blend_most_common(u32 *colors, int count)
 {
-	int a=0, r=0, g=0, b=0, c=0;
   map <u32, unsigned int> counts;
 
 	for(int i = 0; i < count; i++) {
