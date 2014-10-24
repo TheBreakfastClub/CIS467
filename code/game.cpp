@@ -33,6 +33,7 @@ void Game::update()
  */
 void Game::handle_input()
 {
+
     // Get max height and width to pan to
     int h = universe.currentWorld->h - 1;// - WINDOW_HEIGHT;
     int w = universe.currentWorld->w - 1;// - WINDOW_WIDTH;
@@ -58,12 +59,12 @@ void Game::handle_input()
     		switch (event.key.keysym.sym) {
                 case SDLK_KP_PLUS:
                 case SDLK_PLUS:
-                case SDLK_2:
+                case SDLK_0:
                     universe.currentWorld->next_resolution();
                     break;
                 case SDLK_KP_MINUS:
                 case SDLK_MINUS:
-                case SDLK_1:
+                case SDLK_9:
                     universe.currentWorld->prev_resolution();
                     break;
                 case SDLK_i:
@@ -73,6 +74,21 @@ void Game::handle_input()
                 case SDLK_e:
                 case SDLK_ESCAPE:
                     gameIsRunning = false;
+                    break;
+                case SDLK_1:
+                    universe.changeWorld(Sublevel::HUB, universe.currentWorld->currentResLevel, universe.hero.x, universe.hero.y);
+                    break; 
+                case SDLK_2:
+                    universe.changeWorld(Sublevel::FLOUR, universe.currentWorld->currentResLevel, universe.hero.x, universe.hero.y);
+                    break;
+                case SDLK_3:
+                    universe.changeWorld(Sublevel::SUGAR, universe.currentWorld->currentResLevel, universe.hero.x, universe.hero.y);
+                    break;
+                case SDLK_4:
+                    universe.changeWorld(Sublevel::BAKING_SODA, universe.currentWorld->currentResLevel, universe.hero.x, universe.hero.y);
+                    break;
+                case SDLK_5:
+                    universe.changeWorld(Sublevel::BUTTER, universe.currentWorld->currentResLevel, universe.hero.x, universe.hero.y);
                     break;
     		}
     	}

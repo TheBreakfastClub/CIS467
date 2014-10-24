@@ -41,6 +41,8 @@ class GameWorld {
         int w;
         int h;
 
+        Resolution currentResLevel;
+
         // Methods to change the resolution
         void next_resolution(); // selects the next GameMap
         void prev_resolution(); //             prev
@@ -52,7 +54,6 @@ class GameWorld {
         GameMap *highRes;
         GameMap *medRes;
         GameMap *lowRes;
-        Resolution currentResLevel;
 
 };
 

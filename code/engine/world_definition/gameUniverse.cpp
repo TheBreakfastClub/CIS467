@@ -32,7 +32,7 @@ GameUniverse::GameUniverse(string universe_name) : universeName(universe_name)
  */
 void GameUniverse::changeWorld(Sublevel level, Resolution res, int x, int y) {
 
-    if (level == Sublevel::HUB) return;
+    if (level == currentLevel) return;
 
     // adjust the world reference
     currentWorld = sublevels[level];
@@ -75,9 +75,7 @@ bool GameUniverse::checkCollisionsWithItems() {
             it = currentWorld->items.erase(it);
             return true;
         }
-        else {
-            ++it;
-        }
+        ++it;
     }
     return false;
 }
