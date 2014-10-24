@@ -305,7 +305,7 @@ class Image {
 	void putchar(unsigned char c, int x, int y, u32 color)
 	{
 		if(x < 0 || x > w - 8 || y < 0 || y > h - 16) return;
-		int a,b,i,s;
+		int a,i,s;
 		i = c << 4;
 		for(int b = y*w; b < (y+16)*w; b+= w) {
 			s = vga_font[i++];

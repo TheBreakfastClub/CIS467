@@ -119,9 +119,17 @@ bool GameWorld::init(const char *background_filename,
 
     // create some random items 
     for (int i = 0; i < 4; i++) {
-        int x = rand() % w;
-        int y = rand() % h;
-        items.push_back(new Item(x, y, Gfx::loadImage("resources/hero.png"), "hero"));
+        
+        Item *newItem = new Item(rand() % w, rand() % h, Gfx::loadImage("resources/egg.png"), "hero");
+        
+        while (currentRes->mapImg->collision(newItem->spriteImage, newItem->x, newItem->y)) {
+            newItem->x = rand() % w;
+            newItem->y = rand() % h;
+            std::cout << "new coordinates: " << std::to_string(newItem->x) << ", " << std::to_string(newItem->y) << std::endl;
+        }
+        std::cout << "FINAL coordinates: " << std::to_string(newItem->x) << ", " << std::to_string(newItem->y) << std::endl;
+
+        items.push_back(newItem);
     }
 
     return true;
