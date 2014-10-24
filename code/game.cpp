@@ -100,6 +100,9 @@ void Game::handle_input()
             else if(!map->collision(hero, cx+1, cy+dy)) cx++, cy+=dy, redraw=true;
         }
 #endif
+        if(universe.checkCollisionsWithItems()) {
+            cout << "Picked up an item\n";
+        }
     }
     
     // Update movement

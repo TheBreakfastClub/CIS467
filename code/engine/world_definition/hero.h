@@ -10,13 +10,17 @@ Description:	Defines the hero attributes.
 // Includes
 #include <string>
 #include "character.h"
+#include "item.h"
+#include <vector>
 
 class Hero: public Character{
 
     public:
-    Hero();
+        Hero();
+        ~Hero();
+
+        vector<Item*> bag;
 
         // Add here other properties that the hero of a single type should have
-
 };
 

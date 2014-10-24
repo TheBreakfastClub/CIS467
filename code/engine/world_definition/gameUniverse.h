@@ -28,6 +28,7 @@ class GameUniverse{
     Sublevel currentLevel;
 
     void changeWorld(Sublevel level, Resolution res, int x, int y);
+    bool checkCollisionsWithItems();
 
   private:
 
@@ -53,3 +54,4 @@ const char *butterTop = NULL;
 
 const char *heroImage = "resources/hero.png";
 };
+

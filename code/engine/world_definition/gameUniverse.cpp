@@ -44,6 +44,45 @@ void GameUniverse::changeWorld(Sublevel level, Resolution res, int x, int y) {
     hero.y = y;
 }
 
+/**
+ * This method checks to see if the hero collides with any items
+ * in the currentWorld at the current resolution. If the hero collides
+ * with an item, it will pick up the first item it collides with, placing
+ * it in the hero's bag and returning true.  If the hero collides with no
+ * items, it returns false.
+ */
+bool GameUniverse::checkCollisionsWithItems() {
+    
+    auto it = currentWorld->items.begin();
+    while (it != currentWorld->items.end()) {
+
+        Item *item = *it;
+
+        // Continue if item is unobtainable
+        if (!item->obtainable) {
+            ++it;
+            continue;
+        }
+
+        // Make a copy of the world map, including the item
+        Image map(currentWorld->w, currentWorld->h);
+        map.blit(currentWorld->currentRes->mapImg, 0,0);
+        map.ablit(item->spriteImage, item->x, item->y);
+
+        // Check if item and hero collide
+        if (map.collision(hero.spriteImage, hero.x, hero.y)) {
+            cout << "Hero has collided with item\n";
+            hero.bag.push_back(item);
+            it = currentWorld->items.erase(it);
+            return true;
+        }
+        else {
+            ++it;
+        }
+    }
+    return false;
+}
+
 // The deconstructor
 GameUniverse::~GameUniverse() {
     if(sublevels[Sublevel::HUB])

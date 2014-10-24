@@ -17,3 +17,10 @@ Hero::Hero() {
     spriteImage = NULL;
 }
 
+Hero::~Hero() {
+
+    while (!bag.empty()) {
+        delete bag.back();
+        bag.pop_back();
+    }
+}

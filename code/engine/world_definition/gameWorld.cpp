@@ -33,6 +33,11 @@ GameWorld::~GameWorld() {
         delete(medRes);
         delete(lowRes);
     }
+
+    while (!items.empty()) {
+        delete items.back();
+        items.pop_back();
+    }
 }
 
 /**
@@ -116,7 +121,7 @@ bool GameWorld::init(const char *background_filename,
     for (int i = 0; i < 12; i++) {
         int x = rand() % w;
         int y = rand() % h;
-        items.push_back(Item(x, y, Gfx::loadImage("resources/hero.png"), "hero"));
+        items.push_back(new Item(x, y, Gfx::loadImage("resources/hero.png"), "hero"));
     }
 
     return true;

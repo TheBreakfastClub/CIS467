@@ -13,6 +13,7 @@ Description:    Holds the data defining the sublevel
 #include "enemy.h"
 #include <string>
 #include <vector>
+#include <list>
 
 using namespace std;
 
@@ -31,7 +32,7 @@ class GameWorld {
         string worldName;
 
         /** The entities that will inhabit the world */
-        vector<Item> items;
+        list<Item*> items;
         vector<Enemy> enemies;
 
         /** Pointer to the GameMap that currently defines the world */ 

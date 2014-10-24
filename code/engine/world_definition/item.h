@@ -18,7 +18,7 @@ class Item: public Sprite {
 
     public:
         
-        Item(int x, int y, Image *image, std::string pname = "null", bool obtainable=false);
+        Item(int x, int y, Image *image, std::string pname = "null", bool obtainable=true);
 
         /** A short name describing the type of item (e.g. "eggs") */
         std::string name;
