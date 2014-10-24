@@ -125,9 +125,7 @@ bool GameWorld::init(const char *background_filename,
         while (currentRes->mapImg->collision(newItem->spriteImage, newItem->x, newItem->y)) {
             newItem->x = rand() % w;
             newItem->y = rand() % h;
-            std::cout << "new coordinates: " << std::to_string(newItem->x) << ", " << std::to_string(newItem->y) << std::endl;
         }
-        std::cout << "FINAL coordinates: " << std::to_string(newItem->x) << ", " << std::to_string(newItem->y) << std::endl;
 
         items.push_back(newItem);
     }
