@@ -39,6 +39,9 @@ void Game::handle_input()
 
     // Grab reference to the keys
     u8 *keys = (u8*)SDL_GetKeyboardState(0);
+    
+    //Determine if the screen needs to be re-drawn
+    bool redraw;
 
     // Handle non-movement keyboard events
 	SDL_Event event;
@@ -75,36 +78,67 @@ void Game::handle_input()
     // Handle keyboard events
     int dx = 0, dy = 0;
     int speed = universe.hero.speed;
+    Image *map = universe.currentWorld->currentRes->mapImg;
     //process movements keys multiple times, depending on speed
     for(int i = 0; i < speed; ++i) {
-        if(keys[SDL_SCANCODE_UP] && !keys[SDL_SCANCODE_DOWN]) dy += -1;
-        if(keys[SDL_SCANCODE_DOWN] && !keys[SDL_SCANCODE_UP]) dy += 1;
-        if(keys[SDL_SCANCODE_LEFT] && !keys[SDL_SCANCODE_RIGHT]) dx += -1;
-        if(keys[SDL_SCANCODE_RIGHT] && !keys[SDL_SCANCODE_LEFT]) dx += 1;
-#if 0
+        if(keys[SDL_SCANCODE_UP] && !keys[SDL_SCANCODE_DOWN]) dy = -1;
+        if(keys[SDL_SCANCODE_DOWN] && !keys[SDL_SCANCODE_UP]) dy = 1;
+        if(keys[SDL_SCANCODE_LEFT] && !keys[SDL_SCANCODE_RIGHT]) dx = -1;
+        if(keys[SDL_SCANCODE_RIGHT] && !keys[SDL_SCANCODE_LEFT]) dx = 1;
+
         // This code will help when we start handling collisions
         // You will have to change the += above to just = though
         if(dx && dy) {
-            if(!map->collision(hero, cx+dx, cy+dy)) cx+=dx, cy+=dy, redraw=true;
-            else if(!map->collision(hero, cx+dx, cy)) cx+=dx, redraw=true;
-            else if(!map->collision(hero, cx, cy+dy)) cy+=dy, redraw=true;
+	    //checking for diagonal change
+            if(!map->collision(universe.hero.spriteImage, universe.hero.x+dx, universe.hero.y+dy))
+	    {
+	      universe.hero.x+=dx;
+	      universe.hero.y+=dy;
+	      redraw=true;
+	    }
+	    //checking for horizontal change
+            else if(!map->collision(universe.hero.spriteImage, universe.hero.x+dx, universe.hero.y)){
+	      universe.hero.x+=dx;
+	      redraw=true;
+	    }
+	    //change for vertical change
+            else if(!map->collision(universe.hero.spriteImage, universe.hero.x, universe.hero.y+dy)){
+	      universe.hero.y+=dy; 
+	      redraw=true;
+	    }
         }
         else if(dx) {
-            if(!map->collision(hero, cx+dx, cy)) cx+=dx, redraw=true;
-            else if(!map->collision(hero, cx+dx, cy-1)) cx+=dx, cy--, redraw=true;
-            else if(!map->collision(hero, cx+dx, cy+1)) cx+=dx, cy++, redraw=true;
+            if(!map->collision(universe.hero.spriteImage, universe.hero.x+dx, universe.hero.y)) universe.hero.x+=dx, redraw=true;
+            else if(!map->collision(universe.hero.spriteImage, universe.hero.x+dx, universe.hero.y-1)){
+	      universe.hero.x+=dx;
+	      universe.hero.y--;
+	      redraw=true;
+	    }
+            else if(!map->collision(universe.hero.spriteImage, universe.hero.x+dx, universe.hero.y+1)){
+	      universe.hero.x+=dx;
+	      universe.hero.y++;
+	      redraw=true;
+	    }
         }
         else if(dy) {
-            if(!map->collision(hero, cx, cy+dy)) cy+=dy, redraw=true;
-            else if(!map->collision(hero, cx-1, cy+dy)) cx--, cy+=dy, redraw=true;
-            else if(!map->collision(hero, cx+1, cy+dy)) cx++, cy+=dy, redraw=true;
+            if(!map->collision(universe.hero.spriteImage, universe.hero.x, universe.hero.y+dy)) universe.hero.y+=dy, redraw=true;
+            else if(!map->collision(universe.hero.spriteImage, universe.hero.x-1, universe.hero.y+dy)){
+	      universe.hero.x--;
+	      universe.hero.y+=dy;
+	      redraw=true;
+	    }
+            else if(!map->collision(universe.hero.spriteImage, universe.hero.x+1, universe.hero.y+dy)){
+	      universe.hero.x++;
+	      universe.hero.y+=dy;
+	      redraw=true;
+	    }
         }
-#endif
+
     }
     
     // Update movement
-    universe.hero.x += dx;
-    universe.hero.y += dy;
+    //universe.hero.x += dx;
+    //universe.hero.y += dy;
     if (universe.hero.y < 0) universe.hero.y = 0;
     else if (universe.hero.y > h) universe.hero.y = h;
     if (universe.hero.x < 0) universe.hero.x = 0;
