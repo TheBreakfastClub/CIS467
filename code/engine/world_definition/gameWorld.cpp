@@ -118,7 +118,7 @@ bool GameWorld::init(const char *background_filename,
     currentResLevel = Resolution::LOW;
 
     // create some random items 
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 4; i++) {
         int x = rand() % w;
         int y = rand() % h;
         items.push_back(new Item(x, y, Gfx::loadImage("resources/hero.png"), "hero"));

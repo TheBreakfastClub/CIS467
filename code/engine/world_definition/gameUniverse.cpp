@@ -71,7 +71,6 @@ bool GameUniverse::checkCollisionsWithItems() {
 
         // Check if item and hero collide
         if (map.collision(hero.spriteImage, hero.x, hero.y)) {
-            cout << "Hero has collided with item\n";
             hero.bag.push_back(item);
             it = currentWorld->items.erase(it);
             return true;

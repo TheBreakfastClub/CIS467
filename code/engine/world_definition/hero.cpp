@@ -12,8 +12,8 @@ Hero::Hero() {
     invincible = false;
     speed = 5;
     attackDmg = 0;
-    x = 0;
-    y = 0;
+    x = 150;
+    y = 150;
     spriteImage = NULL;
 }
 
