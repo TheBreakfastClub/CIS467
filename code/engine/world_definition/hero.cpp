@@ -10,7 +10,7 @@ Description:	Defines the hero of the game universe.
 Hero::Hero() {
     hitPoints = 100;
     invincible = false;
-    speed = 1;
+    speed = 5;
     attackDmg = 0;
     x = 0;
     y = 0;

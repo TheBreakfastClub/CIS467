@@ -10,9 +10,6 @@ Description:    The main controller of the game.
 #define WINDOW_WIDTH 500
 #define WINDOW_HEIGHT 500
 
-int step;
-
-
 // The default constructor
 Game::Game() : universe(GAME_NAME), clock() 
 {
@@ -37,8 +34,8 @@ void Game::update()
 void Game::handle_input()
 {
     // Get max height and width to pan to
-    int h = universe.currentWorld->h - 1 - WINDOW_HEIGHT;
-    int w = universe.currentWorld->w - 1 - WINDOW_WIDTH;
+    int h = universe.currentWorld->h - 1;// - WINDOW_HEIGHT;
+    int w = universe.currentWorld->w - 1;// - WINDOW_WIDTH;
 
     // Grab reference to the keys
     u8 *keys = (u8*)SDL_GetKeyboardState(0);
@@ -56,24 +53,6 @@ void Game::handle_input()
     	// Keyboard
     	else if (event.type == SDL_KEYDOWN) {
     		switch (event.key.keysym.sym) {
-#if 0
-    			case SDLK_UP:
-                    pan_y -= step;
-                    if (pan_y < 0) pan_y = 0;
-    				break;
-    			case SDLK_DOWN:
-                    pan_y += step;
-                    if (pan_y > h) pan_y = h;
-    				break;
-    			case SDLK_RIGHT:
-                    pan_x += step;
-                    if (pan_x > w) pan_x = w;
-    				break;
-    			case SDLK_LEFT:
-                    pan_x -= step;
-                    if (pan_x < 0) pan_x = 0;
-    				break;
-#endif
                 case SDLK_KP_PLUS:
                 case SDLK_PLUS:
                 case SDLK_2:
@@ -95,9 +74,9 @@ void Game::handle_input()
     
     // Handle keyboard events
     int dx = 0, dy = 0;
-    int speed = step;
+    int speed = universe.hero.speed;
     //process movements keys multiple times, depending on speed
-    for(int i = 0; i < speed; i++) {
+    for(int i = 0; i < speed; ++i) {
         if(keys[SDL_SCANCODE_UP] && !keys[SDL_SCANCODE_DOWN]) dy += -1;
         if(keys[SDL_SCANCODE_DOWN] && !keys[SDL_SCANCODE_UP]) dy += 1;
         if(keys[SDL_SCANCODE_LEFT] && !keys[SDL_SCANCODE_RIGHT]) dx += -1;
@@ -169,8 +148,6 @@ bool Game::setup(const char *gameName, int width, int height)
         return false;
     }
 
-    step = 20;
-    
 	return true;
 }
 
