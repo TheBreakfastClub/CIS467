@@ -2,9 +2,9 @@ Steven Hoffman
 =====================
 CIS 467: The Breakfast Club
 ----------------------------
-Journal Date: 10/16/2014   
-Journal Period - FROM: 8/25/2014 TO: 10/16/2014   
-Total hours worked this period: **91.72**   
+Journal Date: 10/26/2014   
+Journal Period - FROM: 8/25/2014 TO: 10/26/2014   
+Total hours worked this period: **107.38**   
 
 
 
@@ -327,5 +327,62 @@ Searched for error in SDL code, looking at the revisions to SDL code that Tashi 
 
 8:29 pm - 10:03 pm    
 Fixed SDL code based on Tashi's help.  Also sent messages to group, updated Trello, and updated journal.
+
+
+#### Friday, 10/17/2014 (0.18 hours)
+
+1:52 pm - 2:04 pm    
+Messaged group and read messages.
+
+
+#### Monday, 10/20/2014 (3.88 hours)
+
+12:09 noon - 12:46 noon    
+Talked with Tyler about the code and determining next steps.
+
+1:09 pm - 4:26 pm    
+Guided engine team in migrating Tashi's code.
+
+
+#### Tuesday, 10/21/2014 (0.30 hours)
+
+2:14 pm - 2:33 pm    
+Messaged engine team.
+
+
+#### Wednesday, 10/22/2014 (4.62 hours)
+
+12:10 noon - 12:42 noon    
+Worked with Tyler on getting SDL2 Image to work on his computer. Also,  messaged group members.
+
+1:10 pm - 5:16 pm    
+Messaged group members, organized what the engine group should work on, added panning into the world map, and optimized drawing code.
+
+
+#### Thursday, 10/23/2014 (2.07 hours)
+
+12:43 noon - 1:03 pm    
+Messaged group members.
+
+2:39 pm - 2:48 pm    
+Messaged group members.
+
+10:20 pm - 10:49 pm    
+Worked on integrating multiple game worlds into the game (aka the game universe)
+
+11:49 pm - 0:56 am    
+Worked on integrating multiple game worlds into the game (aka the game universe)
+
+
+#### Friday, 10/24/2014 (3.50 hours)
+
+1:15 pm - 4:45 pm    
+Added a temporary method for picking up items. Also met with engine group to work on adding a few features and met with full team to discuss sprint presentation.
+
+
+#### Sunday, 10/26/2014 (1.07 hours)
+
+4:25 pm - 5:29 pm    
+Worked on Sprint 2 report
 
 
