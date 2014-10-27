@@ -1,9 +1,10 @@
-# Sprint 1 Report
+# Sprint 2 Report
 Prepared by All Members.
 
 ## Game Engine
 
 ### Progress Reflection
+With the intended goal of porting functionality from the unstructured prototype to the structured one, most of our tasks during this sprint were clearly defined and allowed for steady progress. Our goal of porting said functionality to the structured codebase was met and exceeded during this sprint, with some additional features implemented that were not present in either of the initial prototypes. Those additional features include an item system with initial support for item collision and the implementation of the "GameUniverse". The GameUniverse defines several different playable areas, each referred to as a GameWorld, with the ability to switch between the different GameWorld's while maintaining the state of data and objects in the inactive worlds. 
 
 ### Problems Encountered
 Although the prototype from sprint 1 was functional, it wasn't easy to understand and wasn't structured very well. Therefore, for this sprint we decided to take that prototype and structure it to make it easier to understand and more efficient. However, this task was more difficult to accomplish than previously expected since new ideas for code implementation were constantly being considered. This problem was overcome by meeting for a few hours every Monday, Wednesday, and Friday to discuss what needed to be accomplished in order to finish the sprint on time and trouble shoot any problems. Other smaller problems that were encountered were personal conflicts such as midterms happening during sprint 2.
