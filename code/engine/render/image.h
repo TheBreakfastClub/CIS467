@@ -110,7 +110,6 @@ class Image {
 	}	
 	
   void blit(Image *src, int x, int y) {
-
 		int x1 = max(x, 0);
 		int x2 = min(x + src->w, w);
 		int y1 = max(y, 0);
@@ -144,23 +143,54 @@ class Image {
 		}
   }
 	
-	// no clipping yet
-  bool collision(Image *src, int x, int y) {
+	// no clipping
+  bool _collision(Image *src, int x, int y) {
 		int a, b, i=0;
     for(b = y*w;b < (y+src->h)*w; b+=w) 
 			for(a = b+x;a < b+x+src->w; a++) 
  				if(pixels[a] & src->pixels[i++] & 0x80000000) return true;
 		return false;
   }
-	
-	// no clipping yet
-  int overlap(Image *src, int x, int y) {
+
+  bool collision(Image *src, int x, int y) {
+		int x1 = max(x, 0);
+		int x2 = min(x + src->w, w);
+		int y1 = max(y, 0);
+		int y2 = min(y + src->h, h);
+
+		for(int b=y1; b < y2; b++) {
+			int i = (b-y)*src->w + x1 - x;
+			for(int a = b*w + x1; a < b*w + x2; a++)
+				if(pixels[a] & src->pixels[i++] & 0x80000000) return true;
+		}
+		return false;
+	}
+
+	// no clipping
+  int _overlap(Image *src, int x, int y) {
 		int a, b, i=0, o=0;
     for(b = y*w;b < (y+src->h)*w; b+=w) 
 			for(a = b+x;a < b+x+src->w; a++) 
  				if(pixels[a] & src->pixels[i++] & 0x80000000) o++;
 		return o;
   }
+
+  int overlap(Image *src, int x, int y) {
+		int o = 0;		
+		int x1 = max(x, 0);
+		int x2 = min(x + src->w, w);
+		int y1 = max(y, 0);
+		int y2 = min(y + src->h, h);
+
+		for(int b=y1; b < y2; b++) {
+			int i = (b-y)*src->w + x1 - x;
+			for(int a = b*w + x1; a < b*w + x2; a++)
+				if(pixels[a] & src->pixels[i++] & 0x80000000) o++;
+		}
+		return o;
+	}
+
+
 	
 	void scaleblit(Image *src)
 	{
