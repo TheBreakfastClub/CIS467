@@ -12,6 +12,8 @@ Description:    The main controller of the game.
 #include "engine/graphics/graphicsEngine.h"
 #include "util/clock.h"
 
+using namespace std;
+
 class Game {
 
 	private:
