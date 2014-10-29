@@ -11,7 +11,7 @@ EXE = PixelGame
 all: $(EXE)
 
 $(EXE): $(SOURCES) $(HEADERS)
-	$(CXX) $(CXXFLAGS) $(FRAMEFLAGS) $(SOURCES) $< -o $(EXE)
+	$(CXX) $(CXXFLAGS) $(FRAMEFLAGS) $(SOURCES) -o $(EXE)
 
 clean:
 	rm *.o && rm $(EXE)

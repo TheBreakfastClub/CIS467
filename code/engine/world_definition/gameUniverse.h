@@ -32,26 +32,27 @@ class GameUniverse{
 
   private:
 
-    const char *hubBackground = "../../resources/background.png";
-    const char *hubCollision = "../../resources/fullBoardTest1.png";
-    const char *hubTop = NULL;
-        
-    const char *flourBackground = "../../resources/background.png";
-    const char *flourCollision = "../../resources/Test1CL.png";
-    const char *flourTop = NULL;
+    const char *hubBackground = "resources/hub2BG.png";
+const char *hubCollision = "resources/hub2CL.png";
+const char *hubTop = NULL;
+    
+const char *flourBackground = "resources/FlourLevelBackground.png";
+const char *flourCollision = "resources/FlourLevel.png";
+const char *flourTop = NULL;
 
-    const char *sugarBackground = "../../resources/background.png";
-    const char *sugarCollision = "../../resources/test4cl.png";
-    const char *sugarTop = NULL;
+const char *sugarBackground = "resources/hero.png";
+const char *sugarCollision = "resources/test4cl.png";
+const char *sugarTop = NULL;
 
-    const char *baking_sodaBackground = "../../resources/background.png";
-    const char *baking_sodaCollision = "../../resources/test4cl.png";
-    const char *baking_sodaTop = NULL;
-        
-    const char *butterBackground = "../../resources/background.png";
-    const char *butterCollision = "../../resources/test4cl.png";
-    const char *butterTop = NULL;
+const char *baking_sodaBackground = "resources/background.png";
+const char *baking_sodaCollision = "resources/test4cl.png";
+const char *baking_sodaTop = NULL;
+    
+const char *butterBackground = "resources/background.png";
+const char *butterCollision = "resources/test4cl.png";
+const char *butterTop = NULL;
 
-    const char *heroImage = "../../resources/hero.png";
+const char *heroImage = "resources/hero.png";
+
 };
 
