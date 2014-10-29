@@ -64,13 +64,9 @@ bool GameUniverse::checkCollisionsWithItems() {
             continue;
         }
 
-        // Make a copy of the world map, including the item
-        Image map(currentWorld->w, currentWorld->h);
-        map.blit(currentWorld->currentRes->mapImg, 0,0);
-        map.ablit(item->spriteImage, item->x, item->y);
 
         // Check if item and hero collide
-        if (map.collision(hero.spriteImage, hero.x, hero.y)) {
+        if (hero.spriteImage->collision(item->spriteImage, hero.x - item->x, hero.y - item->y)) {
             hero.bag.push_back(item);
             it = currentWorld->items.erase(it);
             return true;
@@ -129,4 +125,3 @@ bool GameUniverse::init() {
 
     return true;
 }
-
