@@ -10,6 +10,7 @@ Description:    This class holds the code needed to create
 #include "graphicsEngine.h"
 #include <iostream>
 #include <stdlib.h>
+#include "../render/util.h"
 
 /**
  * Default constructor. User needs to call init before using

@@ -15,6 +15,8 @@ Description:    Holds the data defining the universe
  */
 GameUniverse::GameUniverse(string universe_name) : universeName(universe_name) 
 {
+
+  sublevels = new GameWorld*[Sublevel::COUNT];
   sublevels[Sublevel::HUB] = new GameWorld("hub");
   sublevels[Sublevel::FLOUR] = new GameWorld("flour");
   sublevels[Sublevel::SUGAR] = new GameWorld("sugar");
