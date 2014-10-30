@@ -2,9 +2,9 @@ Steven Hoffman
 =====================
 CIS 467: The Breakfast Club
 ----------------------------
-Journal Date: 10/26/2014   
-Journal Period - FROM: 8/25/2014 TO: 10/26/2014   
-Total hours worked this period: **107.38**   
+Journal Date: 10/30/2014   
+Journal Period - FROM: 8/25/2014 TO: 10/30/2014   
+Total hours worked this period: **110.33**   
 
 
 
@@ -386,3 +386,25 @@ Added a temporary method for picking up items. Also met with engine group to wor
 Worked on Sprint 2 report
 
 
+#### Monday, 10/27/2014 (1.25 hours)
+
+4:30 pm - 5:45 pm    
+Attended class
+
+
+#### Wednesday, 10/29/2014 (1.62 hours)
+
+12:36 noon - 12:50 noon    
+Messaged group member.
+
+4:30 pm - 5:31 pm    
+Attended class and gave presentation.
+
+11:46 pm - 0:08 am    
+Worked on Team Evaluations.
+
+
+#### Thursday, 10/30/2014 (0.08 hours)
+
+3:24 pm - 3:29 pm    
+Updated Journal.
