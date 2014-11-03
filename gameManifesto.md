@@ -33,38 +33,38 @@ The different levels described below (currently in no particular order):
   * Where the pixelation items are to be located
     * pixelation items are to be blocked off until Hero has what is required to access them. How they are blocked TBD.
   * Also contains the Milk and Egg items.
-  * Visual Style: TBD
+  * Visual Style: Temple of Time-ish
   * Pixelation Levels: low, medium, high.
-  * Algorithm: TBD
-  * Designed By: TBD
+  * Algorithm: Average
+  * Designed By: Thomas
 * Flour Level
   * level that contains the Flour item.
   * description of which TBD
   * Visual Style: TBD
-  * Pixelation Levels: Low
-  * Algorithm: Average
+  * Pixelation Levels: low & after completion medium
+  * Algorithm: TBD
   * Designed by: Michelle
+* Sugar Level
+  * level that contains the Sugar item.
+  * I want there to be a lot of shifting parts. This will have to have enemies.
+  * Visual Style: Think colorful crystals.
+  * Pixelation Levels: low, medium & after completion high.
+  * Algorithm: Averaging
+  * Designed by: Thomas
+* Baking Soda Level
+  * level that contains the Baking Soda item.
+  * description of which TBD
+  * Visual Style: TBD
+  * Pixelation Levels: TBD
+  * Algorithm: Zooming Algorithm.
+  * Designed by: Thomas
 * Butter Level
   * level that contains the Butter item.
   * description of which TBD
   * Visual Style: TBD
   * Pixelation Levels: TBD
   * Algorithm: TBD
-  * Designed by: TBD
-* Baking Soda Level
-  * level that contains the Baking Soda item.
-  * description of which TBD
-  * Visual Style: TBD
-  * Pixelation Levels: TBD
-  * Algorithm: TBD
-  * Designed by: TBD
-* Sugar Level
-  * level that contains the Sugar item.
-  * description of which TBD
-  * Visual Style: TBD
-  * Pixelation Levels: TBD
-  * Algorithm: TBD
-  * Designed by: TBD
+  * Designed by: Michelle
 
 
 ## Map
@@ -99,6 +99,7 @@ All algorithms will ignore invisible pixels unless stated otherwise. Not all the
 * **RGB average to Dark:** Same as RGB average but weighting the darker colors more so it blackens out.
 * **Average without Alpha:** Average only the colored spots that are not transparent.
 * **RGB Most Used:** Taking the most used RGB value.
+* **Zooming:** This takes the color array and just blows it up to be bigger.
 
 
 ## Hero
@@ -119,42 +120,42 @@ As you pick up the items an icom appears on the screen to indicate that you got 
 
 ## Items
 The items the hero can pick up and use are all the ingredients to make a waffle. These items will be picked up once and when you get them you can use them unlimited number of times with a set refresh time frame. Aside from the pinch of salt the basic recipe comes from http://www.foodnetwork.com/recipes/simple-waffles-from-scratch-recipe.html
-* **Eggs**
-  * Throwing item, primary weapon. Just hits enemies and hurts them. Possible upgrade items to be different kinds of eggs.
-  * Rejuvenation Time: TBD
-  * Pick up Order: 1st
-  * Key Command: TBD
-  * Level Location: Hub Level
-* **Flour**
-  * Throwing item, when it hits the enemy it makes them transparent similar to a ghost. They can not hurt you. Lasts for a specified duration.
-  * Rejuvenation Time: TBD
-  * Pick up Order: 2nd
-  * Key Command: TBD
-  * Level Location: Flour Level
-* **Milk**
-  * Healing item. Possible upgrades to organic milk for better healing, or use the percents to have different levels of healing.
-  * Rejuvenation Time: TBD
-  * Pick up Order: 3rd
-  * Key Command: TBD
-  * Level Location: Hub Level
 * **Butter**
   * Makes hero move fast but makes her run like on ice.
   * Rejuvenation Time: TBD
-  * Pick up Order: 4th
+  * Pick up Order: TBD
   * Key Command: TBD
   * Level Location: Butter Level
-* **Baking Powder**
-  * Makes Hero transparent like a ghost. You can not get hurt by enemies and can pass through obsticals.
-  * Rejuvenation Time: TBD
-  * Pick up Order: 5th
-  * Key Command: TBD
-  * Level Location: Baking Powder Level
 * **Suger**
   * Makes hero run fast but a straight shot in one direction
   * Rejuvenation Time: TBD
-  * Pick up Order: 6th
+  * Pick up Order: TBD
   * Key Command: TBD
   * Level Location: Sugar Level
+* **Flour**
+  * Throwing item, when it hits the enemy it makes them transparent similar to a ghost. They can not hurt you. Lasts for a specified duration.
+  * Rejuvenation Time: TBD
+  * Pick up Order: TBD
+  * Key Command: TBD
+  * Level Location: Flour Level
+* **Baking Powder**
+  * Makes Hero transparent like a ghost. You can not get hurt by enemies and can pass through obsticals.
+  * Rejuvenation Time: TBD
+  * Pick up Order: TBD
+  * Key Command: TBD
+  * Level Location: Baking Powder Level
+* **Eggs**
+  * Throwing item, primary weapon. Just hits enemies and hurts them. Possible upgrade items to be different kinds of eggs.
+  * Rejuvenation Time: TBD
+  * Pick up Order: TBD
+  * Key Command: TBD
+  * Level Location: Hub Level
+* **Milk**
+  * Healing item. Possible upgrades to organic milk for better healing, or use the percents to have different levels of healing.
+  * Rejuvenation Time: TBD
+  * Pick up Order: TBD
+  * Key Command: TBD
+  * Level Location: Hub Level
 
 ### Pixelation Items
 The pixelation leveling up will be done when the Hero collects the pixelation item for that resolution. The visual look of that item will be a varient on how the hero will look at that level of resolution. I was thinking that they could be grayed out versions of hero like a statue. When the Hero goes up to the item it changes or something...TBD.
@@ -225,6 +226,11 @@ There will be different types of enemies. The definition of the enemies should b
   * High Res: the box is open along the one side
   * Medium Res: the box is still open, but becoming very constricting. The box may give damage if the user is inside at this point.
   * Low Res: The box is solid and has no opening
+
+* **Obsicles:** These are verious elements in the world that are just in the way. There will be no damage enflicted on the hero if hit.
+  * Design: Level dependent.
+  * Level Location: All the levels
+  * Pixelation Algorithm: Level dependent.
 
 
 ## Game Story Line
