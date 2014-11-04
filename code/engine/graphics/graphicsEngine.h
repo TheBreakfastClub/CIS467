@@ -27,7 +27,7 @@ public:
 
     void refreshScreen();
     void drawGameWorld(const GameWorld &world, const int &pan_x, const int &pan_y);
-    void drawGameUniverse(const GameUniverse &universe);
+    void drawGameUniverse(GameUniverse &universe);
 
 private:
    

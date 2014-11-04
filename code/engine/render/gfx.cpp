@@ -1,6 +1,10 @@
 
 #include "gfx.h"
 
+// TODO: remove these includes!
+#include <iostream>
+#include <string>
+
 Image* Gfx::loadImage(const char *filename)	{
 
 	SDL_Surface *gfx = IMG_Load(filename);
@@ -50,4 +54,27 @@ Image* Gfx::downsample(Image *src, int width, int height, u32 (*blend_func)(u32*
 		}
 	}
 	return dst;
+}
+
+// For showing that a character/enemy/whatever has been damaged
+Image* Gfx::redTint(Image *src, int amt)
+{
+	Image *dest = new Image(src->w, src->h);
+	for (int i = 0; i < src->w * src->h; i++) {
+		u32 c, r, g, b, a;
+		c = src->pixels[i];
+		a = c >> 24;
+		r = ((c >> 16) & 0xff) * a / 255;
+		g = ((c >> 8) & 0xff) * a / 255;
+		b = (c & 0xff) * a / 255;
+		if (a < 40) {
+			std::cout << "Color info on full alpha: a: " << std::to_string(a) << " r: " << std::to_string(r) << " g: " << std::to_string(g) << " b: " << std::to_string(b) << std::endl;
+			continue; // don't alter the color of a transparent pixel
+		}
+		if (r + amt <= 255)
+			dest->pixels[i] = (a << 24) + (r + amt << 16) + (g << 8) + b;
+		else
+			dest->pixels[i] = (a << 24) + (255 << 16) + (g << 8) + b;
+	}
+	return dest;
 }

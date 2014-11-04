@@ -21,5 +21,7 @@ public:
     
     static Image* downsample(Image *src, int width, int height, u32 (*blend_func)(u32*, int));
 
+    static Image* redTint(Image *src, int amt);
+
 };
 

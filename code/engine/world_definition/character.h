@@ -14,6 +14,7 @@ using namespace std;
 class Character: public Sprite {
   public:
     Character();
+    Character(int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *charImg=NULL);
     /** Defines the amount of hitpoints a sprite has **/
     int hitPoints;
     /** Defines if a sprite is invincible **/
@@ -22,5 +23,9 @@ class Character: public Sprite {
     int speed;
     /** Defines the attack damage of a sprite **/
     int attackDmg;
+    /** Used when a Character has taken damage **/
+    Image *hitImage;
+    bool hit;
+    
 };
 

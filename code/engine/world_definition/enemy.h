@@ -8,17 +8,22 @@ Description:	Defines the different types of enemies in
 
 #pragma once
 
-// Includes
 #include <string>
 #include "sprite.h"
 #include "character.h"
+#include "hero.h"
 
 class Enemy: public Character {
+public:
+	Enemy(int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL);
 
-    public:
-        
-
-        // Add here other properties that all tiles of a single type should have
+	// subclasses of Enemy will define how to act
+	virtual void action(Hero &hero, Image *map) = 0;
 
 };
 
+class AutoSentry : public Enemy {
+public:
+	AutoSentry(int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL);
+	void action(Hero &hero, Image *map);
+};

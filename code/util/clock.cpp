@@ -17,8 +17,9 @@ Clock::Clock(Uint32 fps) : events()
 }
 
 /* Add an event to the event queue */
-void Clock::add_event(Event* e)
+void Clock::add_event(Event* e, std::string name)
 {
+	e->name = name;
 	e->set_start(time());
 	events.push_back(e);
 }
@@ -43,10 +44,11 @@ void Clock::tick()
 					(*it)->start_time = time();
 				}
 			}
+			// a deletion that causes the collection to be empty will point to end(). check before indenting
+			if (it == events.end()) break;
 			it++;
 		}
 	}
-
 	
 	// set new times and increment frame count
 	now = time();
@@ -73,12 +75,20 @@ float Clock::avgFPS()
 	return (avg > 2000000 ? 0.0f : avg); // initial avg might be super high, cap it
 }
 
+bool Clock::has_event(std::string name)
+{
+	for (Event *e : events) {
+		if (e->name == name) return true;
+	}
+	return false;
+}
+
 
 // E V E N T S
 
 // Define the base Event class. Completely takes care of timing. Child classes only exist
 // in order to define the data stored and the execute() function.
-Event::Event(int duration, bool persist) 
+Event::Event(int duration, bool persist, std::string name) 
  : duration(duration*1000), persist(persist) {}
 
 /* Each event must know when it was started (to compare against duration) */
@@ -115,4 +125,19 @@ void AutoPixEvent::execute()
 	else {
 		gw->prev_resolution();
 	}
+}
+
+
+// Use this to control the duration of when a Character is "hit" for (incomplete: probably going to just use AnonEvent)
+CharHitEvent::CharHitEvent(int duration, Character *c) : c(c), Event(duration, false) {}
+void CharHitEvent::execute() {}
+
+
+// For small events that can can quickly be implemented with a lambda, define a generic event type
+AnonEvent::AnonEvent(int duration, std::function<void()> f, bool persist)
+ : f(f), Event(duration, persist) {}
+
+void AnonEvent::execute() 
+{ 
+	f();
 }

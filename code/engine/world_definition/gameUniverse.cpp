@@ -76,6 +76,12 @@ bool GameUniverse::checkCollisionsWithItems() {
     return false;
 }
 
+/*
+bool GameUniverse::checkCollisionsWithEnemies() {
+
+}
+*/
+
 // The deconstructor
 GameUniverse::~GameUniverse() {
     if(sublevels[Sublevel::HUB])
@@ -121,6 +127,9 @@ bool GameUniverse::init() {
       return false;
     
     if (!(hero.spriteImage = Gfx::loadImage(heroImage)))
+        return false;
+
+    if (!(hero.hitImage = Gfx::redTint(hero.spriteImage, 150)))
         return false;
 
     return true;
