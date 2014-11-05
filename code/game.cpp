@@ -5,6 +5,7 @@ Description:    The main controller of the game.
 ************************************************************/
 
 #include "game.h"
+#include "engine/world_definition/enemy.h"
 
 #define GAME_NAME "One Rad Waffle Game"
 #define WINDOW_WIDTH 500
@@ -14,16 +15,24 @@ Description:    The main controller of the game.
 Game::Game() : universe(GAME_NAME), clock() 
 {
 	gameIsRunning = true;
-
-    // just showing off the types of things the event timer can do...
-    // clock.add_event(new AutoPixEvent(&world));
 }
 
 /* Update game logic at each iteration of the loop */
 void Game::update()
 {
-	// check for collision, events, etc. 
-    // TODO: Move this stuff (generally) to engine
+    // Let each enemy take its turn
+    for (Enemy *e : universe.currentWorld->enemies) {
+        e->action(universe.hero, universe.currentWorld->currentRes->mapImg);
+    }
+
+    // Check for hit status (not sure on this implementation)
+    if (universe.hero.hit && !clock.has_event("herohit")) {
+        clock.add_event(new AnonEvent(1, [&](){
+            universe.hero.hit = false;
+        }), "herohit");
+    }
+
+	universe.checkCollisionsWithItems();
 }
 
 /**
@@ -161,8 +170,6 @@ void Game::handle_input()
     else if (universe.hero.y > h) universe.hero.y = h;
     if (universe.hero.x < 0) universe.hero.x = 0;
     else if (universe.hero.x > w) universe.hero.x = w;
-
-    universe.checkCollisionsWithItems();
 }
 
 /* Main game loop */

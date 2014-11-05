@@ -157,12 +157,12 @@ void GraphicsEngine::drawGameWorld(const GameWorld &world, const int &pan_x, con
  *
  * @param universe The game universe to draw to the screen
  */
-void GraphicsEngine::drawGameUniverse(const GameUniverse &universe) {
+void GraphicsEngine::drawGameUniverse(GameUniverse &universe) {
 
     // Grab references
     GameWorld *world = universe.currentWorld;
     GameMap *map = world->currentRes;
-    const Hero *hero = &universe.hero;
+    Hero *hero = &universe.hero;
 
     // Draw the map to the screen, panning the map to the correct area
     int pan_x = clamp(hero->x - screen->w/2, 0, world->w - screen->w);
@@ -174,8 +174,23 @@ void GraphicsEngine::drawGameUniverse(const GameUniverse &universe) {
         screen->ablit(i->spriteImage, i->x - pan_x, i->y - pan_y);
     }
 
+    // Draw enemies
+    for (Enemy *e : world->enemies) {
+        if (e->hit) {
+            screen->ablit(e->hitImage, e->x - pan_x, e->y - pan_y);
+            e->hit = false;
+        }
+        else
+            screen->ablit(e->spriteImage, e->x - pan_x, e->y - pan_y);
+    }
+
     // Draw the hero to the screen
-    screen->ablit(hero->spriteImage, hero->x - pan_x, hero->y - pan_y);
+    if (hero->hit) {
+        screen->ablit(hero->hitImage, hero->x - pan_x, hero->y - pan_y);
+        //hero->hit = false;
+    }
+    else
+        screen->ablit(hero->spriteImage, hero->x - pan_x, hero->y - pan_y);
 
     // Draw the top layer, if it exists
     if (map->topLayer) {

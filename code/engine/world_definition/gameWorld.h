@@ -33,7 +33,7 @@ class GameWorld {
 
         /** The entities that will inhabit the world */
         list<Item*> items;
-        vector<Enemy> enemies;
+        vector<Enemy*> enemies;
 
         /** Pointer to the GameMap that currently defines the world */ 
         GameMap *currentRes;
