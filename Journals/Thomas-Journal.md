@@ -169,10 +169,77 @@
 
     
 ### Week 7: October 5 - October 11
-* Week Total: 
+* Week Total: 10
 
 
 ##### October 5, 2014
 * 9:00 PM - 11:30 PM
     * Setting up game in xcode for presentation
+
+##### October 7, 2014
+* 9:00 PM - 11:30 PM
+    * Started Designing the Hub Level.
+
+##### October 10, 2014
+* 3:00 PM - 5:30 PM
+    * Met with group to finalize the ideas of how the game will work.
+
+##### October 11, 2014
+* 9:00 PM - 11:30 PM
+    * Designing the Hub Level.
+
+
+
+
+
+### Week 8: October 12 - October 18
+* Week Total: 7.5
+
+
+##### October 5, 2014
+* 9:00 PM - 11:30 PM
+    * Setting up game in xcode for presentation
+
+##### October 7, 2014
+* 9:00 PM - 11:30 PM
+    * Started Designing the Hub Level.
+
+##### October 10, 2014
+* 9:00 PM - 11:30 PM
+    * Designing the Hub Level.
+
+
+
+
+
+
+### Week 9: October 19 - October 25
+* Week Total: 9.5
+
+##### October 20, 2014
+* 9:00 PM - 11:30 PM
+    * Designing the Hub Level.
+
+##### October 24, 2014
+* 9:00 PM - 11:30 PM
+    * Trying to get the flushed out game compiled on my mac to show as a demo
+
+##### October 25, 2014
+* 7:00 PM - 11:30 PM
+    * Trying to get the flushed out game compiled on my mac to show as a demo
+    * Designing Items for the game.
+
+
+
+
+
+### Week 10: October 26 - November 1
+* Week Total: 
+
+
+
+
+
+
+
 
