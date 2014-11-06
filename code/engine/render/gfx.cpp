@@ -68,7 +68,7 @@ Image* Gfx::redTint(Image *src, int amt)
 		g = ((c >> 8) & 0xff) * a / 255;
 		b = (c & 0xff) * a / 255;
 		if (a < 40) {
-			std::cout << "Color info on full alpha: a: " << std::to_string(a) << " r: " << std::to_string(r) << " g: " << std::to_string(g) << " b: " << std::to_string(b) << std::endl;
+			//std::cout << "Color info on full alpha: a: " << std::to_string(a) << " r: " << std::to_string(r) << " g: " << std::to_string(g) << " b: " << std::to_string(b) << std::endl;
 			continue; // don't alter the color of a transparent pixel
 		}
 		if (r + amt <= 255)

@@ -2,9 +2,9 @@ Steven Hoffman
 =====================
 CIS 467: The Breakfast Club
 ----------------------------
-Journal Date: 10/6/2014   
-Journal Period - FROM: 8/25/2014 TO: 10/6/2014   
-Total hours worked this period: **70.17**   
+Journal Date: 10/30/2014   
+Journal Period - FROM: 8/25/2014 TO: 10/30/2014   
+Total hours worked this period: **110.33**   
 
 
 
@@ -239,7 +239,7 @@ Checked status of Sprint 1 report and messaged group members about the report.
 Responded to message and updated burn down chart
 
 
-#### Monday, 10/6/2014 (0.30 hours)
+#### Monday, 10/6/2014 (2.55 hours)
 
 12:05 noon - 12:12 noon    
 Read through messages and updates.
@@ -247,4 +247,164 @@ Read through messages and updates.
 3:03 pm - 3:14 pm    
 Read through messages and updates. Also updated Journal and PowerPoint for Sprint1
 
+4:30 pm - 5:45 pm    
+Attended class and gave part of Sprint 1 presentation.
 
+5:45 pm - 6:45 pm    
+Attended meeting of game engine group to define direction for engine.
+
+
+#### Wednesday, 10/8/2014 (0.98 hours)
+
+4:06 pm - 4:31 pm    
+Worked on team evaluation reports and responded to group messages.
+
+4:30 pm - 5:05 pm    
+Attended class.
+
+
+#### Thursday, 10/9/2014 (0.60 hours)
+
+11:00 am - 11:19 am    
+Messaged game engine group and discussed next steps
+
+11:54 am - 12:12 noon    
+Read through messages.
+
+
+#### Friday, 10/10/2014 (5.28 hours)
+
+1:15 am - 1:37 am    
+Read through messages, game manifesto, and the list of things we need to decide on soon.
+
+12:13 noon - 1:00 pm    
+Reviewed existing code base for project
+
+1:23 pm - 5:31 pm    
+Met with game engine team to discuss direction and distribute work.  Also met with full team to make key game mechanic decisions.  Then I typed up the decisions made and put them on Git.
+
+
+#### Monday, 10/13/2014 (3.70 hours)
+
+12:01 noon - 1:49 pm    
+Met with Tyler to add to world definition and determine next steps.
+
+4:13 pm - 4:39 pm    
+Read through and responded to messages.  Also scheduled meeting with Tashi to define Graphics API
+
+4:58 pm - 6:28 pm    
+Met with Tashi to determine API for his graphics engine.
+
+
+#### Tuesday, 10/14/2014 (0.20 hours)
+
+12:34 noon - 12:42 noon    
+Read through updates to code base and sent a message to the group.
+
+3:04 pm - 3:09 pm    
+Messaged Group members
+
+
+#### Wednesday, 10/15/2014 (6.37 hours)
+
+2:38 pm - 2:55 pm    
+Worked on integrating Tashi's graphics code into the structured prototype.
+
+3:27 pm - 5:12 pm    
+Worked on integrating Tashi's graphics code into the structured prototype.
+
+10:26 pm - 2:46 am    
+Worked on integrating Tashi's graphics code into the structured prototype.  Tried debugging code with Tashi's help.
+
+
+#### Thursday, 10/16/2014 (2.08 hours)
+
+1:16 pm - 1:29 pm    
+Searched for error in SDL code
+
+2:13 pm - 2:31 pm    
+Searched for error in SDL code, looking at the revisions to SDL code that Tashi provided.
+
+8:29 pm - 10:03 pm    
+Fixed SDL code based on Tashi's help.  Also sent messages to group, updated Trello, and updated journal.
+
+
+#### Friday, 10/17/2014 (0.18 hours)
+
+1:52 pm - 2:04 pm    
+Messaged group and read messages.
+
+
+#### Monday, 10/20/2014 (3.88 hours)
+
+12:09 noon - 12:46 noon    
+Talked with Tyler about the code and determining next steps.
+
+1:09 pm - 4:26 pm    
+Guided engine team in migrating Tashi's code.
+
+
+#### Tuesday, 10/21/2014 (0.30 hours)
+
+2:14 pm - 2:33 pm    
+Messaged engine team.
+
+
+#### Wednesday, 10/22/2014 (4.62 hours)
+
+12:10 noon - 12:42 noon    
+Worked with Tyler on getting SDL2 Image to work on his computer. Also,  messaged group members.
+
+1:10 pm - 5:16 pm    
+Messaged group members, organized what the engine group should work on, added panning into the world map, and optimized drawing code.
+
+
+#### Thursday, 10/23/2014 (2.07 hours)
+
+12:43 noon - 1:03 pm    
+Messaged group members.
+
+2:39 pm - 2:48 pm    
+Messaged group members.
+
+10:20 pm - 10:49 pm    
+Worked on integrating multiple game worlds into the game (aka the game universe)
+
+11:49 pm - 0:56 am    
+Worked on integrating multiple game worlds into the game (aka the game universe)
+
+
+#### Friday, 10/24/2014 (3.50 hours)
+
+1:15 pm - 4:45 pm    
+Added a temporary method for picking up items. Also met with engine group to work on adding a few features and met with full team to discuss sprint presentation.
+
+
+#### Sunday, 10/26/2014 (1.07 hours)
+
+4:25 pm - 5:29 pm    
+Worked on Sprint 2 report
+
+
+#### Monday, 10/27/2014 (1.25 hours)
+
+4:30 pm - 5:45 pm    
+Attended class
+
+
+#### Wednesday, 10/29/2014 (1.62 hours)
+
+12:36 noon - 12:50 noon    
+Messaged group member.
+
+4:30 pm - 5:31 pm    
+Attended class and gave presentation.
+
+11:46 pm - 0:08 am    
+Worked on Team Evaluations.
+
+
+#### Thursday, 10/30/2014 (0.08 hours)
+
+3:24 pm - 3:29 pm    
+Updated Journal.
