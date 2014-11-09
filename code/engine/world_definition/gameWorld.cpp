@@ -78,7 +78,7 @@ bool GameWorld::init(const char *background_filename,
 
     // Amount to divide the dimensions by for resolutions
     int medCut = 8;
-    int lowCut = 32;
+    int lowCut = 16;
 
     // Initialize Medium Resolution
     medRes = new GameMap();
