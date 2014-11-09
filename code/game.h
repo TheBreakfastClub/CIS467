@@ -11,6 +11,7 @@ Description:    The main controller of the game.
 #include "engine/world_definition/gameUniverse.h"
 #include "engine/graphics/graphicsEngine.h"
 #include "util/clock.h"
+#include "util/configurations.h"
 
 class Game {
 
@@ -25,7 +26,10 @@ class Game {
 
         /* Utility */
         Clock clock;
- 
+
+        /* Holds the configurations */
+        Configurations config;
+
     public:
  
         Game();
