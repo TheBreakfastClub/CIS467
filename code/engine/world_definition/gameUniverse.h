@@ -12,47 +12,24 @@ Description:    This class holds the different sublevels/subworlds
 #include "gameWorld.h"
 #include "hero.h"
 #include "sublevel.h"
+#include "../../util/configurations.h"
     
 class GameUniverse{
   public:
     GameUniverse(string universe_name);
     ~GameUniverse();
-    bool init();
+    bool init(const Configurations &config);
     
     /** Properties of the universe */
     Hero hero;
     string universeName; 
-    GameWorld** sublevels;
+    GameWorld** sublevels = new GameWorld*[Sublevel::COUNT];
 
     GameWorld* currentWorld;
     Sublevel currentLevel;
 
     void changeWorld(Sublevel level, Resolution res, int x, int y);
     bool checkCollisionsWithItems();
-
-  private:
-
-    const char *hubBackground = "resources/hub2BG.png";
-const char *hubCollision = "resources/hub2CL.png";
-const char *hubTop = NULL;
-    
-const char *flourBackground = "resources/FlourLevelBackground.png";
-const char *flourCollision = "resources/FlourLevel.png";
-const char *flourTop = NULL;
-
-const char *sugarBackground = "resources/hero.png";
-const char *sugarCollision = "resources/test4cl.png";
-const char *sugarTop = NULL;
-
-const char *baking_sodaBackground = "resources/background.png";
-const char *baking_sodaCollision = "resources/test4cl.png";
-const char *baking_sodaTop = NULL;
-    
-const char *butterBackground = "resources/background.png";
-const char *butterCollision = "resources/test4cl.png";
-const char *butterTop = NULL;
-
-const char *heroImage = "resources/hero.png";
 
 };
 

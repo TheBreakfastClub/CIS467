@@ -110,29 +110,36 @@ GameUniverse::~GameUniverse() {
  *
  * This method must be called before any other GameUniverse functions.
  */
-bool GameUniverse::init() {
+bool GameUniverse::init(const Configurations &config) {
     
-    // Initializing the game sub levels  
-    if(! sublevels[Sublevel::HUB] -> init(hubBackground, hubCollision, hubTop))
-      return false;
-      
-    if(! sublevels[Sublevel::FLOUR] -> init(flourBackground, flourCollision, flourTop))
-      return false;
-      
-    if(! sublevels[Sublevel::SUGAR] -> init(sugarBackground, sugarCollision, sugarTop))
-      return false;
-      
-    if(! sublevels[Sublevel::BAKING_SODA] -> init(baking_sodaBackground, baking_sodaCollision, baking_sodaTop))
-      return false;
-      
-    if(! sublevels[Sublevel::BUTTER] -> init(butterBackground, butterCollision, butterTop))
-      return false;
-    
-    if (!(hero.spriteImage = Gfx::loadImage(heroImage)))
-        return false;
+    // Gather the worlds
+    vector<Sublevel> world_list(Sublevel::COUNT);
+    world_list[Sublevel::HUB] = Sublevel::HUB;
+    world_list[Sublevel::FLOUR] = Sublevel::FLOUR;
+    world_list[Sublevel::SUGAR] = Sublevel::SUGAR;
+    world_list[Sublevel::BAKING_SODA] = Sublevel::BAKING_SODA;
+    world_list[Sublevel::BUTTER] = Sublevel::BUTTER;
 
-    if (!(hero.hitImage = Gfx::redTint(hero.spriteImage, 150)))
-        return false;
+    // Initialize the worlds
+    for (Sublevel sub : world_list) {
+        
+        const WorldDef *world = &config.worlds[sub];
+        const char *bck = world->bck_imgName.c_str();
+        const char *col = world->col_imgName.c_str();
+        const char *top = (world->top_imgName == "NULL" ? NULL : world->top_imgName.c_str());
+
+        if (! sublevels[sub] -> init(bck, col, top))
+            return false;
+    }
+
+    // Define the Hero
+    if (!(hero.spriteImage = Gfx::loadImage(config.hero.imgName.c_str()))) return false;
+    if (!(hero.hitImage = Gfx::redTint(hero.spriteImage, 150))) return false;
+    hero.x = config.hero.x;
+    hero.y = config.hero.y;
+    hero.speed = config.hero.speed;
+    hero.hitPoints = config.hero.hitPoints;
+    hero.invincible = config.hero.invincible;
 
     return true;
 }

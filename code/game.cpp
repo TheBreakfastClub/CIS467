@@ -197,6 +197,9 @@ int Game::run()
  */
 bool Game::setup(const char *gameName, int width, int height)
 {
+    // Load configurations
+    config.readInConfigurations(".config");
+    
     // Setup the Graphics Engine
     if (!graphics.init(gameName, width, height)) {
         std::cerr << "Error initializing graphics engine\n";
@@ -204,7 +207,7 @@ bool Game::setup(const char *gameName, int width, int height)
     }
 
     // Setup the Game Universe
-    if (!universe.init()) {
+    if (!universe.init(config)) {
         std::cerr << "Error initializing game universe\n";
         return false;
     }

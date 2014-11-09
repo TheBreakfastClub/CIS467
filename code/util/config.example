@@ -1,0 +1,122 @@
+hub
+hub_bk.png
+hub_cl.png
+NULL
+16 32
+1
+.
+flour
+flour_bk.png
+flour_cl.png
+NULL
+16 32
+1
+.
+sugar
+sugar_bk.png
+sugar_cl.png
+NULL
+16 32
+1
+.
+baking_soda
+baking_soda_bk.png
+baking_soda_cl.png
+NULL
+16 32
+1
+.
+butter
+butter_bk.png
+butter_cl.png
+NULL
+16 32
+1
+.
+--
+0
+150 150
+5 100
+0
+hero.png
+--
+0
+7 7
+0
+egg.png
+.
+1
+7 7
+1
+flour.png
+.
+2
+7 7
+2
+sugar.png
+.
+3
+7 7
+3
+baking_soda.png
+.
+4
+7 7
+4
+butter.png
+.
+0
+70 70
+5
+milk.png
+.
+--
+portal.png
+.
+0
+25 50
+1
+57 92
+.
+1
+25 50
+2
+57 92
+.
+2
+25 50
+3
+57 92
+.
+--
+0
+200 200
+2
+1
+enemy.png
+.
+1
+200 200
+2
+1
+enemy.png
+.
+2
+200 200
+2
+1
+enemy.png
+.
+3
+200 200
+2
+1
+enemy.png
+.
+4
+200 200
+2
+1
+enemy.png
+.
+--
