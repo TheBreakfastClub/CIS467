@@ -15,6 +15,7 @@ Description:	This program reads in the info from a
 #include <sstream>
 #include <string>
 #include "../engine/world_definition/sublevel.h"
+#include "pixUtil.h"
 
 using namespace std;
 

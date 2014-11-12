@@ -48,9 +48,12 @@ GameWorld::~GameWorld() {
  * top_filename may be null
  *
  * This method must be called before any other GameWorld functions.
+ *
+ * @param medCut Cut the width & height of the high resolution by medCut to get the medium resolution
+ * @param lowCut Cut the width & height of the high resolution by lowCut to get the low resolution
  */
 bool GameWorld::init(const char *background_filename, 
-    const char *collision_filename, const char *top_filename) {
+    const char *collision_filename, const char *top_filename, int medCut, int lowCut) {
     
     // Do nothing if already initialized
     if (highRes != NULL) return true;
@@ -75,10 +78,6 @@ bool GameWorld::init(const char *background_filename,
     // Get the width and height of the world
     w = highRes->w();
     h = highRes->h();
-
-    // Amount to divide the dimensions by for resolutions
-    int medCut = 8;
-    int lowCut = 16;
 
     // Initialize Medium Resolution
     medRes = new GameMap();

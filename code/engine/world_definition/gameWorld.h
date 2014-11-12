@@ -26,7 +26,9 @@ class GameWorld {
         ~GameWorld();
         bool init(const char *background_filename, 
                   const char *collision_filename,
-                  const char *top_filename); // TODO: Add pixelation algorithm parameter
+                  const char *top_filename,
+                  int medCut = 8,
+                  int lowCut = 16); // TODO: Add pixelation algorithm parameter
         
         /** Properties of the world */
         string worldName;
