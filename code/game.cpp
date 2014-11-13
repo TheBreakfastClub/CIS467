@@ -198,7 +198,10 @@ int Game::run()
 bool Game::setup(const char *gameName, int width, int height)
 {
     // Load configurations
-    config.readInConfigurations(".config");
+    if (!config.readInConfigurations(".config")) {
+        std::cerr << "Error in reading configuration file\n";
+        return false;
+    }
     
     // Setup the Graphics Engine
     if (!graphics.init(gameName, width, height)) {

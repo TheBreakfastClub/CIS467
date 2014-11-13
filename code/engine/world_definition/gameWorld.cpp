@@ -53,7 +53,11 @@ GameWorld::~GameWorld() {
  * @param lowCut Cut the width & height of the high resolution by lowCut to get the low resolution
  */
 bool GameWorld::init(const char *background_filename, 
-    const char *collision_filename, const char *top_filename, int medCut, int lowCut) {
+                    const char *collision_filename, 
+                    const char *top_filename, 
+                    pixAlgo pixelator, 
+                    int medCut, 
+                    int lowCut) {
     
     // Do nothing if already initialized
     if (highRes != NULL) return true;
@@ -83,28 +87,28 @@ bool GameWorld::init(const char *background_filename,
     medRes = new GameMap();
     medRes->setBackgroundLayer(Gfx::downsample(highRes->backgroundLayer, 
         highRes->backgroundLayer->w/medCut, highRes->backgroundLayer->h/medCut, 
-        blend_average));
+        pixelator));
     medRes->setCollisionLayer(Gfx::downsample(highRes->collisionLayer,
         highRes->collisionLayer->w/medCut, highRes->collisionLayer->h/medCut,
-        blend_average));
+        pixelator));
     if (top_filename) {
         medRes->setTopLayer(Gfx::downsample(highRes->topLayer,
             highRes->topLayer->w/medCut, highRes->topLayer->h/medCut, 
-            blend_average));
+            pixelator));
     }
 
     // Initialize Low Resolution
     lowRes = new GameMap();
     lowRes->setBackgroundLayer(Gfx::downsample(highRes->backgroundLayer,
         highRes->backgroundLayer->w/lowCut, highRes->backgroundLayer->h/lowCut,
-        blend_average));
+        pixelator));
     lowRes->setCollisionLayer(Gfx::downsample(highRes->collisionLayer,
         highRes->collisionLayer->w/lowCut, highRes->collisionLayer->h/lowCut,
-        blend_average));
+        pixelator));
     if (top_filename) {
         lowRes->setTopLayer(Gfx::downsample(highRes->topLayer,
             highRes->topLayer->w/lowCut, highRes->topLayer->h/lowCut, 
-            blend_average));
+            pixelator));
     }
 
     // Create map images

@@ -23,7 +23,7 @@ struct WorldDef {
     string name;
     int medCut; // Med resolution will be 1/medCut the size of high res
     int lowCut; // Low resolution will be 1/lowCut the size of high res
-    int pixAlg; // Indicates the ID of the pixelation algorithm to use
+    pixAlgo pixelator; // Indicates the pixelation algorithm to use
     string bck_imgName; // name of background image file
     string col_imgName; // name of collision image file
     string top_imgName; // name of top image file (or "NULL")

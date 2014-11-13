@@ -3,28 +3,27 @@ File Name:	    pixUtil.cpp
 Author:			Steven Hoffman
 Creation Date:  11-12-2014
 Description:	This class holds methods for working with
-                the PixelationType enum.
+                pixelation algorithms.
 ************************************************************/
 
 #include "pixUtil.h"
 
 /**
  * This method defines which index (when reading in from a config file)
- * refers to which PixelationType. It should be based off the value of
- * the enum.
+ * refers to which pixelation algorithm
  */
-PixelationType PixUtil::getPixTypeFromIdx(int idx) {
-    
+pixAlgo PixUtil::getPixAlgoFromIdx(int idx) {
+
     switch (idx) {
     case 0:
-        return POINT_SAMPLE;
+        return Blend::blend_point_sample;
     case 1:
-        return AVERAGE;
+        return Blend::blend_average;
     case 2:
-        return AVERAGE_OPAQUE;
+        return Blend::blend_average_opaque;
     case 3:
-        return MOST_COMMON;
+        return Blend::blend_most_common;
     default:
-        return AVERAGE;
+        return Blend::blend_average;
     }
 }

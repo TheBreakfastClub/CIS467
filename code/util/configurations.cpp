@@ -91,6 +91,9 @@ string sublevelToStr(const Sublevel &world) {
         case Sublevel::BUTTER:
             worldName = "BUTTER";
             break;
+        case Sublevel::COUNT:
+            worldName = "VOID";
+            break;
         }
         return worldName;
 }
@@ -181,9 +184,11 @@ void Configurations::readInWorlds(ifstream &file) {
         ss >> world.medCut;
         ss >> world.lowCut;
 
+        int pixAlgoIdx;
         getline(file, line);
         stringstream ss2(line);
-        ss2 >> world.pixAlg;
+        ss2 >> pixAlgoIdx;
+        world.pixelator = PixUtil::getPixAlgoFromIdx(pixAlgoIdx);
 
         worlds.push_back(world);
         getline(file, line); // Read in dividing line

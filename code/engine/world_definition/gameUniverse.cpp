@@ -126,8 +126,9 @@ bool GameUniverse::init(const Configurations &config) {
         const char *col = world->col_imgName.c_str();
         const char *top = (world->top_imgName == "NULL" ? NULL : world->top_imgName.c_str());
 
-        if (! sublevels[sub] -> init(bck, col, top, world->medCut, world->lowCut))
+        if (! sublevels[sub] -> init(bck, col, top, world->pixelator, world->medCut, world->lowCut))
             return false;
+        sublevels[sub]->worldName = world->name; 
     }
 
     // Define the Hero
