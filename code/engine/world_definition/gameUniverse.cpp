@@ -111,7 +111,7 @@ GameUniverse::~GameUniverse() {
  * This method must be called before any other GameUniverse functions.
  */
 bool GameUniverse::init(const Configurations &config) {
-    
+ cerr << "BEGIN init\n";   
     // Gather the worlds
     vector<Sublevel> world_list(Sublevel::COUNT);
     world_list[Sublevel::HUB] = Sublevel::HUB;
@@ -119,19 +119,18 @@ bool GameUniverse::init(const Configurations &config) {
     world_list[Sublevel::SUGAR] = Sublevel::SUGAR;
     world_list[Sublevel::BAKING_SODA] = Sublevel::BAKING_SODA;
     world_list[Sublevel::BUTTER] = Sublevel::BUTTER;
-
     // Initialize the worlds
     for (Sublevel sub : world_list) {
-        
         const WorldDef *world = &config.worlds[sub];
         const char *bck = world->bck_imgName.c_str();
         const char *col = world->col_imgName.c_str();
         const char *top = (world->top_imgName == "NULL" ? NULL : world->top_imgName.c_str());
 
-        if (! sublevels[sub] -> init(bck, col, top))
+        if (! sublevels[sub] -> init(bck, col, top)) {
             return false;
+        }
     }
-
+cerr << "Setup world lists done\n";
     // Define the Hero
     if (!(hero.spriteImage = Gfx::loadImage(config.hero.imgName.c_str()))) return false;
     if (!(hero.hitImage = Gfx::redTint(hero.spriteImage, 150))) return false;
@@ -140,6 +139,6 @@ bool GameUniverse::init(const Configurations &config) {
     hero.speed = config.hero.speed;
     hero.hitPoints = config.hero.hitPoints;
     hero.invincible = config.hero.invincible;
-
+cerr << "HERO was created\n";
     return true;
 }

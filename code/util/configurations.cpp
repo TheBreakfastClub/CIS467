@@ -6,6 +6,8 @@ Description:
 ************************************************************/
 
 #include "configurations.h"
+#include <errno.h>
+#include <cstring>
 
 Configurations::Configurations() {}
 
@@ -59,8 +61,10 @@ bool Configurations::readInConfigurations(const char *fileName) {
 
     // Open file
     ifstream file (fileName);
-    if (!file.good()) return false;
-   
+    if (!file.good()) {
+        cerr << "Error: " << strerror(errno);
+        return false;
+       }
     readInWorlds(file);
     readInHero(file);
     readInItems(file);
