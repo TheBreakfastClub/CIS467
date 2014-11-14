@@ -14,7 +14,6 @@ Hero::Hero() {
     attackDmg = 0;
     x = 150;
     y = 150;
-    spriteImage = NULL;
 }
 
 Hero::~Hero() {

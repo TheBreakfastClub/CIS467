@@ -13,13 +13,12 @@ Description:    Holds the data defining the sublevel
 #include "enemy.h"
 #include "../../util/pixUtil.h"
 #include "../render/blend.h"
+#include "resolution.h"
 #include <string>
 #include <vector>
 #include <list>
 
 using namespace std;
-
-enum Resolution { LOW, MED, HIGH };
 
 class GameWorld {
     

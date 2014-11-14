@@ -66,7 +66,8 @@ bool GameUniverse::checkCollisionsWithItems() {
 
 
         // Check if item and hero collide
-        if (hero.spriteImage->collision(item->spriteImage, hero.x - item->x, hero.y - item->y)) {
+        Resolution res = currentRes();
+        if (hero.getSpriteImage(res)->collision(item->getSpriteImage(res), hero.x - item->x, hero.y - item->y)) {
             hero.bag.push_back(item);
             it = currentWorld->items.erase(it);
             return true;
@@ -81,6 +82,10 @@ bool GameUniverse::checkCollisionsWithEnemies() {
 
 }
 */
+
+Resolution GameUniverse::currentRes() {
+    return currentWorld->currentResLevel;
+}
 
 // The deconstructor
 GameUniverse::~GameUniverse() {
@@ -109,7 +114,7 @@ GameUniverse::~GameUniverse() {
  * This method must be called before any other GameUniverse functions.
  */
 bool GameUniverse::init(const Configurations &config) {
-    
+
     // Gather the worlds
     vector<Sublevel> world_list(Sublevel::COUNT);
     world_list[Sublevel::HUB] = Sublevel::HUB;
@@ -125,20 +130,19 @@ bool GameUniverse::init(const Configurations &config) {
         const char *bck = world->bck_imgName.c_str();
         const char *col = world->col_imgName.c_str();
         const char *top = (world->top_imgName == "NULL" ? NULL : world->top_imgName.c_str());
-
         if (! sublevels[sub] -> init(bck, col, top, world->pixelator, world->medCut, world->lowCut))
             return false;
         sublevels[sub]->worldName = world->name; 
+
     }
 
     // Define the Hero
-    if (!(hero.spriteImage = Gfx::loadImage(config.hero.imgName.c_str()))) return false;
-    if (!(hero.hitImage = Gfx::redTint(hero.spriteImage, 150))) return false;
+    if (!(hero.setSpriteImage(config.hero.imgName.c_str()))) return false;
+    if (!(hero.hitImage = Gfx::redTint(hero.getSpriteImage(Resolution::HIGH), 150))) return false;
     hero.x = config.hero.x;
     hero.y = config.hero.y;
     hero.speed = config.hero.speed;
     hero.hitPoints = config.hero.hitPoints;
     hero.invincible = config.hero.invincible;
-
     return true;
 }

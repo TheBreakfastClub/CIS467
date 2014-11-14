@@ -1,20 +1,29 @@
+/*********************************************************
+File Name:	    enemy.cpp
+Author:		    The Breakfast Club
+Creation Date:  09-25-2014
+Description:	Defines the different types of enemies in
+		the world.
+************************************************************/
+
 #include "enemy.h"
 //#include <stdlib.h>
 #include <cmath>
 #include <iostream>
-#include <string>
 
-Enemy::Enemy(int hp, int speed, int damage, int x, int y, bool inv, Image *char_img) 
- : Character(hp, speed, damage, x, y, inv, char_img) {}
+Enemy::Enemy(int hp, int speed, int damage, int x, int y, bool inv) 
+ : Character(hp, speed, damage, x, y, inv) {}
 
+Enemy::Enemy(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x, int y, bool inv) 
+ : Character(charImgH, charImgM, charImgL, hp, speed, damage, x, y, inv) {}
 
-AutoSentry::AutoSentry(int hp, int speed, int damage, int x, int y, bool inv, Image *char_img)
- : Enemy(hp, speed, damage, x, y, inv, char_img) 
-{
-	spriteImage = Gfx::loadImage("resources/enemy.png");
-}
+AutoSentry::AutoSentry(int hp, int speed, int damage, int x, int y, bool inv) 
+ : Enemy(hp, speed, damage, x, y, inv) {}
 
-void AutoSentry::action(Hero &hero, Image *map)
+AutoSentry::AutoSentry(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x, int y, bool inv) 
+ : Enemy(charImgH, charImgM, charImgL, hp, speed, damage, x, y, inv) {}
+
+void AutoSentry::action(Hero &hero, Image *map, Resolution res)
 {
 	// determine how far away we are from the hero
 	float a = abs(x - hero.x);
@@ -31,12 +40,12 @@ void AutoSentry::action(Hero &hero, Image *map)
 		else if (y < hero.y) y_inc = speed;
 
 		// check for collision before updating position
-		if (!hero.hit && hero.spriteImage->collision(spriteImage, hero.x - x + x_inc, hero.y - y + y_inc)) {
+		if (!hero.hit && hero.getSpriteImage(res)->collision(getSpriteImage(res), hero.x - x + x_inc, hero.y - y + y_inc)) {
 			hero.hitPoints -= attackDmg;
 			hero.hit = true;
 			std::cout << "Hero HP: " << std::to_string(hero.hitPoints) << std::endl;
 		}
-		else if (!map->collision(spriteImage, x + x_inc, y + y_inc)) {
+		else if (!map->collision(getSpriteImage(res), x + x_inc, y + y_inc)) {
 			x += x_inc;
 			y += y_inc;
 		}

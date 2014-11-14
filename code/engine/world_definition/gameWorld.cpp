@@ -58,7 +58,7 @@ bool GameWorld::init(const char *background_filename,
                     pixAlgo pixelator, 
                     int medCut, 
                     int lowCut) {
-    
+
     // Do nothing if already initialized
     if (highRes != NULL) return true;
 
@@ -123,20 +123,21 @@ bool GameWorld::init(const char *background_filename,
     // create some random items 
     for (int i = 0; i < 4; i++) {
         
-        Item *newItem = new Item(rand() % w, rand() % h, Gfx::loadImage("resources/egg.png"), "hero");
-        
-        while (currentRes->mapImg->collision(newItem->spriteImage, newItem->x, newItem->y)) {
+        Item *newItem = new Item(rand() % w, rand() % h, "egg");
+        if (!newItem->setSpriteImage("resources/egg.png")) return false;
+        while (currentRes->mapImg->collision(newItem->getSpriteImage(currentResLevel), newItem->x, newItem->y)) {
             newItem->x = rand() % w;
             newItem->y = rand() % h;
         }
-
         items.push_back(newItem);
     }
 
     // create some enemies (hp, speed, damage, x, y)
     for (int i = 0; i < 3; i++) {
         AutoSentry *e = new AutoSentry(50, 2, 25, rand() % w, rand() % h);
-        while (currentRes->mapImg->collision(e->spriteImage, e->x, e->y)) {
+        if (!e->setSpriteImage("resources/enemy.png")) return false;
+
+        while (currentRes->mapImg->collision(e->getSpriteImage(currentResLevel), e->x, e->y)) {
             e->x = rand() % w;
             e->y = rand() % h;
         }
