@@ -12,6 +12,8 @@ Description:    Holds the data defining the sublevel
 #include "item.h"
 #include "enemy.h"
 #include "UpDownEnemy.h"
+#include "../../util/pixUtil.h"
+#include "../render/blend.h"
 #include <string>
 #include <vector>
 #include <list>
@@ -27,7 +29,10 @@ class GameWorld {
         ~GameWorld();
         bool init(const char *background_filename, 
                   const char *collision_filename,
-                  const char *top_filename); // TODO: Add pixelation algorithm parameter
+                  const char *top_filename,
+                  pixAlgo pixelator = Blend::blend_average,
+                  int medCut = 8,
+                  int lowCut = 16); // TODO: Add pixelation algorithm parameter
         
         /** Properties of the world */
         string worldName;

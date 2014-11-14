@@ -5,7 +5,6 @@ Description:    The main controller of the game.
 ************************************************************/
 
 #include "game.h"
-#include <unistd.h>
 #include "engine/world_definition/enemy.h"
 
 #define GAME_NAME "One Rad Waffle Game"
@@ -199,9 +198,9 @@ int Game::run()
 bool Game::setup(const char *gameName, int width, int height)
 {
     // Load configurations
-    if (!config.readInConfigurations("/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/code/CIS467/code/util/thomas.config")) {
-        cerr << "config is bad\n";
-        return false;  
+    if (!config.readInConfigurations(".config")) {
+        std::cerr << "Error in reading configuration file\n";
+        return false;
     }
     
     // Setup the Graphics Engine
