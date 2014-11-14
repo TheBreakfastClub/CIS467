@@ -11,6 +11,7 @@ Description:    Holds the data defining the sublevel
 #include "gameMap.h"
 #include "item.h"
 #include "enemy.h"
+#include "UpDownEnemy.h"
 #include <string>
 #include <vector>
 #include <list>

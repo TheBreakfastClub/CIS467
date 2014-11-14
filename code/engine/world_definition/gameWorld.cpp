@@ -75,37 +75,37 @@ bool GameWorld::init(const char *background_filename,
     // Get the width and height of the world
     w = highRes->w();
     h = highRes->h();
-
+    
     // Amount to divide the dimensions by for resolutions
-    int medCut = 8;
+    int medCut = 4;
     int lowCut = 16;
 
     // Initialize Medium Resolution
     medRes = new GameMap();
     medRes->setBackgroundLayer(Gfx::downsample(highRes->backgroundLayer, 
         highRes->backgroundLayer->w/medCut, highRes->backgroundLayer->h/medCut, 
-        blend_average));
+        blend_average_opaque));
     medRes->setCollisionLayer(Gfx::downsample(highRes->collisionLayer,
         highRes->collisionLayer->w/medCut, highRes->collisionLayer->h/medCut,
-        blend_average));
+        blend_average_opaque));
     if (top_filename) {
         medRes->setTopLayer(Gfx::downsample(highRes->topLayer,
             highRes->topLayer->w/medCut, highRes->topLayer->h/medCut, 
-            blend_average));
+            blend_average_opaque));
     }
 
     // Initialize Low Resolution
     lowRes = new GameMap();
     lowRes->setBackgroundLayer(Gfx::downsample(highRes->backgroundLayer,
         highRes->backgroundLayer->w/lowCut, highRes->backgroundLayer->h/lowCut,
-        blend_average));
+        blend_average_opaque));
     lowRes->setCollisionLayer(Gfx::downsample(highRes->collisionLayer,
         highRes->collisionLayer->w/lowCut, highRes->collisionLayer->h/lowCut,
-        blend_average));
+        blend_average_opaque));
     if (top_filename) {
         lowRes->setTopLayer(Gfx::downsample(highRes->topLayer,
             highRes->topLayer->w/lowCut, highRes->topLayer->h/lowCut, 
-            blend_average));
+            blend_average_opaque));
     }
 
     // Create map images
@@ -130,9 +130,10 @@ bool GameWorld::init(const char *background_filename,
         items.push_back(newItem);
     }
 
+    // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
     // create some enemies (hp, speed, damage, x, y)
-    for (int i = 0; i < 3; i++) {
-        AutoSentry *e = new AutoSentry(50, 2, 25, rand() % w, rand() % h);
+    for (int i = 0; i < 1; i++) {
+        UpDownEnemy *e = new UpDownEnemy(50, 2, 25, 384, -140, false, NULL, 150, 0);
         while (currentRes->mapImg->collision(e->spriteImage, e->x, e->y)) {
             e->x = rand() % w;
             e->y = rand() % h;
