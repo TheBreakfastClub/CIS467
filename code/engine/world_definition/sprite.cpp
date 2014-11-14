@@ -66,17 +66,17 @@ bool Sprite::setSpriteImage(const char *imgFileName, pixAlgo pixelator, int medC
     deallocNeeded = true;
 
     // Read in the high resolution image
-    spriteImageH = Gfx::loadImage(imgFileName);
+    spriteImageH = loadImage(imgFileName);
     if (!spriteImageH) return false;
 
     // Create Medium resolution image
-    Image *shrunken = Gfx::downsample(spriteImageH, spriteImageH->w/medCut, spriteImageH->h/medCut, pixelator);
+    Image *shrunken = downsample(spriteImageH, spriteImageH->w/medCut, spriteImageH->h/medCut, pixelator);
     spriteImageM = new Image(spriteImageH->w, spriteImageH->h);
     spriteImageM->scaleblit(shrunken);
     delete shrunken;
     
     // Create Low resolution image
-    shrunken = Gfx::downsample(spriteImageH, spriteImageH->w/lowCut, spriteImageH->h/lowCut, pixelator);
+    shrunken = downsample(spriteImageH, spriteImageH->w/lowCut, spriteImageH->h/lowCut, pixelator);
     spriteImageL = new Image(spriteImageH->w, spriteImageH->h);
     spriteImageL->scaleblit(shrunken);
     delete shrunken;
@@ -105,5 +105,4 @@ void Sprite::setSpriteImage(Image *spriteImageHigh, Image *spriteImageMed, Image
     spriteImageM = spriteImageMed;
     spriteImageL = spriteImageLow;
 }
-
 
