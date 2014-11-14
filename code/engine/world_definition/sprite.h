@@ -32,9 +32,8 @@ class Sprite {
        
         Image* getSpriteImage(Resolution res);
         bool setSpriteImage(const char *imgFileName, 
-            pixAlgo pixelator = Blend::blend_average_opaque, 
+            pixAlgo pixelator = blend_average_opaque, 
             int medCut = 8, int lowCut = 16);
         void setSpriteImage(Image *spriteImageHigh, 
             Image *spriteImageMed, Image *spriteImageLow);
 };
-
