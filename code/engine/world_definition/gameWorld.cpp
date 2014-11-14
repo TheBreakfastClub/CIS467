@@ -85,28 +85,28 @@ bool GameWorld::init(const char *background_filename,
 
     // Initialize Medium Resolution
     medRes = new GameMap();
-    medRes->setBackgroundLayer(Gfx::downsample(highRes->backgroundLayer, 
+    medRes->setBackgroundLayer(downsample(highRes->backgroundLayer, 
         highRes->backgroundLayer->w/medCut, highRes->backgroundLayer->h/medCut, 
         pixelator));
-    medRes->setCollisionLayer(Gfx::downsample(highRes->collisionLayer,
+    medRes->setCollisionLayer(downsample(highRes->collisionLayer,
         highRes->collisionLayer->w/medCut, highRes->collisionLayer->h/medCut,
         pixelator));
     if (top_filename) {
-        medRes->setTopLayer(Gfx::downsample(highRes->topLayer,
+        medRes->setTopLayer(downsample(highRes->topLayer,
             highRes->topLayer->w/medCut, highRes->topLayer->h/medCut, 
             pixelator));
     }
 
     // Initialize Low Resolution
     lowRes = new GameMap();
-    lowRes->setBackgroundLayer(Gfx::downsample(highRes->backgroundLayer,
+    lowRes->setBackgroundLayer(downsample(highRes->backgroundLayer,
         highRes->backgroundLayer->w/lowCut, highRes->backgroundLayer->h/lowCut,
         pixelator));
-    lowRes->setCollisionLayer(Gfx::downsample(highRes->collisionLayer,
+    lowRes->setCollisionLayer(downsample(highRes->collisionLayer,
         highRes->collisionLayer->w/lowCut, highRes->collisionLayer->h/lowCut,
         pixelator));
     if (top_filename) {
-        lowRes->setTopLayer(Gfx::downsample(highRes->topLayer,
+        lowRes->setTopLayer(downsample(highRes->topLayer,
             highRes->topLayer->w/lowCut, highRes->topLayer->h/lowCut, 
             pixelator));
     }
@@ -208,4 +208,3 @@ void GameWorld::_set_current_res()
             break;
 	}
 }
-
