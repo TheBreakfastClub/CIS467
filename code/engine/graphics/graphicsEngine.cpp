@@ -8,6 +8,7 @@ Description:    This class holds the code needed to create
 
 // The includes
 #include "graphicsEngine.h"
+#include "../render/util.h"
 #include <iostream>
 #include <stdlib.h>
 
@@ -201,4 +202,3 @@ void GraphicsEngine::drawGameUniverse(GameUniverse &universe) {
     // TODO: see if we can paint directly to the screen, only painting
     // the items in the panned area.
 }
-
