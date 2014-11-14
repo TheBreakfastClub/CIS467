@@ -1,10 +1,15 @@
 #pragma once
 
+#include "../../using_mac.h"
 #include <iostream>
 #include <string>
 #include <map>
 #include <SDL2/SDL.h>
-#include <SDL2_image/SDL_image.h>
+#ifdef USING_MAC
+    #include <SDL2_image/SDL_image.h>
+#else
+    #include <SDL2/SDL_image.h>
+#endif
 #include "image.h"
 #include "util.h"
 

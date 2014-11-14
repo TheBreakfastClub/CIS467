@@ -1,17 +1,19 @@
-CXX = g++
-SDL_LINKER_FLAGS = -framework SDL2
-SDL_IMAGE_LINKER_FLAGS = -framework SDL2_image
-# If your compiler is a bit older you may need to change -std=c++11 to -std=c++0x
-CXXFLAGS = -std=c++11 -g -v
-FRAMEFLAGS = $(SDL_LINKER_FLAGS) $(SDL_IMAGE_LINKER_FLAGS)
+# Template found on: http://mrbook.org/tutorials/make/
+CC=g++
+CFLAGS=-Wall -std=c++11 -g
+SDL_LINKER_FLAGS = -L /Library/Frameworks/SDL2/Headers -I ~/lib/SDL2/include/SDL2 -lSDL2 -I ~/lib/SDL2/include
+SDL_IMAGE_LINKER_FLAGS = -L /Library/Frameworks/SDL2_image/Headers -I ~/lib/SDL2_image/include -lSDL2_image
 SOURCES=game.cpp engine/*/*.cpp util/*.cpp
 HEADERS=game.h engine/*/*.h util/*.h
-EXE = PixelGame
+EXECUTABLE=game
 
-all: $(EXE)
-
-$(EXE): $(SOURCES) $(HEADERS)
-	$(CXX) $(CXXFLAGS) $(FRAMEFLAGS) $(SOURCES) -o $(EXE)
+all: $(EXECUTABLE)
+	
+$(EXECUTABLE): $(SOURCES) $(HEADERS)
+	$(CC) $(CFLAGS) $(MAC_LINKER_FLAG) $(SOURCES) -o $(EXECUTABLE)
 
 clean:
-	rm *.o && rm $(EXE)
+	rm $(EXECUTABLE)
+
+mac:
+	make -f makefilemac
