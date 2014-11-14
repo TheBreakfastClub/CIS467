@@ -138,7 +138,7 @@ bool GameUniverse::init(const Configurations &config) {
 
     // Define the Hero
     if (!(hero.setSpriteImage(config.hero.imgName.c_str()))) return false;
-    if (!(hero.hitImage = Gfx::redTint(hero.getSpriteImage(Resolution::HIGH), 150))) return false;
+    if (!(hero.hitImage = redTint(hero.getSpriteImage(Resolution::HIGH), 150))) return false;
     hero.x = config.hero.x;
     hero.y = config.hero.y;
     hero.speed = config.hero.speed;
