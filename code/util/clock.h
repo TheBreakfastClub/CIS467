@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <string>
@@ -77,7 +79,7 @@ private:
 	Uint32 counted_frames; // number of frames that have passed 
 
 public:
-std::vector<Event*> events;
+	std::vector<Event*> events;
 	Clock(Uint32 fps=60);
 	void tick();
 	float avgFPS();

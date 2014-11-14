@@ -17,7 +17,7 @@ Description:    Holds the data defining the world
  * Default constructor for the world. Must call GameWorld::init()
  * before using the GameWorld instance.
  */
-GameWorld::GameWorld(string world_name) : worldName(world_name), items(), enemies() 
+GameWorld::GameWorld(string world_name) : worldName(world_name), items(), enemies()
 {
     highRes = NULL;
     medRes = NULL;
@@ -50,7 +50,7 @@ GameWorld::~GameWorld() {
  * This method must be called before any other GameWorld functions.
  */
 bool GameWorld::init(const char *background_filename, 
-    const char *collision_filename, const char *top_filename) {
+    const char *collision_filename, const char *top_filename, Hero &hero) {
     
     // Do nothing if already initialized
     if (highRes != NULL) return true;
@@ -77,8 +77,8 @@ bool GameWorld::init(const char *background_filename,
     h = highRes->h();
 
     // Amount to divide the dimensions by for resolutions
-    int medCut = 8;
-    int lowCut = 16;
+    medCut = 8;
+    lowCut = 16;
 
     // Initialize Medium Resolution
     medRes = new GameMap();
@@ -133,11 +133,28 @@ bool GameWorld::init(const char *background_filename,
     // create some enemies (hp, speed, damage, x, y)
     for (int i = 0; i < 3; i++) {
         AutoSentry *e = new AutoSentry(50, 2, 25, rand() % w, rand() % h);
+
+        // set up the grid for AI
+        //e->pathfinder.set_grid(&grid);
+        //e->pathfinder.path_to_hero(e->x, e->y);
+
         while (currentRes->mapImg->collision(e->spriteImage, e->x, e->y)) {
             e->x = rand() % w;
             e->y = rand() % h;
         }
         enemies.push_back(e);
+    }
+
+    // initialize the WorldGrid & build initial grid
+    grid.init(lowRes->collisionLayer, &hero, &enemies, lowCut);
+    grid.build_wall_grid(); //_conservative();
+    grid.build_grid();
+
+    // Set grid for enemies
+    for (Enemy *e : enemies) {
+        AutoSentry *a = dynamic_cast<AutoSentry*>(e);
+        a->pathfinder.set_grid(&grid);
+        //a->pathfinder.path_to_hero_(e->x, e->y);
     }
 
     return true;

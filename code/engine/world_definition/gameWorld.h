@@ -10,7 +10,9 @@ Description:    Holds the data defining the sublevel
 // Includes
 #include "gameMap.h"
 #include "item.h"
-#include "enemy.h"
+#include "enemies.h"
+#include "hero.h"
+#include "worldGrid.h"
 #include <string>
 #include <vector>
 #include <list>
@@ -26,7 +28,7 @@ class GameWorld {
         ~GameWorld();
         bool init(const char *background_filename, 
                   const char *collision_filename,
-                  const char *top_filename); // TODO: Add pixelation algorithm parameter
+                  const char *top_filename, Hero &hero); // TODO: Add pixelation algorithm parameter
         
         /** Properties of the world */
         string worldName;
@@ -35,13 +37,24 @@ class GameWorld {
         list<Item*> items;
         vector<Enemy*> enemies;
 
+        /** Defines the world environment */
+        GameMap *highRes;
+        GameMap *medRes;
+        GameMap *lowRes;
+        
         /** Pointer to the GameMap that currently defines the world */ 
         GameMap *currentRes;
 
         int w;
         int h;
 
+        // Amount to divide the dimensions by for resolutions
+        int medCut, lowCut;
+
         Resolution currentResLevel;
+
+        // representation of the world in a grid. used for enemy AI
+        WorldGrid grid;
 
         // Methods to change the resolution
         void next_resolution(); // selects the next GameMap
@@ -50,10 +63,7 @@ class GameWorld {
     private:
         void _set_current_res();
         
-        /** Defines the world environment */
-        GameMap *highRes;
-        GameMap *medRes;
-        GameMap *lowRes;
+        
 
 };
 

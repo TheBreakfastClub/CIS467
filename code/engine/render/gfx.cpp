@@ -1,10 +1,6 @@
 
 #include "gfx.h"
 
-// TODO: remove these includes!
-#include <iostream>
-#include <string>
-
 Image* Gfx::loadImage(const char *filename)	{
 
 	SDL_Surface *gfx = IMG_Load(filename);
@@ -67,8 +63,7 @@ Image* Gfx::redTint(Image *src, int amt)
 		r = ((c >> 16) & 0xff) * a / 255;
 		g = ((c >> 8) & 0xff) * a / 255;
 		b = (c & 0xff) * a / 255;
-		if (a < 40) {
-			std::cout << "Color info on full alpha: a: " << std::to_string(a) << " r: " << std::to_string(r) << " g: " << std::to_string(g) << " b: " << std::to_string(b) << std::endl;
+		if (a < 40) { // my attempt at not mistakenly selecting pixels that shouldn't be altered
 			continue; // don't alter the color of a transparent pixel
 		}
 		if (r + amt <= 255)

@@ -10,7 +10,6 @@ Description:    The main controller of the game.
 #include <iostream>
 #include "engine/world_definition/gameUniverse.h"
 #include "engine/graphics/graphicsEngine.h"
-#include "util/clock.h"
 
 class Game {
 

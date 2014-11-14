@@ -15,6 +15,7 @@ Description:    The main controller of the game.
 Game::Game() : universe(GAME_NAME), clock() 
 {
 	gameIsRunning = true;
+    universe.clock = &clock;
 }
 
 /* Update game logic at each iteration of the loop */
@@ -22,7 +23,7 @@ void Game::update()
 {
     // Let each enemy take its turn
     for (Enemy *e : universe.currentWorld->enemies) {
-        e->action(universe.hero, universe.currentWorld->currentRes->mapImg);
+        e->action(universe.hero, universe.currentWorld->enemies, universe.currentWorld->currentRes->mapImg);
     }
 
     // Check for hit status (not sure on this implementation)

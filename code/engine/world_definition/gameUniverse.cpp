@@ -111,19 +111,19 @@ GameUniverse::~GameUniverse() {
 bool GameUniverse::init() {
     
     // Initializing the game sub levels  
-    if(! sublevels[Sublevel::HUB] -> init(hubBackground, hubCollision, hubTop))
+    if(! sublevels[Sublevel::HUB] -> init(hubBackground, hubCollision, hubTop, hero))
       return false;
       
-    if(! sublevels[Sublevel::FLOUR] -> init(flourBackground, flourCollision, flourTop))
+    if(! sublevels[Sublevel::FLOUR] -> init(flourBackground, flourCollision, flourTop, hero))
       return false;
       
-    if(! sublevels[Sublevel::SUGAR] -> init(sugarBackground, sugarCollision, sugarTop))
+    if(! sublevels[Sublevel::SUGAR] -> init(sugarBackground, sugarCollision, sugarTop, hero))
       return false;
       
-    if(! sublevels[Sublevel::BAKING_SODA] -> init(baking_sodaBackground, baking_sodaCollision, baking_sodaTop))
+    if(! sublevels[Sublevel::BAKING_SODA] -> init(baking_sodaBackground, baking_sodaCollision, baking_sodaTop, hero))
       return false;
       
-    if(! sublevels[Sublevel::BUTTER] -> init(butterBackground, butterCollision, butterTop))
+    if(! sublevels[Sublevel::BUTTER] -> init(butterBackground, butterCollision, butterTop, hero))
       return false;
     
     if (!(hero.spriteImage = Gfx::loadImage(heroImage)))
@@ -132,5 +132,22 @@ bool GameUniverse::init() {
     if (!(hero.hitImage = Gfx::redTint(hero.spriteImage, 150)))
         return false;
 
+    // set WorldGrid in each world
+    //for (int i = 0; i < Sublevel::COUNT; i++) {
+    //  sublevels[i]->grid.init(sublevels[i]->lowRes->collisionLayer, &hero, &(sublevels[i]->enemies), sublevels[i]->lowCut);
+    //  sublevels[i]->grid.set_wall_grid();
+    //  sublevels[i]->grid.set_grid();
+    //}
+
+    // Schedule rebuilding the WorldGrid's at some interval
+      /*
+    clock->add_event(new AnonEvent(3, [this](){
+      for (int i = 0; i < Sublevel::COUNT; i++) {
+        //std::cout << "DOING A THING" << std::endl;
+        this->sublevels[i]->grid.build_grid();
+      }
+    }, true));
+    */
+    
     return true;
 }

@@ -17,13 +17,14 @@ class Enemy: public Character {
 public:
 	Enemy(int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL);
 
+	// keep a count of how many enemies have been generated. current count when spawned
+	// will be an ememy's id.
+	static int count;
+	int id;
+
 	// subclasses of Enemy will define how to act
-	virtual void action(Hero &hero, Image *map) = 0;
+	virtual void action(Hero &hero, std::vector<Enemy*> &enemies, Image *map) = 0;
 
 };
 
-class AutoSentry : public Enemy {
-public:
-	AutoSentry(int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL);
-	void action(Hero &hero, Image *map);
-};
+

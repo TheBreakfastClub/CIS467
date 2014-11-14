@@ -12,6 +12,7 @@ Description:    This class holds the different sublevels/subworlds
 #include "gameWorld.h"
 #include "hero.h"
 #include "sublevel.h"
+#include "../../util/clock.h"
     
 class GameUniverse{
   public:
@@ -29,6 +30,9 @@ class GameUniverse{
 
     void changeWorld(Sublevel level, Resolution res, int x, int y);
     bool checkCollisionsWithItems();
+
+    // Keep a reference to the Clock for event scheduling
+    Clock *clock;
 
   private:
 
