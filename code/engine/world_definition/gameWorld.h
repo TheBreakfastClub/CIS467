@@ -28,7 +28,7 @@ class GameWorld {
         bool init(const char *background_filename, 
                   const char *collision_filename,
                   const char *top_filename,
-                  pixAlgo pixelator = Blend::blend_average,
+                  pixAlgo pixelator = blend_average,
                   int medCut = 8,
                   int lowCut = 16); // TODO: Add pixelation algorithm parameter
         
@@ -60,4 +60,3 @@ class GameWorld {
         GameMap *lowRes;
 
 };
-
