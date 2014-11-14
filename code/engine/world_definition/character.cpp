@@ -24,7 +24,7 @@ Character::Character(Image *charImgH, Image *charImgM, Image *charImgL, int hp, 
  : hitPoints(hp), speed(speed), attackDmg(damage), invincible(inv), hit(false), Sprite(x, y, charImgH, charImgM, charImgL) 
 {
 	if (charImgH && charImgM && charImgL) {
-		hitImage = Gfx::redTint(charImgH, 50);
+		hitImage = redTint(charImgH, 50);
     }
     else {
         hitImage = NULL;
