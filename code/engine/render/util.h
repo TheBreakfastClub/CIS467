@@ -10,6 +10,16 @@ inline int max(int a, int b)
 	return a < b ? b : a; 
 }
 
+inline int min(int a, int b, int c, int d) 
+{ 
+	return min(min(a,b), min(c,d));
+}
+
+inline int max(int a, int b, int c, int d) 
+{ 
+	return max(max(a,b), max(c,d));
+}
+
 inline double min(double a, double b) 
 { 
 	return a < b ? a : b; 

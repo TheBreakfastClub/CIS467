@@ -16,14 +16,14 @@ pixAlgo PixUtil::getPixAlgoFromIdx(int idx) {
 
     switch (idx) {
     case 0:
-        return Blend::blend_point_sample;
+        return blend_point_sample;
     case 1:
-        return Blend::blend_average;
+        return blend_average;
     case 2:
-        return Blend::blend_average_opaque;
+        return blend_average_opaque;
     case 3:
-        return Blend::blend_most_common;
+        return blend_most_common;
     default:
-        return Blend::blend_average;
+        return blend_average;
     }
 }

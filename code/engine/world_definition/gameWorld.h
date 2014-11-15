@@ -14,13 +14,12 @@ Description:    Holds the data defining the sublevel
 #include "UpDownEnemy.h"
 #include "../../util/pixUtil.h"
 #include "../render/blend.h"
+#include "resolution.h"
 #include <string>
 #include <vector>
 #include <list>
 
 using namespace std;
-
-enum Resolution { LOW, MED, HIGH };
 
 class GameWorld {
     
@@ -30,7 +29,7 @@ class GameWorld {
         bool init(const char *background_filename, 
                   const char *collision_filename,
                   const char *top_filename,
-                  pixAlgo pixelator = Blend::blend_average,
+                  pixAlgo pixelator = blend_average,
                   int medCut = 8,
                   int lowCut = 16); // TODO: Add pixelation algorithm parameter
         
@@ -62,4 +61,3 @@ class GameWorld {
         GameMap *lowRes;
 
 };
-

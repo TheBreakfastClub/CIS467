@@ -1,23 +1,17 @@
-
-#include "gfx.h"
-
-// TODO: remove these includes!
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <iostream>
-#include <string>
+#include "gfx.h"
+#include "image.h"
 
-Image* Gfx::loadImage(const char *filename)	{
-
+Image* loadImage(const char *filename)	{
 	SDL_Surface *gfx = IMG_Load(filename);
 	if(!gfx) {
-		cout << "Unable to load " << filename << ": " << IMG_GetError() << endl;
+		std::cout << "Unable to load " << filename << ": " << IMG_GetError() << std::endl;
 		return 0;
 	}
 	
 	Image *img = new Image(gfx->w, gfx->h);
-	if(!img) {
-		cout << "Unable to allocate image.\n";
-		return 0;
-	}
 	
  	SDL_ConvertPixels(gfx->w, gfx->h, gfx->format->format, gfx->pixels, 
  		gfx->pitch, SDL_PIXELFORMAT_ARGB8888, (void *)img->pixels, 4*img->w);
@@ -36,7 +30,7 @@ Image* Gfx::loadImage(const char *filename)	{
 	return img;
 }	
 
-Image* Gfx::downsample(Image *src, int width, int height, u32 (*blend_func)(u32*, int))
+Image* downsample(Image *src, int width, int height, u32 (*blend_func)(u32*, int))
 {
 	Image *dst = new Image(width, height);
 
@@ -57,24 +51,10 @@ Image* Gfx::downsample(Image *src, int width, int height, u32 (*blend_func)(u32*
 }
 
 // For showing that a character/enemy/whatever has been damaged
-Image* Gfx::redTint(Image *src, int amt)
+Image* redTint(Image *src,int amt)
 {
-	Image *dest = new Image(src->w, src->h);
-	for (int i = 0; i < src->w * src->h; i++) {
-		u32 c, r, g, b, a;
-		c = src->pixels[i];
-		a = c >> 24;
-		r = ((c >> 16) & 0xff) * a / 255;
-		g = ((c >> 8) & 0xff) * a / 255;
-		b = (c & 0xff) * a / 255;
-		if (a < 40) {
-			//std::cout << "Color info on full alpha: a: " << std::to_string(a) << " r: " << std::to_string(r) << " g: " << std::to_string(g) << " b: " << std::to_string(b) << std::endl;
-			continue; // don't alter the color of a transparent pixel
-		}
-		if (r + amt <= 255)
-			dest->pixels[i] = (a << 24) + (r + amt << 16) + (g << 8) + b;
-		else
-			dest->pixels[i] = (a << 24) + (255 << 16) + (g << 8) + b;
-	}
+  Image *dest = new Image(src->w, src->h);
+  for (int i = 0; i < src->w * src->h; i++)
+		dest->pixels[i] = (src->pixels[i] & 0xffff0000) + ((src->pixels[i] & 0xfefe) >> 1);
 	return dest;
 }

@@ -2,14 +2,14 @@
 // It is safe to assume that at least one color is passed in.
 
 #include "blend.h"
+#include <map>
 
-
-u32 Blend::blend_point_sample(u32 *colors, int count)
+u32 blend_point_sample(u32 *colors, int count)
 {
 	return colors[0];
 }
 
-u32 Blend::blend_average(u32 *colors, int count)
+u32 blend_average(u32 *colors, int count)
 {
 	int a=0, r=0, g=0, b=0;
 	for(int i = 0; i < count; i++) {
@@ -21,7 +21,7 @@ u32 Blend::blend_average(u32 *colors, int count)
  	return (a/count << 24) + (r/count << 16) + (g/count << 8) + b/count;
 }		
 
-u32 Blend::blend_average_opaque(u32 *colors, int count)
+u32 blend_average_opaque(u32 *colors, int count)
 {
 	int a=0, r=0, g=0, b=0, c=0;
 	for(int i = 0; i < count; i++) {
@@ -37,9 +37,9 @@ u32 Blend::blend_average_opaque(u32 *colors, int count)
 	else return 0;
 }		
 
-u32 Blend::blend_most_common(u32 *colors, int count)
+u32 blend_most_common(u32 *colors, int count)
 {
-  map <u32, unsigned int> counts;
+  std::map <u32, unsigned int> counts;
 
 	for(int i = 0; i < count; i++) {
 		counts[colors[i]]++;
@@ -56,4 +56,3 @@ u32 Blend::blend_most_common(u32 *colors, int count)
 
  	return most_used;
 }
-

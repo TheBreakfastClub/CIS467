@@ -58,7 +58,7 @@ bool GameWorld::init(const char *background_filename,
                     pixAlgo pixelator, 
                     int medCut, 
                     int lowCut) {
-    
+
     // Do nothing if already initialized
     if (highRes != NULL) return true;
 
@@ -85,28 +85,28 @@ bool GameWorld::init(const char *background_filename,
 
     // Initialize Medium Resolution
     medRes = new GameMap();
-    medRes->setBackgroundLayer(Gfx::downsample(highRes->backgroundLayer, 
+    medRes->setBackgroundLayer(downsample(highRes->backgroundLayer, 
         highRes->backgroundLayer->w/medCut, highRes->backgroundLayer->h/medCut, 
         pixelator));
-    medRes->setCollisionLayer(Gfx::downsample(highRes->collisionLayer,
+    medRes->setCollisionLayer(downsample(highRes->collisionLayer,
         highRes->collisionLayer->w/medCut, highRes->collisionLayer->h/medCut,
         pixelator));
     if (top_filename) {
-        medRes->setTopLayer(Gfx::downsample(highRes->topLayer,
+        medRes->setTopLayer(downsample(highRes->topLayer,
             highRes->topLayer->w/medCut, highRes->topLayer->h/medCut, 
             pixelator));
     }
 
     // Initialize Low Resolution
     lowRes = new GameMap();
-    lowRes->setBackgroundLayer(Gfx::downsample(highRes->backgroundLayer,
+    lowRes->setBackgroundLayer(downsample(highRes->backgroundLayer,
         highRes->backgroundLayer->w/lowCut, highRes->backgroundLayer->h/lowCut,
         pixelator));
-    lowRes->setCollisionLayer(Gfx::downsample(highRes->collisionLayer,
+    lowRes->setCollisionLayer(downsample(highRes->collisionLayer,
         highRes->collisionLayer->w/lowCut, highRes->collisionLayer->h/lowCut,
         pixelator));
     if (top_filename) {
-        lowRes->setTopLayer(Gfx::downsample(highRes->topLayer,
+        lowRes->setTopLayer(downsample(highRes->topLayer,
             highRes->topLayer->w/lowCut, highRes->topLayer->h/lowCut, 
             pixelator));
     }
@@ -123,20 +123,21 @@ bool GameWorld::init(const char *background_filename,
     // create some random items 
     for (int i = 0; i < 4; i++) {
         
-        Item *newItem = new Item(rand() % w, rand() % h, Gfx::loadImage("resources/egg.png"), "hero");
-        
-        while (currentRes->mapImg->collision(newItem->spriteImage, newItem->x, newItem->y)) {
+        Item *newItem = new Item(rand() % w, rand() % h, "egg");
+        if (!newItem->setSpriteImage("resources/egg.png")) return false;
+        while (currentRes->mapImg->collision(newItem->getSpriteImage(currentResLevel), newItem->x, newItem->y)) {
             newItem->x = rand() % w;
             newItem->y = rand() % h;
         }
-
         items.push_back(newItem);
     }
 
     // create some enemies (hp, speed, damage, x, y)
     for (int i = 0; i < 3; i++) {
         AutoSentry *e = new AutoSentry(50, 2, 25, rand() % w, rand() % h);
-        while (currentRes->mapImg->collision(e->spriteImage, e->x, e->y)) {
+        if (!e->setSpriteImage("resources/enemy.png")) return false;
+
+        while (currentRes->mapImg->collision(e->getSpriteImage(currentResLevel), e->x, e->y)) {
             e->x = rand() % w;
             e->y = rand() % h;
         }
@@ -207,4 +208,3 @@ void GameWorld::_set_current_res()
             break;
 	}
 }
-

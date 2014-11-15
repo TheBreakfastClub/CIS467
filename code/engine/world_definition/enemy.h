@@ -12,18 +12,22 @@ Description:	Defines the different types of enemies in
 #include "sprite.h"
 #include "character.h"
 #include "hero.h"
+#include "resolution.h"
 
 class Enemy: public Character {
 public:
-	Enemy(int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL);
+	Enemy(int hp, int speed, int damage, int x=0, int y=0, bool inv=false);
+	Enemy(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=false);
 
 	// subclasses of Enemy will define how to act
-	virtual void action(Hero &hero, Image *map) = 0;
+	virtual void action(Hero &hero, Image *map, Resolution res) = 0;
 
 };
 
 class AutoSentry : public Enemy {
 public:
-	AutoSentry(int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL);
-	void action(Hero &hero, Image *map);
+	AutoSentry(int hp, int speed, int damage, int x=0, int y=0, bool inv=false);
+	AutoSentry(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=false);
+	
+    void action(Hero &hero, Image *map, Resolution res);
 };

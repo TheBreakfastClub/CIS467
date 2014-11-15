@@ -48,7 +48,7 @@ bool GameMap::loadBackgroundLayer(const char* filename) {
     if (backgroundLayer) {
         delete(backgroundLayer);
     }
-    backgroundLayer = Gfx::loadImage(filename);
+    backgroundLayer = loadImage(filename);
     return (backgroundLayer != NULL);
 }
 
@@ -64,7 +64,7 @@ bool GameMap::loadCollisionLayer(const char* filename) {
     if (collisionLayer) {
         delete(collisionLayer);
     }
-    collisionLayer = Gfx::loadImage(filename);
+    collisionLayer = loadImage(filename);
     return (collisionLayer != NULL);
 }
 
@@ -80,7 +80,7 @@ bool GameMap::loadTopLayer(const char* filename) {
     if (topLayer) {
         delete(topLayer);
     }
-    topLayer = Gfx::loadImage(filename);
+    topLayer = loadImage(filename);
     return (topLayer != NULL);
 }
 
@@ -176,5 +176,4 @@ int GameMap::h() {
     }
     else return 0;
 }
-
 

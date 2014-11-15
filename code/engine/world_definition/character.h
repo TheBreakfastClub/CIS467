@@ -14,7 +14,10 @@ using namespace std;
 class Character: public Sprite {
   public:
     Character();
-    Character(int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *charImg=NULL);
+    ~Character();
+    Character(int hp, int speed, int damage, int x=0, int y=0, bool inv=false);
+    Character(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=false);
+
     /** Defines the amount of hitpoints a sprite has **/
     int hitPoints;
     /** Defines if a sprite is invincible **/

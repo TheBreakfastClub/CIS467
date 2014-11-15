@@ -19,7 +19,7 @@ class Portal: public Sprite {
 
     public:
         
-        Portal(int x, int y, Image *image, std::string pname = "null", bool usable=true, Sublevel destination = Sublevel::HUB);
+        Portal(int x, int y, std::string pname = "null", bool usable=true, Sublevel destination = Sublevel::HUB);
 
         /** A short name describing the type of item (e.g. "eggs") */
         std::string name;
