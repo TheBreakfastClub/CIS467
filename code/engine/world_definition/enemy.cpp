@@ -26,28 +26,30 @@ AutoSentry::AutoSentry(Image *charImgH, Image *charImgM, Image *charImgL, int hp
 void AutoSentry::action(Hero &hero, Image *map, Resolution res)
 {
 	// determine how far away we are from the hero
-	float a = abs(x - hero.x);
-	float b = abs(y - hero.y);
-	float dist = sqrt(a*a + b*b);
+	float a = x - hero.x;
+	float b = y - hero.y;
+	float dist2 = a*a + b*b; // distance squared
 	//std::cout << "distance from hero: " << std::to_string(c) << std::endl;
 
 	// move in for the kill if Hero is close enough
-	if (dist <= 200.0f) {
+	if (dist2 <= 40000.0) { // if distance <= 200
 		int x_inc = 0, y_inc = 0;
 		if (x > hero.x) x_inc = -speed;
 		else if (x < hero.x) x_inc = speed;
 		if (y > hero.y) y_inc = -speed;
 		else if (y < hero.y) y_inc = speed;
 
-		// check for collision before updating position
-		if (!hero.hit && hero.getSpriteImage(res)->collision(getSpriteImage(res), hero.x - x + x_inc, hero.y - y + y_inc)) {
+		// move first
+		if (!map->collision(getSpriteImage(res), x + x_inc, y + y_inc)) {
+			x += x_inc;
+			y += y_inc;
+		}
+		//then check for collision with hero
+		if (!hero.hit && hero.getSpriteImage(res)->collision(getSpriteImage(res), x - hero.x, y - hero.y)) {
 			hero.hitPoints -= attackDmg;
 			hero.hit = true;
 			std::cout << "Hero HP: " << std::to_string(hero.hitPoints) << std::endl;
 		}
-		else if (!map->collision(getSpriteImage(res), x + x_inc, y + y_inc)) {
-			x += x_inc;
-			y += y_inc;
-		}
+
 	}
 }
