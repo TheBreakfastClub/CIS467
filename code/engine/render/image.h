@@ -21,11 +21,13 @@ class Image {
 	void clear();
 	void clear(u32);
   static u32 blend(u32, u32);
+	bool _collision(Image*, int, int);
   bool collision(Image*, int, int);
   bool rcollision(Image*, int, int, float);
   bool scollision(Image*, int, int, float);
   bool rscollision(Image*, int, int, float, float);
-  int overlap(Image*, int, int);
+	int _overlap(Image*, int, int);  
+	int overlap(Image*, int, int);
   int roverlap(Image*, int, int, float);
   int soverlap(Image*, int, int, float);
   int rsoverlap(Image*, int, int, float, float);
