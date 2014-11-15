@@ -55,6 +55,6 @@ Image* redTint(Image *src,int amt)
 {
   Image *dest = new Image(src->w, src->h);
   for (int i = 0; i < src->w * src->h; i++)
-		dest->pixels[i] = src->pixels[i] & 0xffff0000 + ((src->pixels[i] & 0xfefe) >> 1);
+		dest->pixels[i] = (src->pixels[i] & 0xffff0000) + ((src->pixels[i] & 0xfefe) >> 1);
 	return dest;
 }
