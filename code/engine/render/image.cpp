@@ -95,7 +95,8 @@ void Image::ablit(Image *src, int x, int y) {
 	}
 }
 
-bool Image::collision(Image *src, int x, int y) {
+// no clipping
+bool Image::_collision(Image *src, int x, int y) {
 	int a, b, i=0;
   for(b = y*w;b < (y+src->h)*w; b+=w) 
 		for(a = b+x;a < b+x+src->w; a++) 
@@ -103,12 +104,42 @@ bool Image::collision(Image *src, int x, int y) {
 	return false;
 }
 
-int Image::overlap(Image *src, int x, int y) {
+// no clipping
+int Image::_overlap(Image *src, int x, int y) {
 	int a, b, i=0, overlap=0;
   for(b = y*w;b < (y+src->h)*w; b+=w) 
 		for(a = b+x;a < b+x+src->w; a++) 
  			if(pixels[a] & src->pixels[i++] & 0x80000000) overlap++;
 	return overlap;
+}
+
+bool Image::collision(Image *src, int x, int y) {
+	int x1 = max(x, 0);
+	int x2 = min(x + src->w, w);
+	int y1 = max(y, 0);
+	int y2 = min(y + src->h, h);
+
+	for(int b=y1; b < y2; b++) {
+		int i = (b-y)*src->w + x1 - x;
+		for(int a = b*w + x1; a < b*w + x2; a++)
+			if(pixels[a] & src->pixels[i++] & 0x80000000) return true;
+	}
+	return false;
+}
+
+int Image::overlap(Image *src, int x, int y) {
+	int o = 0;
+	int x1 = max(x, 0);
+	int x2 = min(x + src->w, w);
+	int y1 = max(y, 0);
+	int y2 = min(y + src->h, h);
+
+	for(int b=y1; b < y2; b++) {
+		int i = (b-y)*src->w + x1 - x;
+		for(int a = b*w + x1; a < b*w + x2; a++)
+			if(pixels[a] & src->pixels[i++] & 0x80000000) o++;
+	}
+	return o;
 }
 
 bool Image::scollision(Image *src, int x, int y, float scale)
