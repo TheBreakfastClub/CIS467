@@ -33,7 +33,7 @@ class Image {
   int rsoverlap(Image*, int, int, float, float);
 	void _blit(Image*, int, int);
 	void _ablit(Image*, int, int);	
-  void blit(Image*, int, int);
+  void blit(Image*, int, int); 
 	void ablit(Image*, int, int);
 	void scaleblit(Image*);
 	void ascaleblit(Image*);	
