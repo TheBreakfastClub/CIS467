@@ -3,7 +3,7 @@
 #include "types.h"
 
 class Image {
-	private:
+private:
 	bool dealloc;
 	void init(int, int, void*, bool);
 	
@@ -20,20 +20,20 @@ class Image {
 	void resize(int, int);
 	void clear();
 	void clear(u32);
-  static u32 blend(u32, u32);
+	static u32 blend(u32, u32);
 	bool _collision(Image*, int, int);
-  bool collision(Image*, int, int);
-  bool rcollision(Image*, int, int, float);
-  bool scollision(Image*, int, int, float);
-  bool rscollision(Image*, int, int, float, float);
+	bool collision(Image*, int, int);
+	bool rcollision(Image*, int, int, float);
+	bool scollision(Image*, int, int, float);
+	bool rscollision(Image*, int, int, float, float);
 	int _overlap(Image*, int, int);  
 	int overlap(Image*, int, int);
-  int roverlap(Image*, int, int, float);
-  int soverlap(Image*, int, int, float);
-  int rsoverlap(Image*, int, int, float, float);
+	int roverlap(Image*, int, int, float);
+	int soverlap(Image*, int, int, float);
+	int rsoverlap(Image*, int, int, float, float);
 	void _blit(Image*, int, int);
 	void _ablit(Image*, int, int);	
-  void blit(Image*, int, int); 
+	void blit(Image*, int, int); 
 	void ablit(Image*, int, int);
 	void scaleblit(Image*);
 	void ascaleblit(Image*);	
