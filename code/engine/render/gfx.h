@@ -3,5 +3,5 @@
 #include "types.h"
 
 Image* loadImage(const char*);
-Image* downsample(Image*, int, int, u32 (*blend_func)(u32*, int));
+Image* downsample(Image*, int, int, u32 (*)(u32*, int));
 Image* redTint(Image*, int);
