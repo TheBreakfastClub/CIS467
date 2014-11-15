@@ -49,7 +49,7 @@ u32 Image::blend(u32 src, u32 dst) {
 	invalpha = 256 - (src >> 24) - (src >> 31);
 	ag = (src & 0xff00ff00) + ((invalpha*((dst >> 8) & 0xff00ff)) & 0xff00ff00);
 	rb = (src & 0xff00ff) + (((invalpha*(dst & 0xff00ff)) >> 8) & 0xff00ff);
-//     return ag | rb;
+//	return ag | rb;
   return rb | (ag & 0xff00) | (src & 0xff000000); // just for now, we need the source's unmodified alpha...
 }
 
