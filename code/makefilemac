@@ -14,4 +14,4 @@ $(EXE): $(SOURCES) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(FRAMEFLAGS) $(SOURCES) -o $(EXE)
 
 clean:
-	rm *.o && rm $(EXE)
+	rm *.o && rm $(EXE)  
