@@ -154,7 +154,7 @@ bool GameWorld::init(const char *background_filename,
     // create some portals (x, y, image)
     for (int i = 0; i < 4; i++) {
         
-        Portal *newPortal = new Portal(rand() % w, rand() % h, "Portal", true, Sublevel::FLOUR);
+        Portal *newPortal = new Portal(rand() % w, rand() % h, "Portal", true, Sublevel::FLOUR, 100, 100);
         if (!newPortal->setSpriteImage("resources/cakeIsALie.png")) return false;
 	
         while (currentRes->mapImg->collision(newPortal->getSpriteImage(currentResLevel), newPortal->x, newPortal->y)) {
