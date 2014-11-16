@@ -94,7 +94,7 @@ bool GameUniverse::checkCollisionsWithPortal(){
         // Check if portal and hero collide
         Resolution res = currentRes();
         if (hero.getSpriteImage(res)->collision(portal->getSpriteImage(res), hero.x - portal->x, hero.y - portal->y)) {
-            changeWorld(portal->destination, currentWorld->currentResLevel, hero.x, hero.y);
+            changeWorld(portal->destination, currentWorld->currentResLevel, portal->xDest, portal->yDest);
             return true;
         }
         ++port;
