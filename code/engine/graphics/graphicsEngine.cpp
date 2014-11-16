@@ -142,6 +142,11 @@ void GraphicsEngine::drawGameWorld(const GameWorld &world, const int &pan_x, con
     for (Item* i : world.items) {
         screen->ablit(i->getSpriteImage(res), i->x - pan_x, i->y - pan_y);
     }
+    
+    //Draw portals
+    for (Portal* p : world.portals){
+      screen->ablit (p->getSpriteImage(res), p->x - pan_x, p->y - pan_y);
+    }
 
     // Draw the top layer, if it exists
     if (map->topLayer) {
@@ -175,6 +180,10 @@ void GraphicsEngine::drawGameUniverse(GameUniverse &universe) {
     // Draw the items to the screen
     for (Item* i : world->items) {
         screen->ablit(i->getSpriteImage(res), i->x - pan_x, i->y - pan_y);
+    }
+    
+    for (Portal* p : world->portals) {
+	screen->ablit(p->getSpriteImage(res), p->x - pan_x, p->y - pan_y);
     }
 
     // Draw enemies

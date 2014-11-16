@@ -31,6 +31,6 @@ class GameUniverse{
     Resolution currentRes();
     void changeWorld(Sublevel level, Resolution res, int x, int y);
     bool checkCollisionsWithItems();
-
+    bool checkCollisionsWithPortal();
 };
 

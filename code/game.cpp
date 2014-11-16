@@ -33,6 +33,7 @@ void Game::update()
     }
 
 	universe.checkCollisionsWithItems();
+	universe.checkCollisionsWithPortal();
 }
 
 /**

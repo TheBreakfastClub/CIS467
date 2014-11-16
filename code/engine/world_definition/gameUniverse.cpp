@@ -77,6 +77,31 @@ bool GameUniverse::checkCollisionsWithItems() {
     return false;
 }
 
+bool GameUniverse::checkCollisionsWithPortal(){
+  
+    auto port = currentWorld->portals.begin();
+    while (port != currentWorld->portals.end()) {
+
+        Portal *portal = *port;
+
+        // Continue if portal is unusable
+        if (!portal->usable) {
+            ++port;
+            continue;
+        }
+
+
+        // Check if portal and hero collide
+        Resolution res = currentRes();
+        if (hero.getSpriteImage(res)->collision(portal->getSpriteImage(res), hero.x - portal->x, hero.y - portal->y)) {
+            changeWorld(portal->destination, currentWorld->currentResLevel, hero.x, hero.y);
+            return true;
+        }
+        ++port;
+    }
+    return false;
+}
+
 /*
 bool GameUniverse::checkCollisionsWithEnemies() {
 
