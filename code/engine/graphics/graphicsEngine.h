@@ -9,7 +9,12 @@ Description:    This class holds the code needed to create
 #pragma once
 
 // Includes
+#include "../../using_mac.h"
+#ifdef
+#include <SDL2_image/SDL_image.h>
+#else
 #include <SDL2/SDL_image.h>
+#endif
 #include "../render/image.h"
 #include "../render/gfx.h"
 #include "../world_definition/gameUniverse.h"
