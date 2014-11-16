@@ -5,15 +5,13 @@ Description:    The main controller of the game.
 ************************************************************/
 
 #pragma once
-
+ 
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "engine/world_definition/gameUniverse.h"
 #include "engine/graphics/graphicsEngine.h"
 #include "util/clock.h"
 #include "util/configurations.h"
-
-using namespace std;
 
 class Game {
 
