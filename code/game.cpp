@@ -198,7 +198,7 @@ int Game::run()
 bool Game::setup(const char *gameName, int width, int height)
 {
     // Load configurations
-    if (!config.readInConfigurations(".config")) {
+    if (!config.readInConfigurations("/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/code/CIS467/code/util/thomas.config")) {
         std::cerr << "Error in reading configuration file\n";
         return false;
     }

@@ -8,7 +8,7 @@ Description:    This class holds the code needed to create
 
 #pragma once
 
-// Includes
+// Includes  
 #include "../../using_mac.h"
 #ifdef USING_MAC
 #include <SDL2_image/SDL_image.h>
