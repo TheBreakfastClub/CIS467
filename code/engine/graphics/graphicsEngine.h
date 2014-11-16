@@ -10,7 +10,7 @@ Description:    This class holds the code needed to create
 
 // Includes
 #include "../../using_mac.h"
-#ifdef
+#ifdef USING_MAC
 #include <SDL2_image/SDL_image.h>
 #else
 #include <SDL2/SDL_image.h>
