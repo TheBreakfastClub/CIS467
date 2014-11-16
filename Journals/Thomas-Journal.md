@@ -234,9 +234,68 @@
 
 
 ### Week 10: October 26 - November 1
-* Week Total: 
+* Week Total: 14
+
+##### October 26, 2014
+* 7:00 PM - 11:30 PM
+    * Still working on compiling the program
+    * Finishing touches on the designs with an understanding that it will compile
+
+##### October 27, 2014
+* 2:00 PM - 4:30 PM
+    * got it to compile thanks to Sean Fisk. Super nice guy.
+
+##### October 30, 2014
+* 9:00 PM - 11:30 PM
+    * Started working on the Sugar level
+
+##### November 1, 2014
+* 7:00 PM - 11:30 PM
+    * Working on item images
+    * Working on sugar level
 
 
+
+
+### Week 10: November 2 - November 8
+* Week Total: 9.5
+
+##### November 4, 2014
+* 9:00 PM - 12:30 PM
+    * Working on sugar level
+
+##### November 7, 2014
+* 9:00 PM - 12:30 AM
+    * Working on sugar level
+    * Working on code for basic up down enemy
+
+##### November 8, 2014
+* 9:30 PM - 11:30 PM
+    * Working on sugar level
+    * Working on code for basic up down enemy
+
+
+
+
+
+### Week 10: November 9 - November 15
+* Week Total: 11.4
+
+##### November 10, 2014
+* 7:00 PM - 11:30 PM
+    * Working on sugar level
+    * Working on code for basic up down enemy
+
+##### November 12, 2014
+* 9:00 PM - 11:30 PM
+    * Working on sugar level
+    * Working on code for basic up down enemy
+
+##### November 13, 2014
+* 7:00 PM - 11:30 PM
+    * Working on sugar level
+    * Working on code for basic up down enemy
+    * Working on the making the macVersion Branch be happy to compile on EOS machines.
 
 
 
