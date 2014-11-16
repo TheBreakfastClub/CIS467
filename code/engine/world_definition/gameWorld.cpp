@@ -12,6 +12,7 @@ Description:    Holds the data defining the world
 #include <iostream> 
 #include <numeric>
 #include <cstdlib>
+#include "upDownEnemy.h"
 
 /**
  * Default constructor for the world. Must call GameWorld::init()
@@ -142,6 +143,15 @@ bool GameWorld::init(const char *background_filename,
             e->y = rand() % h;
         }
         enemies.push_back(e);
+    }
+
+
+//int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
+    if (worldName == "hub") {
+        UpDownEnemy *ude = new UpDownEnemy(50, 2, 25, 384, -140, false, 150, 0);
+        if (!ude->setSpriteImage("resources/updown.png")) return false;
+        // UpDownEnemy *ude = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
+        enemies.push_back(ude);
     }
 
     return true;

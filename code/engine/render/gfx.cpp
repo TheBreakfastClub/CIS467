@@ -1,5 +1,10 @@
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include "../../using_mac.h"
+#ifdef USING_MAC
+	#include <SDL2_image/SDL_image.h>
+#else
+	#include <SDL2/SDL_image.h>
+#endif
 #include <iostream>
 #include "gfx.h"
 #include "image.h"

@@ -4,11 +4,19 @@
 #include <cmath>
 #include <iostream>
 #include <string>
+#include "../render/gfx.h"
 
-UpDownEnemy::UpDownEnemy(int hp, int speed, int damage, int x, int y, bool inv, Image *char_img, int dist, int tme)
- : Enemy(hp, speed, damage, x, y, inv, char_img)
+
+    // int hp, int speed, int damage, int x=0, int y=0, bool inv=false
+
+    // Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=false
+
+
+
+UpDownEnemy::UpDownEnemy(int hp, int speed, int damage, int x, int y, bool inv, int dist, int tme)
+ : Enemy(hp, speed, damage, x, y, inv)
 {
-    spriteImage = Gfx::loadImage("resources/updown.png");
+    // spriteImage = Gfx::loadImage("resources/updown.png");
     counter = 0;
     direction = -1;
     y_top = y + dist;
@@ -37,13 +45,13 @@ UpDownEnemy::UpDownEnemy(int hp, int speed, int damage, int x, int y, bool inv, 
         // incramenting y
 
 
-void UpDownEnemy::action(Hero &hero, Image *map)
+void UpDownEnemy::action(Hero &hero, Image *map, Resolution res)
 {
     // in the process of moving
     if (y < y_top && y > y_bottom) {
         // counter ++;
         int y_inc = 3 * direction;
-        if (!map->collision(spriteImage, x, y + y_inc)) {
+        if (!map->collision(getSpriteImage(res), x, y + y_inc)) {
             y += y_inc;
         } else {
             direction = direction * -1;

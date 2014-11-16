@@ -17,8 +17,12 @@ Description:    Defines the different types of enemies in
 
 class UpDownEnemy : public Enemy {
 public:
-    UpDownEnemy(int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0);
-    void action(Hero &hero, Image *map);
+
+    // int hp, int speed, int damage, int x=0, int y=0, bool inv=false
+
+    // Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=false
+    UpDownEnemy(int hp, int speed, int damage, int x=0, int y=0, bool inv=false, int dist=0, int tme=0);
+    void action(Hero &hero, Image *map, Resolution res);
     int time;
     int counter;
     int direction;
