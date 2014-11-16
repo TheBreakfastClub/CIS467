@@ -25,7 +25,7 @@ class Portal: public Sprite {
         std::string name;
         
         /** Defines if the item is obtainable or not **/
-        bool obtainable;
+        bool usable;
 
 	/** Defines what Sublevel the portal leads to **/
 	Sublevel destination;

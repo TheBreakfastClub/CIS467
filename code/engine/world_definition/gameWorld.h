@@ -11,6 +11,7 @@ Description:    Holds the data defining the sublevel
 #include "gameMap.h"
 #include "item.h"
 #include "enemy.h"
+#include "portal.h"
 #include "../../util/pixUtil.h"
 #include "../render/blend.h"
 #include "resolution.h"
@@ -37,8 +38,9 @@ class GameWorld {
 
         /** The entities that will inhabit the world */
         list<Item*> items;
+	list<Portal*> portals;
         vector<Enemy*> enemies;
-
+	
         /** Pointer to the GameMap that currently defines the world */ 
         GameMap *currentRes;
 

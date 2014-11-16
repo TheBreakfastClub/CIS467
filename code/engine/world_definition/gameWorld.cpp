@@ -17,7 +17,7 @@ Description:    Holds the data defining the world
  * Default constructor for the world. Must call GameWorld::init()
  * before using the GameWorld instance.
  */
-GameWorld::GameWorld(string world_name) : worldName(world_name), items(), enemies() 
+GameWorld::GameWorld(string world_name) : worldName(world_name), items(), portals(), enemies() 
 {
     highRes = NULL;
     medRes = NULL;
@@ -37,6 +37,11 @@ GameWorld::~GameWorld() {
     while (!items.empty()) {
         delete items.back();
         items.pop_back();
+    }
+    
+    while (!portals.empty()){
+	delete portals.back();
+	portals.pop_back();
     }
 }
 
@@ -143,6 +148,22 @@ bool GameWorld::init(const char *background_filename,
         }
         enemies.push_back(e);
     }
+    
+    
+    // create some portals (x, y, image)
+    for (int i = 0; i < 4; i++) {
+        
+        Portal *newPortal = new Portal(rand() % w, rand() % h, "Portal", true, Sublevel::FLOUR);
+        if (!newPortal->setSpriteImage("resources/cakeIsALie.png")) return false;
+	
+        while (currentRes->mapImg->collision(newPortal->getSpriteImage(currentResLevel), newPortal->x, newPortal->y)) {
+            newPortal->x = rand() % w;
+            newPortal->y = rand() % h;
+        }
+
+        portals.push_back(newPortal);
+    }
+    
 
     return true;
 }
