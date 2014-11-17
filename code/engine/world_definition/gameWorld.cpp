@@ -12,7 +12,6 @@ Description:    Holds the data defining the world
 #include <iostream> 
 #include <numeric>
 #include <cstdlib>
-#include "upDownEnemy.h"
 
 /**
  * Default constructor for the world. Must call GameWorld::init()
@@ -152,28 +151,28 @@ bool GameWorld::init(const char *background_filename,
     
     
     // create some portals (x, y, image)
-    for (int i = 0; i < 4; i++) {
+    // for (int i = 0; i < 4; i++) {
         
-        Portal *newPortal = new Portal(rand() % w, rand() % h, "Portal", true, Sublevel::FLOUR, 100, 100);
-        if (!newPortal->setSpriteImage("resources/cakeIsALie.png")) return false;
+    //     Portal *newPortal = new Portal(rand() % w, rand() % h, "Portal", true, Sublevel::FLOUR);
+    //     if (!newPortal->setSpriteImage("resources/cakeIsALie.png")) return false;
 	
-        while (currentRes->mapImg->collision(newPortal->getSpriteImage(currentResLevel), newPortal->x, newPortal->y)) {
-            newPortal->x = rand() % w;
-            newPortal->y = rand() % h;
-        }
+    //     while (currentRes->mapImg->collision(newPortal->getSpriteImage(currentResLevel), newPortal->x, newPortal->y)) {
+    //         newPortal->x = rand() % w;
+    //         newPortal->y = rand() % h;
+    //     }
 
-        portals.push_back(newPortal);
-    }
+    //     portals.push_back(newPortal);
+    // }
     
 
 
 //int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
-    if (worldName == "hub") {
-        UpDownEnemy *ude = new UpDownEnemy(50, 2, 25, 384, -140, false, 150, 0);
-        if (!ude->setSpriteImage("resources/updown.png")) return false;
-        // UpDownEnemy *ude = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
-        enemies.push_back(ude);
-    }
+    // if (worldName == "hub") {
+    //     UpDownEnemy *ude = new UpDownEnemy(50, 2, 25, 384, -140, false, 150, 0);
+    //     if (!ude->setSpriteImage("resources/updown.png")) return false;
+    //     // UpDownEnemy *ude = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
+    //     enemies.push_back(ude);
+    // }
 
     return true;
 }

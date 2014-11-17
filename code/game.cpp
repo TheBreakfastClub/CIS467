@@ -170,6 +170,8 @@ void Game::handle_input()
     else if (universe.hero.y > h) universe.hero.y = h;
     if (universe.hero.x < 0) universe.hero.x = 0;
     else if (universe.hero.x > w) universe.hero.x = w;
+
+    // cerr << "hero x: " << universe.hero.x << " y: " << universe.hero.y << "\n";
 }
 
 /* Main game loop */

@@ -1,5 +1,5 @@
 #include "enemy.h"
-#include "UpDownEnemy.h"
+#include "LeftRightEnemy.h"
 //#include <stdlib.h>
 #include <cmath>
 #include <iostream>
@@ -7,16 +7,25 @@
 #include "../render/gfx.h"
 
 
+    // int hp, int speed, int damage, int x=0, int y=0, bool inv=false
+
+    // Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=false
 
 
-UpDownEnemy::UpDownEnemy(int hp, int speed, int damage, int x, int y, bool inv, int dist, int tme)
+    // int hp, int speed, int damage, int x=0, int y=0, bool inv=false
+
+    // Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=false
+
+
+
+LeftRightEnemy::LeftRightEnemy(int hp, int speed, int damage, int x, int y, bool inv, int dist, int tme)
  : Enemy(hp, speed, damage, x, y, inv)
 {
     // spriteImage = Gfx::loadImage("resources/updown.png");
     counter = 0;
     direction = -1;
-    y_top = y + dist;
-    y_bottom = y - dist;
+    x_top = x + dist;
+    x_bottom = x - dist;
     // cerr << "y top: " << y_top << "\ny bottom: " << y_bottom;
 }
 
@@ -41,33 +50,27 @@ UpDownEnemy::UpDownEnemy(int hp, int speed, int damage, int x, int y, bool inv, 
         // incramenting y
 
 
-void UpDownEnemy::action(Hero &hero, Image *map, Resolution res)
+void LeftRightEnemy::action(Hero &hero, Image *map, Resolution res)
 {
     // in the process of moving
-    if (y < y_top && y > y_bottom) {
+    if (x < x_top && x > x_bottom) {
         // counter ++;
-        int y_inc = speed * direction;
-        if (!map->collision(getSpriteImage(res), x, y + y_inc)) {
-            y += y_inc;
+        int x_inc = speed * direction;
+        if (!map->collision(getSpriteImage(res), x + x_inc, y)) {
+            x += x_inc;
         } else {
+            // cerr << "collide LR";
             direction = direction * -1;
-            y += speed * direction;
+            x += speed * direction;
         }
-        // cerr << "y: " << y << "\n";
+        // cerr << "x: " << x << "\n";
     } 
     // time to turn around
     else {
         direction = direction * -1;
-        y += speed * direction;
+        x += speed * direction;
         // cerr << "change direction\n";
     }
-
-    if (!hero.hit && hero.getSpriteImage(res)->collision(getSpriteImage(res), x - hero.x, y - hero.y)) {
-            // hero.hitPoints -= attackDmg;
-            // hero.hit = true;
-            // std::cout << "Hero HP: " << std::to_string(hero.hitPoints) << std::endl;
-            // cerr << "hit by updown";
-        }
 
 
 
