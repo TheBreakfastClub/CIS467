@@ -160,6 +160,17 @@ bool GameUniverse::init(const Configurations &config) {
         sublevels[sub]->worldName = world->name; 
 
     }
+    
+    // Initialize the portals
+    for(PortalDef p : config.portals){
+      
+        Portal *newPortal = new Portal(p.homeX, p.homeY, "portal", true, p.destWorld, p.destX, p.destY);
+        if(!newPortal->setSpriteImage(p.imgName.c_str())) {
+            cerr << "Error loading portal image " << p.imgName << endl;
+            return false;
+        }
+        sublevels[p.homeWorld]->portals.push_back(newPortal);
+    }
 
     // Define the Hero
     if (!(hero.setSpriteImage(config.hero.imgName.c_str()))) return false;

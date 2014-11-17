@@ -140,7 +140,7 @@ bool GameWorld::init(const char *background_filename,
     // create some enemies (hp, speed, damage, x, y)
     for (int i = 0; i < 3; i++) {
         AutoSentry *e = new AutoSentry(50, 2, 25, rand() % w, rand() % h);
-        if (!e->setSpriteImage("resources/enemy.png")) return false;
+        if (!e->setSpriteImage("resources/SpikeyBall.png")) return false;
 
         while (currentRes->mapImg->collision(e->getSpriteImage(currentResLevel), e->x, e->y)) {
             e->x = rand() % w;
@@ -148,22 +148,6 @@ bool GameWorld::init(const char *background_filename,
         }
         enemies.push_back(e);
     }
-    
-    
-    // create some portals (x, y, image)
-    for (int i = 0; i < 4; i++) {
-        
-        Portal *newPortal = new Portal(rand() % w, rand() % h, "Portal", true, Sublevel::FLOUR, 100, 100);
-        if (!newPortal->setSpriteImage("resources/cakeIsALie.png")) return false;
-	
-        while (currentRes->mapImg->collision(newPortal->getSpriteImage(currentResLevel), newPortal->x, newPortal->y)) {
-            newPortal->x = rand() % w;
-            newPortal->y = rand() % h;
-        }
-
-        portals.push_back(newPortal);
-    }
-    
 
     return true;
 }

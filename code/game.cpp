@@ -67,6 +67,9 @@ void Game::handle_input()
     	// Keyboard
     	else if (event.type == SDL_KEYDOWN) {
     		switch (event.key.keysym.sym) {
+                case SDLK_p:
+                    cout << "X,Y = " << universe.hero.x << "," << universe.hero.y << endl;
+                    break;
                 case SDLK_KP_PLUS:
                 case SDLK_PLUS:
                 case SDLK_0:
