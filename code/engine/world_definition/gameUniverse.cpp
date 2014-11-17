@@ -208,6 +208,15 @@ bool GameUniverse::init(const Configurations &config) {
     if (!stoh2Portal->setSpriteImage("resources/portal.png")) return false;
     sublevels[Sublevel::SUGAR]->portals.push_back(stoh2Portal);
 
+
+
+
+
+
+    Portal *htob1Portal = new Portal(928, 128, "Portal", true, Sublevel::BUTTER, 250, 250);
+    if (!htob1Portal->setSpriteImage("resources/portal.png")) return false;
+    sublevels[Sublevel::HUB]->portals.push_back(htob1Portal);
+
     
 
 
@@ -218,7 +227,7 @@ bool GameUniverse::init(const Configurations &config) {
     // UpDownEnemy *ude1 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
     sublevels[Sublevel::SUGAR]->enemies.push_back(ude1);
 
-    LeftRightEnemy *lre1 = new LeftRightEnemy(50, 1, 25, 1530, 128, false, 150, 0);
+    LeftRightEnemy *lre1 = new LeftRightEnemy(50, 3, 25, 1530, 128, false, 150, 0);
     if (!lre1->setSpriteImage("resources/leftright1.png")) return false;
     // LeftRightEnemy *lre1 = new LeftRightEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
     sublevels[Sublevel::SUGAR]->enemies.push_back(lre1);
