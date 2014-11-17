@@ -6,6 +6,7 @@ Prepared by All Members.
 ### Progress Reflection
 
 ### Problems Encountered
+New features such as pixelating the hero and items proved to be difficult since some of the sprite class had to be re-implemented to account for the varying pixelation levels. Although the changes themselves didn't account for the largest difficulty, changing all methods which incorrectly accessed the sprite images was slightly time consuming. Additionally, the implementation of a config file, although beneficial, was also time consuming as well since objects such as the hero and portals which were previously hard coded, needed to be implemented into the config file.
 
 ### Projected Progress
 With the final sprint coming up, we plan to add as many additional features as we can, but we recognize that we may not get to them all in time.  We plan on finishing the configuration file so that items and enemies are pulled from the configuration file as well.  Another priority of the upcoming sprint is to give enemies the ability to push the hero and collide with the hero; this is needed for some of the level designs that the game design team wishes to implement.
