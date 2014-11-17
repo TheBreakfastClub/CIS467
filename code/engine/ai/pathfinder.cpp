@@ -95,7 +95,6 @@ void Pathfinder::find_hero(int x, int y)
 	// Initial check to see if we've found the target Enemy
 	// NO PATH TO ENEMY
 	if (origin_neighbors.empty()) {
-		delete origin;
 		path = NULL;
 		std::cout << "NO PATH TO ENEMY (right away at origin too!)\n";
 		return; // blocked in from the get-go...
