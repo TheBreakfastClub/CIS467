@@ -2,9 +2,9 @@ Steven Hoffman
 =====================
 CIS 467: The Breakfast Club
 ----------------------------
-Journal Date: 10/30/2014   
-Journal Period - FROM: 8/25/2014 TO: 10/30/2014   
-Total hours worked this period: **110.33**   
+Journal Date: 11/16/2014   
+Journal Period - FROM: 8/25/2014 TO: 11/16/2014   
+Total hours worked this period: **130.75**   
 
 
 
@@ -404,7 +404,96 @@ Attended class and gave presentation.
 Worked on Team Evaluations.
 
 
-#### Thursday, 10/30/2014 (0.08 hours)
+#### Thursday, 10/30/2014 (0.28 hours)
 
 3:24 pm - 3:29 pm    
 Updated Journal.
+
+3:31 pm - 3:44 pm    
+Updated Trello.
+
+
+#### Monday, 11/3/2014 (0.18 hours)
+
+9:48 am - 10:00 am    
+Messaged group members and updated trello.
+
+
+#### Wednesday, 11/5/2014 (0.90 hours)
+
+8:51 pm - 8:57 pm    
+Sent messages to group members.
+
+10:18 pm - 11:07 pm    
+Worked on merging engine branch with master. Also messeged group members.
+
+
+#### Friday, 11/7/2014 (3.13 hours)
+
+12:50 noon - 1:15 pm    
+Began working on creating a class that reads in a configuration file.
+
+2:03 pm - 4:47 pm    
+Began working on creating a class that reads in a configuration file. Also met with group.
+
+
+#### Saturday, 11/8/2014 (3.87 hours)
+
+12:56 noon - 1:30 pm    
+Continued working on creating a class that reads in a configuration file.
+
+4:56 pm - 6:41 pm    
+Continued working on creating a class that reads in a configuration file.
+
+7:38 pm - 9:12 pm    
+Worked on integrating config file into the game.
+
+
+#### Monday, 11/10/2014 (1.00 hours)
+
+3:00 pm - 4:00 pm    
+Met with Thomas to work out Mac Version. 
+
+
+#### Wednesday, 11/12/2014 (2.92 hours)
+
+4:40 pm - 5:10 pm    
+Worked on pulling Cuts and Pixelation Algorithms from the config files.
+
+5:20 pm - 5:45 pm    
+Brainstormed coding ideas and updated trello.
+
+10:03 pm - 0:03 am    
+Worked on pulling Pixelation Algorithms from the config files.
+
+
+#### Thursday, 11/13/2014 (2.80 hours)
+
+7:23 pm - 7:46 pm    
+Worked on pixelating the sprite image.
+
+9:34 pm - 9:45 pm    
+Worked on pixelating the sprite image.
+
+10:52 pm - 1:06 am    
+Worked on pixelating the sprite image.
+
+
+#### Friday, 11/14/2014 (3.03 hours)
+
+2:34 pm - 5:37 pm    
+Worked on pixelating the sprite image and met with team. Helped team members with various tasks.
+
+
+#### Sunday, 11/16/2014 (2.27 hours)
+
+7:06 pm - 7:21 pm    
+Worked on Burndown Chart and added controls for easier pixelation.
+
+8:45 pm - 10:01 pm    
+Read through and answered group messages. Also implemented portals being pulled from the config file and updated the config file.
+
+10:05 pm - 10:50 pm    
+Worked on Sprint Report. Also updated my journal.
+
+
