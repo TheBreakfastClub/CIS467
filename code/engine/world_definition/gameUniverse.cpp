@@ -139,7 +139,7 @@ GameUniverse::~GameUniverse() {
  * This method must be called before any other GameUniverse functions.
  */
 bool GameUniverse::init(const Configurations &config) {
-
+cerr << "About to init gameUniverse\n";
     // Gather the worlds
     vector<Sublevel> world_list(Sublevel::COUNT);
     world_list[Sublevel::HUB] = Sublevel::HUB;
@@ -159,6 +159,13 @@ bool GameUniverse::init(const Configurations &config) {
             return false;
         sublevels[sub]->worldName = world->name; 
 
+    }
+cerr << "TESTING about to add items\n";
+    // Initialize the items
+    for(ItemDef i : config.items) {
+        Item *newItem = new Item(i.x, i.y, i.imgName);
+        if (!newItem->setSpriteImage(i.imgName.c_str())) return false;
+        sublevels[i.world]->items.push_back(newItem);
     }
     
     // Initialize the portals
