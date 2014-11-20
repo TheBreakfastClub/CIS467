@@ -17,4 +17,5 @@ public:
 	void action(Hero &hero, std::vector<Enemy*> &enemies, Image *map);
 	Pathfinder pathfinder;
 	long moves;
+	bool active;
 };

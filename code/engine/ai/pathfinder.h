@@ -23,10 +23,9 @@ public:
 	Pathfinder(int id);
 	void set_grid(WorldGrid *grid);
 
-	//void path_to_hero(int x, int y);
-	//void path_to_hero_(int x, int y);
 	void find_hero(int x, int y);
 	std::pair<int, int> next_move();
+	std::pair<int, int> unstuck(std::string direction, int x, int y, int percent, int magnitude);
 
 	void print_path_to_hero();
 

@@ -1,4 +1,5 @@
 #include "pathfinder.h"
+#include <cstdlib>
 
 
 Pathfinder::Pathfinder(int id) : id(id) { path = NULL; }
@@ -60,7 +61,7 @@ void Pathfinder::find_hero(int x, int y)
 				int x = cell->x + offset_x;
 				int y = cell->y + offset_y;
 
-				// Do bounds checking and make sure a cell isn't already a part of a closed cell
+				// Do bounds checking and make sure a cell isn't already in the closed list
 				if (x >= 0 && x < grid->width && y >= 0 && y < grid->height && closed_cells.count(std::to_string(x)+","+std::to_string(y)) == 0) {
 					Cell *c = &(grid->grid[y * grid->width + x]);
 					if (c->x == e_x && c->y == e_y) {
@@ -188,3 +189,132 @@ std::pair<int, int> Pathfinder::next_move()
 	next.second = (c->parent->y > c->y ? 1 : (c->parent->y < c->y ? -1 : 0));
 	return next;
 }
+
+std::pair<int, int> Pathfinder::unstuck(std::string direction, int x, int y, int percent, int magnitude)
+{
+	std::pair<int, int> move(0, 0);
+	auto set_move = [&](int f, int s) {
+		move.first = f;
+		move.second = s;
+	};
+
+	if (direction == "n") {
+		if (rand() % 100 < percent) { 
+			if (rand() % 2) set_move(1, 0); // east
+			else set_move(-1, 0); // west
+		}
+		else { // rest: nw, ne, se, sw, s
+			if (rand() % 2) set_move(-1, -1);
+			else if (rand() % 2) set_move(1, -1);
+			else if (rand() % 2) set_move(1, 1);
+			else if (rand() % 2) set_move(-1, 1);
+			else set_move(0, 1);
+		}
+	}
+	else if (direction == "ne") {
+		if (rand() % 100 < percent) { // e, n
+			if (rand() % 2) set_move(1, 0);
+			else set_move(0, -1);
+		}
+		else { // se, s, sw, w, nw
+			if (rand() % 2) set_move(1, 1);
+			else if (rand() % 2) set_move(0, 1);
+			else if (rand() % 2) set_move(-1, 1);
+			else if (rand() % 2) set_move(-1, 0);
+			else set_move(-1, -1);
+		}
+	}
+	else if (direction == "e") {
+		if (rand() % 100 < percent) { // n, s
+			if (rand() % 2) set_move(0, -1);
+			else set_move(0, 1);
+		}
+		else { // ne, se, sw, w, nw
+			if (rand() % 2) set_move(1, -1);
+			else if (rand() % 2) set_move(1, 1);
+			else if (rand() % 2) set_move(-1, 1);
+			else if (rand() % 2) set_move(-1, 0);
+			else set_move(-1, -1);
+		}
+	} 
+	else if (direction == "se") {
+		if (rand() % 100 < percent) { // e, s
+			if (rand() % 2) set_move(1, 0);
+			else set_move(0, 1);
+		}
+		else { // ne, n, sw, w, nw
+			if (rand() % 2) set_move(1, -1);
+			else if (rand() % 2) set_move(0, -1);
+			else if (rand() % 2) set_move(-1, 1);
+			else if (rand() % 2) set_move(-1, 0);
+			else set_move(-1, -1);
+		}
+	}
+	else if (direction == "s") {
+		if (rand() % 100 < percent) { // e, w
+			if (rand() % 2) set_move(1, 0);
+			else set_move(-1, 0);
+		}
+		else { // ne, n, sw, se, nw
+			if (rand() % 2) set_move(1, -1);
+			else if (rand() % 2) set_move(0, -1);
+			else if (rand() % 2) set_move(-1, 1);
+			else if (rand() % 2) set_move(1, 1);
+			else set_move(-1, -1);
+		}
+	}
+	else if (direction == "sw") {
+		if (rand() % 100 < percent) { // s, w
+			if (rand() % 2) set_move(0, 1);
+			else set_move(-1, 0);
+		}
+		else { // ne, n, e, se, nw
+			if (rand() % 2) set_move(1, -1);
+			else if (rand() % 2) set_move(0, -1);
+			else if (rand() % 2) set_move(1, 0);
+			else if (rand() % 2) set_move(1, 1);
+			else set_move(-1, -1);
+		}
+	}
+	else if (direction == "w") {
+		if (rand() % 100 < percent) { // s, n
+			if (rand() % 2) set_move(0, 1);
+			else set_move(0, -1);
+		}
+		else { // ne, sw, e, se, nw
+			if (rand() % 2) set_move(1, -1);
+			else if (rand() % 2) set_move(-1, 1);
+			else if (rand() % 2) set_move(1, 0);
+			else if (rand() % 2) set_move(1, 1);
+			else set_move(-1, -1);
+		}
+	}
+	else if (direction == "nw") {
+		if (rand() % 100 < percent) { // w, n
+			if (rand() % 2) set_move(-1, 0);
+			else set_move(0, -1);
+		}
+		else { // ne, sw, e, se, s
+			if (rand() % 2) set_move(1, -1);
+			else if (rand() % 2) set_move(-1, 1);
+			else if (rand() % 2) set_move(1, 0);
+			else if (rand() % 2) set_move(1, 1);
+			else set_move(0, 1);
+		}
+	}
+	move.first *= magnitude;
+	move.second *= magnitude;
+	return move;
+}
+
+/*
+std::pair<int, int> Pathfinder::unstuck()
+{
+	std::pair<int, int> next(0, 0);
+	Cell *c = path;
+	if (c == NULL || c->parent == NULL || c->parent->parent == NULL) return next;
+	next.first = (c->parent->parent->x > c->parent->x ? 1 : (c->parent->parent->x < c->parent->x ? -1 : 0));
+	next.second = (c->parent->parent->y > c->parent->y ? 1 : (c->parent->parent->y < c->parent->y ? -1 : 0));
+	return next;
+}
+*/
