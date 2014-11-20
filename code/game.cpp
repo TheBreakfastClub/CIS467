@@ -202,13 +202,12 @@ int Game::run()
  */
 bool Game::setup(const char *gameName, int width, int height)
 {
-cerr << "Reading in config" << endl;
     // Load configurations
     if (!config.readInConfigurations(".config")) {
         std::cerr << "Error in reading configuration file\n";
         return false;
     }
-    cerr << "Done reading in config" << endl;
+
     // Setup the Graphics Engine
     if (!graphics.init(gameName, width, height)) {
         std::cerr << "Error initializing graphics engine\n";
@@ -230,7 +229,6 @@ cerr << "Reading in config" << endl;
 int main(int argc, char* argv[])
 {
 	Game game;
-    cout << "TESTING\n";
 	if (!game.setup(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT)) {
         std::cerr << "Error in setting up the game. Game is exiting.\n";
 		return 1;

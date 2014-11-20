@@ -139,7 +139,7 @@ GameUniverse::~GameUniverse() {
  * This method must be called before any other GameUniverse functions.
  */
 bool GameUniverse::init(const Configurations &config) {
-cerr << "About to init gameUniverse\n";
+
     // Gather the worlds
     vector<Sublevel> world_list(Sublevel::COUNT);
     world_list[Sublevel::HUB] = Sublevel::HUB;
@@ -160,7 +160,7 @@ cerr << "About to init gameUniverse\n";
         sublevels[sub]->worldName = world->name; 
 
     }
-cerr << "TESTING about to add items\n";
+
     // Initialize the items
     for(ItemDef i : config.items) {
         Item *newItem = new Item(i.x, i.y, i.imgName);

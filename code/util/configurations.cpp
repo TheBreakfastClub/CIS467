@@ -306,7 +306,6 @@ void Configurations::readInItems(ifstream &file) {
     string line;
     getline(file, line);
     while (line != "--") {
-       cerr << "NEW ITEM !!!!!\n"; 
         ItemDef item;
 
         stringstream ss(line);
