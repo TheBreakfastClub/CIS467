@@ -34,6 +34,12 @@ class Game {
  
         Game();
 
+	int xMomentum;
+	int yMomentum;
+	int maxXMomentum;
+	int maxYMomentum;
+	int nonButterMomentum;
+	int momentumIncrease;
         int run();
         void update();
         void handle_input();
