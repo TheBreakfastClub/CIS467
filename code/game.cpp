@@ -67,14 +67,19 @@ void Game::handle_input()
     	// Keyboard
     	else if (event.type == SDL_KEYDOWN) {
     		switch (event.key.keysym.sym) {
+                case SDLK_p:
+                    cout << "X,Y = " << universe.hero.x << "," << universe.hero.y << endl;
+                    break;
                 case SDLK_KP_PLUS:
                 case SDLK_PLUS:
                 case SDLK_0:
+                case SDLK_d:
                     universe.currentWorld->next_resolution();
                     break;
                 case SDLK_KP_MINUS:
                 case SDLK_MINUS:
                 case SDLK_9:
+                case SDLK_a:
                     universe.currentWorld->prev_resolution();
                     break;
                 case SDLK_i:
@@ -204,7 +209,7 @@ bool Game::setup(const char *gameName, int width, int height)
         std::cerr << "Error in reading configuration file\n";
         return false;
     }
-    
+
     // Setup the Graphics Engine
     if (!graphics.init(gameName, width, height)) {
         std::cerr << "Error initializing graphics engine\n";

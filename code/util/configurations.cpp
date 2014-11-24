@@ -33,7 +33,6 @@ Configurations::Configurations() {}
  * For each Item:
  *      world_id (the int for the enum describing the world from sublevel.h)
  *      x y
- *      item_id
  *      img_name
  *      .
  * --
@@ -307,7 +306,6 @@ void Configurations::readInItems(ifstream &file) {
     string line;
     getline(file, line);
     while (line != "--") {
-        
         ItemDef item;
 
         stringstream ss(line);
@@ -320,9 +318,9 @@ void Configurations::readInItems(ifstream &file) {
         ss2 >> item.x;
         ss2 >> item.y;
 
-        getline(file, line);
-        stringstream ss3(line);
-        ss3 >> item.itemType;
+        //getline(file, line);
+        //stringstream ss3(line);
+        //ss3 >> item.itemType;
 
         getline(file, item.imgName);
         items.push_back(item);

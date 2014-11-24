@@ -125,22 +125,10 @@ bool GameWorld::init(const char *background_filename,
     currentRes = lowRes;
     currentResLevel = Resolution::LOW;
 
-    // create some random items 
-    for (int i = 0; i < 4; i++) {
-        
-        Item *newItem = new Item(rand() % w, rand() % h, "egg");
-        if (!newItem->setSpriteImage("resources/egg.png")) return false;
-        while (currentRes->mapImg->collision(newItem->getSpriteImage(currentResLevel), newItem->x, newItem->y)) {
-            newItem->x = rand() % w;
-            newItem->y = rand() % h;
-        }
-        items.push_back(newItem);
-    }
-
     // create some enemies (hp, speed, damage, x, y)
     for (int i = 0; i < 3; i++) {
         AutoSentry *e = new AutoSentry(50, 2, 25, rand() % w, rand() % h);
-        if (!e->setSpriteImage("resources/enemy.png")) return false;
+        if (!e->setSpriteImage("resources/SpikeyBall.png")) return false;
 
         while (currentRes->mapImg->collision(e->getSpriteImage(currentResLevel), e->x, e->y)) {
             e->x = rand() % w;
@@ -148,31 +136,6 @@ bool GameWorld::init(const char *background_filename,
         }
         enemies.push_back(e);
     }
-    
-    
-    // create some portals (x, y, image)
-    // for (int i = 0; i < 4; i++) {
-        
-    //     Portal *newPortal = new Portal(rand() % w, rand() % h, "Portal", true, Sublevel::FLOUR);
-    //     if (!newPortal->setSpriteImage("resources/cakeIsALie.png")) return false;
-	
-    //     while (currentRes->mapImg->collision(newPortal->getSpriteImage(currentResLevel), newPortal->x, newPortal->y)) {
-    //         newPortal->x = rand() % w;
-    //         newPortal->y = rand() % h;
-    //     }
-
-    //     portals.push_back(newPortal);
-    // }
-    
-
-
-//int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
-    // if (worldName == "hub") {
-    //     UpDownEnemy *ude = new UpDownEnemy(50, 2, 25, 384, -140, false, 150, 0);
-    //     if (!ude->setSpriteImage("resources/updown.png")) return false;
-    //     // UpDownEnemy *ude = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
-    //     enemies.push_back(ude);
-    // }
 
     return true;
 }

@@ -33,7 +33,7 @@ struct ItemDef {
     Sublevel world; // The world that this item should be placed into
     int x; // location of the item
     int y;
-    int itemType; // Indicates the ID of the type of item this is
+    //int itemType; // Indicates the ID of the type of item this is
     string imgName; // name of image file
 };
 

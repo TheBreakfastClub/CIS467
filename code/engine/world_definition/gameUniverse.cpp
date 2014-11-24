@@ -163,100 +163,116 @@ bool GameUniverse::init(const Configurations &config) {
 
     }
 
-    // Hub & Flower Portals
+    // // Hub & Flower Portals
 
-    // First to Flower
-    Portal *htof1Portal = new Portal(288, 128, "Portal", true, Sublevel::FLOUR, 700, 100);
-    if (!htof1Portal->setSpriteImage("resources/portal.png")) return false;
-    sublevels[Sublevel::HUB]->portals.push_back(htof1Portal);
+    // // First to Flower
+    // Portal *htof1Portal = new Portal(288, 128, "Portal", true, Sublevel::FLOUR, 700, 100);
+    // if (!htof1Portal->setSpriteImage("resources/portal.png")) return false;
+    // sublevels[Sublevel::HUB]->portals.push_back(htof1Portal);
 
-    // Second to Flower
-    Portal *htof2Portal = new Portal(768, 768, "Portal", true, Sublevel::FLOUR, 860, 300);
-    if (!htof2Portal->setSpriteImage("resources/portal.png")) return false;
-    sublevels[Sublevel::HUB]->portals.push_back(htof2Portal);
+    // // Second to Flower
+    // Portal *htof2Portal = new Portal(768, 768, "Portal", true, Sublevel::FLOUR, 860, 300);
+    // if (!htof2Portal->setSpriteImage("resources/portal.png")) return false;
+    // sublevels[Sublevel::HUB]->portals.push_back(htof2Portal);
 
-    // First to Hub
-    Portal *ftohPortal = new Portal(896, 80, "Portal", true, Sublevel::HUB, 288, 200);
-    if (!ftohPortal->setSpriteImage("resources/portal.png")) return false;
-    sublevels[Sublevel::FLOUR]->portals.push_back(ftohPortal);
+    // // First to Hub
+    // Portal *ftohPortal = new Portal(896, 80, "Portal", true, Sublevel::HUB, 288, 200);
+    // if (!ftohPortal->setSpriteImage("resources/portal.png")) return false;
+    // sublevels[Sublevel::FLOUR]->portals.push_back(ftohPortal);
 
-    // Second to Hub
-    Portal *ftoh2Portal = new Portal(896, 192, "Portal", true, Sublevel::HUB, 768, 700);
-    if (!ftoh2Portal->setSpriteImage("resources/portal.png")) return false;
-    sublevels[Sublevel::FLOUR]->portals.push_back(ftoh2Portal);
-
-
-    // Hub & Sugar Portals
-
-    // First to Sugar
-    Portal *htos1Portal = new Portal(608, 128, "Portal", true, Sublevel::SUGAR, 100, 100);
-    if (!htos1Portal->setSpriteImage("resources/portal.png")) return false;
-    sublevels[Sublevel::HUB]->portals.push_back(htos1Portal);
-
-    // Second to Sugar
-    Portal *htos2Portal = new Portal(1248, 768, "Portal", true, Sublevel::SUGAR, 2360, 500);
-    if (!htos2Portal->setSpriteImage("resources/portal.png")) return false;
-    sublevels[Sublevel::HUB]->portals.push_back(htos2Portal);
-
-    // First to Hub
-    Portal *stohPortal = new Portal(64, 300, "Portal", true, Sublevel::HUB, 608, 200);
-    if (!stohPortal->setSpriteImage("resources/portal.png")) return false;
-    sublevels[Sublevel::SUGAR]->portals.push_back(stohPortal);
-
-    // Second to Hub
-    Portal *stoh2Portal = new Portal(2260, 550, "Portal", true, Sublevel::HUB, 1248, 700);
-    if (!stoh2Portal->setSpriteImage("resources/portal.png")) return false;
-    sublevels[Sublevel::SUGAR]->portals.push_back(stoh2Portal);
+    // // Second to Hub
+    // Portal *ftoh2Portal = new Portal(896, 192, "Portal", true, Sublevel::HUB, 768, 700);
+    // if (!ftoh2Portal->setSpriteImage("resources/portal.png")) return false;
+    // sublevels[Sublevel::FLOUR]->portals.push_back(ftoh2Portal);
 
 
+    // // Hub & Sugar Portals
 
+    // // First to Sugar
+    // Portal *htos1Portal = new Portal(608, 128, "Portal", true, Sublevel::SUGAR, 100, 100);
+    // if (!htos1Portal->setSpriteImage("resources/portal.png")) return false;
+    // sublevels[Sublevel::HUB]->portals.push_back(htos1Portal);
 
+    // // Second to Sugar
+    // Portal *htos2Portal = new Portal(1248, 768, "Portal", true, Sublevel::SUGAR, 2360, 500);
+    // if (!htos2Portal->setSpriteImage("resources/portal.png")) return false;
+    // sublevels[Sublevel::HUB]->portals.push_back(htos2Portal);
 
+    // // First to Hub
+    // Portal *stohPortal = new Portal(64, 300, "Portal", true, Sublevel::HUB, 608, 200);
+    // if (!stohPortal->setSpriteImage("resources/portal.png")) return false;
+    // sublevels[Sublevel::SUGAR]->portals.push_back(stohPortal);
 
-    // Portal *htob1Portal = new Portal(928, 128, "Portal", true, Sublevel::BUTTER, 250, 250);
-    // if (!htob1Portal->setSpriteImage("resources/portal.png")) return false;
-    // sublevels[Sublevel::HUB]->portals.push_back(htob1Portal);
+    // // Second to Hub
+    // Portal *stoh2Portal = new Portal(2260, 550, "Portal", true, Sublevel::HUB, 1248, 700);
+    // if (!stoh2Portal->setSpriteImage("resources/portal.png")) return false;
+    // sublevels[Sublevel::SUGAR]->portals.push_back(stoh2Portal);
 
 
 
 
 
-    Portal *htopPortal = new Portal(928, 128, "Portal", true, Sublevel::BAKING_SODA, 772, 96);
-    if (!htopPortal->setSpriteImage("resources/portal.png")) return false;
-    sublevels[Sublevel::HUB]->portals.push_back(htopPortal);
 
-    // Portal *ptohPortal = new Portal(772, 274, "Portal", true, Sublevel::HUB, 1248, 700);
-    // if (!ptohPortal->setSpriteImage("resources/portal.png")) return false;
-    // sublevels[Sublevel::BAKING_SODA]->portals.push_back(ptohPortal);
+    // // Portal *htob1Portal = new Portal(928, 128, "Portal", true, Sublevel::BUTTER, 250, 250);
+    // // if (!htob1Portal->setSpriteImage("resources/portal.png")) return false;
+    // // sublevels[Sublevel::HUB]->portals.push_back(htob1Portal);
+
+
+
+
+
+    // Portal *htopPortal = new Portal(928, 128, "Portal", true, Sublevel::BAKING_SODA, 772, 96);
+    // if (!htopPortal->setSpriteImage("resources/portal.png")) return false;
+    // sublevels[Sublevel::HUB]->portals.push_back(htopPortal);
+
+    // // Portal *ptohPortal = new Portal(772, 274, "Portal", true, Sublevel::HUB, 1248, 700);
+    // // if (!ptohPortal->setSpriteImage("resources/portal.png")) return false;
+    // // sublevels[Sublevel::BAKING_SODA]->portals.push_back(ptohPortal);
 
     
 
 
 
-    // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
-    UpDownEnemy *ude1 = new UpDownEnemy(50, 1, 25, 384, -100, false, 150, 0);
-    if (!ude1->setSpriteImage("resources/updown2.png")) return false;
-    // UpDownEnemy *ude1 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
-    sublevels[Sublevel::SUGAR]->enemies.push_back(ude1);
+    // // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
+    // UpDownEnemy *ude1 = new UpDownEnemy(50, 1, 25, 384, -100, false, 150, 0);
+    // if (!ude1->setSpriteImage("resources/updown2.png")) return false;
+    // // UpDownEnemy *ude1 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
+    // sublevels[Sublevel::SUGAR]->enemies.push_back(ude1);
 
-    LeftRightEnemy *lre1 = new LeftRightEnemy(50, 3, 25, 1530, 128, false, 150, 0);
-    if (!lre1->setSpriteImage("resources/leftright1.png")) return false;
-    // LeftRightEnemy *lre1 = new LeftRightEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
-    sublevels[Sublevel::SUGAR]->enemies.push_back(lre1);
+    // LeftRightEnemy *lre1 = new LeftRightEnemy(50, 3, 25, 1530, 128, false, 150, 0);
+    // if (!lre1->setSpriteImage("resources/leftright1.png")) return false;
+    // // LeftRightEnemy *lre1 = new LeftRightEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
+    // sublevels[Sublevel::SUGAR]->enemies.push_back(lre1);
 
-    // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
-    UpDownEnemy *ude2 = new UpDownEnemy(50, 1, 25, 1672, 150, false, 150, 0);
-    if (!ude2->setSpriteImage("resources/updownsingleR.png")) return false;
-    // UpDownEnemy *ude2 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
-    sublevels[Sublevel::SUGAR]->enemies.push_back(ude2);
+    // // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
+    // UpDownEnemy *ude2 = new UpDownEnemy(50, 1, 25, 1672, 150, false, 150, 0);
+    // if (!ude2->setSpriteImage("resources/updownsingleR.png")) return false;
+    // // UpDownEnemy *ude2 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
+    // sublevels[Sublevel::SUGAR]->enemies.push_back(ude2);
 
-    UpDownEnemy *ude3 = new UpDownEnemy(50, 1, 25, 1736, 300, false, 150, 0);
-    if (!ude3->setSpriteImage("resources/updownsingle.png")) return false;
-    // UpDownEnemy *ude3 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
-    sublevels[Sublevel::SUGAR]->enemies.push_back(ude3);
+    // UpDownEnemy *ude3 = new UpDownEnemy(50, 1, 25, 1736, 300, false, 150, 0);
+    // if (!ude3->setSpriteImage("resources/updownsingle.png")) return false;
+    // // UpDownEnemy *ude3 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
+    // sublevels[Sublevel::SUGAR]->enemies.push_back(ude3);
 
-    // 417
 
+    // Initialize the items
+    for(ItemDef i : config.items) {
+        Item *newItem = new Item(i.x, i.y, i.imgName);
+        if (!newItem->setSpriteImage(i.imgName.c_str())) return false;
+        sublevels[i.world]->items.push_back(newItem);
+    }
+    
+    // Initialize the portals
+    for(PortalDef p : config.portals){
+      
+        Portal *newPortal = new Portal(p.homeX, p.homeY, "portal", true, p.destWorld, p.destX, p.destY);
+        if(!newPortal->setSpriteImage(p.imgName.c_str())) {
+            cerr << "Error loading portal image " << p.imgName << endl;
+            return false;
+        }
+        sublevels[p.homeWorld]->portals.push_back(newPortal);
+    }
 
     // Define the Hero
     if (!(hero.setSpriteImage(config.hero.imgName.c_str()))) return false;
