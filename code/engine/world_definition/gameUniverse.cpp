@@ -213,9 +213,21 @@ bool GameUniverse::init(const Configurations &config) {
 
 
 
-    Portal *htob1Portal = new Portal(928, 128, "Portal", true, Sublevel::BUTTER, 250, 250);
-    if (!htob1Portal->setSpriteImage("resources/portal.png")) return false;
-    sublevels[Sublevel::HUB]->portals.push_back(htob1Portal);
+    // Portal *htob1Portal = new Portal(928, 128, "Portal", true, Sublevel::BUTTER, 250, 250);
+    // if (!htob1Portal->setSpriteImage("resources/portal.png")) return false;
+    // sublevels[Sublevel::HUB]->portals.push_back(htob1Portal);
+
+
+
+
+
+    Portal *htopPortal = new Portal(928, 128, "Portal", true, Sublevel::BAKING_SODA, 772, 96);
+    if (!htopPortal->setSpriteImage("resources/portal.png")) return false;
+    sublevels[Sublevel::HUB]->portals.push_back(htopPortal);
+
+    // Portal *ptohPortal = new Portal(772, 274, "Portal", true, Sublevel::HUB, 1248, 700);
+    // if (!ptohPortal->setSpriteImage("resources/portal.png")) return false;
+    // sublevels[Sublevel::BAKING_SODA]->portals.push_back(ptohPortal);
 
     
 
@@ -223,7 +235,7 @@ bool GameUniverse::init(const Configurations &config) {
 
     // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
     UpDownEnemy *ude1 = new UpDownEnemy(50, 1, 25, 384, -100, false, 150, 0);
-    if (!ude1->setSpriteImage("resources/updown1.png")) return false;
+    if (!ude1->setSpriteImage("resources/updown2.png")) return false;
     // UpDownEnemy *ude1 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
     sublevels[Sublevel::SUGAR]->enemies.push_back(ude1);
 
@@ -233,12 +245,12 @@ bool GameUniverse::init(const Configurations &config) {
     sublevels[Sublevel::SUGAR]->enemies.push_back(lre1);
 
     // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
-    UpDownEnemy *ude2 = new UpDownEnemy(50, 1, 25, 1666, 150, false, 150, 0);
+    UpDownEnemy *ude2 = new UpDownEnemy(50, 1, 25, 1672, 150, false, 150, 0);
     if (!ude2->setSpriteImage("resources/updownsingleR.png")) return false;
     // UpDownEnemy *ude2 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
     sublevels[Sublevel::SUGAR]->enemies.push_back(ude2);
 
-    UpDownEnemy *ude3 = new UpDownEnemy(50, 1, 25, 1742, 300, false, 150, 0);
+    UpDownEnemy *ude3 = new UpDownEnemy(50, 1, 25, 1736, 300, false, 150, 0);
     if (!ude3->setSpriteImage("resources/updownsingle.png")) return false;
     // UpDownEnemy *ude3 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
     sublevels[Sublevel::SUGAR]->enemies.push_back(ude3);
