@@ -12,10 +12,10 @@ Description:	Defines the different types of enemies in
 #include <iostream>
 
 Enemy::Enemy(int hp, int speed, int damage, int x, int y, bool inv) 
- : Character(hp, speed, damage, x, y, inv), pushes(false) {}
+ : Character(hp, speed, damage, x, y, inv), pushes(true) {}
 
 Enemy::Enemy(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x, int y, bool inv) 
- : Character(charImgH, charImgM, charImgL, hp, speed, damage, x, y, inv), pushes(false) {}
+ : Character(charImgH, charImgM, charImgL, hp, speed, damage, x, y, inv), pushes(true) {}
 
 /**
  * This checks to see if the enemy will collide with anything if it moves the given change in x and y.
