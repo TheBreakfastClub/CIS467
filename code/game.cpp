@@ -109,10 +109,17 @@ void Game::handle_input()
     	}
     }
     
+    // Create a copy of the map containing all enemies for collision
+    Image *map = new Image (universe.currentWorld->currentRes->mapImg->w, universe.currentWorld->currentRes->mapImg->h);
+    map->blit(universe.currentWorld->currentRes->mapImg, 0, 0);
+    for (Enemy *e : universe.currentWorld->enemies) {
+        map->ablit(e->getSpriteImage(universe.currentRes()), e->x, e->y);
+    }
+    //Image *map = universe.currentWorld->currentRes->mapImg;
+    
     // Handle keyboard events
     int dx = 0, dy = 0;
     int speed = universe.hero.speed;
-    Image *map = universe.currentWorld->currentRes->mapImg;
     Image *heroImg = universe.hero.getSpriteImage(universe.currentRes());
     //process movements keys multiple times, depending on speed
     for(int i = 0; i < speed; ++i) {
@@ -167,6 +174,7 @@ void Game::handle_input()
 	        }
         }
     }
+    delete map;
     
     // Update movement
     //universe.hero.x += dx;
