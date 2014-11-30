@@ -15,6 +15,12 @@ Description:    The main controller of the game.
 Game::Game() : universe(GAME_NAME), clock() 
 {
 	gameIsRunning = true;
+	xMomentum = 0;
+	yMomentum = 0;
+	maxXMomentum = 50;
+	maxYMomentum = 50;
+	nonButterMomentum = 1;
+	momentumIncrease = 1;
 }
 
 /* Update game logic at each iteration of the loop */
@@ -30,6 +36,14 @@ void Game::update()
         clock.add_event(new AnonEvent(1, [&](){
             universe.hero.hit = false;
         }), "herohit");
+	
+	if (universe.hero.hitPoints <= 0 )
+	{
+	  cout << "YOU ARE KILL\n";
+	  //Change the level to the kill screen level
+	  //universe.changeWorld(Sublevel::BUTTER, universe.currentWorld->currentResLevel, universe.hero.x, universe.hero.y);
+	  
+	}
     }
 
 	universe.checkCollisionsWithItems();
@@ -43,7 +57,18 @@ void Game::update()
  */
 void Game::handle_input()
 {
-
+    bool enableSliding;
+    double levelXMomentum;
+    double levelYMomentum;
+    if(universe.currentWorld->worldName == "butter")
+    {
+      enableSliding = true;
+    }
+    else
+    {
+      enableSliding = false;
+    }
+   
     // Get max height and width to pan to
     int h = universe.currentWorld->h - 1;// - WINDOW_HEIGHT;
     int w = universe.currentWorld->w - 1;// - WINDOW_WIDTH;
@@ -109,17 +134,79 @@ void Game::handle_input()
     	}
     }
     
+    if(!enableSliding) //if the level doesn't have sliding
+    {
+      
+      levelXMomentum = 1;
+      levelYMomentum = 1;
+      
+      if(keys[SDL_SCANCODE_UP] && !keys[SDL_SCANCODE_DOWN]) yMomentum = -1;
+      if(keys[SDL_SCANCODE_DOWN] && !keys[SDL_SCANCODE_UP]) yMomentum = 1;
+      if(keys[SDL_SCANCODE_LEFT] && !keys[SDL_SCANCODE_RIGHT]) xMomentum = -1;
+      if(keys[SDL_SCANCODE_RIGHT] && !keys[SDL_SCANCODE_LEFT]) xMomentum = 1;
+    }
+    
+    else
+    {
+      levelXMomentum = maxXMomentum;
+      levelYMomentum = maxYMomentum;
+    
+      if(keys[SDL_SCANCODE_UP] && !keys[SDL_SCANCODE_DOWN]) //if the keypress is up
+      {
+	  if(yMomentum > -maxYMomentum)
+	      yMomentum-=momentumIncrease;
+      }
+      else if(keys[SDL_SCANCODE_DOWN] && !keys[SDL_SCANCODE_UP]) //if the keypress is down
+      {
+	if(yMomentum < maxYMomentum)
+	  yMomentum +=momentumIncrease;
+      }
+      else {
+
+	if(yMomentum > 0) yMomentum--;
+	if(yMomentum < 0) yMomentum++;
+      }
+      if(keys[SDL_SCANCODE_LEFT] && !keys[SDL_SCANCODE_RIGHT]) //if the keypress is left
+      {
+	if(xMomentum > -maxXMomentum)
+	  xMomentum -=momentumIncrease;
+      }
+      else if(keys[SDL_SCANCODE_RIGHT] && !keys[SDL_SCANCODE_LEFT]) //if the keypress is right
+      {
+	if(xMomentum < maxXMomentum)
+	  xMomentum +=momentumIncrease;
+      }
+      else {
+	if(xMomentum > 0) xMomentum--;
+	if(xMomentum < 0) xMomentum++;
+      }
+    }
+    
+    // Create a copy of the map containing all enemies for collision
+    Image *map = new Image (universe.currentWorld->currentRes->mapImg->w, universe.currentWorld->currentRes->mapImg->h);
+    map->blit(universe.currentWorld->currentRes->mapImg, 0, 0);
+    for (Enemy *e : universe.currentWorld->enemies) {
+        map->ablit(e->getSpriteImage(universe.currentRes()), e->x, e->y);
+    }
+    //Image *map = universe.currentWorld->currentRes->mapImg;
+
     // Handle keyboard events
     int dx = 0, dy = 0;
     int speed = universe.hero.speed;
-    Image *map = universe.currentWorld->currentRes->mapImg;
+    double xMomPer = ((double)abs(xMomentum)) / levelXMomentum;
+    double yMomPer = ((double)abs(yMomentum)) / levelYMomentum;
+    double maxMomPer = 1.0;
+    if (xMomPer > yMomPer) maxMomPer = xMomPer;
+    else maxMomPer = yMomPer;
+    speed = (int) speed * maxMomPer;
     Image *heroImg = universe.hero.getSpriteImage(universe.currentRes());
+    
     //process movements keys multiple times, depending on speed
     for(int i = 0; i < speed; ++i) {
-        if(keys[SDL_SCANCODE_UP] && !keys[SDL_SCANCODE_DOWN]) dy = -1;
-        if(keys[SDL_SCANCODE_DOWN] && !keys[SDL_SCANCODE_UP]) dy = 1;
-        if(keys[SDL_SCANCODE_LEFT] && !keys[SDL_SCANCODE_RIGHT]) dx = -1;
-        if(keys[SDL_SCANCODE_RIGHT] && !keys[SDL_SCANCODE_LEFT]) dx = 1;
+        if(yMomentum < 0) dy = -1;
+        if(yMomentum > 0) dy = 1;
+        if(xMomentum < 0) dx = -1;
+        if(xMomentum > 0) dx = 1;
 
         if(dx && dy) {
 	        //checking for diagonal change
@@ -167,6 +254,7 @@ void Game::handle_input()
 	        }
         }
     }
+    delete map;
     
     // Update movement
     //universe.hero.x += dx;
@@ -175,8 +263,10 @@ void Game::handle_input()
     else if (universe.hero.y > h) universe.hero.y = h;
     if (universe.hero.x < 0) universe.hero.x = 0;
     else if (universe.hero.x > w) universe.hero.x = w;
-
-    // cerr << "hero x: " << universe.hero.x << " y: " << universe.hero.y << "\n";
+    
+    if (!enableSliding) {
+      xMomentum = yMomentum = 0;
+    }
 }
 
 /* Main game loop */
@@ -205,7 +295,7 @@ int Game::run()
 bool Game::setup(const char *gameName, int width, int height)
 {
     // Load configurations
-    if (!config.readInConfigurations("/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/code/CIS467/code/util/thomas.config")) {
+    if (!config.readInConfigurations(".config")) {
         std::cerr << "Error in reading configuration file\n";
         return false;
     }

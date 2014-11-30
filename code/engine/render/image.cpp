@@ -3,6 +3,7 @@
 #include "types.h"
 #include "util.h"
 #include "image.h"
+#include "color.h"
 
 Image::Image() {
 	init(0,0,0,false);
@@ -52,6 +53,40 @@ u32 Image::blend(u32 src, u32 dst) {
 //	return ag | rb;
   return rb | (ag & 0xff00) | (src & 0xff000000); // just for now, we need the source's unmodified alpha...
 }
+
+// sample the image using bilinear interpolation
+// 0 <= x < w-1, 0 <= y < h-1
+u32 Image::bilinear(float x, float y)
+{
+  // integer coordinates
+  int ix = (int)x;
+  int iy = (int)y;
+  
+  // fractional coordinates
+  float fx = x - ix;
+  float fy = y - iy;
+  
+  // pixel values
+  Color A = pixels[w*iy + ix];
+  Color B = pixels[w*iy + ix + 1];
+  Color C = pixels[w*iy + ix + w];
+  Color D = pixels[w*iy + ix + w + 1];
+  
+  // pixel weights
+  float wA = (1.0f - fx)*(1.0f - fy);
+  float wB = fx*(1.0f - fy);
+  float wC = (1.0f - fx)*fy;
+  float wD = fx*fy;
+  
+  // weighted average
+  Color out;
+  out.a = wA*A.a + wB*B.a + wC*C.a + wD*D.a;
+  out.r = wA*A.r + wB*B.r + wC*C.r + wD*D.r;
+  out.g = wA*A.g + wB*B.g + wC*C.g + wD*D.g;
+  out.b = wA*A.b + wB*B.b + wC*C.b + wD*D.b;
+  
+  return out();
+}  
 
 // no clipping
 void Image::_blit(Image *src, int x, int y) {
@@ -271,6 +306,36 @@ void Image::asblit(Image *src, int x, int y, float scale)
 	}
 }
 
+void Image::sblit(Image *src, int x, int y, float scale)
+{
+	if(scale <= 0) return;
+	
+	int du = 65536/scale;
+	int dv = 65536/scale;
+
+	int x1 = max(x, 0);
+	int y1 = max(y, 0);
+
+	int u1 = max(0, -x*du);
+	int v1 = max(0, -y*dv);		
+	int u2 = min(src->w << 16, (w-x) * du);
+	int v2 = min(src->h << 16, (h-y) * dv);
+	
+	int j;
+	y = y1;
+	u32 *o;
+	for(int v = v1; v < v2; v+= dv) {
+		j = (v >> 16)*src->w;
+		o = pixels + y*w + x1;
+		for(int u = u1; u < u2; u+=du) {
+			*o = src->pixels[j + (u >> 16)];
+			o++;
+		}
+		y++;
+	}
+}
+
+
 void Image::arblit(Image *src, float x, float y, float angle)
 {
 	arsblit(src, x, y, angle, 1.0);
@@ -328,6 +393,41 @@ void Image::arsblit(Image *src, float X, float Y, float angle, float scale)
 		}
 	}
 }
+
+// alpha,bilinear,rotation,scale blit
+void Image::abrsblit(Image *src, float X, float Y, float angle, float scale)
+{
+	angle /= M_PI*180.0;
+	float S = sin(angle);
+	float C = cos(angle);
+	float a,b,c,d,e,f;
+	
+	// reverse transformation matrix (X,Y)->(U,V)
+	a = C/scale;
+	b = -S/scale;
+	c = (Y*S - X*C )/scale + src->cx;
+	d = S/scale;
+	e = C/scale;
+	f = (-X*S - Y*C)/scale + src->cy;
+
+	float u,v;
+	u32 *i = pixels;
+  int W = src->w - 1;
+  int H = src->h - 1;
+  
+	for(int y = 0; y < h; y++) {
+		u = y*b + c;
+		v = y*e + f;
+		for(int x = 0; x < w; x++) {
+			if(u >= 0 && u < W && v >= 0 && v < H)
+        *i = blend(src->bilinear(u,v), *i);
+			u += a;
+			v += d;
+      i++;
+		}
+	}
+}
+
 
 void Image::putchar(unsigned char c, int x, int y, u32 color)
 {

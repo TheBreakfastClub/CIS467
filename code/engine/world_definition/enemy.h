@@ -19,9 +19,14 @@ public:
 	Enemy(int hp, int speed, int damage, int x=0, int y=0, bool inv=false);
 	Enemy(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=false);
 
+    // True if the enemy hurts the hero by pushing it into walls
+    bool pushes;
+
 	// subclasses of Enemy will define how to act
 	virtual void action(Hero &hero, Image *map, Resolution res) = 0;
-
+    void move (Hero &hero, Image *map, Resolution res, int xMov, int yMov);
+    bool moveCheckCollision(Hero &hero, Image *map, Resolution res, int dx, int dy);
+    bool moveCheckCollisionAndPush(Hero &hero, Image *map, Resolution res, int dx, int dy);
 };
 
 class AutoSentry : public Enemy {

@@ -1,5 +1,7 @@
 #include "color.h"
 
+Color::Color() {}
+
 Color::Color(int alpha, int red, int green, int blue) {
 	a = alpha;
 	r = red;
