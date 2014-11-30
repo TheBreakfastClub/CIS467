@@ -186,7 +186,8 @@ void Game::handle_input()
     Image *map = new Image (universe.currentWorld->currentRes->mapImg->w, universe.currentWorld->currentRes->mapImg->h);
     map->blit(universe.currentWorld->currentRes->mapImg, 0, 0);
     for (Enemy *e : universe.currentWorld->enemies) {
-        map->ablit(e->getSpriteImage(universe.currentRes()), e->x, e->y);
+        if (e->pushes)
+            map->ablit(e->getSpriteImage(universe.currentRes()), e->x, e->y);
     }
     //Image *map = universe.currentWorld->currentRes->mapImg;
 
