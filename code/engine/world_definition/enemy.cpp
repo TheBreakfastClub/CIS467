@@ -153,3 +153,21 @@ void AutoSentry::action(Hero &hero, Image *map, Resolution res)
         move(hero, map, res, x_inc, y_inc);
 	}
 }
+
+StaticEnemy::StaticEnemy(int hp, int speed, int damage, int x, int y, bool inv) 
+ : Enemy(hp, speed, damage, x, y, inv) {}
+
+StaticEnemy::StaticEnemy(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x, int y, bool inv) 
+ : Enemy(charImgH, charImgM, charImgL, hp, speed, damage, x, y, inv) {}
+
+void StaticEnemy::action(Hero &hero, Image *map, Resolution res) {
+
+    if (hero.getSpriteImage(res)->collision(getSpriteImage(res), x - hero.x, y - hero.y)) {
+        if (!hero.hit) {
+            hero.hitPoints -= attackDmg;
+            hero.hit = true;
+            std::cout << "Hero HP: " << std::to_string(hero.hitPoints) << std::endl;
+        }
+    }
+}
+

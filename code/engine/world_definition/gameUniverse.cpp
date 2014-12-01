@@ -169,7 +169,7 @@ bool GameUniverse::init(const Configurations &config) {
     }
     
     // Initialize the portals
-    for(PortalDef p : config.portals){
+    for(PortalDef p : config.portals) {
       
         Portal *newPortal = new Portal(p.homeX, p.homeY, "portal", true, p.destWorld, p.destX, p.destY);
         if(!newPortal->setSpriteImage(p.imgName.c_str())) {
@@ -177,6 +177,37 @@ bool GameUniverse::init(const Configurations &config) {
             return false;
         }
         sublevels[p.homeWorld]->portals.push_back(newPortal);
+    }
+
+    // Initialize the enemies
+    for (EnemyDef e : config.enemies) {
+        int hitpoints;
+        int damage;
+    
+        if (e.enemyType == STATIC_ENEMY) {
+
+            hitpoints  = 50;
+            damage = 25;
+            StaticEnemy *enemy = new StaticEnemy(hitpoints, e.speed, damage, e.x, e.y);
+            if (!enemy->setSpriteImage(e.imgName.c_str())) {
+                cerr << "Error loading enemy image " << e.imgName << endl;
+                return false;
+            }
+           
+            sublevels[e.world]->enemies.push_back(enemy);
+        }
+        else if (e.enemyType == AUTO_SENTRY) {
+        
+            hitpoints  = 50;
+            damage = 25;
+            AutoSentry *enemy = new AutoSentry(hitpoints, e.speed, damage, e.x, e.y);
+            if (!enemy->setSpriteImage(e.imgName.c_str())) {
+                cerr << "Error loading enemy image " << e.imgName << endl;
+                return false;
+            }
+           
+            sublevels[e.world]->enemies.push_back(enemy);
+        }
     }
 
     // Define the Hero

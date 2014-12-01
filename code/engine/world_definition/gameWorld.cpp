@@ -125,18 +125,6 @@ bool GameWorld::init(const char *background_filename,
     currentRes = lowRes;
     currentResLevel = Resolution::LOW;
 
-    // create some enemies (hp, speed, damage, x, y)
-    for (int i = 0; i < 3; i++) {
-        AutoSentry *e = new AutoSentry(50, 2, 25, rand() % w, rand() % h);
-        if (!e->setSpriteImage("resources/SpikeyBall.png")) return false;
-
-        while (currentRes->mapImg->collision(e->getSpriteImage(currentResLevel), e->x, e->y)) {
-            e->x = rand() % w;
-            e->y = rand() % h;
-        }
-        enemies.push_back(e);
-    }
-
     return true;
 }
 

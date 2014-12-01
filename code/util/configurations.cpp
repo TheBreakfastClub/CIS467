@@ -49,7 +49,7 @@ Configurations::Configurations() {}
  *      world_id
  *      x y
  *      speed
- *      enemy_id
+ *      enemy_type // See engine/world_definition/enemyType for the index to give
  *      imgName
  *      .
  * --
@@ -221,7 +221,8 @@ void Configurations::readInEnemies(ifstream &file) {
 
         getline(file, line);
         stringstream ss4(line);
-        ss4 >> enemy.enemyType;
+        ss4 >> type;
+        enemy.enemyType = (EnemyType) type;
 
         getline(file, enemy.imgName);
         enemies.push_back(enemy);

@@ -36,3 +36,13 @@ public:
 	
     void action(Hero &hero, Image *map, Resolution res);
 };
+
+class StaticEnemy : public Enemy {
+
+public:
+	StaticEnemy(int hp, int speed, int damage, int x=0, int y=0, bool inv=true);
+	StaticEnemy(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=true);
+	
+    void action(Hero &hero, Image *map, Resolution res);
+};
+
