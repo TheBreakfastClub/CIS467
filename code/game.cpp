@@ -40,14 +40,45 @@ void Game::update()
 	if (universe.hero.hitPoints <= 0 )
 	{
 	  cout << "YOU ARE KILL\n";
+	  universe.hero.bag.clear(); //emptying out the hero's inventory
 	  //Change the level to the kill screen level
-	  //universe.changeWorld(Sublevel::BUTTER, universe.currentWorld->currentResLevel, universe.hero.x, universe.hero.y);
+	  //universe.changeWorld(Sublevel::HUB, universe.currentWorld->currentResLevel, universe.hero.x, universe.hero.y);
+	  if (!universe.init(config)) {
+	      std::cerr << "Error initializing game universe\n";
+	      exit(0);
+	  }
+	  
 	  
 	}
+	
+    }
+    if (universe.hero.bag.size() >=6) //can't have all items if you have less than 6 items
+    { //Since the hero can have multiple eggs, we have to check all items in the inventory.
+      int egg = 0;
+      int flour = 0;
+      int bakingPowder = 0;
+      int milk = 0;
+      int sugar = 0;
+      int butter = 0;
+      for(int i = 0; i<universe.hero.bag.size(); i++)
+      {
+	  if (universe.hero.bag[i]->name == "resources/egg.png") egg = 1;
+	  if (universe.hero.bag[i]->name == "resources/milk.png") milk = 1;
+	  if (universe.hero.bag[i]->name == "resources/sugar.png") sugar = 1;
+	  if (universe.hero.bag[i]->name == "resources/baking_powder.png") bakingPowder = 1;
+	  if (universe.hero.bag[i]->name == "resources/butter.png") butter = 1;
+	  if (universe.hero.bag[i]->name == "resources/flour.png") flour = 1;
+	  
+      }
+      if (egg+milk+sugar+bakingPowder+butter+flour == 1)
+      {
+	  cout << "UR DA BEST!!!!\n";
+	  universe.hero.bag.clear();
+      }
     }
 
-	universe.checkCollisionsWithItems();
-	universe.checkCollisionsWithPortal();
+    universe.checkCollisionsWithItems();
+    universe.checkCollisionsWithPortal();
 }
 
 /**
@@ -108,8 +139,15 @@ void Game::handle_input()
                     universe.currentWorld->prev_resolution();
                     break;
                 case SDLK_i:
-                    cout << "Items in bag: " << universe.hero.bag.size() << endl;
+		  cout << "Items in bag:\n";
+		  for(int i = 0; i<universe.hero.bag.size(); i++)
+		  {
+		      cout << universe.hero.bag[i]->name <<endl;
+		  }
                     break;
+		case SDLK_l:
+		    cout <<"Level: " <<universe.currentWorld->worldName << endl;
+		    break;
                 case SDLK_q:
                 case SDLK_e:
                 case SDLK_ESCAPE:
@@ -186,7 +224,8 @@ void Game::handle_input()
     Image *map = new Image (universe.currentWorld->currentRes->mapImg->w, universe.currentWorld->currentRes->mapImg->h);
     map->blit(universe.currentWorld->currentRes->mapImg, 0, 0);
     for (Enemy *e : universe.currentWorld->enemies) {
-        map->ablit(e->getSpriteImage(universe.currentRes()), e->x, e->y);
+        if (e->pushes)
+            map->ablit(e->getSpriteImage(universe.currentRes()), e->x, e->y);
     }
     //Image *map = universe.currentWorld->currentRes->mapImg;
 
