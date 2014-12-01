@@ -17,6 +17,7 @@ UpDownEnemy::UpDownEnemy(int hp, int speed, int damage, int x, int y, bool inv, 
     direction = -1;
     y_top = y + dist;
     y_bottom = y - dist;
+    pushes = true;
     // cerr << "y top: " << y_top << "\ny bottom: " << y_bottom;
 }
 
@@ -46,19 +47,22 @@ void UpDownEnemy::action(Hero &hero, Image *map, Resolution res)
     // in the process of moving
     if (y < y_top && y > y_bottom) {
         // counter ++;
-        int y_inc = speed * direction;
-        if (!map->collision(getSpriteImage(res), x, y + y_inc)) {
-            y += y_inc;
+        // int y_inc = speed * direction;
+        if (!map->collision(getSpriteImage(res), x, y + speed * direction)) {
+            // y += y_inc;
+            move(hero, map, res, 0, speed * direction);
         } else {
             direction = direction * -1;
-            y += speed * direction;
+            // y += speed * direction;
+            move(hero, map, res, 0, speed * direction);
         }
         // cerr << "y: " << y << "\n";
     } 
     // time to turn around
     else {
         direction = direction * -1;
-        y += speed * direction;
+        // y += speed * direction;
+        move(hero, map, res, 0, (speed * direction));
         // cerr << "change direction\n";
     }
 
