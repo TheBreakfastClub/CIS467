@@ -38,6 +38,8 @@ class Image {
 	void ablit(Image*, int, int);
 	void scaleblit(Image*);
 	void ascaleblit(Image*);	
+  void bscaleblit(Image*);
+  void abscaleblit(Image*);
 	void asblit(Image*, int, int, float);
 	void sblit(Image*, int, int, float);
 	void arblit(Image*, float, float, float);
