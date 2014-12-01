@@ -208,6 +208,14 @@ bool GameUniverse::init(const Configurations &config) {
            
             sublevels[e.world]->enemies.push_back(enemy);
         }
+        else if (e.enemyType == UP_DOWN) {
+            cout << "Top: " << e.max << endl;
+            cout << "Bottom: " << e.min << endl;
+        }
+        else if (e.enemyType == LEFT_RIGHT) {
+            cout << "Left: " << e.max << endl;
+            cout << "Right: " << e.min << endl;
+        }
     }
 
     // Define the Hero
