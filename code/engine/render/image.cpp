@@ -55,9 +55,13 @@ u32 Image::blend(u32 src, u32 dst) {
 }
 
 // sample the image using bilinear interpolation
-// 0 <= x < w-1, 0 <= y < h-1
+// 0 <= x <= w-1, 0 <= y <= h-1
 u32 Image::bilinear(float x, float y)
 {
+  // clamp coordinates
+  x = clamp(x, 0.0, w-1.001);
+  y = clamp(y, 0.0, h-1.001);
+
   // integer coordinates
   int ix = (int)x;
   int iy = (int)y;
@@ -177,6 +181,7 @@ int Image::overlap(Image *src, int x, int y) {
 	return o;
 }
 
+// scaled collision
 bool Image::scollision(Image *src, int x, int y, float scale)
 {
 	if(scale <= 0) return false;
@@ -208,6 +213,7 @@ bool Image::scollision(Image *src, int x, int y, float scale)
 }
 
 
+// scaled overlap
 int Image::soverlap(Image *src, int x, int y, float scale)
 {
 	if(scale <= 0) return false;
@@ -239,9 +245,13 @@ int Image::soverlap(Image *src, int x, int y, float scale)
 	return overlap;
 }
 
+// scale blit
 void Image::scaleblit(Image *src)
 {
-	u32 *i = pixels;
+//   bscaleblit(src);
+//   return;
+  
+  u32 *i = pixels;
 	int du = (src->w << 16)/w;
 	int dv = (src->h << 16)/h;
 	int u, v = 0;
@@ -257,8 +267,12 @@ void Image::scaleblit(Image *src)
 	}
 }
 
+// alpha,scale blit
 void Image::ascaleblit(Image *src)
 {
+//   abscaleblit(src);
+//   return;
+
 	u32 *i = pixels;
 	int du = (src->w << 16)/w;
 	int dv = (src->h << 16)/h;
@@ -277,6 +291,47 @@ void Image::ascaleblit(Image *src)
 
 }
 
+// bilinear scale blit
+void Image::bscaleblit(Image *src)
+{
+  u32 *i = pixels;
+  float du = (src->w-1.0)/w;
+  float dv = (src->h-1.0)/h;
+  float u, v = 0;
+  
+  for(int y = 0; y < h; y++) {
+    u = 0;
+    for(int x = 0; x < w; x++) {
+      *i++ = src->bilinear(u,v);
+      u += du;
+    }
+    v += dv;
+  }
+}
+
+// alpha,bilinear scale blit
+void Image::abscaleblit(Image *src)
+{
+  u32 *i = pixels;
+  float du = (src->w-1.0)/w;
+  float dv = (src->h-1.0)/h;
+  float u, v = 0;
+  
+  for(int y = 0; y < h; y++) {
+    u = 0;
+    for(int x = 0; x < w; x++) {
+      *i = blend(src->bilinear(u,v), *i);
+      i++;
+      u += du;
+    }
+    v += dv;
+  }
+}
+
+
+
+
+// alpha,scale blit
 void Image::asblit(Image *src, int x, int y, float scale)
 {
 	if(scale <= 0) return;
@@ -306,6 +361,7 @@ void Image::asblit(Image *src, int x, int y, float scale)
 	}
 }
 
+// scale blit
 void Image::sblit(Image *src, int x, int y, float scale)
 {
 	if(scale <= 0) return;
@@ -335,12 +391,13 @@ void Image::sblit(Image *src, int x, int y, float scale)
 	}
 }
 
-
+// alpha,rotation blit
 void Image::arblit(Image *src, float x, float y, float angle)
 {
 	arsblit(src, x, y, angle, 1.0);
 }
 
+// alpha,rotation,scale blit
 void Image::arsblit(Image *src, float X, float Y, float angle, float scale)
 {
 	angle /= M_PI*180.0;
@@ -419,7 +476,7 @@ void Image::abrsblit(Image *src, float X, float Y, float angle, float scale)
 		u = y*b + c;
 		v = y*e + f;
 		for(int x = 0; x < w; x++) {
-			if(u >= 0 && u < W && v >= 0 && v < H)
+			if(u >= 0 && u <= W && v >= 0 && v <= H)
         *i = blend(src->bilinear(u,v), *i);
 			u += a;
 			v += d;
