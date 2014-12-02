@@ -11,7 +11,7 @@ Description:    Holds the data defining the sublevel
 #include "gameMap.h"
 #include "item.h"
 #include "enemy.h"
-#include "UpDownEnemy.h"
+#include "upDownEnemy.h"
 #include "portal.h"
 #include "../../util/pixUtil.h"
 #include "../render/blend.h"
