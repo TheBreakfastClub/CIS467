@@ -1,4 +1,3 @@
-#include "../../using_mac.h"
 #include <SDL2/SDL.h>
 #ifdef USING_MAC
 #include <SDL2_image/SDL_image.h>
