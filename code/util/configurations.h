@@ -15,6 +15,7 @@ Description:	This program reads in the info from a
 #include <sstream>
 #include <string>
 #include "../engine/world_definition/sublevel.h"
+#include "../engine/world_definition/enemyType.h"
 #include "pixUtil.h"
 
 using namespace std;
@@ -52,7 +53,9 @@ struct EnemyDef {
     int x; // start location of the enemy
     int y;
     int speed;
-    int enemyType; // Indicates the ID of the type of enemy this is
+    int max;
+    int min;
+    EnemyType enemyType; // Indicates the ID of the type of enemy this is
     string imgName; // name of image file
 };
 

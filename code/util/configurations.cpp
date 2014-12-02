@@ -49,7 +49,8 @@ Configurations::Configurations() {}
  *      world_id
  *      x y
  *      speed
- *      enemy_id
+ *      enemy_type // See engine/world_definition/enemyType for the index to give
+ *      max min (only have this line for Up-Down and Left-Right enemies)
  *      imgName
  *      .
  * --
@@ -221,7 +222,15 @@ void Configurations::readInEnemies(ifstream &file) {
 
         getline(file, line);
         stringstream ss4(line);
-        ss4 >> enemy.enemyType;
+        ss4 >> type;
+        enemy.enemyType = (EnemyType) type;
+
+        if (enemy.enemyType == UP_DOWN || enemy.enemyType == LEFT_RIGHT) {
+            getline(file, line);
+            stringstream ssM(line);
+            ssM >> enemy.max;
+            ssM >> enemy.min;
+        }
 
         getline(file, enemy.imgName);
         enemies.push_back(enemy);
