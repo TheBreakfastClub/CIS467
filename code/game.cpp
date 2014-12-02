@@ -39,7 +39,7 @@ void Game::update()
 	
 	if (universe.hero.hitPoints <= 0 )
 	{
-	  cout << "YOU ARE KILL\n";
+	  graphics.message("YOU DIED!");
 	  universe.hero.bag.clear(); //emptying out the hero's inventory
 	  //Change the level to the kill screen level
 	  //universe.changeWorld(Sublevel::HUB, universe.currentWorld->currentResLevel, universe.hero.x, universe.hero.y);
@@ -72,7 +72,7 @@ void Game::update()
       }
       if (egg+milk+sugar+bakingPowder+butter+flour == 1)
       {
-	  cout << "UR DA BEST!!!!\n";
+	  graphics.message("UR DA BEST!!!!");
 	  universe.hero.bag.clear();
       }
     }
