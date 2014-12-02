@@ -29,7 +29,6 @@ bool Enemy::moveCheckCollision(Hero &hero, Image *map, Resolution res, int dx, i
         if (!hero.hit) {
             hero.hitPoints -= attackDmg;
             hero.hit = true;
-            std::cout << "Hero HP: " << std::to_string(hero.hitPoints) << std::endl;
         }
         return true;
     }
@@ -50,7 +49,6 @@ bool Enemy::moveCheckCollisionAndPush(Hero &hero, Image *map, Resolution res, in
             if (!hero.hit) {
                 hero.hitPoints -= attackDmg;
                 hero.hit = true;
-                std::cout << "Hero HP: " << std::to_string(hero.hitPoints) << std::endl;
             }
             return true;
         } else {
@@ -166,7 +164,6 @@ void StaticEnemy::action(Hero &hero, Image *map, Resolution res) {
         if (!hero.hit) {
             hero.hitPoints -= attackDmg;
             hero.hit = true;
-            std::cout << "Hero HP: " << std::to_string(hero.hitPoints) << std::endl;
         }
     }
 }
