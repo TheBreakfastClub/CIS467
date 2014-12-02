@@ -69,7 +69,7 @@ bool GameUniverse::checkCollisionsWithItems() {
 
         // Check if item and hero collide
         Resolution res = currentRes();
-        if (hero.getSpriteImage(res)->collision(item->getSpriteImage(res), hero.x - item->x, hero.y - item->y)) {
+        if (hero.getSpriteImage(res)->collision(item->getSpriteImage(res), item->x - hero.x, item->y - hero.y)) {
             hero.bag.push_back(item);
             it = currentWorld->items.erase(it);
             return true;
@@ -95,7 +95,7 @@ bool GameUniverse::checkCollisionsWithPortal(){
 
         // Check if portal and hero collide
         Resolution res = currentRes();
-        if (hero.getSpriteImage(res)->collision(portal->getSpriteImage(res), hero.x - portal->x, hero.y - portal->y)) {
+        if (hero.getSpriteImage(res)->collision(portal->getSpriteImage(res), portal->x - hero.x, portal->y - hero.y)) {
             changeWorld(portal->destination, currentWorld->currentResLevel, portal->xDest, portal->yDest);
             return true;
         }
