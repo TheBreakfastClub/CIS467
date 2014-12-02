@@ -1,5 +1,5 @@
 #include "enemy.h"
-#include "UpDownEnemy.h"
+#include "upDownEnemy.h"
 //#include <stdlib.h>
 #include <cmath>
 #include <iostream>
