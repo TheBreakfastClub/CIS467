@@ -334,8 +334,11 @@ int Game::run()
 bool Game::setup(const char *gameName, int width, int height)
 {
     // Load configurations
+#ifdef USING_MAC
     if (!config.readInConfigurations("/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/code/CIS467/code/util/thomas.config")) {
-        std::cerr << "Error in reading configuration file\n";
+#else
+    if (!config.readInConfigurations(".config")) {
+#endif
         return false;
     }
 
