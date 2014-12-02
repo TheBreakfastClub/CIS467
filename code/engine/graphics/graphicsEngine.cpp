@@ -10,7 +10,8 @@ Description:    This class holds the code needed to create
 #include "graphicsEngine.h"
 #include "../render/util.h"
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
+#include <cstring>
 #include "../render/util.h"
 
 /**
@@ -22,6 +23,7 @@ GraphicsEngine::GraphicsEngine()
     window = NULL;
     surface = NULL;
     screen = NULL;
+    msgTime = 0;
 }
 
 /**
@@ -209,6 +211,27 @@ void GraphicsEngine::drawGameUniverse(GameUniverse &universe) {
         screen->ascaleblit(map->topLayer);
     }
 
+    // display health
+    char text[64];
+    sprintf(text,"health:%4d:", hero->hitPoints);
+    screen->puttext(text, screen->w - 88, 0, 0xffffffff); // white
+
+    // display status message
+    if(msgTime > 0) {
+      screen->puttext(msg, screen->w/2 - 4*strlen(msg), 0, 0xffff0000); // red
+      msgTime--;
+    }
+    
     // TODO: see if we can paint directly to the screen, only painting
     // the items in the panned area.
+}
+
+/**
+ * Display status message for ~1s
+ *
+ * @param text Message to display
+ */
+void GraphicsEngine::message(const char *text) {
+  strncpy(msg, text, 64);
+  msgTime = 60;
 }
