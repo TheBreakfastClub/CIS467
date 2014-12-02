@@ -8,6 +8,8 @@ Description:    Holds the data defining the universe
 #include "gameUniverse.h"
 #include <iostream> 
 #include <numeric>
+#include "upDownEnemy.h"
+#include "leftRightEnemy.h"
 
 /**
  * Default constructor for the universe. Must call GameUniverse::init()
@@ -67,7 +69,7 @@ bool GameUniverse::checkCollisionsWithItems() {
 
         // Check if item and hero collide
         Resolution res = currentRes();
-        if (hero.getSpriteImage(res)->collision(item->getSpriteImage(res), hero.x - item->x, hero.y - item->y)) {
+        if (hero.getSpriteImage(res)->collision(item->getSpriteImage(res), item->x - hero.x, item->y - hero.y)) {
             hero.bag.push_back(item);
             it = currentWorld->items.erase(it);
             return true;
@@ -93,7 +95,7 @@ bool GameUniverse::checkCollisionsWithPortal(){
 
         // Check if portal and hero collide
         Resolution res = currentRes();
-        if (hero.getSpriteImage(res)->collision(portal->getSpriteImage(res), hero.x - portal->x, hero.y - portal->y)) {
+        if (hero.getSpriteImage(res)->collision(portal->getSpriteImage(res), portal->x - hero.x, portal->y - hero.y)) {
             changeWorld(portal->destination, currentWorld->currentResLevel, portal->xDest, portal->yDest);
             return true;
         }
@@ -160,6 +162,31 @@ bool GameUniverse::init(const Configurations &config) {
         sublevels[sub]->worldName = world->name; 
 
     }
+
+
+
+    // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
+    UpDownEnemy *ude1 = new UpDownEnemy(50, 1, 25, 384, -100, false, 150, 0);
+    if (!ude1->setSpriteImage("resources/updown2.png")) return false;
+    // UpDownEnemy *ude1 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
+    sublevels[Sublevel::SUGAR]->enemies.push_back(ude1);
+
+    LeftRightEnemy *lre1 = new LeftRightEnemy(50, 3, 25, 1530, 128, false, 150, 0);
+    if (!lre1->setSpriteImage("resources/leftright1.png")) return false;
+    // LeftRightEnemy *lre1 = new LeftRightEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
+    sublevels[Sublevel::SUGAR]->enemies.push_back(lre1);
+
+    // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
+    UpDownEnemy *ude2 = new UpDownEnemy(50, 1, 25, 1672, 150, false, 150, 0);
+    if (!ude2->setSpriteImage("resources/updownsingleR.png")) return false;
+    // UpDownEnemy *ude2 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
+    sublevels[Sublevel::SUGAR]->enemies.push_back(ude2);
+
+    UpDownEnemy *ude3 = new UpDownEnemy(50, 1, 25, 1736, 300, false, 150, 0);
+    if (!ude3->setSpriteImage("resources/updownsingle.png")) return false;
+    // UpDownEnemy *ude3 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
+    sublevels[Sublevel::SUGAR]->enemies.push_back(ude3);
+
 
     // Initialize the items
     for(ItemDef i : config.items) {

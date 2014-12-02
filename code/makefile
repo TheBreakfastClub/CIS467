@@ -14,3 +14,6 @@ $(EXECUTABLE): $(SOURCES) $(HEADERS)
 
 clean:
 	rm $(EXECUTABLE)
+
+mac:
+	make -f makefilemac
