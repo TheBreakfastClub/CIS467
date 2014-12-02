@@ -32,6 +32,7 @@ public:
     void refreshScreen();
     void drawGameWorld(const GameWorld &world, const int &pan_x, const int &pan_y);
     void drawGameUniverse(GameUniverse &universe);
+    void message(const char*);
 
 private:
    
@@ -43,6 +44,10 @@ private:
     /** Used when determining if screen pixel format needs to be converted */
     bool convert;
 
+    /** status message */
+    char msg[64];
+    int msgTime;    
+    
     bool setupSDL(const char *gameName, int width, int height);
     void cleanupSDL();
 
