@@ -40,13 +40,20 @@ void Game::update()
 	if (universe.hero.hitPoints <= 0 )
 	{
 	  graphics.message("YOU DIED!");
+	  for(int i = 0; i<Sublevel::COUNT; i++){
+	      universe.sublevels[i]->enemies.clear();
+	      universe.sublevels[i]->portals.clear();
+	      universe.sublevels[i]->items.clear();
+	  }
 	  universe.hero.bag.clear(); //emptying out the hero's inventory
-	  //Change the level to the kill screen level
-	  //universe.changeWorld(Sublevel::HUB, universe.currentWorld->currentResLevel, universe.hero.x, universe.hero.y);
+	  //universe.
+	  //Change the level to the starting level
+	  universe.changeWorld(Sublevel::HUB, universe.currentWorld->currentResLevel, universe.hero.x, universe.hero.y);
 	  if (!universe.init(config)) {
 	      std::cerr << "Error initializing game universe\n";
 	      exit(0);
 	  }
+	  graphics.message("YOU DIED!");
 	  
 	  
 	}
@@ -138,12 +145,33 @@ void Game::handle_input()
                 case SDLK_a:
                     universe.currentWorld->prev_resolution();
                     break;
+		    
+		case SDLK_h:
+		  if(universe.hero.hitPoints>0)
+		  {
+		      for(int iterator = 0; iterator < universe.hero.bag.size() && universe.hero.hitPoints != 100; iterator++)
+		      {
+		      if(universe.hero.bag[iterator]->name == "resources/milk.png" && universe.hero.bag[iterator]->obtainable)
+		      {
+		      
+			  universe.hero.bag[iterator]->obtainable = false;;
+			  graphics.message("Milk Used");
+			  universe.hero.hitPoints+= 50;
+			  if (universe.hero.hitPoints > 100)
+			  universe.hero.hitPoints = 100;
+		      
+			break;
+		      }
+		      }
+		  }
+		    break;
                 case SDLK_i:
 		  cout << "Items in bag:\n";
 		  for(int i = 0; i<universe.hero.bag.size(); i++)
 		  {
 		      cout << universe.hero.bag[i]->name <<endl;
 		  }
+		  
                     break;
 		case SDLK_l:
 		    cout <<"Level: " <<universe.currentWorld->worldName << endl;
