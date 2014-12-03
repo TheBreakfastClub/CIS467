@@ -44,7 +44,7 @@ bool Enemy::moveCheckCollisionAndPush(Hero &hero, Image *map, Resolution res, in
 
     if (map->collision(getSpriteImage(res), x + dx, y + dy)) return true;
     if (hero.getSpriteImage(res)->collision(getSpriteImage(res), x + dx - hero.x, y + dy - hero.y)) {
-        if (map->collision(getSpriteImage(res), hero.x + dx, hero.y + dy)) {
+        if (map->collision(hero.getSpriteImage(res), hero.x + dx, hero.y + dy)) {
                   
             if (!hero.hit) {
                 hero.hitPoints -= attackDmg;

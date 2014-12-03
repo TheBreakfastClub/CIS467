@@ -44,6 +44,7 @@ UpDownEnemy::UpDownEnemy(int hp, int speed, int damage, int x, int y, bool inv, 
 
 void UpDownEnemy::action(Hero &hero, Image *map, Resolution res)
 {
+    
     // in the process of moving
     if (y < y_top && y > y_bottom) {
         // counter ++;
@@ -65,6 +66,7 @@ void UpDownEnemy::action(Hero &hero, Image *map, Resolution res)
         move(hero, map, res, 0, (speed * direction));
         // cerr << "change direction\n";
     }
+
 
     if (!hero.hit && hero.getSpriteImage(res)->collision(getSpriteImage(res), x - hero.x, y - hero.y)) {
             // hero.hitPoints -= attackDmg;
