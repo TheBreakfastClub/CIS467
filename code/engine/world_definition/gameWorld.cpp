@@ -60,6 +60,7 @@ GameWorld::~GameWorld() {
 bool GameWorld::init(const char *background_filename, 
                     const char *collision_filename, 
                     const char *top_filename, 
+                    Hero &hero,
                     pixAlgo pixelator, 
                     int medCut, 
                     int lowCut) {
@@ -124,6 +125,11 @@ bool GameWorld::init(const char *background_filename,
     // Set resolution
     currentRes = lowRes;
     currentResLevel = Resolution::LOW;
+
+    // initialize WorldGrid and set initial state
+    grid.init(lowRes->collisionLayer, &hero, &enemies, lowCut);
+    grid.build_wall_grid();
+    grid.build_grid();
 
     return true;
 }

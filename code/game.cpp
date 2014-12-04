@@ -6,6 +6,7 @@ Description:    The main controller of the game.
 
 #include "game.h"
 #include "engine/world_definition/enemy.h"
+#include "engine/world_definition/autoSentry.h"
 
 #define GAME_NAME "One Rad Waffle Game"
 #define WINDOW_WIDTH 500
@@ -28,7 +29,7 @@ void Game::update()
 {
     // Let each enemy take its turn
     for (Enemy *e : universe.currentWorld->enemies) {
-        e->action(universe.hero, universe.currentWorld->currentRes->mapImg, universe.currentRes());
+        e->action(universe.hero, universe.currentWorld->enemies, universe.currentWorld->currentRes->mapImg, universe.currentRes());
     }
 
     // Check for hit status (not sure on this implementation)

@@ -12,6 +12,7 @@ Description:    The main controller of the game.
 #include "engine/graphics/graphicsEngine.h"
 #include "util/clock.h"
 #include "util/configurations.h"
+#include "engine/world_definition/enemyType.h"
 
 class Game {
 

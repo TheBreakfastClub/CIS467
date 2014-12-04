@@ -13,6 +13,7 @@ Description:	Defines the different types of enemies in
 #include "character.h"
 #include "hero.h"
 #include "resolution.h"
+#include "enemyType.h"
 
 class Enemy: public Character {
 public:
@@ -22,20 +23,17 @@ public:
     // True if the enemy hurts the hero by pushing it into walls
     bool pushes;
 
+    // for enemies who make use of pathfinding
+    static int count;
+    int id;
+
 	// subclasses of Enemy will define how to act
-	virtual void action(Hero &hero, Image *map, Resolution res) = 0;
+	virtual void action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res) = 0;
     void move (Hero &hero, Image *map, Resolution res, int xMov, int yMov);
     bool moveCheckCollision(Hero &hero, Image *map, Resolution res, int dx, int dy);
     bool moveCheckCollisionAndPush(Hero &hero, Image *map, Resolution res, int dx, int dy);
 };
 
-class AutoSentry : public Enemy {
-public:
-	AutoSentry(int hp, int speed, int damage, int x=0, int y=0, bool inv=false);
-	AutoSentry(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=false);
-	
-    void action(Hero &hero, Image *map, Resolution res);
-};
 
 class StaticEnemy : public Enemy {
 
@@ -43,6 +41,6 @@ public:
 	StaticEnemy(int hp, int speed, int damage, int x=0, int y=0, bool inv=true);
 	StaticEnemy(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=true);
 	
-    void action(Hero &hero, Image *map, Resolution res);
+    void action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res);
 };
 

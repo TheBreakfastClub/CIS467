@@ -157,7 +157,7 @@ bool GameUniverse::init(const Configurations &config) {
         const char *bck = world->bck_imgName.c_str();
         const char *col = world->col_imgName.c_str();
         const char *top = (world->top_imgName == "NULL" ? NULL : world->top_imgName.c_str());
-        if (! sublevels[sub] -> init(bck, col, top, world->pixelator, world->medCut, world->lowCut))
+        if (! sublevels[sub] -> init(bck, col, top, hero, world->pixelator, world->medCut, world->lowCut))
             return false;
         sublevels[sub]->worldName = world->name; 
 
@@ -232,6 +232,7 @@ bool GameUniverse::init(const Configurations &config) {
                 cerr << "Error loading enemy image " << e.imgName << endl;
                 return false;
             }
+            enemy->pathfinder.set_grid(&(sublevels[e.world]->grid));
            
             sublevels[e.world]->enemies.push_back(enemy);
         }

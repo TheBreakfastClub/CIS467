@@ -50,7 +50,7 @@ LeftRightEnemy::LeftRightEnemy(int hp, int speed, int damage, int x, int y, bool
         // incramenting y
 
 
-void LeftRightEnemy::action(Hero &hero, Image *map, Resolution res)
+void LeftRightEnemy::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res)
 {
     // in the process of moving
     if (x < x_top && x > x_bottom) {

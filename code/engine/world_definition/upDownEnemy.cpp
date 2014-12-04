@@ -42,7 +42,7 @@ UpDownEnemy::UpDownEnemy(int hp, int speed, int damage, int x, int y, bool inv, 
         // incramenting y
 
 
-void UpDownEnemy::action(Hero &hero, Image *map, Resolution res)
+void UpDownEnemy::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res)
 {
     
     // in the process of moving
