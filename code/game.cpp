@@ -48,12 +48,12 @@ void Game::update()
 	  universe.hero.bag.clear(); //emptying out the hero's inventory
 	  //universe.
 	  //Change the level to the starting level
-	  universe.changeWorld(Sublevel::HUB, universe.currentWorld->currentResLevel, universe.hero.x, universe.hero.y);
+	  universe.changeWorld(Sublevel::HUB, Resolution::LOW, universe.hero.x, universe.hero.y);
 	  if (!universe.init(config)) {
 	      std::cerr << "Error initializing game universe\n";
 	      exit(0);
 	  }
-	  graphics.message("YOU DIED!");
+	  graphics.message("YOU DIED!"); //trying to make the message last longer
 	  
 	  
 	}
@@ -77,10 +77,22 @@ void Game::update()
 	  if (universe.hero.bag[i]->name == "resources/flour.png") flour = 1;
 	  
       }
-      if (egg+milk+sugar+bakingPowder+butter+flour == 1)
+      if (egg+milk+sugar+bakingPowder+butter+flour == 6)
       {
 	  graphics.message("UR DA BEST!!!!");
-	  universe.hero.bag.clear();
+	  for(int i = 0; i<Sublevel::COUNT; i++){
+	      universe.sublevels[i]->enemies.clear();
+	      universe.sublevels[i]->portals.clear();
+	      universe.sublevels[i]->items.clear();
+	  }
+	  universe.hero.bag.clear(); //emptying out the hero's inventory
+	  //universe.
+	  //Change the level to the starting level
+	  if (!universe.init(config)) {
+	      std::cerr << "Error initializing game universe\n";
+	      exit(0);
+	  }
+	  universe.changeWorld(Sublevel::HUB, Resolution::HIGH, universe.hero.x, universe.hero.y);
       }
     }
 
