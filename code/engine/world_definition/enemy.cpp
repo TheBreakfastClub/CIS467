@@ -7,6 +7,7 @@ Description:	Defines the different types of enemies in
 ************************************************************/
 
 #include "enemy.h"
+#include "../render/collision.h"
 #include <cmath>
 #include <iostream>
 
@@ -25,10 +26,11 @@ Enemy::Enemy(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int spee
  * @return pair.first = true if the enemy was able to move to the indicated location, false otherwise
  * @return pair.second = true if the enemy collided with the hero, false otherwise
  */
-pair<bool,bool> Enemy::moveCheckCollision(Hero &hero, Image *map, Resolution res, int dx, int dy) {
-
-    if (map->collision(getSpriteImage(res), x + dx, y + dy)) return make_pair(false,false);
-    if (hero.getSpriteImage(res)->collision(getSpriteImage(res), (x + dx) - hero.x, (y + dy) - hero.y)) {
+pair<bool,bool> Enemy::moveCheckCollision(Hero &hero, Image *map, Resolution res, int dx, int dy, float s) {
+    
+    if(scollision(getSpriteImage(res), x+dx, y+dy, scale[res], map, 0, 0, s)) return make_pair(false,false);
+    if(scollision(hero.getSpriteImage(res), hero.x, hero.y, hero.scale[res],
+      getSpriteImage(res), x + dx, y + dy, scale[res])) {
         if (!hero.hit) {
             hero.changeHitPoints(-attackDmg);
             hero.hit = true;
@@ -46,12 +48,12 @@ pair<bool,bool> Enemy::moveCheckCollision(Hero &hero, Image *map, Resolution res
  * @return pair.first = true if the enemy was able to move to the indicated location, false otherwise
  * @return pair.second = true if the enemy collided with the hero, false otherwise
  */
-pair<bool,bool> Enemy::moveCheckCollisionAndPush(Hero &hero, Image *map, Resolution res, int dx, int dy) {
+pair<bool,bool> Enemy::moveCheckCollisionAndPush(Hero &hero, Image *map, Resolution res, int dx, int dy, float s) {
 
-    if (map->collision(getSpriteImage(res), x + dx, y + dy)) return make_pair(false, false);
-    if (hero.getSpriteImage(res)->collision(getSpriteImage(res), (x + dx) - hero.x, (y + dy) - hero.y)) {
-        if (map->collision(hero.getSpriteImage(res), hero.x + dx, hero.y + dy)) {
-                  
+    if(scollision(getSpriteImage(res), x+dx, y+dy, scale[res], map, 0, 0, s)) return make_pair(false, false);
+    if(scollision(hero.getSpriteImage(res), hero.x, hero.y, hero.scale[res],
+      getSpriteImage(res), x+dx, y+dy, scale[res])) {
+        if (scollision(hero.getSpriteImage(res), hero.x+dx, hero.y+dy, hero.scale[res], map, 0, 0, s)) {
             if (!hero.hit) {
                 hero.changeHitPoints(-attackDmg);
                 hero.hit = true;
@@ -74,7 +76,7 @@ pair<bool,bool> Enemy::moveCheckCollisionAndPush(Hero &hero, Image *map, Resolut
  * @return pair.first = true if the enemy was able to move to the indicated location, false otherwise
  * @return pair.second = true if the enemy collided with the hero, false otherwise
  */
-pair<bool,bool> Enemy::move (Hero &hero, Image *map, Resolution res, int xMov, int yMov) {
+pair<bool,bool> Enemy::move (Hero &hero, Image *map, Resolution res, int xMov, int yMov, float s) {
 
     int dx = (xMov > 0) ? 1 : -1;
     int dy = (yMov > 0) ? 1 : -1;
@@ -90,7 +92,7 @@ pair<bool,bool> Enemy::move (Hero &hero, Image *map, Resolution res, int xMov, i
         // Move in both x and y direction
         while (xInc < xMov && yInc < yMov) {
             
-            results = moveCheckCollision(hero, map, res, dx, dy);
+            results = moveCheckCollision(hero, map, res, dx, dy, s);
             if(!results.first) return results;
             x += dx;
             y += dy;
@@ -100,13 +102,13 @@ pair<bool,bool> Enemy::move (Hero &hero, Image *map, Resolution res, int xMov, i
         
         // Move in either x or y direction, if needed
         while (xInc < xMov) {
-            results = moveCheckCollision(hero, map, res, dx, 0);
+            results = moveCheckCollision(hero, map, res, dx, 0, s);
             if (!results.first) return results;
             x += dx;
             ++xInc;
         }
         while (yInc < yMov) {
-            results = moveCheckCollision(hero, map, res, 0, dy);
+            results = moveCheckCollision(hero, map, res, 0, dy, s);
             if (!results.first) return results;
             y += dy;
             ++yInc;
@@ -120,7 +122,7 @@ pair<bool,bool> Enemy::move (Hero &hero, Image *map, Resolution res, int xMov, i
         // Move in both x and y direction
         while (xInc < xMov && yInc < yMov) {
             
-            results = moveCheckCollisionAndPush(hero, map, res, dx, dy);
+            results = moveCheckCollisionAndPush(hero, map, res, dx, dy, s);
             if(!results.first) return results;
             x += dx;
             y += dy;
@@ -131,14 +133,14 @@ pair<bool,bool> Enemy::move (Hero &hero, Image *map, Resolution res, int xMov, i
         // Move in either x or y direction, if needed
         while (xInc < xMov) {
 
-            results = moveCheckCollisionAndPush(hero, map, res, dx, 0);
+            results = moveCheckCollisionAndPush(hero, map, res, dx, 0, s);
             if (!results.first) return results;
             x += dx;
             ++xInc;
         }
         while (yInc < yMov) {
 
-            results = moveCheckCollisionAndPush(hero, map, res, 0, dy);
+            results = moveCheckCollisionAndPush(hero, map, res, 0, dy, s);
             if (!results.first) return results;
             y += dy;
             ++yInc;
@@ -154,13 +156,13 @@ StaticEnemy::StaticEnemy(int hp, int speed, int damage, int x, int y, bool inv)
 StaticEnemy::StaticEnemy(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x, int y, bool inv) 
  : Enemy(charImgH, charImgM, charImgL, hp, speed, damage, x, y, inv) {}
 
-void StaticEnemy::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res) {
+void StaticEnemy::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res, float s) {
 
-    if (hero.getSpriteImage(res)->collision(getSpriteImage(res), x - hero.x, y - hero.y)) {
+    if(scollision(hero.getSpriteImage(res), hero.x, hero.y, hero.scale[res],
+      getSpriteImage(res), x, y, scale[res])) {
         if (!hero.hit) {
             hero.changeHitPoints(-attackDmg);
             hero.hit = true;
         }
     }
 }
-
