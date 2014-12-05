@@ -49,7 +49,7 @@ class Game {
         void generateCollMap();
 
         /* SDL graphics and asset management methods */
-        bool setup(const char *gameName, int width, int height);
+        bool setup(const char *gameName, int width, int height, const char*, const char*);
         void cleanup();
 };
 
