@@ -252,7 +252,7 @@ bool GameUniverse::init(const Configurations &config) {
     hero.x = config.hero.x;
     hero.y = config.hero.y;
     hero.speed = config.hero.speed;
-    hero.hitPoints = config.hero.hitPoints;
+    hero.setHitPoints(config.hero.hitPoints);
     hero.invincible = config.hero.invincible;
     return true;
 }

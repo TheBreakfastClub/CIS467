@@ -49,22 +49,14 @@ void AutoSentry::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Re
 		do {
 			//std::cout << "Enemy " << std::to_string(id) << " next move: " << std::to_string(x_inc) << ", " << std::to_string(y_inc) << std::endl;
 
-			// check for collision before updating position
-			if (hero.getSpriteImage(res)->collision(getSpriteImage(res), hero.x - x + x_inc, hero.y - y + y_inc)) {
-				if (!hero.hit) {
-					hero.hitPoints -= attackDmg;
-					hero.hit = true;
-					std::cout << "Hero HP: " << std::to_string(hero.hitPoints) << std::endl;
-				}
-				stuck = false;
-			}
-			else if (!map->collision(getSpriteImage(res), x + x_inc, y + y_inc)) {
-				x += x_inc;
-				y += y_inc;
-				stuck = false;
-			}
-			else { // get unstuck!
-				stuck = true;
+            // Try to move
+            pair<bool,bool> results = move(hero, map, res, x_inc, y_inc);
+            stuck = !(results.second || results.first);
+
+            // Try to get unstuck, if you are stuck
+            if (stuck) {
+			    
+                // check for collision before updating position
 				std::pair<int, int> u_move = pathfinder.unstuck(direction(next.first, next.second), x, y, percent, magnitude);
 				if (u_move.first == 0 && u_move.second == 0) {
 					std::cout << "Nowhere to go...\n";
@@ -76,6 +68,7 @@ void AutoSentry::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Re
 			percent -= 5;
 			if (i % 3 == 0) magnitude++;
 			i++;
+
 		} while (stuck && percent >= 0);
 
 		moves++;

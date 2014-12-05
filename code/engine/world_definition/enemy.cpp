@@ -7,7 +7,6 @@ Description:	Defines the different types of enemies in
 ************************************************************/
 
 #include "enemy.h"
-//#include <stdlib.h>
 #include <cmath>
 #include <iostream>
 
@@ -21,56 +20,67 @@ Enemy::Enemy(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int spee
 
 /**
  * This checks to see if the enemy will collide with anything if it moves the given change in x and y.
- * It returns true if it collides, false otherwise. This should be used if the enemy cannot push the
- * hero.
+ * This should be used if the enemy cannot push the hero.
+ *
+ * @return pair.first = true if the enemy was able to move to the indicated location, false otherwise
+ * @return pair.second = true if the enemy collided with the hero, false otherwise
  */
-bool Enemy::moveCheckCollision(Hero &hero, Image *map, Resolution res, int dx, int dy) {
+pair<bool,bool> Enemy::moveCheckCollision(Hero &hero, Image *map, Resolution res, int dx, int dy) {
 
-    if (map->collision(getSpriteImage(res), x + dx, y + dy)) return true;
-    if (hero.getSpriteImage(res)->collision(getSpriteImage(res), x + dx - hero.x, y + dy - hero.y)) {
+    if (map->collision(getSpriteImage(res), x + dx, y + dy)) return make_pair(false,false);
+    if (hero.getSpriteImage(res)->collision(getSpriteImage(res), (x + dx) - hero.x, (y + dy) - hero.y)) {
         if (!hero.hit) {
-            hero.hitPoints -= attackDmg;
+            hero.changeHitPoints(-attackDmg);
             hero.hit = true;
         }
-        return true;
+        return make_pair(false,true);
     }
-    return false;
+    return make_pair(true, false);
 }
 
 /**
  * This checks to see if the enemy will collide with anything if it moves the given change in x and y.
  * It returns true if it collides, false otherwise. This should be used if the enemy can push the
  * hero. If the enemy then collides with the hero, it pushes the hero and returns false.
+ * 
+ * @return pair.first = true if the enemy was able to move to the indicated location, false otherwise
+ * @return pair.second = true if the enemy collided with the hero, false otherwise
  */
-bool Enemy::moveCheckCollisionAndPush(Hero &hero, Image *map, Resolution res, int dx, int dy) {
+pair<bool,bool> Enemy::moveCheckCollisionAndPush(Hero &hero, Image *map, Resolution res, int dx, int dy) {
 
-    if (map->collision(getSpriteImage(res), x + dx, y + dy)) return true;
-    if (hero.getSpriteImage(res)->collision(getSpriteImage(res), x + dx - hero.x, y + dy - hero.y)) {
+    if (map->collision(getSpriteImage(res), x + dx, y + dy)) return make_pair(false, false);
+    if (hero.getSpriteImage(res)->collision(getSpriteImage(res), (x + dx) - hero.x, (y + dy) - hero.y)) {
         if (map->collision(hero.getSpriteImage(res), hero.x + dx, hero.y + dy)) {
                   
             if (!hero.hit) {
-                hero.hitPoints -= attackDmg;
+                hero.changeHitPoints(-attackDmg);
                 hero.hit = true;
             }
-            return true;
+            return make_pair(false, true);
         } else {
             hero.x += dx;
             hero.y += dy;
+            return make_pair(true, true);
         }
     }
-    return false;
+    return make_pair(true, false);
 }
 
 /**
  * Moves the enemy by up to xMov horizontally and yMov vertically. If the enemy
  * would collide while moving to its new destination, it stops at the obstacle.
+ *
+ * 
+ * @return pair.first = true if the enemy was able to move to the indicated location, false otherwise
+ * @return pair.second = true if the enemy collided with the hero, false otherwise
  */
-void Enemy::move (Hero &hero, Image *map, Resolution res, int xMov, int yMov) {
+pair<bool,bool> Enemy::move (Hero &hero, Image *map, Resolution res, int xMov, int yMov) {
 
     int dx = (xMov > 0) ? 1 : -1;
     int dy = (yMov > 0) ? 1 : -1;
     xMov = abs(xMov);
     yMov = abs(yMov);
+    pair<bool,bool> results;
 
     if (!pushes) {
 
@@ -79,8 +89,9 @@ void Enemy::move (Hero &hero, Image *map, Resolution res, int xMov, int yMov) {
 
         // Move in both x and y direction
         while (xInc < xMov && yInc < yMov) {
-
-            if(moveCheckCollision(hero, map, res, dx, dy)) return;
+            
+            results = moveCheckCollision(hero, map, res, dx, dy);
+            if(!results.first) return results;
             x += dx;
             y += dy;
             ++xInc;
@@ -89,12 +100,14 @@ void Enemy::move (Hero &hero, Image *map, Resolution res, int xMov, int yMov) {
         
         // Move in either x or y direction, if needed
         while (xInc < xMov) {
-            if (moveCheckCollision(hero, map, res, dx, 0)) return;
+            results = moveCheckCollision(hero, map, res, dx, 0);
+            if (!results.first) return results;
             x += dx;
             ++xInc;
         }
         while (yInc < yMov) {
-            if (moveCheckCollision(hero, map, res, 0, dy)) return;
+            results = moveCheckCollision(hero, map, res, 0, dy);
+            if (!results.first) return results;
             y += dy;
             ++yInc;
         }
@@ -106,8 +119,9 @@ void Enemy::move (Hero &hero, Image *map, Resolution res, int xMov, int yMov) {
 
         // Move in both x and y direction
         while (xInc < xMov && yInc < yMov) {
-
-            if(moveCheckCollisionAndPush(hero, map, res, dx, dy)) return;
+            
+            results = moveCheckCollisionAndPush(hero, map, res, dx, dy);
+            if(!results.first) return results;
             x += dx;
             y += dy;
             ++xInc;
@@ -116,16 +130,21 @@ void Enemy::move (Hero &hero, Image *map, Resolution res, int xMov, int yMov) {
 
         // Move in either x or y direction, if needed
         while (xInc < xMov) {
-            if (moveCheckCollisionAndPush(hero, map, res, dx, 0)) return;
+
+            results = moveCheckCollisionAndPush(hero, map, res, dx, 0);
+            if (!results.first) return results;
             x += dx;
             ++xInc;
         }
         while (yInc < yMov) {
-            if (moveCheckCollisionAndPush(hero, map, res, 0, dy)) return;
+
+            results = moveCheckCollisionAndPush(hero, map, res, 0, dy);
+            if (!results.first) return results;
             y += dy;
             ++yInc;
         }
     }
+    return results;
 }
 
 
@@ -139,7 +158,7 @@ void StaticEnemy::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, R
 
     if (hero.getSpriteImage(res)->collision(getSpriteImage(res), x - hero.x, y - hero.y)) {
         if (!hero.hit) {
-            hero.hitPoints -= attackDmg;
+            hero.changeHitPoints(-attackDmg);
             hero.hit = true;
         }
     }

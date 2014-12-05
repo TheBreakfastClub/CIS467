@@ -9,7 +9,8 @@ Description:	Defines the different types of sprites that can
 #include "character.h"
 #include "../render/gfx.h"
 
-Character::Character() : Sprite(0, 0), hit(false), hitImage(NULL) {}
+Character::Character() : Sprite(0, 0), hit(false), hitImage(NULL), 
+    maxHitPoints(100) {}
 
 Character::~Character() {
     if (hitImage) {
@@ -18,10 +19,10 @@ Character::~Character() {
 }
 
 Character::Character(int hp, int speed, int damage, int x, int y, bool inv)
- : hitPoints(hp), speed(speed), attackDmg(damage), invincible(inv), hit(false), hitImage(NULL), Sprite(x, y) {}
+ : hitPoints(hp), maxHitPoints(hp), speed(speed), attackDmg(damage), invincible(inv), hit(false), hitImage(NULL), Sprite(x, y) {}
 
 Character::Character(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x, int y, bool inv)
- : hitPoints(hp), speed(speed), attackDmg(damage), invincible(inv), hit(false), Sprite(x, y, charImgH, charImgM, charImgL) 
+ : hitPoints(hp), maxHitPoints(hp), speed(speed), attackDmg(damage), invincible(inv), hit(false), Sprite(x, y, charImgH, charImgM, charImgL) 
 {
 	if (charImgH && charImgM && charImgL) {
 		hitImage = redTint(charImgH, 50);
@@ -31,4 +32,28 @@ Character::Character(Image *charImgH, Image *charImgM, Image *charImgL, int hp, 
     }
 }
 
+int Character::getHitPoints() {
+    return hitPoints;
+}
+
+/**
+ * Returns true if the hit points were successfully changed
+ */
+bool Character::changeHitPoints(int change) {
+    
+    if (!invincible || change > 0) {
+        hitPoints += change;
+        if (hitPoints > maxHitPoints) hitPoints = maxHitPoints;
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Returns true if the hit points were successfully changed
+ */
+bool Character::setHitPoints(int newHitPoints) {
+
+    return changeHitPoints(newHitPoints - hitPoints);
+}
 

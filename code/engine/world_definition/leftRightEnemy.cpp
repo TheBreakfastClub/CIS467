@@ -26,6 +26,7 @@ LeftRightEnemy::LeftRightEnemy(int hp, int speed, int damage, int x, int y, bool
     direction = -1;
     x_top = x + dist;
     x_bottom = x - dist;
+    pushes = true;
     // cerr << "y top: " << y_top << "\ny bottom: " << y_bottom;
 }
 
@@ -54,22 +55,21 @@ void LeftRightEnemy::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map
 {
     // in the process of moving
     if (x < x_top && x > x_bottom) {
-        // counter ++;
-        int x_inc = speed * direction;
-        if (!map->collision(getSpriteImage(res), x + x_inc, y)) {
-            x += x_inc;
+
+        // Move in same direction, unless you hit a wall, then change direction
+        if (!map->collision(getSpriteImage(res), x + speed * direction, y)) {
+            //x += x_inc;
+            move(hero, map, res, speed * direction, 0);
         } else {
             // cerr << "collide LR";
             direction = direction * -1;
-            x += speed * direction;
+            move(hero, map, res, speed * direction, 0);
         }
-        // cerr << "x: " << x << "\n";
     } 
     // time to turn around
     else {
         direction = direction * -1;
-        x += speed * direction;
-        // cerr << "change direction\n";
+        move(hero, map, res, speed * direction, 0);
     }
 
 

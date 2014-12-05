@@ -213,7 +213,7 @@ void GraphicsEngine::drawGameUniverse(GameUniverse &universe) {
 
     // display health
     char text[64];
-    sprintf(text,"health:%4d:", hero->hitPoints);
+    sprintf(text,"health:%4d:", hero->getHitPoints());
     screen->puttext(text, screen->w - 88, 0, 0xffffffff); // white
 
     // display status message

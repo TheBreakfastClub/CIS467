@@ -22,14 +22,41 @@ Game::Game() : universe(GAME_NAME), clock()
 	maxYMomentum = 50;
 	nonButterMomentum = 1;
 	momentumIncrease = 1;
+    collMap = NULL;
+}
+
+/**
+ * This generates a copy of the current map image with all the
+ * pushing enemies included. This should be used when checking for collisions
+ * with the world.
+ */
+void Game::generateCollMap() {
+    
+    if (collMap) {
+        delete collMap;
+    }
+
+    // Create a copy of the map containing all pushing enemies for collision
+    collMap = new Image (universe.currentWorld->currentRes->mapImg->w, universe.currentWorld->currentRes->mapImg->h);
+    collMap->blit(universe.currentWorld->currentRes->mapImg, 0, 0);
+    for (Enemy *e : universe.currentWorld->enemies) {
+        if (e->pushes)
+            collMap->ablit(e->getSpriteImage(universe.currentRes()), e->x, e->y);
+    }
 }
 
 /* Update game logic at each iteration of the loop */
 void Game::update()
 {
+
     // Let each enemy take its turn
     for (Enemy *e : universe.currentWorld->enemies) {
-        e->action(universe.hero, universe.currentWorld->enemies, universe.currentWorld->currentRes->mapImg, universe.currentRes());
+        if (e->pushes) {    
+            e->action(universe.hero, universe.currentWorld->enemies, 
+                universe.currentWorld->currentRes->mapImg, universe.currentRes());
+        } else {
+            e->action(universe.hero, universe.currentWorld->enemies, collMap, universe.currentRes());
+        }
     }
 
     // Check for hit status (not sure on this implementation)
@@ -38,7 +65,7 @@ void Game::update()
             universe.hero.hit = false;
         }), "herohit");
 	
-	if (universe.hero.hitPoints <= 0 )
+	if (universe.hero.getHitPoints() <= 0 )
 	{
 	  graphics.message("YOU DIED!");
 	  for(int i = 0; i<Sublevel::COUNT; i++){
@@ -160,25 +187,24 @@ void Game::handle_input()
                     break;
 		    
 		case SDLK_h:
-		  if(universe.hero.hitPoints>0)
+		  if(universe.hero.getHitPoints() > 0)
 		  {
-		      for(int iterator = 0; iterator < universe.hero.bag.size() && universe.hero.hitPoints != 100; iterator++)
+              int maxHitPoints = universe.hero.maxHitPoints;
+
+		      for(int iterator = 0; iterator < universe.hero.bag.size() && universe.hero.getHitPoints() != maxHitPoints; iterator++)
 		      {
-		      if(universe.hero.bag[iterator]->name == "resources/milk.png" && universe.hero.bag[iterator]->obtainable)
-		      {
+		            if(universe.hero.bag[iterator]->name == "resources/milk.png" && universe.hero.bag[iterator]->obtainable) {
 		      
-			  universe.hero.bag[iterator]->obtainable = false;;
-			  graphics.message("Milk Used");
-			  universe.hero.hitPoints+= 50;
-			  if (universe.hero.hitPoints > 100)
-			  universe.hero.hitPoints = 100;
-		      
-			break;
-		      }
+      			        universe.hero.bag[iterator]->obtainable = false;
+			            graphics.message("Milk Used");
+			            universe.hero.changeHitPoints(maxHitPoints/2);
+			            if (universe.hero.getHitPoints() > maxHitPoints)
+			                universe.hero.setHitPoints(maxHitPoints);
+		            }
 		      }
 		  }
-		    break;
-                case SDLK_i:
+		  break;
+        case SDLK_i:
 		  cout << "Items in bag:\n";
 		  for(int i = 0; i<universe.hero.bag.size(); i++)
 		  {
@@ -261,15 +287,6 @@ void Game::handle_input()
       }
     }
     
-    // Create a copy of the map containing all enemies for collision
-    Image *map = new Image (universe.currentWorld->currentRes->mapImg->w, universe.currentWorld->currentRes->mapImg->h);
-    map->blit(universe.currentWorld->currentRes->mapImg, 0, 0);
-    for (Enemy *e : universe.currentWorld->enemies) {
-        if (e->pushes)
-            map->ablit(e->getSpriteImage(universe.currentRes()), e->x, e->y);
-    }
-    //Image *map = universe.currentWorld->currentRes->mapImg;
-
     // Handle keyboard events
     int dx = 0, dy = 0;
     int speed = universe.hero.speed;
@@ -290,51 +307,50 @@ void Game::handle_input()
 
         if(dx && dy) {
 	        //checking for diagonal change
-            if(!map->collision(heroImg, universe.hero.x+dx, universe.hero.y+dy))
+            if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y+dy))
     	    {
     	      universe.hero.x+=dx;
     	      universe.hero.y+=dy;
     	      redraw=true;
     	    }
     	    //checking for horizontal change
-            else if(!map->collision(heroImg, universe.hero.x+dx, universe.hero.y)){
+            else if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y)){
     	      universe.hero.x+=dx;
     	      redraw=true;
       	    }
     	    //change for vertical change
-            else if(!map->collision(heroImg, universe.hero.x, universe.hero.y+dy)){
+            else if(!collMap->collision(heroImg, universe.hero.x, universe.hero.y+dy)){
     	      universe.hero.y+=dy; 
     	      redraw=true;
     	    }
         }
         else if(dx) {
-            if(!map->collision(heroImg, universe.hero.x+dx, universe.hero.y)) universe.hero.x+=dx, redraw=true;
-            else if(!map->collision(heroImg, universe.hero.x+dx, universe.hero.y-1)) {
+            if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y)) universe.hero.x+=dx, redraw=true;
+            else if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y-1)) {
     	        universe.hero.x+=dx;
     	        universe.hero.y--;
     	        redraw=true;
     	    }
-            else if(!map->collision(heroImg, universe.hero.x+dx, universe.hero.y+1)) {
+            else if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y+1)) {
     	      universe.hero.x+=dx;
     	      universe.hero.y++;
     	      redraw=true;
     	    }
         }
         else if(dy) {
-            if(!map->collision(heroImg, universe.hero.x, universe.hero.y+dy)) universe.hero.y+=dy, redraw=true;
-            else if(!map->collision(heroImg, universe.hero.x-1, universe.hero.y+dy)){
+            if(!collMap->collision(heroImg, universe.hero.x, universe.hero.y+dy)) universe.hero.y+=dy, redraw=true;
+            else if(!collMap->collision(heroImg, universe.hero.x-1, universe.hero.y+dy)){
 	            universe.hero.x--;
     	        universe.hero.y+=dy;
 	        redraw=true;
 	        }
-            else if(!map->collision(heroImg, universe.hero.x+1, universe.hero.y+dy)){
+            else if(!collMap->collision(heroImg, universe.hero.x+1, universe.hero.y+dy)){
         	    universe.hero.x++;
 	            universe.hero.y+=dy;
 	            redraw=true;
 	        }
         }
     }
-    delete map;
     
     // Update movement
     //universe.hero.x += dx;
@@ -355,6 +371,7 @@ int Game::run()
 	while (gameIsRunning) {
         graphics.drawGameUniverse(universe);
         graphics.refreshScreen();
+        generateCollMap();
 		handle_input();
 		update();
 		clock.tick();

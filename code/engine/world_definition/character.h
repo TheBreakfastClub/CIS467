@@ -18,8 +18,6 @@ class Character: public Sprite {
     Character(int hp, int speed, int damage, int x=0, int y=0, bool inv=false);
     Character(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=false);
 
-    /** Defines the amount of hitpoints a sprite has **/
-    int hitPoints;
     /** Defines if a sprite is invincible **/
     bool invincible;
     /** Defines the speed of a sprite **/
@@ -29,6 +27,16 @@ class Character: public Sprite {
     /** Used when a Character has taken damage **/
     Image *hitImage;
     bool hit;
+
+    int maxHitPoints;
+
+    int getHitPoints();
+    bool changeHitPoints(int change);
+    bool setHitPoints(int newHitPoints);
+
+  private:
+    /** Defines the amount of hitpoints a sprite has **/
+    int hitPoints;
     
 };
 

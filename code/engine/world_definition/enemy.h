@@ -9,6 +9,7 @@ Description:	Defines the different types of enemies in
 #pragma once
 
 #include <string>
+#include <utility>
 #include "sprite.h"
 #include "character.h"
 #include "hero.h"
@@ -29,9 +30,9 @@ public:
 
 	// subclasses of Enemy will define how to act
 	virtual void action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res) = 0;
-    void move (Hero &hero, Image *map, Resolution res, int xMov, int yMov);
-    bool moveCheckCollision(Hero &hero, Image *map, Resolution res, int dx, int dy);
-    bool moveCheckCollisionAndPush(Hero &hero, Image *map, Resolution res, int dx, int dy);
+    pair<bool,bool> move (Hero &hero, Image *map, Resolution res, int xMov, int yMov);
+    pair<bool,bool> moveCheckCollision(Hero &hero, Image *map, Resolution res, int dx, int dy);
+    pair<bool,bool> moveCheckCollisionAndPush(Hero &hero, Image *map, Resolution res, int dx, int dy);
 };
 
 

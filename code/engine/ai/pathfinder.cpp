@@ -135,7 +135,7 @@ void Pathfinder::find_hero(int x, int y)
 
 	// Couldn't find a path to the Enemy
 	std::cout << "No path to Enemy found :(\n";
-	print_path_to_hero();
+	//print_path_to_hero();
 }
 
 void Pathfinder::print_path_to_hero()

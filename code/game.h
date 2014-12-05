@@ -44,6 +44,9 @@ class Game {
         int run();
         void update();
         void handle_input();
+        
+        Image *collMap;
+        void generateCollMap();
 
         /* SDL graphics and asset management methods */
         bool setup(const char *gameName, int width, int height);
