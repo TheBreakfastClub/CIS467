@@ -8,7 +8,7 @@ AutoSentry::AutoSentry(int hp, int speed, int damage, int x, int y, bool inv)
 AutoSentry::AutoSentry(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x, int y, bool inv) 
  : Enemy(charImgH, charImgM, charImgL, hp, speed, damage, x, y, inv), pathfinder(id), moves(0), active(false) {}
 
-void AutoSentry::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res) // TODO: collision with other enemies
+void AutoSentry::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res, float s) // TODO: collision with other enemies
 {
 	auto direction = [](int x_mov, int y_mov) {
 		if (x_mov == 1 && y_mov == 1) return "se";
@@ -50,7 +50,7 @@ void AutoSentry::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Re
 			//std::cout << "Enemy " << std::to_string(id) << " next move: " << std::to_string(x_inc) << ", " << std::to_string(y_inc) << std::endl;
 
             // Try to move
-            pair<bool,bool> results = move(hero, map, res, x_inc, y_inc);
+            pair<bool,bool> results = move(hero, map, res, x_inc, y_inc, s);
             stuck = !(results.second || results.first);
 
             // Try to get unstuck, if you are stuck
