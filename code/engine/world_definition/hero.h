@@ -20,6 +20,8 @@ class Hero: public Character{
         ~Hero();
 
         vector<Item*> bag;
+        vector<Item*> crystals;
+
 
         // Add here other properties that the hero of a single type should have
 };
