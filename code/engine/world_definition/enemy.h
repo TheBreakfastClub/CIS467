@@ -29,10 +29,10 @@ public:
     int id;
 
 	// subclasses of Enemy will define how to act
-	virtual void action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res) = 0;
-    pair<bool,bool> move (Hero &hero, Image *map, Resolution res, int xMov, int yMov);
-    pair<bool,bool> moveCheckCollision(Hero &hero, Image *map, Resolution res, int dx, int dy);
-    pair<bool,bool> moveCheckCollisionAndPush(Hero &hero, Image *map, Resolution res, int dx, int dy);
+	virtual void action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res, float) = 0;
+    pair<bool,bool> move (Hero &hero, Image *map, Resolution res, int xMov, int yMov, float);
+    pair<bool,bool> moveCheckCollision(Hero &hero, Image *map, Resolution res, int dx, int dy, float);
+    pair<bool,bool> moveCheckCollisionAndPush(Hero &hero, Image *map, Resolution res, int dx, int dy, float);
 };
 
 
@@ -42,6 +42,5 @@ public:
 	StaticEnemy(int hp, int speed, int damage, int x=0, int y=0, bool inv=true);
 	StaticEnemy(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=true);
 	
-    void action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res);
+    void action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res, float);
 };
-
