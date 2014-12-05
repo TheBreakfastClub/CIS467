@@ -62,7 +62,7 @@ class GameWorld {
         WorldGrid grid;
 
         // Methods to change the resolution
-        void next_resolution(); // selects the next GameMap
+        void next_resolution(int numCrystals); // selects the next GameMap
         void prev_resolution(); //             prev
         void set_resolution(Resolution res);
     private:
