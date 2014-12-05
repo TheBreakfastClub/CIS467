@@ -22,4 +22,8 @@ Hero::~Hero() {
         delete bag.back();
         bag.pop_back();
     }
+    while (!crystals.empty()) {
+        delete crystals.back();
+        crystals.pop_back();
+    }
 }
