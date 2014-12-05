@@ -59,7 +59,7 @@ void AutoSentry::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Re
                 // check for collision before updating position
 				std::pair<int, int> u_move = pathfinder.unstuck(direction(next.first, next.second), x, y, percent, magnitude);
 				if (u_move.first == 0 && u_move.second == 0) {
-					std::cout << "Nowhere to go...\n";
+					//std::cout << "Nowhere to go...\n";
 					break;
 				}
 				x_inc = u_move.first * speed;

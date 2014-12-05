@@ -84,7 +84,7 @@ void Pathfinder::find_hero(int x, int y)
 	origin->parent = NULL;
 
 	if (origin->type != Celltype::HERO) {
-		std::cout << "Origin cell isn't of Hero celltype\n";
+		//std::cout << "Origin cell isn't of Hero celltype\n";
 		return;
 	}
 
@@ -98,14 +98,14 @@ void Pathfinder::find_hero(int x, int y)
 	// NO PATH TO ENEMY
 	if (origin_neighbors.empty()) {
 		path = NULL;
-		std::cout << "NO PATH TO ENEMY (right away at origin too!)\n";
+		//std::cout << "NO PATH TO ENEMY (right away at origin too!)\n";
 		return; // blocked in from the get-go...
 	}
 	// FOUND ENEMY
 	if (origin_neighbors.size() == 1 && origin_neighbors[0]->x == x && origin_neighbors[0]->y == y) {
 		path = origin_neighbors[0];
 		path->parent = origin;
-		std::cout << "Found Enemy in origin's neighbors\n";
+		//std::cout << "Found Enemy in origin's neighbors\n";
 		return;
 	}
 
@@ -134,7 +134,7 @@ void Pathfinder::find_hero(int x, int y)
 	}
 
 	// Couldn't find a path to the Enemy
-	std::cout << "No path to Enemy found :(\n";
+	//std::cout << "No path to Enemy found :(\n";
 	//print_path_to_hero();
 }
 
