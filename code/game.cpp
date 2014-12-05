@@ -387,18 +387,15 @@ int Game::run()
  * @param gameName The name of the game to display on the game's window.
  * @param width The width of the game's window.
  * @param height The height of the game's window.
+ * @param pathPrefix Prefix to prepend to each pathname (for loading images, etc)
+ * @param configFileName Name of configuration file to load
  * @return True if setup was completed successfully, false otherwise.
  */
-bool Game::setup(const char *gameName, int width, int height)
+bool Game::setup(const char *gameName, int width, int height, const char *pathPrefix, const char *configFileName)
 {
     // Load configurations
-#ifdef USING_MAC
-    if (!config.readInConfigurations("/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/code/CIS467/code/util/thomas.config")) {
-#else
-    if (!config.readInConfigurations(".config")) {
-#endif
-        return false;
-    }
+    config.setPathPrefix(pathPrefix);
+    if(!config.readInConfigurations(configFileName)) return false;
 
     // Setup the Graphics Engine
     if (!graphics.init(gameName, width, height)) {
@@ -421,11 +418,29 @@ bool Game::setup(const char *gameName, int width, int height)
 int main(int argc, char* argv[])
 {
 	Game game;
-	if (!game.setup(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT)) {
+
+  #ifdef USING_MAC
+    const char *pathPrefix = "/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/code/CIS467/code/";
+    const char *configFileName = "/Users/thomasverstraete/Dropbox/GVSU/SeniorProjCIS467/code/CIS467/code/.config";
+  #else
+    const char *pathPrefix = "";
+    const char *configFileName = ".config";
+  #endif
+
+  if(argc > 3) {
+    std::cout << "Usage: " << argv[0] << " [[pathPrefix] configFile]\n\n";
+    return 1;
+  }
+  else if(argc == 3) {
+    pathPrefix = argv[1];
+    configFileName = argv[2];
+  }
+  else if(argc == 2)
+    configFileName = argv[1];
+  
+  if (!game.setup(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, pathPrefix, configFileName)) {
         std::cerr << "Error in setting up the game. Game is exiting.\n";
 		return 1;
 	}
-	int signal = game.run();
-	return signal;
+	return game.run();
 }
-
