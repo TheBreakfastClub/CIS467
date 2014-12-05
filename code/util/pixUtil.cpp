@@ -23,6 +23,8 @@ pixAlgo PixUtil::getPixAlgoFromIdx(int idx) {
         return blend_average_opaque;
     case 3:
         return blend_most_common;
+    case 8:
+        return 0;
     default:
         return blend_average;
     }
