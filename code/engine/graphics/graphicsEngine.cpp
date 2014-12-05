@@ -119,47 +119,6 @@ void GraphicsEngine::refreshScreen() {
 }
 
 /** 
- * This method draws the GameWorld to the screen. It does NOT 
- * refresh the screen, allowing the caller to decide when to display
- * what has been drawn.
- *
- * @param world The game world to draw to the screen
- * @param pan_x The horizontal distance from the top-left corner
- *      of the game map indicating the top-left corner of the area
- *      of the game map that should be drawn to the screen.
- * @param pan_y The vertical distance from the top-left corner
- *      of the game map indicating the top-left corner of the area
- *      of the game map that should be drawn to the screen.
- */
-void GraphicsEngine::drawGameWorld(const GameWorld &world, const int &pan_x, const int &pan_y) {
-
-    // Grab the current map to draw 
-    GameMap *map = world.currentRes;
-    Resolution res = world.currentResLevel;
-
-    // Draw the map to the screen, panning the map to the correct area
-    screen->blit(map->mapImg, -pan_x, -pan_y);
-
-    // TODO: Draw Sprites (e.g. hero, enemies, items) onto mapImg
-    for (Item* i : world.items) {
-        screen->ablit(i->getSpriteImage(res), i->x - pan_x, i->y - pan_y);
-    }
-    
-    //Draw portals
-    for (Portal* p : world.portals){
-      screen->ablit (p->getSpriteImage(res), p->x - pan_x, p->y - pan_y);
-    }
-
-    // Draw the top layer, if it exists
-    if (map->topLayer) {
-        screen->ascaleblit(map->topLayer);
-    }
-
-    // TODO: see if we can paint directly to the screen, only painting
-    // the items in the panned area.
-}
-
-/** 
  * This method draws the GameUniverse to the screen. It does NOT 
  * refresh the screen, allowing the caller to decide when to display
  * what has been drawn.
@@ -173,29 +132,30 @@ void GraphicsEngine::drawGameUniverse(GameUniverse &universe) {
     GameMap *map = world->currentRes;
     Hero *hero = &universe.hero;
     Resolution res = universe.currentRes();
+    float scale = world->scale[res];
 
     // Draw the map to the screen, panning the map to the correct area
-    int pan_x = clamp(hero->x - screen->w/2, 0, world->w - screen->w);
-    int pan_y = clamp(hero->y - screen->h/2, 0, world->h - screen->h);
-    screen->blit(map->mapImg, -pan_x, -pan_y);
+    int pan_x = clamp(hero->x - screen->w/2, 0, (int)(universe.currentWorld->currentRes->mapImg->w*scale) - screen->w);
+    int pan_y = clamp(hero->y - screen->h/2, 0, (int)(universe.currentWorld->currentRes->mapImg->h*scale) - screen->h);
+    screen->sblit(map->mapImg, -pan_x, -pan_y, scale);
 
     // Draw the items to the screen
     for (Item* i : world->items) {
-        screen->ablit(i->getSpriteImage(res), i->x - pan_x, i->y - pan_y);
+        screen->asblit(i->getSpriteImage(res), i->x - pan_x, i->y - pan_y, scale);
     }
     
     for (Portal* p : world->portals) {
-	screen->ablit(p->getSpriteImage(res), p->x - pan_x, p->y - pan_y);
+	screen->asblit(p->getSpriteImage(res), p->x - pan_x, p->y - pan_y, scale);
     }
 
     // Draw enemies
     for (Enemy *e : world->enemies) {
         if (e->hit) {
-            screen->ablit(e->hitImage, e->x - pan_x, e->y - pan_y);
+            screen->asblit(e->hitImage, e->x - pan_x, e->y - pan_y, scale);
             e->hit = false;
         }
         else
-            screen->ablit(e->getSpriteImage(res), e->x - pan_x, e->y - pan_y);
+            screen->asblit(e->getSpriteImage(res), e->x - pan_x, e->y - pan_y, scale);
     }
 
     // Draw the hero to the screen
@@ -204,11 +164,11 @@ void GraphicsEngine::drawGameUniverse(GameUniverse &universe) {
         //hero->hit = false;
     }
     else
-        screen->ablit(hero->getSpriteImage(res), hero->x - pan_x, hero->y - pan_y);
+        screen->asblit(hero->getSpriteImage(res), hero->x - pan_x, hero->y - pan_y, scale);
 
     // Draw the top layer, if it exists
     if (map->topLayer) {
-        screen->ascaleblit(map->topLayer);
+        screen->asblit(map->topLayer, -pan_x, -pan_y, scale);
     }
 
     // display health
