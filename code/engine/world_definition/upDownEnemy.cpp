@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include "../render/gfx.h"
+#include "../render/collision.h"
 
 
 
@@ -42,20 +43,20 @@ UpDownEnemy::UpDownEnemy(int hp, int speed, int damage, int x, int y, bool inv, 
         // incramenting y
 
 
-void UpDownEnemy::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res)
+void UpDownEnemy::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res, float s)
 {
     
     // in the process of moving
     if (y < y_top && y > y_bottom) {
         // counter ++;
         // int y_inc = speed * direction;
-        if (!map->collision(getSpriteImage(res), x, y + speed * direction)) {
+        if(!scollision(getSpriteImage(res), x, y + speed*direction, scale[res], map, 0, 0, s)) {
             // y += y_inc;
-            move(hero, map, res, 0, speed * direction);
+            move(hero, map, res, 0, speed * direction, s);
         } else {
             direction = direction * -1;
             // y += speed * direction;
-            move(hero, map, res, 0, speed * direction);
+            move(hero, map, res, 0, speed * direction, s);
         }
         // cerr << "y: " << y << "\n";
     } 
@@ -63,12 +64,13 @@ void UpDownEnemy::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, R
     else {
         direction = direction * -1;
         // y += speed * direction;
-        move(hero, map, res, 0, (speed * direction));
+        move(hero, map, res, 0, speed * direction, s);
         // cerr << "change direction\n";
     }
 
 
-    if (!hero.hit && hero.getSpriteImage(res)->collision(getSpriteImage(res), x - hero.x, y - hero.y)) {
+    if(!hero.hit && scollision(hero.getSpriteImage(res), hero.x, hero.y, hero.scale[res],
+      getSpriteImage(res), x, y, scale[res])) {
             // hero.hitPoints -= attackDmg;
             // hero.hit = true;
             // std::cout << "Hero HP: " << std::to_string(hero.hitPoints) << std::endl;
