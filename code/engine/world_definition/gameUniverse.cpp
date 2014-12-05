@@ -10,6 +10,7 @@ Description:    Holds the data defining the universe
 #include <numeric>
 #include "upDownEnemy.h"
 #include "leftRightEnemy.h"
+#include "../render/collision.h"
 
 /**
  * Default constructor for the universe. Must call GameUniverse::init()
@@ -69,7 +70,9 @@ bool GameUniverse::checkCollisionsWithItems() {
 
         // Check if item and hero collide
         Resolution res = currentRes();
-        if (hero.getSpriteImage(res)->collision(item->getSpriteImage(res), item->x - hero.x, item->y - hero.y)) {
+
+        if(scollision(hero.getSpriteImage(res), hero.x, hero.y, hero.scale[res], 
+          item->getSpriteImage(res), item->x, item->y, item->scale[res])) {
             hero.bag.push_back(item);
             it = currentWorld->items.erase(it);
             return true;
@@ -95,7 +98,9 @@ bool GameUniverse::checkCollisionsWithPortal(){
 
         // Check if portal and hero collide
         Resolution res = currentRes();
-        if (hero.getSpriteImage(res)->collision(portal->getSpriteImage(res), portal->x - hero.x, portal->y - hero.y)) {
+        
+        if(scollision(hero.getSpriteImage(res), hero.x, hero.y, hero.scale[res], 
+          portal->getSpriteImage(res), portal->x, portal->y, portal->scale[res])) {
             changeWorld(portal->destination, currentWorld->currentResLevel, portal->xDest, portal->yDest);
             return true;
         }
