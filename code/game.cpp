@@ -7,6 +7,7 @@ Description:    The main controller of the game.
 #include "game.h"
 #include "engine/world_definition/enemy.h"
 #include "engine/world_definition/autoSentry.h"
+#include "engine/render/collision.h"
 
 #define GAME_NAME "One Rad Waffle Game"
 #define WINDOW_WIDTH 500
@@ -52,10 +53,11 @@ void Game::update()
     // Let each enemy take its turn
     for (Enemy *e : universe.currentWorld->enemies) {
         if (e->pushes) {    
-            e->action(universe.hero, universe.currentWorld->enemies, 
-                universe.currentWorld->currentRes->mapImg, universe.currentRes());
+            e->action(universe.hero, universe.currentWorld->enemies, universe.currentWorld->currentRes->mapImg, 
+              universe.currentRes(), universe.currentWorld->scale[universe.currentRes()]);
         } else {
-            e->action(universe.hero, universe.currentWorld->enemies, collMap, universe.currentRes());
+            e->action(universe.hero, universe.currentWorld->enemies, universe.currentWorld->currentRes->mapImg, 
+              universe.currentRes(), universe.currentWorld->scale[universe.currentRes()]);
         }
     }
 
@@ -107,7 +109,7 @@ void Game::update()
       }
       if (egg+milk+sugar+bakingPowder+butter+flour == 6)
       {
-	  graphics.message("YOU WIN!!!!");
+	  graphics.message("UR DA BEST!!!!");
 	  for(int i = 0; i<Sublevel::COUNT; i++){
 	      universe.sublevels[i]->enemies.clear();
 	      universe.sublevels[i]->portals.clear();
@@ -159,15 +161,17 @@ void Game::handle_input()
 
     // Handle non-movement keyboard events
 	SDL_Event event;
-	while(SDL_PollEvent(&event)) {
+	float oldScale;
+
+  while(SDL_PollEvent(&event)) {
 
 		// Quit (through close window decoration)
     	if (event.type == SDL_QUIT) {
     		gameIsRunning = false;
     		return;
     	}
-
-    	// Keyboard
+      
+      // Keyboard
     	else if (event.type == SDL_KEYDOWN) {
     		switch (event.key.keysym.sym) {
                 case SDLK_p:
@@ -177,13 +181,27 @@ void Game::handle_input()
                 case SDLK_PLUS:
                 case SDLK_0:
                 case SDLK_d:
-                    universe.currentWorld->next_resolution(universe.hero.crystals.size());
+                    if(universe.currentWorld->highRes == universe.currentWorld->medRes) {
+                      oldScale = universe.currentWorld->scale[universe.currentRes()];
+                      universe.currentWorld->next_resolution();
+                      universe.hero.x += universe.hero.getSpriteImage(universe.currentRes())->w *
+                        (oldScale - universe.currentWorld->scale[universe.currentRes()]) / 2;
+                    }
+                    else
+                      universe.currentWorld->next_resolution();
                     break;
                 case SDLK_KP_MINUS:
                 case SDLK_MINUS:
                 case SDLK_9:
                 case SDLK_a:
-                    universe.currentWorld->prev_resolution();
+                    if(universe.currentWorld->highRes == universe.currentWorld->medRes) {
+                      oldScale = universe.currentWorld->scale[universe.currentRes()];
+                      universe.currentWorld->prev_resolution();
+                      universe.hero.x += universe.hero.getSpriteImage(universe.currentRes())->w *
+                        (oldScale - universe.currentWorld->scale[universe.currentRes()]) / 2;
+                    }
+                    else
+                      universe.currentWorld->prev_resolution();
                     break;
 		    
 		case SDLK_h:
@@ -210,8 +228,6 @@ void Game::handle_input()
 		  {
 		      cout << universe.hero.bag[i]->name <<endl;
 		  }
-		  
-		  cout << "Crystal Number: " << universe.hero.crystals.size() << endl;
 		  
                     break;
 		case SDLK_l:
@@ -298,7 +314,10 @@ void Game::handle_input()
     if (xMomPer > yMomPer) maxMomPer = xMomPer;
     else maxMomPer = yMomPer;
     speed = (int) speed * maxMomPer;
-    Image *heroImg = universe.hero.getSpriteImage(universe.currentRes());
+    Resolution res = universe.currentRes();
+    Image *heroImg = universe.hero.getSpriteImage(res);
+    Image *mapImg = universe.currentWorld->currentRes->mapImg;
+    float scale = universe.currentWorld->scale[res];
     
     //process movements keys multiple times, depending on speed
     for(int i = 0; i < speed; ++i) {
@@ -309,48 +328,71 @@ void Game::handle_input()
 
         if(dx && dy) {
 	        //checking for diagonal change
-            if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y+dy))
+          if(!scollision(heroImg, universe.hero.x+dx, universe.hero.y+dy, universe.hero.scale[res],
+              mapImg, 0, 0, scale))
     	    {
     	      universe.hero.x+=dx;
     	      universe.hero.y+=dy;
     	      redraw=true;
     	    }
     	    //checking for horizontal change
-            else if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y)){
-    	      universe.hero.x+=dx;
-    	      redraw=true;
-      	    }
+          else if(!scollision(heroImg, universe.hero.x+dx, universe.hero.y, universe.hero.scale[res],
+            mapImg, 0, 0, scale))
+          {
+          universe.hero.x+=dx;
+          redraw=true;
+          }
     	    //change for vertical change
-            else if(!collMap->collision(heroImg, universe.hero.x, universe.hero.y+dy)){
-    	      universe.hero.y+=dy; 
-    	      redraw=true;
+          else if(!scollision(heroImg, universe.hero.x, universe.hero.y+dy, universe.hero.scale[res],
+            mapImg, 0, 0, scale))
+          {
+  	      universe.hero.y+=dy; 
+  	      redraw=true;
     	    }
         }
         else if(dx) {
-            if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y)) universe.hero.x+=dx, redraw=true;
-            else if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y-1)) {
-    	        universe.hero.x+=dx;
-    	        universe.hero.y--;
-    	        redraw=true;
+          if(!scollision(heroImg, universe.hero.x+dx, universe.hero.y, universe.hero.scale[res],
+            mapImg, 0, 0, scale))
+          {
+            universe.hero.x+= dx;
+            redraw = true;
+          }
+          else if(!scollision(heroImg, universe.hero.x+dx, universe.hero.y-1, universe.hero.scale[res],
+            mapImg, 0, 0, scale))
+          {
+  	        universe.hero.x+=dx;
+  	        universe.hero.y--;
+  	        redraw=true;
     	    }
-            else if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y+1)) {
-    	      universe.hero.x+=dx;
-    	      universe.hero.y++;
-    	      redraw=true;
+          else if(!scollision(heroImg, universe.hero.x+dx, universe.hero.y+1, universe.hero.scale[res],
+            mapImg, 0, 0, scale))
+          {
+            universe.hero.x+=dx;
+            universe.hero.y++;
+            redraw=true;
     	    }
         }
         else if(dy) {
-            if(!collMap->collision(heroImg, universe.hero.x, universe.hero.y+dy)) universe.hero.y+=dy, redraw=true;
-            else if(!collMap->collision(heroImg, universe.hero.x-1, universe.hero.y+dy)){
+            if(!scollision(heroImg, universe.hero.x, universe.hero.y+dy, universe.hero.scale[res],
+              mapImg, 0, 0, scale))
+            {
+              universe.hero.y += dy;
+              redraw = true;
+            }
+            else if(!scollision(heroImg, universe.hero.x-1, universe.hero.y+dy, universe.hero.scale[res],
+              mapImg, 0, 0, scale))
+            {
 	            universe.hero.x--;
     	        universe.hero.y+=dy;
-	        redraw=true;
-	        }
-            else if(!collMap->collision(heroImg, universe.hero.x+1, universe.hero.y+dy)){
+              redraw=true;
+            }
+            else if(!scollision(heroImg, universe.hero.x+1, universe.hero.y+dy, universe.hero.scale[res],
+              mapImg, 0, 0, scale))
+            {
         	    universe.hero.x++;
 	            universe.hero.y+=dy;
 	            redraw=true;
-	        }
+            }
         }
     }
     
@@ -371,9 +413,9 @@ void Game::handle_input()
 int Game::run()
 {
 	while (gameIsRunning) {
-        graphics.drawGameUniverse(universe);
-        graphics.refreshScreen();
-        generateCollMap();
+    graphics.drawGameUniverse(universe);
+    graphics.refreshScreen();
+//     generateCollMap();
 		handle_input();
 		update();
 		clock.tick();
