@@ -55,6 +55,7 @@ class GameWorld {
 
         int w;
         int h;
+        float scale[3]; // scaling factors for low, med, high resolution
 
         Resolution currentResLevel;
 
