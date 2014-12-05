@@ -70,9 +70,19 @@ bool GameUniverse::checkCollisionsWithItems() {
         // Check if item and hero collide
         Resolution res = currentRes();
         if (hero.getSpriteImage(res)->collision(item->getSpriteImage(res), item->x - hero.x, item->y - hero.y)) {
-            hero.bag.push_back(item);
-            it = currentWorld->items.erase(it);
+            
+	  if(item->name == "resources/crystal.png")
+	  {
+	    hero.crystals.push_back(item);
+	    it = currentWorld->items.erase(it);
+	    return true;
+	  }
+	  else
+	  {  
+	    hero.bag.push_back(item);
+	    it = currentWorld->items.erase(it);
             return true;
+	  }
         }
         ++it;
     }
