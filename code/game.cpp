@@ -107,7 +107,7 @@ void Game::update()
       }
       if (egg+milk+sugar+bakingPowder+butter+flour == 6)
       {
-	  graphics.message("UR DA BEST!!!!");
+	  graphics.message("YOU WIN!!!!");
 	  for(int i = 0; i<Sublevel::COUNT; i++){
 	      universe.sublevels[i]->enemies.clear();
 	      universe.sublevels[i]->portals.clear();
@@ -177,7 +177,7 @@ void Game::handle_input()
                 case SDLK_PLUS:
                 case SDLK_0:
                 case SDLK_d:
-                    universe.currentWorld->next_resolution();
+                    universe.currentWorld->next_resolution(universe.hero.crystals.size());
                     break;
                 case SDLK_KP_MINUS:
                 case SDLK_MINUS:
@@ -210,6 +210,8 @@ void Game::handle_input()
 		  {
 		      cout << universe.hero.bag[i]->name <<endl;
 		  }
+		  
+		  cout << "Crystal Number: " << universe.hero.crystals.size() << endl;
 		  
                     break;
 		case SDLK_l:
