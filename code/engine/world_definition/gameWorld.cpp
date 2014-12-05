@@ -29,9 +29,9 @@ GameWorld::GameWorld(string world_name) : worldName(world_name), items(), portal
 GameWorld::~GameWorld() {
 
     if (highRes) {
-        delete(highRes);
-        delete(medRes);
-        delete(lowRes);
+        if(medRes != highRes) delete medRes;
+        if(lowRes != highRes) delete lowRes;
+        delete highRes;
     }
 
     while (!items.empty()) {
@@ -88,43 +88,61 @@ bool GameWorld::init(const char *background_filename,
     // Get the width and height of the world
     w = highRes->w();
     h = highRes->h();
+    
+    // create high res image
+    highRes->createMapImage();
 
-    // Initialize Medium Resolution
-    medRes = new GameMap();
-    medRes->setBackgroundLayer(downsample(highRes->backgroundLayer, 
-        highRes->backgroundLayer->w/medCut, highRes->backgroundLayer->h/medCut, 
-        pixelator));
-    medRes->setCollisionLayer(downsample(highRes->collisionLayer,
-        highRes->collisionLayer->w/medCut, highRes->collisionLayer->h/medCut,
-        pixelator));
-    if (top_filename) {
-        medRes->setTopLayer(downsample(highRes->topLayer,
-            highRes->topLayer->w/medCut, highRes->topLayer->h/medCut, 
-            pixelator));
+    if(pixelator) {
+      // Initialize Medium Resolution
+      medRes = new GameMap();
+      medRes->setBackgroundLayer(downsample(highRes->backgroundLayer, 
+          highRes->backgroundLayer->w/medCut, highRes->backgroundLayer->h/medCut, 
+          pixelator));
+      medRes->setCollisionLayer(downsample(highRes->collisionLayer,
+          highRes->collisionLayer->w/medCut, highRes->collisionLayer->h/medCut,
+          pixelator));
+      if (top_filename) {
+          medRes->setTopLayer(downsample(highRes->topLayer,
+              highRes->topLayer->w/medCut, highRes->topLayer->h/medCut, 
+              pixelator));
+      }
+
+      // Initialize Low Resolution
+      lowRes = new GameMap();
+      lowRes->setBackgroundLayer(downsample(highRes->backgroundLayer,
+          highRes->backgroundLayer->w/lowCut, highRes->backgroundLayer->h/lowCut,
+          pixelator));
+      lowRes->setCollisionLayer(downsample(highRes->collisionLayer,
+          highRes->collisionLayer->w/lowCut, highRes->collisionLayer->h/lowCut,
+          pixelator));
+      if (top_filename) {
+          lowRes->setTopLayer(downsample(highRes->topLayer,
+              highRes->topLayer->w/lowCut, highRes->topLayer->h/lowCut, 
+              pixelator));
+      }
+
+      // downsampled map image
+      medRes->createMapImage();
+      lowRes->createMapImage();
     }
-
-    // Initialize Low Resolution
-    lowRes = new GameMap();
-    lowRes->setBackgroundLayer(downsample(highRes->backgroundLayer,
-        highRes->backgroundLayer->w/lowCut, highRes->backgroundLayer->h/lowCut,
-        pixelator));
-    lowRes->setCollisionLayer(downsample(highRes->collisionLayer,
-        highRes->collisionLayer->w/lowCut, highRes->collisionLayer->h/lowCut,
-        pixelator));
-    if (top_filename) {
-        lowRes->setTopLayer(downsample(highRes->topLayer,
-            highRes->topLayer->w/lowCut, highRes->topLayer->h/lowCut, 
-            pixelator));
+    else {
+      lowRes = medRes = highRes;
     }
-
-    // Create map images
-    highRes->createMapImage(w,h);
-    medRes->createMapImage(w,h);
-    lowRes->createMapImage(w,h);
+    
+    // set scales
+    scale[0] = lowCut;
+    scale[1] = medCut;
+    scale[2] = 1;
     
     // Set resolution
-    currentRes = lowRes;
-    currentResLevel = Resolution::LOW;
+    if(pixelator) {
+      currentRes = lowRes;
+      currentResLevel = Resolution::LOW;
+    }
+    else {
+      currentRes = highRes;
+      currentResLevel = Resolution::HIGH;
+    }
 
     // initialize WorldGrid and set initial state
     grid.init(lowRes->collisionLayer, &hero, &enemies, lowCut);
@@ -141,14 +159,13 @@ bool GameWorld::init(const char *background_filename,
 void GameWorld::next_resolution()
 {
 	switch (currentResLevel) {
-		case Resolution::LOW:
-			currentResLevel = Resolution::MED; 
-            break;
+      case Resolution::LOW:
+			set_resolution(Resolution::MED); 
+      break;
 		case Resolution::MED:
-			currentResLevel = Resolution::HIGH; 
-            break;
+			set_resolution(Resolution::HIGH);
+      break;
 	}
-	_set_current_res();
 }
 
 /**
@@ -159,13 +176,12 @@ void GameWorld::prev_resolution()
 {
 	switch (currentResLevel) {
 		case Resolution::MED:
-			currentResLevel = Resolution::LOW; 
-            break;
+			set_resolution(Resolution::LOW); 
+      break;
 		case Resolution::HIGH:
-			currentResLevel = Resolution::MED; 
-            break;
+			set_resolution(Resolution::MED);
+      break;
 	}
-	_set_current_res();
 }
 
 /**
@@ -173,8 +189,23 @@ void GameWorld::prev_resolution()
  * passed in.
  */
 void GameWorld::set_resolution(Resolution res) {
-    currentResLevel = res;
-    _set_current_res();
+  if(highRes == medRes) { // little big mode, need to shift everything
+    float ratio = scale[currentResLevel]/scale[res];
+    for(auto i = items.begin(); i != items.end(); ++i) {
+      (*i)->x *= ratio;
+      (*i)->y *= ratio;
+    }
+    for(auto i = portals.begin(); i != portals.end(); ++i) {
+      (*i)->x *= ratio;
+      (*i)->y *= ratio;
+    }
+    for(auto i = enemies.begin(); i != enemies.end(); ++i) {
+      (*i)->x *= ratio;
+      (*i)->y *= ratio;
+    }
+  }
+  currentResLevel = res;
+  _set_current_res();
 }
 
 /**
