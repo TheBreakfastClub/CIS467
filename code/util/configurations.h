@@ -77,7 +77,8 @@ public:
     vector<PortalDef> portals;
     vector<EnemyDef> enemies;
     HeroDef hero;
-
+    char pathPrefix[256];
+  
     Configurations();
     bool readInConfigurations(const char *fileName);
     void readInWorlds(ifstream &file);
@@ -85,5 +86,8 @@ public:
     void readInItems(ifstream &file);
     void readInPortals(ifstream &file);
     void readInEnemies(ifstream &file);
+    void setPathPrefix(const char*);
+    
+private:
+    void getPath(std::istream&, std::string&);
 };
-
