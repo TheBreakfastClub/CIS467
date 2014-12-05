@@ -29,6 +29,7 @@ class Sprite {
         ~Sprite();
         int x;
         int y;
+        float scale[3]; // scaling factors for low, medium, and high resolution sprites
        
         Image* getSpriteImage(Resolution res);
         bool setSpriteImage(const char *imgFileName, 
