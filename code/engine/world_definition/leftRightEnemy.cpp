@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include "../render/gfx.h"
+#include "../render/collision.h"
 
 
     // int hp, int speed, int damage, int x=0, int y=0, bool inv=false
@@ -51,25 +52,25 @@ LeftRightEnemy::LeftRightEnemy(int hp, int speed, int damage, int x, int y, bool
         // incramenting y
 
 
-void LeftRightEnemy::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res)
+void LeftRightEnemy::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res, float s)
 {
     // in the process of moving
     if (x < x_top && x > x_bottom) {
 
         // Move in same direction, unless you hit a wall, then change direction
-        if (!map->collision(getSpriteImage(res), x + speed * direction, y)) {
+        if(!scollision(getSpriteImage(res), x + speed*direction, y, scale[res], map, 0, 0, s)) {
             //x += x_inc;
-            move(hero, map, res, speed * direction, 0);
+            move(hero, map, res, speed * direction, 0, s);
         } else {
             // cerr << "collide LR";
             direction = direction * -1;
-            move(hero, map, res, speed * direction, 0);
+            move(hero, map, res, speed * direction, 0, s);
         }
     } 
     // time to turn around
     else {
         direction = direction * -1;
-        move(hero, map, res, speed * direction, 0);
+        move(hero, map, res, speed * direction, 0, s);
     }
 
 
