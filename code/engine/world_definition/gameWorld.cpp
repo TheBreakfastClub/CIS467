@@ -138,13 +138,15 @@ bool GameWorld::init(const char *background_filename,
  * This function increases the current resolution, unless the world is
  * already at its highest resolution.
  */
-void GameWorld::next_resolution()
+void GameWorld::next_resolution(int numCrystals)
 {
 	switch (currentResLevel) {
 		case Resolution::LOW:
+		  if(numCrystals>=1)
 			currentResLevel = Resolution::MED; 
             break;
 		case Resolution::MED:
+		  if(numCrystals>=2)
 			currentResLevel = Resolution::HIGH; 
             break;
 	}
