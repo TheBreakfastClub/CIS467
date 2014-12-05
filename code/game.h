@@ -22,15 +22,15 @@ class Game {
         GraphicsEngine graphics;
 
 		/* Game engine */
-        GameUniverse universe;
 		bool gameIsRunning;
+    GameUniverse universe;
 
         /* Utility */
         Clock clock;
 
         /* Holds the configurations */
         Configurations config;
-
+    
     public:
  
         Game();
@@ -52,4 +52,3 @@ class Game {
         bool setup(const char *gameName, int width, int height, const char*, const char*);
         void cleanup();
 };
-
