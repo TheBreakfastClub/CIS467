@@ -5,6 +5,7 @@ Creation Date:  11-07-2014
 Description:	  
 ************************************************************/
 
+#include <cstring>
 #include "configurations.h"
 
 Configurations::Configurations() {}
@@ -58,6 +59,9 @@ Configurations::Configurations() {}
 bool Configurations::readInConfigurations(const char *fileName) {
 
     // Open file
+    std::cout << "Reading configuration from file " << fileName << '\n';
+    std::cout << "Path Prefix: " << pathPrefix << '\n';
+    
     ifstream file (fileName);
     if (!file.good()) return false;
    
@@ -175,9 +179,9 @@ void Configurations::readInWorlds(ifstream &file) {
 
         WorldDef world;
         getline(file, world.name);
-        getline(file, world.bck_imgName);
-        getline(file, world.col_imgName);
-        getline(file, world.top_imgName);
+        getPath(file, world.bck_imgName); 
+        getPath(file, world.col_imgName);
+        getPath(file, world.top_imgName);
  
         getline(file, line);
         stringstream ss(line);
@@ -232,7 +236,7 @@ void Configurations::readInEnemies(ifstream &file) {
             ssM >> enemy.min;
         }
 
-        getline(file, enemy.imgName);
+        getPath(file, enemy.imgName);
         enemies.push_back(enemy);
 
         getline(file, line); // Read in dividing line
@@ -246,7 +250,7 @@ void Configurations::readInPortals(ifstream &file) {
 
     // Read in portal info
     string portalImgName;
-    getline(file, portalImgName);
+    getPath(file, portalImgName);
     getline(file, line); // Read in dividing line
     getline(file, line);
     while (line != "--") {
@@ -305,7 +309,7 @@ void Configurations::readInHero(ifstream &file) {
     stringstream ss4(line);
     hero.invincible = (line != "0");
 
-    getline(file, hero.imgName);
+    getPath(file, hero.imgName);
     getline(file, line); // Read in dividing line
 }
 
@@ -331,7 +335,7 @@ void Configurations::readInItems(ifstream &file) {
         //stringstream ss3(line);
         //ss3 >> item.itemType;
 
-        getline(file, item.imgName);
+        getPath(file, item.imgName);
         items.push_back(item);
 
         getline(file, line); // Read in dividing line
@@ -340,3 +344,13 @@ void Configurations::readInItems(ifstream &file) {
 
 }
 
+void Configurations::getPath(istream& is, string& str) {
+  string tmp;
+  getline(is, tmp);
+  if(tmp == "NULL") str = tmp;
+  else str = pathPrefix + tmp;
+}
+
+void Configurations::setPathPrefix(const char *prefix) {
+  strncpy(pathPrefix, prefix, 256);
+}
