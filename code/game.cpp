@@ -22,27 +22,6 @@ Game::Game() : universe(GAME_NAME), clock()
 	maxYMomentum = 50;
 	nonButterMomentum = 1;
 	momentumIncrease = 1;
-    collMap = NULL;
-}
-
-/**
- * This generates a copy of the current map image with all the
- * pushing enemies included. This should be used when checking for collisions
- * with the world.
- */
-void Game::generateCollMap() {
-    
-    if (collMap) {
-        delete collMap;
-    }
-
-    // Create a copy of the map containing all pushing enemies for collision
-    collMap = new Image (universe.currentWorld->currentRes->mapImg->w, universe.currentWorld->currentRes->mapImg->h);
-    collMap->blit(universe.currentWorld->currentRes->mapImg, 0, 0);
-    for (Enemy *e : universe.currentWorld->enemies) {
-        if (e->pushes)
-            collMap->ablit(e->getSpriteImage(universe.currentRes()), e->x, e->y);
-    }
 }
 
 /* Update game logic at each iteration of the loop */
@@ -50,14 +29,8 @@ void Game::update()
 {
 
     // Let each enemy take its turn
-    for (Enemy *e : universe.currentWorld->enemies) {
-        if (e->pushes) {    
-            e->action(universe.hero, universe.currentWorld->enemies, 
-                universe.currentWorld->currentRes->mapImg, universe.currentRes());
-        } else {
-            e->action(universe.hero, universe.currentWorld->enemies, collMap, universe.currentRes());
-        }
-    }
+    for (Enemy *e : universe.currentWorld->enemies)
+      e->action();
 
     // Check for hit status (not sure on this implementation)
     if (universe.hero.hit && !clock.has_event("herohit")) {
@@ -154,9 +127,6 @@ void Game::handle_input()
     // Grab reference to the keys
     u8 *keys = (u8*)SDL_GetKeyboardState(0);
     
-    //Determine if the screen needs to be re-drawn
-    bool redraw;
-
     // Handle non-movement keyboard events
 	SDL_Event event;
 	while(SDL_PollEvent(&event)) {
@@ -177,7 +147,7 @@ void Game::handle_input()
                 case SDLK_PLUS:
                 case SDLK_0:
                 case SDLK_d:
-                    universe.currentWorld->next_resolution(universe.hero.crystals.size());
+                    universe.currentWorld->next_resolution();
                     break;
                 case SDLK_KP_MINUS:
                 case SDLK_MINUS:
@@ -298,8 +268,12 @@ void Game::handle_input()
     if (xMomPer > yMomPer) maxMomPer = xMomPer;
     else maxMomPer = yMomPer;
     speed = (int) speed * maxMomPer;
-    Image *heroImg = universe.hero.getSpriteImage(universe.currentRes());
-    
+
+//     if(keys[SDL_SCANCODE_UP] && !keys[SDL_SCANCODE_DOWN]) dy = -1;
+//     if(keys[SDL_SCANCODE_DOWN] && !keys[SDL_SCANCODE_UP]) dy = 1;
+//     if(keys[SDL_SCANCODE_LEFT] && !keys[SDL_SCANCODE_RIGHT]) dx = -1;
+//     if(keys[SDL_SCANCODE_RIGHT] && !keys[SDL_SCANCODE_LEFT]) dx = 1;
+
     //process movements keys multiple times, depending on speed
     for(int i = 0; i < speed; ++i) {
         if(yMomentum < 0) dy = -1;
@@ -308,59 +282,29 @@ void Game::handle_input()
         if(xMomentum > 0) dx = 1;
 
         if(dx && dy) {
-	        //checking for diagonal change
-            if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y+dy))
-    	    {
-    	      universe.hero.x+=dx;
-    	      universe.hero.y+=dy;
-    	      redraw=true;
-    	    }
-    	    //checking for horizontal change
-            else if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y)){
-    	      universe.hero.x+=dx;
-    	      redraw=true;
-      	    }
-    	    //change for vertical change
-            else if(!collMap->collision(heroImg, universe.hero.x, universe.hero.y+dy)){
-    	      universe.hero.y+=dy; 
-    	      redraw=true;
-    	    }
+          if(!universe.hero.move(dx, dy))
+            if(!universe.hero.move(dx, 0))
+              universe.hero.move(0, dy);
         }
         else if(dx) {
-            if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y)) universe.hero.x+=dx, redraw=true;
-            else if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y-1)) {
-    	        universe.hero.x+=dx;
-    	        universe.hero.y--;
-    	        redraw=true;
-    	    }
-            else if(!collMap->collision(heroImg, universe.hero.x+dx, universe.hero.y+1)) {
-    	      universe.hero.x+=dx;
-    	      universe.hero.y++;
-    	      redraw=true;
-    	    }
+          if(!universe.hero.move(dx, 0))
+            if(!universe.hero.move(dx, -1))
+              universe.hero.move(dx, 1);
         }
         else if(dy) {
-            if(!collMap->collision(heroImg, universe.hero.x, universe.hero.y+dy)) universe.hero.y+=dy, redraw=true;
-            else if(!collMap->collision(heroImg, universe.hero.x-1, universe.hero.y+dy)){
-	            universe.hero.x--;
-    	        universe.hero.y+=dy;
-	        redraw=true;
-	        }
-            else if(!collMap->collision(heroImg, universe.hero.x+1, universe.hero.y+dy)){
-        	    universe.hero.x++;
-	            universe.hero.y+=dy;
-	            redraw=true;
-	        }
+          if(!universe.hero.move(0, dy))
+            if(!universe.hero.move(-1, dy))
+              universe.hero.move(1, dy);
         }
     }
     
     // Update movement
-    //universe.hero.x += dx;
-    //universe.hero.y += dy;
-    if (universe.hero.y < 0) universe.hero.y = 0;
-    else if (universe.hero.y > h) universe.hero.y = h;
-    if (universe.hero.x < 0) universe.hero.x = 0;
-    else if (universe.hero.x > w) universe.hero.x = w;
+//     universe.hero.x += dx;
+//     universe.hero.y += dy;
+//     if (universe.hero.y < 0) universe.hero.y = 0;
+//     else if (universe.hero.y > h) universe.hero.y = h;
+//     if (universe.hero.x < 0) universe.hero.x = 0;
+//     else if (universe.hero.x > w) universe.hero.x = w;
     
     if (!enableSliding) {
       xMomentum = yMomentum = 0;
@@ -371,13 +315,11 @@ void Game::handle_input()
 int Game::run()
 {
 	while (gameIsRunning) {
-        graphics.drawGameUniverse(universe);
-        graphics.refreshScreen();
-        generateCollMap();
+    graphics.drawGameUniverse(universe);
+    graphics.refreshScreen();
 		handle_input();
 		update();
 		clock.tick();
-        //std::cout << std::to_string(clock.avgFPS()) << std::endl;
 	}
 	return 0;
 }

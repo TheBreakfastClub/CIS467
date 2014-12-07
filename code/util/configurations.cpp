@@ -235,7 +235,7 @@ void Configurations::readInEnemies(ifstream &file) {
             ssM >> enemy.max;
             ssM >> enemy.min;
         }
-
+        
         getPath(file, enemy.imgName);
         enemies.push_back(enemy);
 

@@ -8,10 +8,9 @@ Description:	Defines the hero of the game universe.
 #include "hero.h"
 
 Hero::Hero() {
-    setHitPoints(100);
+    setHitPoints(200);
     invincible = false;
     speed = 5;
-    attackDmg = 0;
     x = 150;
     y = 150;
 }

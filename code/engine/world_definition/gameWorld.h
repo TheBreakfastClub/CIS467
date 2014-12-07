@@ -32,7 +32,7 @@ class GameWorld {
         bool init(const char *background_filename, 
                   const char *collision_filename,
                   const char *top_filename,
-                  Hero &hero,
+                  Hero *hero,
                   pixAlgo pixelator = blend_average,
                   int medCut = 8,
                   int lowCut = 16); // TODO: Add pixelation algorithm parameter
@@ -42,8 +42,9 @@ class GameWorld {
 
         /** The entities that will inhabit the world */
         list<Item*> items;
-	    list<Portal*> portals;
+        list<Portal*> portals;
         vector<Enemy*> enemies;
+        Hero *hero;
 
         /** Defines the world environment */
         GameMap *highRes;
@@ -55,6 +56,14 @@ class GameWorld {
 
         int w;
         int h;
+        float scale[3];
+        int lowCut;
+        int medCut;
+        
+        
+        // pixelation algorithm used for this world (we need this so sprites
+        // in this world pixelate accordingly with the world
+        pixAlgo pixelator;
 
         Resolution currentResLevel;
 
@@ -62,7 +71,7 @@ class GameWorld {
         WorldGrid grid;
 
         // Methods to change the resolution
-        void next_resolution(int numCrystals); // selects the next GameMap
+        void next_resolution(); // selects the next GameMap
         void prev_resolution(); //             prev
         void set_resolution(Resolution res);
     private:

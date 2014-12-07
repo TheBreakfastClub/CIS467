@@ -13,19 +13,14 @@ Description:    Defines the different types of enemies in
 #include "character.h"
 #include "hero.h"
 
-
-
 class UpDownEnemy : public Enemy {
 public:
 
-    // int hp, int speed, int damage, int x=0, int y=0, bool inv=false
-
-    // Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=false
-    UpDownEnemy(int hp, int speed, int damage, int x=0, int y=0, bool inv=false, int dist=0, int tme=0);
-    void action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res);
-    int time;
-    int counter;
+    UpDownEnemy(int x, int y, GameWorld *world, int speed = 1, int range = 100);
+    ~UpDownEnemy();
+    
+    void action();
     int direction;
-    int y_top;
-    int y_bottom;
+    int y_min;
+    int y_max;
 };

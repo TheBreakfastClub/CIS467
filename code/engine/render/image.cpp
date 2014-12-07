@@ -400,7 +400,7 @@ void Image::arblit(Image *src, float x, float y, float angle)
 // alpha,rotation,scale blit
 void Image::arsblit(Image *src, float X, float Y, float angle, float scale)
 {
-	angle /= M_PI*180.0;
+	angle *= M_PI/180.0;
 	float S = sin(angle);
 	float C = cos(angle);
 	int a,b,c,d,e,f;
@@ -454,7 +454,7 @@ void Image::arsblit(Image *src, float X, float Y, float angle, float scale)
 // alpha,bilinear,rotation,scale blit
 void Image::abrsblit(Image *src, float X, float Y, float angle, float scale)
 {
-	angle /= M_PI*180.0;
+	angle *= M_PI/180.0;
 	float S = sin(angle);
 	float C = cos(angle);
 	float a,b,c,d,e,f;

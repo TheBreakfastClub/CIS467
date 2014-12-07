@@ -7,32 +7,26 @@ be in the world.
 ************************************************************/
 #pragma once
 #include <utility>
-#include "sprite.h"
+#include "object.h"
 
-using namespace std;
-
-class Character: public Sprite {
+class Character: public Object {
   public:
     Character();
+    Character(int x, int y, GameWorld *world, int speed);
     ~Character();
-    Character(int hp, int speed, int damage, int x=0, int y=0, bool inv=false);
-    Character(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x=0, int y=0, bool inv=false);
-
+        
     /** Defines if a sprite is invincible **/
     bool invincible;
     /** Defines the speed of a sprite **/
     int speed;
-    /** Defines the attack damage of a sprite **/
-    int attackDmg;
-    /** Used when a Character has taken damage **/
-    Image *hitImage;
-    bool hit;
 
     int maxHitPoints;
+    bool pushes;
 
     int getHitPoints();
     bool changeHitPoints(int change);
     bool setHitPoints(int newHitPoints);
+    void damage(int d);
 
   private:
     /** Defines the amount of hitpoints a sprite has **/

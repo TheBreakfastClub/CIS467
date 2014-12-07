@@ -7,8 +7,11 @@ Description:	    Defines the item attributes.
 
 #include "item.h"
 
-Item::Item(int x, int y, std::string pname, bool obtainable)
- : Sprite(x, y), name(pname), obtainable(obtainable) {}
+Item::Item(int x, int y, GameWorld *world, std::string name, bool obtainable) : Object(x,y, world)
+{
+  this->name = name;
+  this->obtainable = obtainable;
+}
 
-
+Item::~Item() {}
 

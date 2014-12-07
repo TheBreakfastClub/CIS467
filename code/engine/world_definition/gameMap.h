@@ -36,7 +36,7 @@ class GameMap {
         void setCollisionLayer(Image *img);
         void setTopLayer(Image *img);
 
-        void createMapImage(int worldWidth, int worldHeight);
+        void createMapImage();
 
         int w();
         int h();

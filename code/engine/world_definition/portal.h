@@ -10,17 +10,18 @@ Description:	    Defines the portal attributes.
 // Includes
 #include <string>
 #include "portal.h"
-#include "sprite.h"
 #include "sublevel.h"
 #include "../render/image.h"
 #include "../render/gfx.h"
+#include "object.h"
 
-class Portal: public Sprite {
+class Portal: public Object {
 
-    public:
-        
-        Portal(int x, int y, std::string pname = "null", bool usable=true, Sublevel destination = Sublevel::HUB, int xDest = 0, int yDest = 0);
-
+public:
+    Portal(int x, int y, GameWorld *world, std::string name = "<portal>", bool usable = true, 
+      Sublevel destination = Sublevel::HUB, int dstX = 0, int dstY = 0);
+    ~Portal();
+    
         /** A short name describing the type of portal (e.g. "hubPortal") */
         std::string name;
         

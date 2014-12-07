@@ -1,11 +1,3 @@
-/*********************************************************
-File Name:	    sprite.h
-Author:		    The Breakfast Club
-Creation Date:  09-28-2014
-Description:	Defines the different types of sprites that can
-                be in the world.
-************************************************************/
-
 #pragma once
 
 #include "../render/image.h"
@@ -16,24 +8,17 @@ Description:	Defines the different types of sprites that can
 #include <utility>
 
 class Sprite {
+  private:
+    Image **images;
 
-    private:
-        Image *spriteImageH;
-        Image *spriteImageM;
-        Image *spriteImageL;
-        bool deallocNeeded;
+  public:
+    Sprite(const char *fileName, pixAlgo pixelator = blend_average,
+      int medCut = 8, int lowCut = 16, bool rotates = false);
+    ~Sprite();
+  
+    float scale[3];
+    int angles;
 
-    public:
-        Sprite(int x, int y);
-        Sprite(int x, int y, Image *spriteImageH, Image *spriteImageM, Image *spriteImageL);
-        ~Sprite();
-        int x;
-        int y;
-       
-        Image* getSpriteImage(Resolution res);
-        bool setSpriteImage(const char *imgFileName, 
-            pixAlgo pixelator = blend_average_opaque, 
-            int medCut = 8, int lowCut = 16);
-        void setSpriteImage(Image *spriteImageHigh, 
-            Image *spriteImageMed, Image *spriteImageLow);
+    Image* getImage(int resolution);
+    Image* getImage(int resolution, int angle);
 };

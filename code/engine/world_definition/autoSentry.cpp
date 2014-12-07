@@ -1,14 +1,13 @@
 #include "autoSentry.h"
+#include "gameWorld.h"
 #include <cstdlib> // just for exit() for testing
 
 
-AutoSentry::AutoSentry(int hp, int speed, int damage, int x, int y, bool inv) 
- : Enemy(hp, speed, damage, x, y, inv), pathfinder(id), moves(0), active(false) {}
+AutoSentry::AutoSentry(int x, int y, GameWorld *world, int speed) : 
+  Enemy(x, y, world, speed), pathfinder(id), moves(0), active(false) {}
+AutoSentry::~AutoSentry() {}
 
-AutoSentry::AutoSentry(Image *charImgH, Image *charImgM, Image *charImgL, int hp, int speed, int damage, int x, int y, bool inv) 
- : Enemy(charImgH, charImgM, charImgL, hp, speed, damage, x, y, inv), pathfinder(id), moves(0), active(false) {}
-
-void AutoSentry::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Resolution res) // TODO: collision with other enemies
+void AutoSentry::action()
 {
 	auto direction = [](int x_mov, int y_mov) {
 		if (x_mov == 1 && y_mov == 1) return "se";
@@ -23,13 +22,17 @@ void AutoSentry::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Re
 	};
 	
 	// determine how far away we are from the hero
-	float a = abs(x - hero.x);
-	float b = abs(y - hero.y);
-	float dist = sqrt(a*a + b*b);
+//   float a = x - world->hero->x;
+//   float b = y - world->hero->y;
+// 	float dist = sqrt(a*a + b*b);
+    // let's speed this up...
+    long a = x - world->hero->x;
+    long b = y - world->hero->y;
+    long d2 = a*a + b*b;
 
 	// move in for the kill if Hero is close enough
-	if (active || dist <= 200.0f) {
-		if (dist >= 500.0f) active = false; // even after AS detected the Hero, Hero can still escape its detection
+	if (active || d2 <= 40000l) { //dist <= 200.0f) {
+		if (d2 >= 250000l) active = false; //dist >= 500.0f) active = false; // even after AS detected the Hero, Hero can still escape its detection
 		else active = true;
 
 		// rebuild the path to the Hero sometimes
@@ -50,9 +53,9 @@ void AutoSentry::action(Hero &hero, std::vector<Enemy*> &enemies, Image *map, Re
 			//std::cout << "Enemy " << std::to_string(id) << " next move: " << std::to_string(x_inc) << ", " << std::to_string(y_inc) << std::endl;
 
             // Try to move
-            pair<bool,bool> results = move(hero, map, res, x_inc, y_inc);
-            stuck = !(results.second || results.first);
-
+//             pair<bool,bool> results = move(hero, map, res, x_inc, y_inc);
+//             stuck = !(results.second || results.first);
+            stuck = !move(x_inc, y_inc);
             // Try to get unstuck, if you are stuck
             if (stuck) {
 			    

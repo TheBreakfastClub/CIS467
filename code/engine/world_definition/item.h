@@ -10,16 +10,16 @@ Description:	    Defines the item attributes.
 // Includes
 #include <string>
 #include "item.h"
-#include "sprite.h"
 #include "../render/image.h"
 #include "../render/gfx.h"
+#include "object.h"
 
-class Item: public Sprite {
+class Item: public Object {
 
     public:
+        Item(int x, int y, GameWorld *world, std::string name = "<item>", bool obtainable = true);
+        ~Item();
         
-        Item(int x, int y, std::string pname = "<item>", bool obtainable=true);
-
         /** A short name describing the type of item (e.g. "eggs") */
         std::string name;
         

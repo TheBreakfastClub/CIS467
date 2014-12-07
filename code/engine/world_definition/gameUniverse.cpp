@@ -35,15 +35,26 @@ GameUniverse::GameUniverse(string universe_name) : universeName(universe_name)
 void GameUniverse::changeWorld(Sublevel level, Resolution res, int x, int y) {
 
     if (level == currentLevel) return;
+    
+    // the set_resolution routine shuffles world objects around as needed in little-big mode
+    // it is therefore important to preserve order of operations here...
+    
+    // shuffles everything back to "normal" in the old world (little-big)
+    currentWorld->set_resolution(HIGH);
+
+    // Move the hero *before* setting resolution in the new world
+    hero.x = x;
+    hero.y = y;
 
     // adjust the world reference
     currentWorld = sublevels[level];
     currentLevel = level;
+    // if we are low-res + little-big, the character's coordinates will be adjusted appropriately
     currentWorld->set_resolution(res);
+    
 
-    // Move the hero
-    hero.x = x;
-    hero.y = y;
+    // all Objects (including the hero) need a pointer to their current world
+    hero.world = currentWorld;
 }
 
 /**
@@ -68,21 +79,20 @@ bool GameUniverse::checkCollisionsWithItems() {
 
 
         // Check if item and hero collide
-        Resolution res = currentRes();
-        if (hero.getSpriteImage(res)->collision(item->getSpriteImage(res), item->x - hero.x, item->y - hero.y)) {
+        if(hero.overlaps(item)) {
             
-	  if(item->name == "resources/crystal.png")
-	  {
-	    hero.crystals.push_back(item);
-	    it = currentWorld->items.erase(it);
-	    return true;
-	  }
-	  else
-	  {  
-	    hero.bag.push_back(item);
-	    it = currentWorld->items.erase(it);
+          if(item->name == "resources/crystal.png")
+          {
+            hero.crystals.push_back(item);
+            it = currentWorld->items.erase(it);
             return true;
-	  }
+          }
+          else
+          {  
+            hero.bag.push_back(item);
+            it = currentWorld->items.erase(it);
+                  return true;
+          }
         }
         ++it;
     }
@@ -102,10 +112,8 @@ bool GameUniverse::checkCollisionsWithPortal(){
             continue;
         }
 
-
         // Check if portal and hero collide
-        Resolution res = currentRes();
-        if (hero.getSpriteImage(res)->collision(portal->getSpriteImage(res), portal->x - hero.x, portal->y - hero.y)) {
+        if(hero.overlaps(portal)) {
             changeWorld(portal->destination, currentWorld->currentResLevel, portal->xDest, portal->yDest);
             return true;
         }
@@ -160,6 +168,7 @@ bool GameUniverse::init(const Configurations &config) {
     world_list[Sublevel::BAKING_SODA] = Sublevel::BAKING_SODA;
     world_list[Sublevel::BUTTER] = Sublevel::BUTTER;
 
+
     // Initialize the worlds
     for (Sublevel sub : world_list) {
         
@@ -167,88 +176,71 @@ bool GameUniverse::init(const Configurations &config) {
         const char *bck = world->bck_imgName.c_str();
         const char *col = world->col_imgName.c_str();
         const char *top = (world->top_imgName == "NULL" ? NULL : world->top_imgName.c_str());
-        if (! sublevels[sub] -> init(bck, col, top, hero, world->pixelator, world->medCut, world->lowCut))
+        
+        if (!sublevels[sub] -> init(bck, col, top, &hero, world->pixelator, world->medCut, world->lowCut))
             return false;
         sublevels[sub]->worldName = world->name; 
 
     }
 
 
-
     // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
-    UpDownEnemy *ude1 = new UpDownEnemy(50, 1, 25, 384, -100, false, 150, 0);
-    if (!ude1->setSpriteImage("resources/updown2.png")) return false;
+//     UpDownEnemy *ude1 = new UpDownEnemy(50, 1, 25, 384, -100, false, 150, 0);
+//     if (!ude1->setSpriteImage("resources/updown2.png")) return false;
     // UpDownEnemy *ude1 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
-    sublevels[Sublevel::SUGAR]->enemies.push_back(ude1);
+//     UpDownEnemy *ude1 = new UpDownEnemy("resources/updown2.png", 384, -100, sublevels[Sublevel::SUGAR]);
+//     sublevels[Sublevel::SUGAR]->enemies.push_back(ude1);
 
-    LeftRightEnemy *lre1 = new LeftRightEnemy(50, 3, 25, 1530, 128, false, 150, 0);
-    if (!lre1->setSpriteImage("resources/leftright1.png")) return false;
-    // LeftRightEnemy *lre1 = new LeftRightEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
-    sublevels[Sublevel::SUGAR]->enemies.push_back(lre1);
-
-    // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
-    UpDownEnemy *ude2 = new UpDownEnemy(50, 1, 25, 1672, 150, false, 150, 0);
-    if (!ude2->setSpriteImage("resources/updownsingleR.png")) return false;
-    // UpDownEnemy *ude2 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
-    sublevels[Sublevel::SUGAR]->enemies.push_back(ude2);
-
-    UpDownEnemy *ude3 = new UpDownEnemy(50, 1, 25, 1736, 300, false, 150, 0);
-    if (!ude3->setSpriteImage("resources/updownsingle.png")) return false;
-    // UpDownEnemy *ude3 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
-    sublevels[Sublevel::SUGAR]->enemies.push_back(ude3);
-
+//     LeftRightEnemy *lre1 = new LeftRightEnemy(50, 3, 25, 1530, 128, false, 150, 0);
+//     if (!lre1->setSpriteImage("resources/leftright1.png")) return false;
+//     // LeftRightEnemy *lre1 = new LeftRightEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
+//     sublevels[Sublevel::SUGAR]->enemies.push_back(lre1);
+//
+//     // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
+//     UpDownEnemy *ude2 = new UpDownEnemy(50, 1, 25, 1672, 150, false, 150, 0);
+//     if (!ude2->setSpriteImage("resources/updownsingleR.png")) return false;
+//     // UpDownEnemy *ude2 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
+//     sublevels[Sublevel::SUGAR]->enemies.push_back(ude2);
+//
+//     UpDownEnemy *ude3 = new UpDownEnemy(50, 1, 25, 1736, 300, false, 150, 0);
+//     if (!ude3->setSpriteImage("resources/updownsingle.png")) return false;
+//     // UpDownEnemy *ude3 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
+//     sublevels[Sublevel::SUGAR]->enemies.push_back(ude3);
 
     // Initialize the items
     for(ItemDef i : config.items) {
-        Item *newItem = new Item(i.x, i.y, i.imgName);
-        if (!newItem->setSpriteImage(i.imgName.c_str())) return false;
-        sublevels[i.world]->items.push_back(newItem);
+        GameWorld *w = sublevels[i.world];
+        Item *newItem = new Item(i.x, i.y, w);
+        if (!newItem->loadImage(i.imgName.c_str(), w->medCut, w->lowCut)) return false;
+        w->items.push_back(newItem);
     }
     
     // Initialize the portals
     for(PortalDef p : config.portals) {
-      
-        Portal *newPortal = new Portal(p.homeX, p.homeY, "portal", true, p.destWorld, p.destX, p.destY);
-        if(!newPortal->setSpriteImage(p.imgName.c_str())) {
-            cerr << "Error loading portal image " << p.imgName << endl;
-            return false;
-        }
-        sublevels[p.homeWorld]->portals.push_back(newPortal);
+        GameWorld *w = sublevels[p.homeWorld];
+        Portal *newPortal = new Portal(p.homeX, p.homeY, w, "<portal>", true, p.destWorld, p.destX, p.destY);
+        if (!newPortal->loadImage(p.imgName.c_str(), w->medCut, w->lowCut)) return false;
+        w->portals.push_back(newPortal);
     }
 
     // Initialize the enemies
     for (EnemyDef e : config.enemies) {
-        int hitpoints;
-        int damage;
-    
+        GameWorld *w = sublevels[e.world];
         if (e.enemyType == STATIC_ENEMY) {
-
-            hitpoints  = 50;
-            damage = 25;
-            StaticEnemy *enemy = new StaticEnemy(hitpoints, e.speed, damage, e.x, e.y);
-            if (!enemy->setSpriteImage(e.imgName.c_str())) {
-                cerr << "Error loading enemy image " << e.imgName << endl;
-                return false;
-            }
-           
-            sublevels[e.world]->enemies.push_back(enemy);
+            StaticEnemy *enemy = new StaticEnemy(e.x, e.y, w);
+            if (!enemy->loadImage(e.imgName.c_str(), w->medCut, w->lowCut)) return false;
+            w->enemies.push_back(enemy);
         }
         else if (e.enemyType == AUTO_SENTRY) {
-        
-            hitpoints  = 50;
-            damage = 25;
-            AutoSentry *enemy = new AutoSentry(hitpoints, e.speed, damage, e.x, e.y);
-            if (!enemy->setSpriteImage(e.imgName.c_str())) {
-                cerr << "Error loading enemy image " << e.imgName << endl;
-                return false;
-            }
-            enemy->pathfinder.set_grid(&(sublevels[e.world]->grid));
-           
-            sublevels[e.world]->enemies.push_back(enemy);
+            AutoSentry *enemy = new AutoSentry(e.x, e.y, w, e.speed);
+            if (!enemy->loadImage(e.imgName.c_str(), w->medCut, w->lowCut, true)) return false;
+            enemy->pathfinder.set_grid(&(w->grid));
+            w->enemies.push_back(enemy);
         }
         else if (e.enemyType == UP_DOWN) {
-            cout << "Top: " << e.max << endl;
-            cout << "Bottom: " << e.min << endl;
+            UpDownEnemy *enemy = new UpDownEnemy(e.x, e.y, w, e.speed, e.max);
+            if (!enemy->loadImage(e.imgName.c_str(), w->medCut, w->lowCut)) return false;
+            w->enemies.push_back(enemy);
         }
         else if (e.enemyType == LEFT_RIGHT) {
             cout << "Left: " << e.max << endl;
@@ -257,12 +249,13 @@ bool GameUniverse::init(const Configurations &config) {
     }
 
     // Define the Hero
-    if (!(hero.setSpriteImage(config.hero.imgName.c_str()))) return false;
-    if (!(hero.hitImage = redTint(hero.getSpriteImage(Resolution::HIGH), 150))) return false;
     hero.x = config.hero.x;
     hero.y = config.hero.y;
+    hero.world = sublevels[config.hero.world];
     hero.speed = config.hero.speed;
     hero.setHitPoints(config.hero.hitPoints);
     hero.invincible = config.hero.invincible;
+    if(!hero.loadImage(config.hero.imgName.c_str(), hero.world->medCut, hero.world->lowCut, true))
+      return false;
     return true;
 }

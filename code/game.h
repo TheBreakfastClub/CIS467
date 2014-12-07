@@ -41,15 +41,12 @@ class Game {
 	int maxYMomentum;
 	int nonButterMomentum;
 	int momentumIncrease;
-        int run();
-        void update();
-        void handle_input();
-        
-        Image *collMap;
-        void generateCollMap();
+  int run();
+  void update();
+  void handle_input();
 
-        /* SDL graphics and asset management methods */
-        bool setup(const char *gameName, int width, int height, const char*, const char*);
-        void cleanup();
+  /* SDL graphics and asset management methods */
+  bool setup(const char *gameName, int width, int height, const char*, const char*);
+  void cleanup();
 };
 

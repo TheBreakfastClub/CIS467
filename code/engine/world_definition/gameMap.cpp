@@ -143,13 +143,13 @@ void GameMap::setTopLayer(Image *img) {
  * collision layers, scaled to the correct size of the world.
  * If the background or collision layer is null, then this does nothing.
  */
-void GameMap::createMapImage(int worldWidth, int worldHeight) {
+void GameMap::createMapImage() {
     
     if (backgroundLayer && collisionLayer) {
         if (mapImg) delete mapImg;
-        mapImg = new Image(worldWidth, worldHeight);
+        mapImg = new Image(collisionLayer->w, collisionLayer->h);
         mapImg->scaleblit(backgroundLayer);
-        mapImg->ascaleblit(collisionLayer);
+        mapImg->ablit(collisionLayer, 0, 0);
     }
 }
 
