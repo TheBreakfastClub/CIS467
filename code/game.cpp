@@ -177,13 +177,13 @@ void Game::handle_input()
                 case SDLK_PLUS:
                 case SDLK_0:
                 case SDLK_d:
-                    universe.currentWorld->next_resolution();
+                    universe.currentWorld->next_resolution(universe.hero);
                     break;
                 case SDLK_KP_MINUS:
                 case SDLK_MINUS:
                 case SDLK_9:
                 case SDLK_a:
-                    universe.currentWorld->prev_resolution();
+                    universe.currentWorld->prev_resolution(universe.hero);
                     break;
 		    
 		case SDLK_h:

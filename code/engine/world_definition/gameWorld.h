@@ -56,15 +56,23 @@ class GameWorld {
         int w;
         int h;
 
+        /** Should be true if this is a little big world, false otherwise */
+        bool littleBig;
+        int medScale;
+        int lowScale;
+
         Resolution currentResLevel;
 
         // representation of the world in a grid. used for enemy AI
         WorldGrid grid;
 
         // Methods to change the resolution
-        void next_resolution(); // selects the next GameMap
-        void prev_resolution(); //             prev
+        void next_resolution(Hero &hero); // selects the next GameMap
+        void prev_resolution(Hero &hero); //             prev
         void set_resolution(Resolution res);
+        void setWorldInhabitantsForRes(Resolution res);
+        void updateWorldEntities(double scale);
+        void updateWorldInhabitants(Hero &hero, double scale);
     private:
         void _set_current_res();
 

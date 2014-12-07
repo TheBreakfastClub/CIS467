@@ -36,6 +36,14 @@ void GameUniverse::changeWorld(Sublevel level, Resolution res, int x, int y) {
 
     if (level == currentLevel) return;
 
+    // If little-big world, always begin in low res (for simplicity's sake)
+    if(sublevels[level]->littleBig) {
+        res = Resolution::LOW;
+
+        // Setup the world for going into it
+        sublevels[level]->setWorldInhabitantsForRes(res);
+    }
+
     // adjust the world reference
     currentWorld = sublevels[level];
     currentLevel = level;
@@ -149,6 +157,7 @@ bool GameUniverse::init(const Configurations &config) {
     world_list[Sublevel::SUGAR] = Sublevel::SUGAR;
     world_list[Sublevel::BAKING_SODA] = Sublevel::BAKING_SODA;
     world_list[Sublevel::BUTTER] = Sublevel::BUTTER;
+    sublevels[Sublevel::BAKING_SODA]->littleBig = true;
 
     // Initialize the worlds
     for (Sublevel sub : world_list) {
@@ -160,10 +169,7 @@ bool GameUniverse::init(const Configurations &config) {
         if (! sublevels[sub] -> init(bck, col, top, hero, world->pixelator, world->medCut, world->lowCut))
             return false;
         sublevels[sub]->worldName = world->name; 
-
     }
-
-
 
     // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
     UpDownEnemy *ude1 = new UpDownEnemy(50, 1, 25, 384, -100, false, 150, 0);
@@ -246,6 +252,9 @@ bool GameUniverse::init(const Configurations &config) {
         }
     }
 
+    // Set location of entitites for little big world
+    sublevels[Sublevel::BAKING_SODA]->updateWorldEntities(sublevels[Sublevel::BAKING_SODA]->lowScale);
+
     // Define the Hero
     if (!(hero.setSpriteImage(config.hero.imgName.c_str()))) return false;
     if (!(hero.hitImage = redTint(hero.getSpriteImage(Resolution::HIGH), 150))) return false;
@@ -254,5 +263,6 @@ bool GameUniverse::init(const Configurations &config) {
     hero.speed = config.hero.speed;
     hero.setHitPoints(config.hero.hitPoints);
     hero.invincible = config.hero.invincible;
+
     return true;
 }

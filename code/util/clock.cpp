@@ -119,12 +119,14 @@ AutoPixEvent::AutoPixEvent(GameWorld *gw) : Event(1, true)
 
 void AutoPixEvent::execute()
 {
+#if 0
 	if (rand() % 2) {
 		gw->next_resolution();
 	}
 	else {
 		gw->prev_resolution();
 	}
+#endif
 }
 
 
