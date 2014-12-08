@@ -70,12 +70,12 @@ void Game::update()
       int butter = 0;
       for(int i = 0; i<universe.hero.bag.size(); i++)
       {
-	  if (universe.hero.bag[i]->name == "resources/egg.png") egg = 1;
-	  if (universe.hero.bag[i]->name == "resources/milk.png") milk = 1;
-	  if (universe.hero.bag[i]->name == "resources/sugar.png") sugar = 1;
-	  if (universe.hero.bag[i]->name == "resources/baking_powder.png") bakingPowder = 1;
-	  if (universe.hero.bag[i]->name == "resources/butter.png") butter = 1;
-	  if (universe.hero.bag[i]->name == "resources/flour.png") flour = 1;
+	  if (universe.hero.bag[i]->name.find("egg")!= std::string::npos) egg = 1;
+	  if (universe.hero.bag[i]->name.find("milk")std::string::npos) milk = 1;
+	  if (universe.hero.bag[i]->name.find("sugar")std::string::npos) sugar = 1;
+	  if (universe.hero.bag[i]->name.find("baking_powder")std::string::npos) bakingPowder = 1;
+	  if (universe.hero.bag[i]->name.find("butter")std::string::npos) butter = 1;
+	  if (universe.hero.bag[i]->name.find("flour")std::string::npos) flour = 1;
 	  
       }
       if (egg+milk+sugar+bakingPowder+butter+flour == 6)
@@ -163,7 +163,7 @@ void Game::handle_input()
 
 		      for(int iterator = 0; iterator < universe.hero.bag.size() && universe.hero.getHitPoints() != maxHitPoints; iterator++)
 		      {
-		            if(universe.hero.bag[iterator]->name == "resources/milk.png" && universe.hero.bag[iterator]->obtainable) {
+		            if((universe.hero.bag[iterator]->name.find("milk") != std::string::npos) && universe.hero.bag[iterator]->obtainable) {
 		      
       			        universe.hero.bag[iterator]->obtainable = false;
 			            graphics.message("Milk Used");
