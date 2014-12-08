@@ -232,8 +232,7 @@ void Configurations::readInEnemies(ifstream &file) {
         if (enemy.enemyType == UP_DOWN || enemy.enemyType == LEFT_RIGHT) {
             getline(file, line);
             stringstream ssM(line);
-            ssM >> enemy.max;
-            ssM >> enemy.min;
+            ssM >> enemy.range;
         }
         
         getPath(file, enemy.imgName);

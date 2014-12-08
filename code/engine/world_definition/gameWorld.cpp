@@ -168,10 +168,12 @@ void GameWorld::next_resolution()
   int numCrystals = hero->crystals.size();
 	switch (currentResLevel) {
       case Resolution::LOW:
-			set_resolution(Resolution::MED); 
+			if(numCrystals>=1)
+        set_resolution(Resolution::MED); 
       break;
 		case Resolution::MED:
-			set_resolution(Resolution::HIGH);
+			if(numCrystals>=2)
+        set_resolution(Resolution::HIGH);
       break;
 	}
 }

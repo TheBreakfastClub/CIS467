@@ -20,9 +20,6 @@ public:
   Enemy(int x, int y, GameWorld *world, int speed = 1);
   ~Enemy();
 
-  int touchDamage;
-  int crushDamage;
-
   // for enemies who make use of pathfinding
   static int count;
   int id;

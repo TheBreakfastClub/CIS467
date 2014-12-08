@@ -38,8 +38,14 @@ class Object {
     bool moveTo(int x, int y);
     bool moveTo(int x, int y, int angle);
     bool move(int dx, int dy);
+    bool push(int dx, int dy);
     bool overlaps(Object *other);
-    bool overlaps(Object *other, int angle);
+    bool overlaps(Object *other, int x, int y);
+    bool overlaps(Object *other, int x, int y, int angle);
     void draw(Image *screen, int panX, int panY);
     void draw(Image *screen, int panX, int panY, Sprite *sprite);
+    bool turn(int dx, int dy);
+    bool turnMove(int dx, int dy);
+    bool turnPush(int dx, int dy);
+    bool within(float r, Object *o);
 };

@@ -11,6 +11,7 @@ Item::Item(int x, int y, GameWorld *world, std::string name, bool obtainable) : 
 {
   this->name = name;
   this->obtainable = obtainable;
+  solid = false;
 }
 
 Item::~Item() {}

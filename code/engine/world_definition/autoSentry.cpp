@@ -4,7 +4,7 @@
 
 
 AutoSentry::AutoSentry(int x, int y, GameWorld *world, int speed) : 
-  Enemy(x, y, world, speed), pathfinder(id), moves(0), active(false) {}
+  Enemy(x, y, world, speed), pathfinder(id), moves(0), active(false) {pushable = true;}
 AutoSentry::~AutoSentry() {}
 
 void AutoSentry::action()
@@ -55,7 +55,7 @@ void AutoSentry::action()
             // Try to move
 //             pair<bool,bool> results = move(hero, map, res, x_inc, y_inc);
 //             stuck = !(results.second || results.first);
-            stuck = !move(x_inc, y_inc);
+            stuck = !push(x_inc, y_inc);
             // Try to get unstuck, if you are stuck
             if (stuck) {
 			    

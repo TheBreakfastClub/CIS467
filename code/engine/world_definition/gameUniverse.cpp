@@ -79,7 +79,7 @@ bool GameUniverse::checkCollisionsWithItems() {
 
 
         // Check if item and hero collide
-        if(hero.overlaps(item)) {
+        if(hero.within(.7, item)) {
             
           if(item->name == "resources/crystal.png")
           {
@@ -113,7 +113,7 @@ bool GameUniverse::checkCollisionsWithPortal(){
         }
 
         // Check if portal and hero collide
-        if(hero.overlaps(portal)) {
+        if(hero.within(.4, portal)) {
             changeWorld(portal->destination, currentWorld->currentResLevel, portal->xDest, portal->yDest);
             return true;
         }
@@ -210,7 +210,7 @@ bool GameUniverse::init(const Configurations &config) {
     // Initialize the items
     for(ItemDef i : config.items) {
         GameWorld *w = sublevels[i.world];
-        Item *newItem = new Item(i.x, i.y, w);
+        Item *newItem = new Item(i.x, i.y, w, i.imgName);
         if (!newItem->loadImage(i.imgName.c_str(), w->medCut, w->lowCut)) return false;
         w->items.push_back(newItem);
     }
@@ -238,13 +238,12 @@ bool GameUniverse::init(const Configurations &config) {
             w->enemies.push_back(enemy);
         }
         else if (e.enemyType == UP_DOWN) {
-            UpDownEnemy *enemy = new UpDownEnemy(e.x, e.y, w, e.speed, e.max);
+            UpDownEnemy *enemy = new UpDownEnemy(e.x, e.y, w, e.speed, e.range);
             if (!enemy->loadImage(e.imgName.c_str(), w->medCut, w->lowCut)) return false;
             w->enemies.push_back(enemy);
         }
         else if (e.enemyType == LEFT_RIGHT) {
-            cout << "Left: " << e.max << endl;
-            cout << "Right: " << e.min << endl;
+            cout << "LeftRight range: " << e.range << endl;
         }
     }
 

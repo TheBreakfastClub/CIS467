@@ -13,6 +13,7 @@ Hero::Hero() {
     speed = 5;
     x = 150;
     y = 150;
+    pushable = true;
 }
 
 Hero::~Hero() {

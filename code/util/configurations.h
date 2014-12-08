@@ -53,8 +53,7 @@ struct EnemyDef {
     int x; // start location of the enemy
     int y;
     int speed;
-    int max;
-    int min;
+    int range;
     EnemyType enemyType; // Indicates the ID of the type of enemy this is
     string imgName; // name of image file
 };
