@@ -19,7 +19,7 @@ Sprite::Sprite(const char *fileName, pixAlgo pixelator,
   scale[2] = 1;
 
   // rotate image
-  int rwidth = max(image->w, image->h)*3/2;
+  int rwidth = max(image->w, image->h)*2;
   for(int a = 0; a < angles; a++) {
     images[a*3 + 2] = new Image(rwidth, rwidth);
     images[a*3 + 2]->clear();
