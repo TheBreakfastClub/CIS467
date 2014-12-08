@@ -81,7 +81,7 @@ bool GameUniverse::checkCollisionsWithItems() {
         // Check if item and hero collide
         if(hero.within(.7, item)) {
             
-          if(item->name == "resources/crystal.png")
+          if(item->name.find("crystal") != std::string::npos)
           {
             hero.crystals.push_back(item);
             it = currentWorld->items.erase(it);
