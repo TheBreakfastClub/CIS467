@@ -10,6 +10,7 @@ Description:    Holds the data defining the universe
 #include <numeric>
 #include "upDownEnemy.h"
 #include "leftRightEnemy.h"
+#include "dumbSentry.h"
 
 /**
  * Default constructor for the universe. Must call GameUniverse::init()
@@ -245,6 +246,12 @@ bool GameUniverse::init(const Configurations &config) {
         else if (e.enemyType == LEFT_RIGHT) {
             cout << "LeftRight range: " << e.range << endl;
         }
+				else if (e.enemyType == DUMB_SENTRY) {
+						DumbSentry *enemy = new DumbSentry(e.x, e.y, w, e.speed, e.range);
+            if (!enemy->loadImage(e.imgName.c_str(), w->medCut, w->lowCut, true)) return false;
+            w->enemies.push_back(enemy);
+        }
+
     }
 
     // Define the Hero
