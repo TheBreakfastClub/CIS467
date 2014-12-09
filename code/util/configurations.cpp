@@ -229,7 +229,7 @@ void Configurations::readInEnemies(ifstream &file) {
         ss4 >> type;
         enemy.enemyType = (EnemyType) type;
 
-        if (enemy.enemyType == UP_DOWN || enemy.enemyType == LEFT_RIGHT) {
+        if (enemy.enemyType == UP_DOWN || enemy.enemyType == LEFT_RIGHT || enemy.enemyType == DUMB_SENTRY) {
             getline(file, line);
             stringstream ssM(line);
             ssM >> enemy.range;
