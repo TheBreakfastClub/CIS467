@@ -4,4 +4,4 @@
 
 Image* loadImage(const char*);
 Image* downsample(Image*, int, int, u32 (*)(u32*, int));
-Image* redTint(Image*, int);
+Image* redTint(Image*);

@@ -6,8 +6,8 @@ Portal::Portal(int x, int y, GameWorld *world, std::string name, bool usable, Su
   this->name = name;
   this->usable = usable;
   this->destination = destination;
-  xDest = dstX;
-  yDest = dstY;
+  xDest = dstX + 16; // dirty hack
+  yDest = dstY + 16; // dirty hack
 }
 
 Portal::~Portal() {}

@@ -30,7 +30,13 @@ Object::~Object() {
 
 // world field must be set before calling this function
 bool Object::loadImage(const char *fileName, int medCut, int lowCut, bool rotates) {
-  sprite = new Sprite(fileName, world->pixelator, medCut, lowCut, rotates);
+  Image *image = ::loadImage(fileName);
+  if(!image) {
+    std::cout << "could not load image file: " << fileName << '\n';
+    return false;
+  }
+  sprite = new Sprite(image, world->pixelator, medCut, lowCut, rotates);
+  delete image;
   return sprite->angles;
 }
 
@@ -104,21 +110,33 @@ bool Object::turnPush(int dx, int dy) {
   return push(dx, dy);
 }
 
+bool Object::_move(int dx, int dy) {
+  return moveTo(x + dx, y + dy);
+}
+
 bool Object::move(int dx, int dy) {
   return moveTo(x + dx, y + dy);
 }
 
 bool Object::push(int dx, int dy) {
   if(!fitsMap(x+dx, y+dy)) return false;
-  for(auto i : world->enemies)
-    if(i->solid && overlaps(i, x+dx, y+dy) && (!i->pushable || !i->move(dx,dy))) return false; 
-  for(auto i : world->items)
-    if(i->solid && overlaps(i, x+dx, y+dy) && (!i->pushable || !i->move(dx,dy))) return false; 
-  if(world->hero->solid && overlaps(world->hero, x+dx, y+dy) && 
-    (!world->hero->pushable || !world->hero->move(dx,dy))) return false;
+  bool s = solid;
+  solid = false;
   x += dx;
   y += dy;
+  for(auto i : world->enemies)
+    if(i->solid && overlaps(i) && (!i->pushable || !i->push(dx,dy))) goto fail; 
+  for(auto i : world->items)
+    if(i->solid && overlaps(i) && (!i->pushable || !i->push(dx,dy))) goto fail; 
+  if(world->hero->solid && overlaps(world->hero) && 
+    (!world->hero->pushable || !world->hero->push(dx,dy))) goto fail;
+  solid = s;
   return true;
+  fail:
+  x -= dx;
+  y -= dy;
+  solid = s;
+  return false;
 }
 
 bool Object::overlaps(Object *other) {
@@ -146,14 +164,6 @@ void Object::draw(Image *screen, int panX, int panY) {
   float s = getScale();
   screen->asblit(img, x - s*img->w/2 - panX, y - s*img->h/2 - panY, s);
 }
-
-// draw this object with an alternate sprite (maybe a damage sprite...)
-void Object::draw(Image *screen, int panX, int panY, Sprite *sprite) {
-  Image *img = sprite->getImage(world->currentResLevel, angle);
-  float s = sprite->scale[world->currentResLevel];
-  screen->asblit(img, x - s*img->w/2 - panX, y - s*img->h/2 - panY, s);
-}
-
 
 int Object::getAngle(int dx, int dy) {
   if(dx  < 0) {

@@ -14,9 +14,8 @@ LeftRightEnemy::~LeftRightEnemy() {}
 
 void LeftRightEnemy::action()
 {
-    // in the process of moving
-    if (x > x_min && x < x_max)
-      move(speed*direction, 0);
-    else
-      direction = direction * -1;
+  if(x <= x_min) push(speed*(direction=1), 0);
+  else if(x >= x_max) push(speed*(direction=-1), 0);
+//   else push(speed*direction, 0);
+  else if(!push(speed*direction, 0)) direction *= -1;
 }

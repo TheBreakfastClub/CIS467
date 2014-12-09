@@ -1,33 +1,27 @@
 #include "sprite.h"
 #include <iostream>
 
-Sprite::Sprite(const char *fileName, pixAlgo pixelator,
+Sprite::Sprite(Image *image, pixAlgo pixelator,
   int medCut, int lowCut, bool rotates)
 {
-  Image *image = loadImage(fileName);
-  if(!image) {
-    std::cout << "could not load image file: " << fileName << '\n';
-    angles = 0;
-    images = 0;
-    return;
-  }
-
   angles = rotates ? 8 : 1;
   images = new Image*[angles*3];
   scale[0] = lowCut;
   scale[1] = medCut;
   scale[2] = 1;
 
-  // rotate image
-  int rwidth = max(image->w, image->h)*2;
-  for(int a = 0; a < angles; a++) {
-    images[a*3 + 2] = new Image(rwidth, rwidth);
-    images[a*3 + 2]->clear();
-    images[a*3 + 2]->abrsblit(image, (rwidth-1.0)/2.0, (rwidth-1.0)/2.0, a*45.0, 1.0);
+  if(rotates) {
+    int rwidth = max(image->w, image->h)*2;
+    for(int a = 0; a < 8; a++) {
+      images[a*3 + 2] = new Image(rwidth, rwidth);
+      images[a*3 + 2]->clear();
+      images[a*3 + 2]->abrsblit(image, (rwidth-1.0)/2.0, (rwidth-1.0)/2.0, a*45.0, 1.0);
+    }
   }
-  
-  if(rotates) delete image;
-  else images[2] = image;
+  else {
+    images[2] = new Image(image->w, image->h);
+    images[2]->blit(image, 0, 0);
+  }
   
   // downsample image[s]
   for(int a = 0; a < angles; a++) {

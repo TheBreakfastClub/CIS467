@@ -10,7 +10,7 @@
 class GameWorld;
 
 class Object {
-  private:
+  protected:
     Sprite *sprite;
 
   public:
@@ -25,6 +25,7 @@ class Object {
     int angle;
     bool solid;
     bool pushable;
+    bool pushes;
     bool hit;
  
     Image* getImage();
@@ -37,8 +38,10 @@ class Object {
     bool fitsMap(int x, int y, int angle);
     bool moveTo(int x, int y);
     bool moveTo(int x, int y, int angle);
+    bool _move(int dx, int dy);
     bool move(int dx, int dy);
     bool push(int dx, int dy);
+    bool push(int dx, int dy, int r);
     bool overlaps(Object *other);
     bool overlaps(Object *other, int x, int y);
     bool overlaps(Object *other, int x, int y, int angle);

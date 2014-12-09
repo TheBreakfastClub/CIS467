@@ -12,7 +12,7 @@ class Sprite {
     Image **images;
 
   public:
-    Sprite(const char *fileName, pixAlgo pixelator = blend_average,
+    Sprite(Image *image, pixAlgo pixelator = blend_average,
       int medCut = 8, int lowCut = 16, bool rotates = false);
     ~Sprite();
   

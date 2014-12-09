@@ -55,7 +55,7 @@ Image* downsample(Image *src, int width, int height, u32 (*blend_func)(u32*, int
 }
 
 // For showing that a character/enemy/whatever has been damaged
-Image* redTint(Image *src,int amt)
+Image* redTint(Image *src)
 {
   Image *dest = new Image(src->w, src->h);
   for (int i = 0; i < src->w * src->h; i++)

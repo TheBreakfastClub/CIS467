@@ -184,30 +184,6 @@ bool GameUniverse::init(const Configurations &config) {
 
     }
 
-
-    // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
-//     UpDownEnemy *ude1 = new UpDownEnemy(50, 1, 25, 384, -100, false, 150, 0);
-//     if (!ude1->setSpriteImage("resources/updown2.png")) return false;
-    // UpDownEnemy *ude1 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
-//     UpDownEnemy *ude1 = new UpDownEnemy("resources/updown2.png", 384, -100, sublevels[Sublevel::SUGAR]);
-//     sublevels[Sublevel::SUGAR]->enemies.push_back(ude1);
-
-//     LeftRightEnemy *lre1 = new LeftRightEnemy(50, 3, 25, 1530, 128, false, 150, 0);
-//     if (!lre1->setSpriteImage("resources/leftright1.png")) return false;
-//     // LeftRightEnemy *lre1 = new LeftRightEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
-//     sublevels[Sublevel::SUGAR]->enemies.push_back(lre1);
-//
-//     // int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL, int dist=0, int tme=0
-//     UpDownEnemy *ude2 = new UpDownEnemy(50, 1, 25, 1672, 150, false, 150, 0);
-//     if (!ude2->setSpriteImage("resources/updownsingleR.png")) return false;
-//     // UpDownEnemy *ude2 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
-//     sublevels[Sublevel::SUGAR]->enemies.push_back(ude2);
-//
-//     UpDownEnemy *ude3 = new UpDownEnemy(50, 1, 25, 1736, 300, false, 150, 0);
-//     if (!ude3->setSpriteImage("resources/updownsingle.png")) return false;
-//     // UpDownEnemy *ude3 = new UpDownEnemy(50, 2, 25, 550, 250, false, NULL, 30, 0);
-//     sublevels[Sublevel::SUGAR]->enemies.push_back(ude3);
-
     // Initialize the items
     for(ItemDef i : config.items) {
         GameWorld *w = sublevels[i.world];
@@ -244,7 +220,9 @@ bool GameUniverse::init(const Configurations &config) {
             w->enemies.push_back(enemy);
         }
         else if (e.enemyType == LEFT_RIGHT) {
-            cout << "LeftRight range: " << e.range << endl;
+            LeftRightEnemy *enemy = new LeftRightEnemy(e.x, e.y, w, e.speed, e.range);
+            if (!enemy->loadImage(e.imgName.c_str(), w->medCut, w->lowCut)) return false;
+            w->enemies.push_back(enemy);
         }
 				else if (e.enemyType == DUMB_SENTRY) {
 						DumbSentry *enemy = new DumbSentry(e.x, e.y, w, e.speed, e.range);

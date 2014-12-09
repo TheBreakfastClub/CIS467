@@ -8,7 +8,7 @@ DumbSentry::DumbSentry(int x, int y, GameWorld *world, int speed, int range) : E
 	dx = 0;
 	dy = 0;
 	countdown = 0;
-  this->range = range;
+  this->range = range*range; // we use range^2 internally
 }  
 
 DumbSentry::~DumbSentry() {}
@@ -16,10 +16,9 @@ DumbSentry::~DumbSentry() {}
 void DumbSentry::action()
 {
 	// determine how far away we are from the hero
-//	float a = x - world->hero->x;
-//	float b = y - world->hero->y;
-//	float d2 = a*a + b*b; // distance squared
-//	float r = world->pixelator ? range : range * world->scale[world->currentResLevel];
+	float a = x - world->hero->x;
+	float b = y - world->hero->y;
+  if((a*a + b*b) > range) return;
 
 //	if (d2 <= r*r) { // if distance <= range
 

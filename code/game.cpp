@@ -47,15 +47,13 @@ void Game::update()
 	      universe.sublevels[i]->items.clear();
 	  }
 	  universe.hero.bag.clear(); //emptying out the hero's inventory
-	  //universe.
+
 	  //Change the level to the starting level
 	  universe.changeWorld(Sublevel::HUB, Resolution::LOW, universe.hero.x, universe.hero.y);
 	  if (!universe.init(config)) {
 	      std::cerr << "Error initializing game universe\n";
 	      exit(0);
 	  }
-	  graphics.message("YOU DIED!"); //trying to make the message last longer
-	  
 	  
 	}
 	
@@ -120,9 +118,9 @@ void Game::handle_input()
       enableSliding = false;
     }
    
-    // Get max height and width to pan to
-    int h = universe.currentWorld->h - 1;// - WINDOW_HEIGHT;
-    int w = universe.currentWorld->w - 1;// - WINDOW_WIDTH;
+//     // Get max height and width to pan to
+//     int h = universe.currentWorld->h - 1;// - WINDOW_HEIGHT;
+//     int w = universe.currentWorld->w - 1;// - WINDOW_WIDTH;
 
     // Grab reference to the keys
     u8 *keys = (u8*)SDL_GetKeyboardState(0);
@@ -269,11 +267,6 @@ void Game::handle_input()
     else maxMomPer = yMomPer;
     speed = (int) speed * maxMomPer;
 
-//     if(keys[SDL_SCANCODE_UP] && !keys[SDL_SCANCODE_DOWN]) dy = -1;
-//     if(keys[SDL_SCANCODE_DOWN] && !keys[SDL_SCANCODE_UP]) dy = 1;
-//     if(keys[SDL_SCANCODE_LEFT] && !keys[SDL_SCANCODE_RIGHT]) dx = -1;
-//     if(keys[SDL_SCANCODE_RIGHT] && !keys[SDL_SCANCODE_LEFT]) dx = 1;
-
     //process movements keys multiple times, depending on speed
     for(int i = 0; i < speed; ++i) {
         if(yMomentum < 0) dy = -1;
@@ -300,13 +293,12 @@ void Game::handle_input()
         }
     }
     
-    // Update movement
-//     universe.hero.x += dx;
-//     universe.hero.y += dy;
-//     if (universe.hero.y < 0) universe.hero.y = 0;
-//     else if (universe.hero.y > h) universe.hero.y = h;
-//     if (universe.hero.x < 0) universe.hero.x = 0;
-//     else if (universe.hero.x > w) universe.hero.x = w;
+    int w = universe.currentWorld->currentRes->mapImg->w * universe.currentWorld->scale[universe.currentRes()];
+    int h = universe.currentWorld->currentRes->mapImg->h * universe.currentWorld->scale[universe.currentRes()];
+    if (universe.hero.y < 0) universe.hero.y = 0;
+    else if (universe.hero.y > h) universe.hero.y = h;
+    if (universe.hero.x < 0) universe.hero.x = 0;
+    else if (universe.hero.x > w) universe.hero.x = w;
     
     if (!enableSliding) {
       xMomentum = yMomentum = 0;

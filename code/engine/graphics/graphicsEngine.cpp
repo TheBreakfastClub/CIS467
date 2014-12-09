@@ -175,11 +175,11 @@ void GraphicsEngine::drawGameUniverse(GameUniverse &universe) {
 }
 
 /**
- * Display status message for ~1s
+ * Display status message for ~10s
  *
  * @param text Message to display
  */
 void GraphicsEngine::message(const char *text) {
   strncpy(msg, text, 64);
-  msgTime = 60;
+  msgTime = 600;
 }
