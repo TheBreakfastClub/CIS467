@@ -21,6 +21,8 @@ Aside from the software development, creating this game involved many purely des
 
 ##Major Components
 
+#### Game Visuals and Mechanics
+
 In software development the difference between a game and almost any other type of software is the mechanics of user interaction. After the initial core idea of creating a game utilizing the changing of pixel resolution we had to come up with a "reason" to change the resolution. This reason must be compelling and entertaining to make it a success as a game to play.
 
 There were two areas that needed to be addressed to work out how to take the core idea and create a game around it. The first is how it will look. Not just what colors to use and what style it should be but since the resolution shifting has such a huge effect on this we needed to see how the visuals would change. Creating a quick and dirty prototype to see how images would change as the resolutions changed aided in understanding of what is not just possible but necessary. Because the visuals must be understood at high and low resolutions this prototype helped direct the visual style.
@@ -29,6 +31,7 @@ Working and playing with the prototype also lead into the second area we needed 
 
 Developing the game mechanics and user interaction has been an investigative process. Working with and massaging the core idea of shifting resolution has evolved the our ideas of how the game is played.
 
+#### AI Pathfinding
 
 Early on in the game's design the group decided that certain desirable features would only be implemented if time permitted. Once the core of the game matured enough so that group members could comfortably work on different aspects of the game in parallel, it was clear that some of those desirable features could be added. Pathfinding in particular seemed like a smart choice to spend some time on since we had already begun adding enemies.
 
@@ -36,7 +39,7 @@ To summarize our pathfinding system, it implements the A* search algorithm and s
 
 Without detailing exactly how the A* algorithm works, our implementation finds the optimal path from an enemy to the hero while taking into account only ground spaces and ignoring walls and spaces occupied by other enemies. Since the hero and enemies generally have the potential to move at any given point in time, the grid representation of the world must be rebuilt frequently in order to update their positions. The result of this frequent rebuilding of the grid is that the AI only needs to be concerned with moving towards the first grid space on the path to its destination. Having the AI take the entire path into account would be a waste of resources since the path is being continuously rebuilt.
 
-##Pixelation and collision detection
+#### Pixelation and collision detection
 
 Pixelation is implemented using some basic algorithms: point sampling, averaging, and most-used color. Each image is stored as a PNG file in it's highest resolution, and is downsampled at load time.
 
