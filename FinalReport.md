@@ -36,7 +36,7 @@ To summarize our pathfinding system, it implements the A* search algorithm and s
 
 Without detailing exactly how the A* algorithm works, our implementation finds the optimal path from an enemy to the hero while taking into account only ground spaces and ignoring walls and spaces occupied by other enemies. Since the hero and enemies generally have the potential to move at any given point in time, the grid representation of the world must be rebuilt frequently in order to update their positions. The result of this frequent rebuilding of the grid is that the AI only needs to be concerned with moving towards the first grid space on the path to its destination. Having the AI take the entire path into account would be a waste of resources since the path is being continuously rebuilt.
 
-#Pixelation and collision detection
+##Pixelation and collision detection
 
 Pixelation is implemented using some basic algorithms: point sampling, averaging, and most-used color. Each image is stored as a PNG file in it's highest resolution, and is downsampled at load time.
 
