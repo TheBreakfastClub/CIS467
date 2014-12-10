@@ -21,11 +21,22 @@ Aside from the software development, creating this game involved many purely des
 
 ##Body
 
+In software development the difference between a game and almost any other type of software is the mechanics of user interaction. After the initial core idea of creating a game utilizing the changing of pixel resolution we had to come up with a "reason" to change the resolution. This reason must be compelling and entertaining to make it a success as a game to play.
+
+There were two areas that needed to be addressed to work out how to take the core idea and create a game around it. The first is how it will look. Not just what colors to use and what style it should be but since the resolution shifting has such a huge effect on this we needed to see how the visuals would change. Creating a quick and dirty prototype to see how images would change as the resolutions changed aided in understanding of what is not just possible but necessary. Because the visuals must be understood at high and low resolutions this prototype helped direct the visual style.
+
+Working and playing with the prototype also lead into the second area we needed to address, how the game would play. Seeing how the images changed with the change in resolution helped inform not only the type of game we would make but how the feature would be utilized. The decision to make a puzzle type game was based on the fact that the change in resolution could force the user to think about how and when to change in order to reach a goal. And not to get into too much detail but with the shifting resolutions the game world and items change shape and to use this to reach the goal. It is the change in shape that solves the puzzles face by the user.
+
+Developing the game mechanics and user interaction has been an investigative process. Working with and massaging the core idea of shifting resolution has evolved the our ideas of how the game is played.
+
+
 Early on in the game's design the group decided that certain desirable features would only be implemented if time permitted. Once the core of the game matured enough so that group members could comfortably work on different aspects of the game in parallel, it was clear that some of those desirable features could be added. Pathfinding in particular seemed like a smart choice to spend some time on since we had already begun adding enemies.
 
-To summarize our pathfinding system, it implements the A* search algorithm and searches through a grid-like representation of the game world. The grid representation of the world is initially created by analyzing raw pixel data from the game world's collision layer, adding a grid entry for each pixel in the image. Each grid entry at this stage contains data that determines whether that point on the grid is a wall or traversable ground. To cut down on memory consumption and time needed to calculate a path, only the lowest resulution image is used. It then calculates the hero's location and the location of all other enemies and adds that information to the grid. So, each grid space represents a type that is either a wall, ground, hero, or an enemy. 
+To summarize our pathfinding system, it implements the A* search algorithm and searches through a grid-like representation of the game world. The grid representation of the world is initially created by analyzing raw pixel data from the game world's collision layer, adding a grid entry for each pixel in the image. Each grid entry at this stage contains data that determines whether that point on the grid is a wall or traversable ground. To cut down on memory consumption and time needed to calculate a path, only the lowest resolution image is used. It then calculates the hero's location and the location of all other enemies and adds that information to the grid. So, each grid space represents a type that is either a wall, ground, hero, or an enemy.
 
-Without detailing exactly how the A* algorithm works, our implementation finds the optimal path from an enemy to the hero while taking into account only ground spaces and ignoring walls and spaces occupied by other enemies. Since the hero and enemies generally have the potential to move at any given point in time, the grid representation of the world must be rebuilt frequently in order to update their positions. The result of this frequent rebuilding of the grid is that the AI only needs to be concerned with moving towards the first grid space on the path to its destination. Having the AI take the entire path into account would be a waste of resources since the path is being continuously rebuilt. 
+Without detailing exactly how the A* algorithm works, our implementation finds the optimal path from an enemy to the hero while taking into account only ground spaces and ignoring walls and spaces occupied by other enemies. Since the hero and enemies generally have the potential to move at any given point in time, the grid representation of the world must be rebuilt frequently in order to update their positions. The result of this frequent rebuilding of the grid is that the AI only needs to be concerned with moving towards the first grid space on the path to its destination. Having the AI take the entire path into account would be a waste of resources since the path is being continuously rebuilt.
+
+
 
 ##Ethical Reflection
 
@@ -51,7 +62,7 @@ Although it would be easy to create a program in an environment which every grou
 
 7.02 Assist colleagues in professional development.
 
-Each group member has done exceptionally well with reviewing each other's work to help ensure the best code possible. In addition to that, each group member was very open to critiques by other members as well. 
+Each group member has done exceptionally well with reviewing each other's work to help ensure the best code possible. In addition to that, each group member was very open to critiques by other members as well.
 
 7.05 Give a fair hearing to the opinions, concerns, or complaints of a colleague.
 
@@ -81,4 +92,3 @@ Although the semester has come to a close, we believe that our project can still
 Communication was a major factor to this project’s success; but wasn’t the only resource used to ensure our project’s success. We used a website called Slack which was used to create several personal chat rooms for the game engine, graphics, and design aspects. This allowed discussions to be organized and able to be referred back to. A GitHub repository was created as well with multiple branches to ensure that the master branch was always a properly working and presentable program. Finally, Trello was used to keep track of tasks needed for the current sprint.
 
 Grand Valley has done a great job of preparing us for this project, but didn’t fully prepare all group members for every aspect of the project. Most group members didn’t have any previous experience with creating a graphics engine which made the start of the project slightly difficult. If a graphics course was offered more frequently more group members could have had more knowledge on the subject. Finally, although group work is encouraged in most CS courses, very few have large group work such as 4 or more students. This caused some minor trouble as we tried to determine the best method to divide up work between so many people. Although it is easy to say that our group was fairly large at 6 people, many companies will have us working with much more than 5 other people.
-	
