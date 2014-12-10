@@ -2,21 +2,25 @@
 #include "leftRightEnemy.h"
 #include "../render/gfx.h"
 
-LeftRightEnemy::LeftRightEnemy(int x, int y, GameWorld *world, 
-  int speed, int touchDamage, int CrushDamage, int range) :
+LeftRightEnemy::LeftRightEnemy(int x, int y, GameWorld *world, int speed, 
+  int touchDamage, int crushDamage, int range) : 
   Enemy(x, y, world, true, false, true, speed, touchDamage, crushDamage)
 {
   direction = -1;
   x_min = x - range;
   x_max = x + range;
+  counter = range;
 }  
 
 LeftRightEnemy::~LeftRightEnemy() {}
 
 void LeftRightEnemy::action()
 {
-  if(x <= x_min) move(speed*(direction=1), 0);
-  else if(x >= x_max) move(speed*(direction=-1), 0);
-//   else move(speed*direction, 0);
-  else if(!move(speed*direction, 0)) direction *= -1;
+  move(direction*speed, 0);
+  counter -= speed;
+  if(counter <= 0) {
+    direction *= -1;
+    if(direction == 1) counter = x_max - x;
+    else counter = x - x_min;
+  }
 }

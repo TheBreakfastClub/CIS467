@@ -58,7 +58,7 @@ bool Character::setHitPoints(int hp) {
 }
 
 void Character::damage(int d) {
-  if(!hit && !invincible) {
+  if(d && !hit && !invincible) {
     hitPoints -= d;
     hit = true;
   }

@@ -205,7 +205,7 @@ void Configurations::readInEnemies(ifstream &file) {
 
     // Read in Enemy info
     getline(file, line);
-    while (line != "--") {
+    while (line.compare(0,2,"--")) {
         
         EnemyDef enemy;
 
@@ -245,7 +245,7 @@ void Configurations::readInPortals(ifstream &file) {
     getPath(file, portalImgName);
     getline(file, line); // Read in dividing line
     getline(file, line);
-    while (line != "--") {
+    while (line.compare(0,2,"--")) {
     
         PortalDef portal;
         portal.imgName = portalImgName;
@@ -309,7 +309,7 @@ void Configurations::readInItems(ifstream &file) {
     // Read in items
     string line;
     getline(file, line);
-    while (line != "--") {
+    while (line.compare(0,2,"--")) {
         ItemDef item;
 
         stringstream ss(line);

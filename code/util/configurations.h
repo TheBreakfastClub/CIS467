@@ -72,7 +72,7 @@ struct HeroDef {
     int hitPoints;
     bool invincible;
     string imgName; // name of image file
-    bool pushes = false;
+    bool pushes = true;
     int speed = 1;
 };
 

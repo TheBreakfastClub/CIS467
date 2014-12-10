@@ -23,4 +23,5 @@ public:
     int direction;
     int x_min;
     int x_max;
+    int counter;
 };

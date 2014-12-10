@@ -22,8 +22,8 @@ public:
   ~Enemy();
   
   bool move(int dx, int dy);
-//   bool push(int dx, int dy);
-
+  bool turnMove(int dx, int dy);
+  
   // for enemies who make use of pathfinding
   static int count;
   int id;
