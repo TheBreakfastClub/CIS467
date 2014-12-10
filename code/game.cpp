@@ -166,9 +166,9 @@ void Game::handle_input()
 		      
       			        universe.hero.bag[iterator]->obtainable = false;
 			            graphics.message("Milk Used");
-			            universe.hero.changeHitPoints(maxHitPoints/2);
+			            universe.hero.changeHitPoints(universe.hero.getHitPoints()+100);
 			            if (universe.hero.getHitPoints() > maxHitPoints)
-			                universe.hero.setHitPoints(maxHitPoints);
+			                universe.hero.setHitPoints(200);
 		            }
 		      }
 		  }
