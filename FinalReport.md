@@ -1,6 +1,7 @@
 # Final Report
 Prepared by All Members.
-presentation slides https://docs.google.com/presentation/d/1_RL628Q7AKfPrthr2YhT6hXWg_wZmLNL2prtIZd5oJU/edit?usp=sharing
+
+Presentation slides https://docs.google.com/presentation/d/1_RL628Q7AKfPrthr2YhT6hXWg_wZmLNL2prtIZd5oJU/edit?usp=sharing
 
 ##Abstract
 Video games have become an influential part of today’s culture.  These games are often a large collection of complex and interacting components, and, because of this, the process to develop them can be quite intensive.  Our group decided to build a video game from scratch, allowing us to gain the experience of juggling the many different processes involved in video game development.
