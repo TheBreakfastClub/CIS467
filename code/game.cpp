@@ -159,15 +159,14 @@ void Game::handle_input()
 		  if(universe.hero.getHitPoints() > 0)
 		  {
               int maxHitPoints = universe.hero.maxHitPoints;
-
 		      for(int iterator = 0; iterator < universe.hero.bag.size() && universe.hero.getHitPoints() != maxHitPoints; iterator++)
 		      {
 		            if((universe.hero.bag[iterator]->name.find("milk") != std::string::npos) && universe.hero.bag[iterator]->obtainable) {
 		      
       			        universe.hero.bag[iterator]->obtainable = false;
-			            graphics.message("Milk Used");
-			            universe.hero.changeHitPoints(universe.hero.getHitPoints()+100);
-			            if (universe.hero.getHitPoints() > maxHitPoints)
+			            graphics.message("Milk Used. No More milk to use.");
+			            universe.hero.setHitPoints(universe.hero.getHitPoints()+100);
+			            if (universe.hero.getHitPoints() > 200)
 			                universe.hero.setHitPoints(200);
 		            }
 		      }
