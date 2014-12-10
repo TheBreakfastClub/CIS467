@@ -301,4 +301,61 @@
 
 
 
+### Week 11: November 9 - November 15
+* Week Total: 6
 
+##### November 17, 2014
+* 1:00 PM - 4:30 PM
+    * Finishing up sugar level
+
+##### November 20, 2014
+* 9:00 PM - 11:30 PM
+    * integrating enemies in sugar level
+    * Creating LeftRight enemies based on up down.
+
+
+
+
+
+### Week 11: November 9 - November 15
+* Week Total: 3
+
+##### November 24, 2014
+* 3:00 PM - 6:00 PM
+    * Design work. Final touches on sugar
+
+
+
+
+
+### Week 11: November 9 - November 15
+* Week Total: 6
+
+
+##### November 30, 2014
+* 9:00 PM - 12:00 PM
+    * Design work. Final touches on sugar. I Think it might be done by now.
+
+##### December 2, 2014
+* 9:00 PM - 12:00 PM
+    * Working on the baking powder level even thoug I don't have the algorithm.
+    * Changed updown enemy to use new move process.
+
+
+
+
+
+### Week 11: November 9 - November 15
+* Week Total: 10.5
+
+##### December 9, 2014
+* 9:00 PM - 1:30 AM
+    * Working on the baking powder level now that I finaly have the algorithm.
+
+##### December 10, 2014
+* 10:00 PM - 4:00 AM
+    * Finishing up the baking powder level
+    * Working on the final report
+    * Getting final touches taken care of.
+
+- I know there was a lot more time that I did short stints in the last few weeks but I didn't track them.
