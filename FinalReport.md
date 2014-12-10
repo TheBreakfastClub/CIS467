@@ -21,6 +21,12 @@ Aside from the software development, creating this game involved many purely des
 
 ##Body
 
+Early on in the game's design the group decided that certain desirable features would only be implemented if time permitted. Once the core of the game matured enough so that group members could comfortably work on different aspects of the game in parallel, it was clear that some of those desirable features could be added. Pathfinding in particular seemed like a smart choice to spend some time on since we had already begun adding enemies.
+
+To summarize our pathfinding system, it implements the A* search algorithm and searches through a grid-like representation of the game world. The grid representation of the world is initially created by analyzing raw pixel data from the game world's collision layer, adding a grid entry for each pixel in the image. Each grid entry at this stage contains data that determines whether that point on the grid is a wall or traversable ground. To cut down on memory consumption and time needed to calculate a path, only the lowest resulution image is used. It then calculates the hero's location and the location of all other enemies and adds that information to the grid. So, each grid space represents a type that is either a wall, ground, hero, or an enemy. 
+
+Without detailing exactly how the A* algorithm works, our implementation finds the optimal path from an enemy to the hero while taking into account only ground spaces and ignoring walls and spaces occupied by other enemies. Since the hero and enemies generally have the potential to move at any given point in time, the grid representation of the world must be rebuilt frequently in order to update their positions. The result of this frequent rebuilding of the grid is that the AI only needs to be concerned with moving towards the first grid space on the path to its destination. Having the AI take the entire path into account would be a waste of resources since the path is being continuously rebuilt. 
+
 ##Ethical Reflection
 
 1.01 Accept full responsibility for their own work.
