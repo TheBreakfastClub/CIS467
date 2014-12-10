@@ -13,15 +13,34 @@ Description:	Defines the different types of enemies in
 
 int Enemy::count = 1;
 
-Enemy::Enemy(int x, int y, GameWorld *world, int speed) : Character(x, y, world, speed) {}
+Enemy::Enemy(int x, int y, GameWorld *world, bool solid, bool pushable, 
+  bool pushes, int speed, int touchDamage, int crushDamage) : 
+  Character(x, y, world, solid, pushable, pushes, speed) 
+{
+  this->touchDamage = touchDamage;
+  this->crushDamage = crushDamage;
+}
 
 Enemy::~Enemy() {}
 
-StaticEnemy::StaticEnemy(int x, int y, GameWorld *world) : Enemy(x, y, world) 
-{
-  solid = false;
-  speed = 0;
+// returns true if move is successful OR we have "crushed" the hero
+bool Enemy::move(int dx, int dy) {
+  if(overlaps(world->hero, x+dx, y+dy)) { // touching the hero
+    if(!pushes || Character::move(dx, dy)) {
+      std::cout << "touching " << touchDamage << "\n";
+      world->hero->damage(touchDamage);
+    }
+    else {
+      world->hero->damage(crushDamage);
+      std::cout << "crushing" << crushDamage << "\n";
+    }
+    return true;
+  }
+  else return Character::move(dx, dy);
 }
+
+StaticEnemy::StaticEnemy(int x, int y, GameWorld *world, int touchDamage) : 
+  Enemy(x, y, world, 0, false, false, false, touchDamage, 0) {}
 
 StaticEnemy::~StaticEnemy() {}
 

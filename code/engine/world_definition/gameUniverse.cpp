@@ -187,7 +187,7 @@ bool GameUniverse::init(const Configurations &config) {
     // Initialize the items
     for(ItemDef i : config.items) {
         GameWorld *w = sublevels[i.world];
-        Item *newItem = new Item(i.x, i.y, w, i.imgName);
+        Item *newItem = new Item(i.x, i.y, w, i.solid, i.pushable, i.imgName);
         if (!newItem->loadImage(i.imgName.c_str(), w->medCut, w->lowCut)) return false;
         w->items.push_back(newItem);
     }
@@ -204,28 +204,32 @@ bool GameUniverse::init(const Configurations &config) {
     for (EnemyDef e : config.enemies) {
         GameWorld *w = sublevels[e.world];
         if (e.enemyType == STATIC_ENEMY) {
-            StaticEnemy *enemy = new StaticEnemy(e.x, e.y, w);
+            StaticEnemy *enemy = new StaticEnemy(e.x, e.y, w, e.touchDamage);
             if (!enemy->loadImage(e.imgName.c_str(), w->medCut, w->lowCut)) return false;
             w->enemies.push_back(enemy);
         }
         else if (e.enemyType == AUTO_SENTRY) {
-            AutoSentry *enemy = new AutoSentry(e.x, e.y, w, e.speed);
+            AutoSentry *enemy = new AutoSentry(e.x, e.y, w, e.solid, e.pushable,
+              e.pushes, e.speed, e.touchDamage, e.crushDamage);
             if (!enemy->loadImage(e.imgName.c_str(), w->medCut, w->lowCut, true)) return false;
             enemy->pathfinder.set_grid(&(w->grid));
             w->enemies.push_back(enemy);
         }
         else if (e.enemyType == UP_DOWN) {
-            UpDownEnemy *enemy = new UpDownEnemy(e.x, e.y, w, e.speed, e.range);
+            UpDownEnemy *enemy = new UpDownEnemy(e.x, e.y, w, e.speed, 
+              e.touchDamage, e.crushDamage, e.range);
             if (!enemy->loadImage(e.imgName.c_str(), w->medCut, w->lowCut)) return false;
             w->enemies.push_back(enemy);
         }
         else if (e.enemyType == LEFT_RIGHT) {
-            LeftRightEnemy *enemy = new LeftRightEnemy(e.x, e.y, w, e.speed, e.range);
+            LeftRightEnemy *enemy = new LeftRightEnemy(e.x, e.y, w, e.speed, 
+              e.touchDamage, e.crushDamage, e.range);
             if (!enemy->loadImage(e.imgName.c_str(), w->medCut, w->lowCut)) return false;
             w->enemies.push_back(enemy);
         }
 				else if (e.enemyType == DUMB_SENTRY) {
-						DumbSentry *enemy = new DumbSentry(e.x, e.y, w, e.speed, e.range);
+						DumbSentry *enemy = new DumbSentry(e.x, e.y, w, e.solid, e.pushable, 
+              e.pushes, e.speed, e.touchDamage, e.crushDamage);
             if (!enemy->loadImage(e.imgName.c_str(), w->medCut, w->lowCut, true)) return false;
             w->enemies.push_back(enemy);
         }
@@ -239,6 +243,7 @@ bool GameUniverse::init(const Configurations &config) {
     hero.speed = config.hero.speed;
     hero.setHitPoints(config.hero.hitPoints);
     hero.invincible = config.hero.invincible;
+    hero.pushes = config.hero.pushes;
     if(!hero.loadImage(config.hero.imgName.c_str(), hero.world->medCut, hero.world->lowCut, true))
       return false;
     return true;

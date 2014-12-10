@@ -3,8 +3,10 @@
 #include <cstdlib> // just for exit() for testing
 
 
-AutoSentry::AutoSentry(int x, int y, GameWorld *world, int speed) : 
-  Enemy(x, y, world, speed), pathfinder(id), moves(0), active(false) {pushable = true;}
+AutoSentry::AutoSentry(int x, int y, GameWorld *world, bool solid, bool pushable,
+  bool pushes, int speed, int touchDamage, int crushDamage) : 
+  Enemy(x, y, world, solid, pushable, pushes, speed, touchDamage, crushDamage), 
+  pathfinder(id), moves(0), active(false) {}
 AutoSentry::~AutoSentry() {}
 
 void AutoSentry::action()
@@ -55,7 +57,7 @@ void AutoSentry::action()
             // Try to move
 //             pair<bool,bool> results = move(hero, map, res, x_inc, y_inc);
 //             stuck = !(results.second || results.first);
-            stuck = !push(x_inc, y_inc);
+            stuck = !move(x_inc, y_inc);
             // Try to get unstuck, if you are stuck
             if (stuck) {
 			    

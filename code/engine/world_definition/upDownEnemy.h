@@ -16,11 +16,13 @@ Description:    Defines the different types of enemies in
 class UpDownEnemy : public Enemy {
 public:
 
-    UpDownEnemy(int x, int y, GameWorld *world, int speed = 1, int range = 100);
+    UpDownEnemy(int x, int y, GameWorld *world, int speed, 
+      int touchDamage, int crushDamage, int range);
     ~UpDownEnemy();
     
     void action();
     int direction;
     int y_min;
     int y_max;
+    int counter;
 };

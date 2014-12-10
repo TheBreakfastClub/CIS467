@@ -7,11 +7,11 @@ Description:	    Defines the item attributes.
 
 #include "item.h"
 
-Item::Item(int x, int y, GameWorld *world, std::string name, bool obtainable) : Object(x,y, world)
+Item::Item(int x, int y, GameWorld *world, bool solid, bool pushable, 
+  std::string name, bool obtainable) : Object(x,y, world, solid, pushable)
 {
   this->name = name;
   this->obtainable = obtainable;
-  solid = false;
 }
 
 Item::~Item() {}

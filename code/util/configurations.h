@@ -36,6 +36,8 @@ struct ItemDef {
     int y;
     //int itemType; // Indicates the ID of the type of item this is
     string imgName; // name of image file
+    bool solid = false;
+    bool pushable = false;
 };
 
 struct PortalDef { 
@@ -52,20 +54,26 @@ struct EnemyDef {
     Sublevel world; // The world that this enemy should be placed into
     int x; // start location of the enemy
     int y;
-    int speed;
-    int range;
     EnemyType enemyType; // Indicates the ID of the type of enemy this is
     string imgName; // name of image file
+    int speed = 1;
+    bool solid = true;
+    bool pushable = true;
+    bool pushes = false;
+    int touchDamage = 10;
+    int crushDamage = 10;
+    int range = 100;
 };
 
 struct HeroDef {
     Sublevel world; // The world that this hero should be placed into
     int x; // start location of the hero
     int y;
-    int speed;
     int hitPoints;
     bool invincible;
     string imgName; // name of image file
+    bool pushes = false;
+    int speed = 1;
 };
 
 class Configurations {

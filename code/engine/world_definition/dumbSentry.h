@@ -15,11 +15,11 @@ Description:    Defines the different types of enemies in
 
 class DumbSentry : public Enemy {
 public:
-    DumbSentry(int x, int y, GameWorld *world, int speed = 1, int range = 300);
+    DumbSentry(int x, int y, GameWorld *world, bool solid, bool pushable, bool pushes, 
+      int speed, int touchDamage, int crushDamage);
     ~DumbSentry();
     
     void action();
-    int range;
 		int dx;
 		int dy;
 		int countdown;

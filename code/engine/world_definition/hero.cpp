@@ -21,7 +21,6 @@ Hero::Hero() {
 }
 
 Hero::~Hero() {
-
     while (!bag.empty()) {
         delete bag.back();
         bag.pop_back();

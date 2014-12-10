@@ -12,13 +12,17 @@ be in the world.
 class Character: public Object {
   public:
     Character();
-    Character(int x, int y, GameWorld *world, int speed);
+    Character(int x, int y, GameWorld *world, bool solid = true, 
+      bool pushable = false, bool pushes = false, int speed = 1);
     ~Character();
-        
+    
+    bool move(int dx, int dy);
+    
     /** Defines if a sprite is invincible **/
     bool invincible;
     /** Defines the speed of a sprite **/
     int speed;
+    bool hit;
 
     int maxHitPoints;
     bool pushes;

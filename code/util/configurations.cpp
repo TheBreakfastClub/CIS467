@@ -26,14 +26,14 @@ Configurations::Configurations() {}
  * -- // Dividing line between sections; must be "--"
  * For the Hero:
  *      world_id (the int for the enum describing the world from sublevel.h)
- *      x y
+ *      x y [pushes]
  *      speed  max_hit_points 
  *      invincible (put a 0 for not invincible, 1 for invincible)
  *      img_name
  * --
  * For each Item:
  *      world_id (the int for the enum describing the world from sublevel.h)
- *      x y
+ *      x y [solid pushable]
  *      img_name
  *      .
  * --
@@ -48,10 +48,9 @@ Configurations::Configurations() {}
  * --
  * For each enemy:
  *      world_id
- *      x y
+ *      x y [solid pushable pushes touchDamage crushDamage range]
  *      speed
  *      enemy_type // See engine/world_definition/enemyType for the index to give
- *      max min (only have this line for Up-Down and Left-Right enemies)
  *      imgName
  *      .
  * --
@@ -217,8 +216,8 @@ void Configurations::readInEnemies(ifstream &file) {
 
         getline(file, line);
         stringstream ss2(line);
-        ss2 >> enemy.x;
-        ss2 >> enemy.y;
+        ss2 >> enemy.x >> enemy.y >> enemy.solid >> enemy.pushable >> enemy.pushes >>
+          enemy.touchDamage >> enemy.crushDamage >> enemy.range;
 
         getline(file, line);
         stringstream ss3(line);
@@ -229,12 +228,6 @@ void Configurations::readInEnemies(ifstream &file) {
         ss4 >> type;
         enemy.enemyType = (EnemyType) type;
 
-        if (enemy.enemyType == UP_DOWN || enemy.enemyType == LEFT_RIGHT || enemy.enemyType == DUMB_SENTRY) {
-            getline(file, line);
-            stringstream ssM(line);
-            ssM >> enemy.range;
-        }
-        
         getPath(file, enemy.imgName);
         enemies.push_back(enemy);
 
@@ -296,8 +289,7 @@ void Configurations::readInHero(ifstream &file) {
     
     getline(file, line);
     stringstream ss2(line);
-    ss2 >> hero.x;
-    ss2 >> hero.y;
+    ss2 >> hero.x >> hero.y >> hero.pushes;
 
     getline(file, line);
     stringstream ss3(line);
@@ -327,8 +319,7 @@ void Configurations::readInItems(ifstream &file) {
 
         getline(file, line);
         stringstream ss2(line);
-        ss2 >> item.x;
-        ss2 >> item.y;
+        ss2 >> item.x >> item.y >> item.solid >> item.pushable;
 
         //getline(file, line);
         //stringstream ss3(line);

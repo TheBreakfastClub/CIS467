@@ -15,7 +15,7 @@ class Object {
 
   public:
     Object();
-    Object(int x, int y, GameWorld *world);
+    Object(int x, int y, GameWorld *world, bool solid = true, bool pushable = false);
     ~Object();
     bool loadImage(const char *fileName, int medCut = 8, int lowCut = 16, bool rotates = false);
   
@@ -25,9 +25,7 @@ class Object {
     int angle;
     bool solid;
     bool pushable;
-    bool pushes;
-    bool hit;
- 
+
     Image* getImage();
     Image* getImage(int angle);
     float getScale();
@@ -38,7 +36,6 @@ class Object {
     bool fitsMap(int x, int y, int angle);
     bool moveTo(int x, int y);
     bool moveTo(int x, int y, int angle);
-    bool _move(int dx, int dy);
     bool move(int dx, int dy);
     bool push(int dx, int dy);
     bool push(int dx, int dy, int r);
@@ -49,6 +46,5 @@ class Object {
     void draw(Image *screen, int panX, int panY, Sprite *sprite);
     bool turn(int dx, int dy);
     bool turnMove(int dx, int dy);
-    bool turnPush(int dx, int dy);
     bool within(float r, Object *o);
 };

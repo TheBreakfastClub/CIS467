@@ -7,20 +7,18 @@ Object::Object() {
   y = 0;
   world = 0;
   angle = 0;
-  hit = false;
   solid = true;
   pushable = false;
   sprite = 0;
 }
 
-Object::Object(int x, int y, GameWorld *world) {
+Object::Object(int x, int y, GameWorld *world, bool solid, bool pushable) {
   this->x = x + 16; // dirty hack
   this->y = y + 16; // dirty hack
   this->world = world;
   angle = 0;
-  hit = false;
-  solid = true;
-  pushable = false;
+  this->solid = solid;
+  this->pushable = pushable;
   sprite = 0;
 }
 
@@ -103,15 +101,6 @@ bool Object::turn(int dx, int dy) {
 bool Object::turnMove(int dx, int dy) {
   turn(dx, dy);
   return move(dx, dy);
-}
-
-bool Object::turnPush(int dx, int dy) {
-  turn(dx, dy);
-  return push(dx, dy);
-}
-
-bool Object::_move(int dx, int dy) {
-  return moveTo(x + dx, y + dy);
 }
 
 bool Object::move(int dx, int dy) {

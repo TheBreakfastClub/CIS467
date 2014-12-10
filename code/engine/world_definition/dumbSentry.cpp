@@ -3,35 +3,28 @@
 #include "gameWorld.h"
 #include <cstdlib>
 
-DumbSentry::DumbSentry(int x, int y, GameWorld *world, int speed, int range) : Enemy(x, y, world, speed)
+DumbSentry::DumbSentry(int x, int y, GameWorld *world, bool solid, bool pushable, 
+  bool pushes, int speed, int touchDamage, int crushDamage) : 
+  Enemy(x, y, world, solid, pushable, pushes, speed, touchDamage, crushDamage)
 {
 	dx = 0;
 	dy = 0;
 	countdown = 0;
-  this->range = range*range; // we use range^2 internally
 }  
 
 DumbSentry::~DumbSentry() {}
 
 void DumbSentry::action()
 {
-	// determine how far away we are from the hero
-	float a = x - world->hero->x;
-	float b = y - world->hero->y;
-  if((a*a + b*b) > range) return;
-
-//	if (d2 <= r*r) { // if distance <= range
-
 		if(countdown > 0) {
 			if(!(countdown & 7)) {
 				dx = ((rand() % 3) - 1)*speed;
 				dy = ((rand() % 3) - 1)*speed;
 			}
-			turnPush(dx, dy);
+			turnMove(dx, dy);
 			countdown--;
 		}
-//			if(turnPush(dx, dy)) countdown--;
-//			else countdown=0;
+
 		else {
 			dx = 0, dy = 0;
 			if (x > world->hero->x) dx = -speed;
@@ -40,7 +33,7 @@ void DumbSentry::action()
 			if (y > world->hero->y) dy = -speed;
 			else if (y < world->hero->y) dy = speed;
 	
-			if((dx || dy) && !turnPush(dx, dy)) countdown = 48;
+			if((dx || dy) && !turnMove(dx, dy)) countdown = 48;
 		}
 
 }

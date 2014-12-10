@@ -17,7 +17,8 @@ Description:	    Defines the item attributes.
 class Item: public Object {
 
     public:
-        Item(int x, int y, GameWorld *world, std::string name = "<item>", bool obtainable = true);
+        Item(int x, int y, GameWorld *world, bool solid = false, bool pushable = false, 
+          std::string name = "<item>", bool obtainable = true);
         ~Item();
         
         /** A short name describing the type of item (e.g. "eggs") */

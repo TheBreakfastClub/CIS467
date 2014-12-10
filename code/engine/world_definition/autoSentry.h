@@ -12,7 +12,8 @@
 
 class AutoSentry : public Enemy {
 public:
-  AutoSentry(int x, int y, GameWorld *world, int speed = 1);
+  AutoSentry(int x, int y, GameWorld *world, bool solid, bool pushable, bool pushes, 
+    int speed, int touchDamage, int crushDamage);
   ~AutoSentry();
   
   void action();

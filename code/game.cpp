@@ -277,19 +277,19 @@ void Game::handle_input()
         universe.hero.turn(dx,dy);
 
         if(dx && dy) {
-          if(!universe.hero.push(dx, dy))
-            if(!universe.hero.push(dx, 0))
-              universe.hero.push(0, dy);
+          if(!universe.hero.move(dx, dy))
+            if(!universe.hero.move(dx, 0))
+              universe.hero.move(0, dy);
         }
         else if(dx) {
-          if(!universe.hero.push(dx, 0))
-            if(!universe.hero.push(dx, -1))
-              universe.hero.push(dx, 1);
+          if(!universe.hero.move(dx, 0))
+            if(!universe.hero.move(dx, -1))
+              universe.hero.move(dx, 1);
         }
         else if(dy) {
-          if(!universe.hero.push(0, dy))
-            if(!universe.hero.push(-1, dy))
-              universe.hero.push(1, dy);
+          if(!universe.hero.move(0, dy))
+            if(!universe.hero.move(-1, dy))
+              universe.hero.move(1, dy);
         }
     }
     

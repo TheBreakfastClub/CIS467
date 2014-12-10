@@ -14,15 +14,24 @@ Character::Character()
   world = 0;
 }  
 
-Character::Character(int x, int y, GameWorld *world, int speed) : Object(x, y, world)
+Character::Character(int x, int y, GameWorld *world, bool solid, bool pushable, bool pushes, int speed) : 
+  Object(x, y, world, solid, pushable)
 {
   hitPoints = 100;
   maxHitPoints = 100;
+  this->pushes = pushes;
   this->speed = speed;
   invincible = false;
+  hit = false;
 }
 
 Character::~Character() {}
+
+bool Character::move(int dx, int dy) {
+  if(pushes) return push(dx, dy);
+  else return moveTo(x + dx, y + dy);
+}
+
 
 int Character::getHitPoints() {
     return hitPoints;

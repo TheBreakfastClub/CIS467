@@ -15,7 +15,8 @@ Description:    Defines the different types of enemies in
 
 class LeftRightEnemy : public Enemy {
 public:
-    LeftRightEnemy(int x, int y, GameWorld *world, int speed = 1, int range = 100);
+    LeftRightEnemy(int x, int y, GameWorld *world, int speed, 
+      int touchDamage, int crushDamage, int range);
     ~LeftRightEnemy();
     
     void action();
