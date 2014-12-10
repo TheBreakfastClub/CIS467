@@ -19,7 +19,7 @@ While designing the game, we decided that it would be beneficial to add enemies 
 
 Aside from the software development, creating this game involved many purely design decisions.  For example, we needed to decide how the user was to control the hero, what the different worlds would look like, how the hero would interact with the environment, and how the game was to be won or lost.  Because these decisions affected the way the user would play and interact with the game at such a fundamental level, we decided to have two of our members devoted to making these decisions and creating the images defining the game worlds.
 
-##Body
+##Major Components
 
 In software development the difference between a game and almost any other type of software is the mechanics of user interaction. After the initial core idea of creating a game utilizing the changing of pixel resolution we had to come up with a "reason" to change the resolution. This reason must be compelling and entertaining to make it a success as a game to play.
 
