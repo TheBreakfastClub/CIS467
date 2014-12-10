@@ -46,6 +46,7 @@ void Game::update()
 	      universe.sublevels[i]->portals.clear();
 	      universe.sublevels[i]->items.clear();
 	  }
+	  universe.hero.crystals.clear();
 	  universe.hero.bag.clear(); //emptying out the hero's inventory
 
 	  //Change the level to the starting level
