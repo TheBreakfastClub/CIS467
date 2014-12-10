@@ -80,6 +80,36 @@ void WorldGrid::build_grid()
 // Sets where "walls" (obstructions in the map) are located in the wall_grid. Only needs to be done once.
 void WorldGrid::build_wall_grid() 
 {
+	// Determines whether or not this is too tight of a space for an enemy to fit through
+	auto too_tight = [this](int x, int y) {
+		for (int y_inc = -1; y_inc < 2; y_inc++) {          // iterate through neighbors...
+			for (int x_inc = -1; x_inc < 2; x_inc++) {
+				if (x_inc == 0 && y_inc == 0) continue;
+				int new_x = x + x_inc, new_y = y + y_inc;
+				if (new_x >= 0 && new_x < this->width && new_y >= 0 && new_y < this->height) {
+
+					// Check if open space is surrounded either horizontally, vertically, or diagonally by walls
+					int index = new_y * this->width + new_x;
+					if (this->wall_grid[index].type == Celltype::WALL) { 
+						if (x_inc == -1 && y_inc == -1) { // check if upper left and lower right are walls
+							if (x+1 < this->width && y+1 < this->height && this->wall_grid[(y+1) * this->width + x+1].type == Celltype::WALL) return true;
+						}
+						if (x_inc == 0 && y_inc == -1) { // check vert walls
+							if (y+1 < this->width && this->wall_grid[(y+1) * this->width + x].type == Celltype::WALL) return true;
+						}
+						if (x_inc == 1 && y_inc == -1) { // check upper right andn lower left
+							if (y+1 < this->width && x-1 >= 0 && this->wall_grid[(y+1) * this->width + x-1].type == Celltype::WALL) return true;
+						}
+						if (x_inc == 1 && y_inc == 0) { // check horiz walls
+							if (x-1 >= 0 && this->wall_grid[y * this->width + x-1].type == Celltype::WALL) return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	};
+
 	// initialize all Cells here, but only setting types of wall and ground
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
@@ -87,7 +117,7 @@ void WorldGrid::build_wall_grid()
 			Uint32 alpha = map->pixels[index] >> 24;
 			if (alpha > 60) // wild guess on the alpha number here
 				wall_grid[index].type = Celltype::WALL;
-			else
+			else 
 				wall_grid[index].type = Celltype::GROUND;
 			wall_grid[index].x = x;
 			wall_grid[index].y = y;
@@ -95,6 +125,18 @@ void WorldGrid::build_wall_grid()
 			wall_grid[index].f_val = 0;
 			wall_grid[index].open = false;
 			wall_grid[index].parent = NULL;
+		}
+	}
+
+	// iterate again to fill in spaces that an enemy couldn't fit through
+	for (int y = 0; y < height; y++) {
+		for (int x = 0; x < width; x++) {
+			int index = y*width + x;
+			if (wall_grid[index].type == Celltype::GROUND) {
+				if (too_tight(x, y)) {
+					wall_grid[index].type = Celltype::WALL;
+				}
+			}
 		}
 	}
 }
