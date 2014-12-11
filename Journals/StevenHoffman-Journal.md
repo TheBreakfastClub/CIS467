@@ -2,9 +2,9 @@ Steven Hoffman
 =====================
 CIS 467: The Breakfast Club
 ----------------------------
-Journal Date: 11/19/2014   
-Journal Period - FROM: 8/25/2014 TO: 11/19/2014   
-Total hours worked this period: **133.03**   
+Journal Date: 12/10/2014   
+Journal Period - FROM: 8/25/2014 TO: 12/10/2014   
+Total hours worked this period: **159.07**   
 
 
 
@@ -425,7 +425,7 @@ Messaged group members and updated trello.
 Sent messages to group members.
 
 10:18 pm - 11:07 pm    
-Worked on merging engine branch with master. Also messeged group members.
+Worked on merging engine branch with master. Also messaged group members.
 
 
 #### Friday, 11/7/2014 (3.13 hours)
@@ -458,37 +458,37 @@ Met with Thomas to work out Mac Version.
 #### Wednesday, 11/12/2014 (2.92 hours)
 
 4:40 pm - 5:10 pm    
-Worked on pulling Cuts and Pixelation Algorithms from the config files.
+Worked on pulling Cuts and Pixilation Algorithms from the config files.
 
 5:20 pm - 5:45 pm    
 Brainstormed coding ideas and updated trello.
 
 10:03 pm - 0:03 am    
-Worked on pulling Pixelation Algorithms from the config files.
+Worked on pulling Pixilation Algorithms from the config files.
 
 
 #### Thursday, 11/13/2014 (2.80 hours)
 
 7:23 pm - 7:46 pm    
-Worked on pixelating the sprite image.
+Worked on pixilating the sprite image.
 
 9:34 pm - 9:45 pm    
-Worked on pixelating the sprite image.
+Worked on pixilating the sprite image.
 
 10:52 pm - 1:06 am    
-Worked on pixelating the sprite image.
+Worked on pixilating the sprite image.
 
 
 #### Friday, 11/14/2014 (3.03 hours)
 
 2:34 pm - 5:37 pm    
-Worked on pixelating the sprite image and met with team. Helped team members with various tasks.
+Worked on pixilating the sprite image and met with team. Helped team members with various tasks.
 
 
 #### Sunday, 11/16/2014 (2.27 hours)
 
 7:06 pm - 7:21 pm    
-Worked on Burndown Chart and added controls for easier pixelation.
+Worked on Burndown Chart and added controls for easier pixilation.
 
 8:45 pm - 10:01 pm    
 Read through and answered group messages. Also implemented portals being pulled from the config file and updated the config file.
@@ -510,5 +510,128 @@ Attended Class and helped give presentation for Sprint Report
 
 10:14 pm - 10:50 pm    
 Worked on Team Evaluations and updated journal.
+
+
+#### Thursday, 11/20/2014 (0.73 hours)
+
+3:03 pm - 3:47 pm    
+Made it so that items definitions are pulled from the config file.
+
+
+#### Friday, 11/21/2014 (0.78 hours)
+
+3:45 pm - 4:13 pm    
+Messaged group members and came up with a list of top priorities for the last sprint.
+
+11:14 pm - 11:33 pm    
+Messaged group members.
+
+
+#### Sunday, 11/23/2014 (0.07 hours)
+
+5:12 pm - 5:17 pm    
+Read group messages and responded to them.
+
+
+#### Monday, 11/24/2014 (2.05 hours)
+
+1:06 pm - 1:19 pm    
+Read through messages from group members and responded to them.
+
+1:40 pm - 3:00 pm    
+Met with Tyler and added code to implement slipperiness.
+
+5:00 pm - 5:30 pm    
+Met with Tyler and added code to implement slipperiness.
+
+
+#### Wednesday, 11/26/2014 (2.40 hours)
+
+2:53 pm - 5:18 pm    
+Worked on creating enemies that can push the hero.
+
+
+#### Friday, 11/28/2014 (1.70 hours)
+
+10:10 pm - 11:52 pm    
+Worked on creating enemies that can push the hero.
+
+
+#### Saturday, 11/29/2014 (0.25 hours)
+
+9:09 pm - 9:24 pm    
+Messaged group members.
+
+
+#### Sunday, 11/30/2014 (0.35 hours)
+
+3:18 pm - 3:28 pm    
+Messaged group members.
+
+3:29 pm - 3:41 pm    
+Tested new updates to code and made it so you can walk through enemies that don't push you.
+
+
+#### Monday, 12/1/2014 (3.55 hours)
+
+2:58 pm - 6:19 pm    
+Met with the group and discussed where the project should go in the next two weeks. Fixed bug in enemies pushing the hero. Determined next steps. Made the configuration file pull enemy data rather than placing enemies randomly. Created a StaticEnemy which doesn't move but can be used as a part of the environment that hurts the hero.
+
+6:50 pm - 7:02 pm    
+Added Updown and Leftright enemy specific items to the config file.
+
+
+#### Tuesday, 12/2/2014 (0.37 hours)
+
+0:33 am - 0:56 am    
+Reviewed code updates made by teammembers.
+
+
+#### Thursday, 12/4/2014 (2.98 hours)
+
+11:00 pm - 2:00 am    
+Reviewed path finding code and worked on merging back some lost features. Added invincibility and updated enemy moving stuff. Messaged group.
+
+
+#### Friday, 12/5/2014 (1.68 hours)
+
+12:00 noon - 12:52 noon    
+Talked with Tyler about direction of game and what we need to do.
+
+1:35 pm - 2:24 pm    
+Met with Colin to discuss path finding.
+
+
+#### Saturday, 12/6/2014 (3.10 hours)
+
+7:03 pm - 10:09 pm    
+Implemented Little-Big-World.
+
+
+#### Sunday, 12/7/2014 (1.07 hours)
+
+9:03 pm - 10:08 pm    
+CIS Exit Survey
+
+
+#### Tuesday, 12/9/2014 (3.25 hours)
+
+3:00 pm - 4:19 pm    
+Reviewed new code and messaged group members about it.
+
+4:19 pm - 6:15 pm    
+Worked on Final Report's Introduction and Abstract
+
+
+#### Wednesday, 12/10/2014 (1.58 hours)
+
+2:08 pm - 2:45 pm    
+Read through messages and responded to group. Also wrote Team Evaluation and sent to professor.
+
+4:00 pm - 4:25 pm    
+Gave final presentation.
+
+8:54 pm - 9:27 pm    
+Worked on merging current code into master. Also updated my Journal.
 
 
