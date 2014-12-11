@@ -14,12 +14,16 @@ Description:	Defines the hero attributes.
 #include <vector>
 
 class Hero: public Character{
+    private:
+        Sprite *hitSprite;
 
     public:
         Hero();
         ~Hero();
-
+        bool loadImage(const char *fileName, int medCut = 8, int lowCut = 16, bool rotates = false);
+        void draw(Image *screen, int panX, int panY);
         vector<Item*> bag;
+        vector<Item*> crystals;
 
         // Add here other properties that the hero of a single type should have
 };

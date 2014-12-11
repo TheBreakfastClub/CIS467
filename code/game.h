@@ -11,6 +11,8 @@ Description:    The main controller of the game.
 #include "engine/world_definition/gameUniverse.h"
 #include "engine/graphics/graphicsEngine.h"
 #include "util/clock.h"
+#include "util/configurations.h"
+#include "engine/world_definition/enemyType.h"
 
 class Game {
 
@@ -25,17 +27,26 @@ class Game {
 
         /* Utility */
         Clock clock;
- 
+
+        /* Holds the configurations */
+        Configurations config;
+
     public:
  
         Game();
 
-        int run();
-        void update();
-        void handle_input();
+	int xMomentum;
+	int yMomentum;
+	int maxXMomentum;
+	int maxYMomentum;
+	int nonButterMomentum;
+	int momentumIncrease;
+  int run();
+  void update();
+  void handle_input();
 
-        /* SDL graphics and asset management methods */
-        bool setup(const char *gameName, int width, int height);
-        void cleanup();
+  /* SDL graphics and asset management methods */
+  bool setup(const char *gameName, int width, int height, const char*, const char*);
+  void cleanup();
 };
 

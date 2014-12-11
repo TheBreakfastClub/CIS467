@@ -9,13 +9,57 @@ Description:	Defines the different types of sprites that can
 #include "character.h"
 #include "../render/gfx.h"
 
-Character::Character() : Sprite(0, 0, NULL), hit(false) {}
-
-Character::Character(int hp, int speed, int damage, int x, int y, bool inv, Image *charImg)
- : hitPoints(hp), speed(speed), attackDmg(damage), invincible(inv), hit(false), Sprite(x, y, charImg) 
+Character::Character() 
 {
-	if (charImg != NULL)
-		hitImage = Gfx::redTint(charImg, 50);
+  world = 0;
+}  
+
+Character::Character(int x, int y, GameWorld *world, bool solid, bool pushable, bool pushes, int speed) : 
+  Object(x, y, world, solid, pushable)
+{
+  hitPoints = 100;
+  maxHitPoints = 100;
+  this->pushes = pushes;
+  this->speed = speed;
+  invincible = false;
+  hit = false;
+}
+
+Character::~Character() {}
+
+bool Character::move(int dx, int dy) {
+  if(pushes) return push(dx, dy);
+  else return moveTo(x + dx, y + dy);
 }
 
 
+int Character::getHitPoints() {
+    return hitPoints;
+}
+
+/**
+ * Returns true if the hit points were successfully changed
+ */
+bool Character::changeHitPoints(int change) {
+    
+    if (!invincible || change > 0) {
+        hitPoints += change;
+        if (hitPoints > maxHitPoints) hitPoints = maxHitPoints;
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Returns true if the hit points were successfully changed
+ */
+bool Character::setHitPoints(int hp) {
+  return hitPoints = hp;
+}
+
+void Character::damage(int d) {
+  if(d && !hit && !invincible) {
+    hitPoints -= d;
+    hit = true;
+  }
+}

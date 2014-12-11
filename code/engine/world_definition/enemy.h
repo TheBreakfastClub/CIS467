@@ -9,21 +9,41 @@ Description:	Defines the different types of enemies in
 #pragma once
 
 #include <string>
-#include "sprite.h"
+#include <utility>
 #include "character.h"
 #include "hero.h"
+#include "resolution.h"
+#include "enemyType.h"
 
 class Enemy: public Character {
 public:
-	Enemy(int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL);
+  Enemy(int x, int y, GameWorld *world, bool solid=true, bool pushable=false, 
+    bool pushes=false, int speed = 1, int touchDamage = 10, int crushDamage = 10);
+  ~Enemy();
+  
+  bool move(int dx, int dy);
+  bool turnMove(int dx, int dy);
+  
+  // for enemies who make use of pathfinding
+  static int count;
+  int id;
+  
+  int touchDamage;
+  int crushDamage;
 
 	// subclasses of Enemy will define how to act
-	virtual void action(Hero &hero, Image *map) = 0;
-
+	virtual void action() = 0;
+//     pair<bool,bool> move (Hero &hero, Image *map, Resolution res, int xMov, int yMov);
+//     pair<bool,bool> moveCheckCollision(Hero &hero, Image *map, Resolution res, int dx, int dy);
+//     pair<bool,bool> moveCheckCollisionAndPush(Hero &hero, Image *map, Resolution res, int dx, int dy);
 };
 
-class AutoSentry : public Enemy {
+
+class StaticEnemy : public Enemy {
+
 public:
-	AutoSentry(int hp, int speed, int damage, int x=0, int y=0, bool inv=false, Image *char_img=NULL);
-	void action(Hero &hero, Image *map);
+  StaticEnemy(int x, int y, GameWorld *world, int touchDamage = 10);
+  ~StaticEnemy();
+
+  void action();
 };

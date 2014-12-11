@@ -17,7 +17,7 @@ Description:    Holds the data defining the world
  * Default constructor for the world. Must call GameWorld::init()
  * before using the GameWorld instance.
  */
-GameWorld::GameWorld(string world_name) : worldName(world_name), items(), enemies() 
+GameWorld::GameWorld(string world_name) : worldName(world_name), items(), portals(), enemies() 
 {
     highRes = NULL;
     medRes = NULL;
@@ -29,14 +29,19 @@ GameWorld::GameWorld(string world_name) : worldName(world_name), items(), enemie
 GameWorld::~GameWorld() {
 
     if (highRes) {
-        delete(highRes);
-        delete(medRes);
-        delete(lowRes);
+        if(medRes != highRes) delete medRes;
+        if(lowRes != highRes) delete lowRes;
+        delete highRes;
     }
 
     while (!items.empty()) {
         delete items.back();
         items.pop_back();
+    }
+    
+    while (!portals.empty()){
+	delete portals.back();
+	portals.pop_back();
     }
 }
 
@@ -48,10 +53,19 @@ GameWorld::~GameWorld() {
  * top_filename may be null
  *
  * This method must be called before any other GameWorld functions.
+ *
+ * @param medCut Cut the width & height of the high resolution by medCut to get the medium resolution
+ * @param lowCut Cut the width & height of the high resolution by lowCut to get the low resolution
  */
 bool GameWorld::init(const char *background_filename, 
-    const char *collision_filename, const char *top_filename) {
-    
+                    const char *collision_filename, 
+                    const char *top_filename, 
+                    Hero *hero,
+                    pixAlgo pixelator, 
+                    int medCut, 
+                    int lowCut) 
+{
+
     // Do nothing if already initialized
     if (highRes != NULL) return true;
 
@@ -75,70 +89,72 @@ bool GameWorld::init(const char *background_filename,
     // Get the width and height of the world
     w = highRes->w();
     h = highRes->h();
+    
+    // create high res image
+    highRes->createMapImage();
 
-    // Amount to divide the dimensions by for resolutions
-    int medCut = 8;
-    int lowCut = 16;
+    this->hero = hero;    
+    this->pixelator = pixelator;
 
-    // Initialize Medium Resolution
-    medRes = new GameMap();
-    medRes->setBackgroundLayer(Gfx::downsample(highRes->backgroundLayer, 
-        highRes->backgroundLayer->w/medCut, highRes->backgroundLayer->h/medCut, 
-        blend_average));
-    medRes->setCollisionLayer(Gfx::downsample(highRes->collisionLayer,
-        highRes->collisionLayer->w/medCut, highRes->collisionLayer->h/medCut,
-        blend_average));
-    if (top_filename) {
-        medRes->setTopLayer(Gfx::downsample(highRes->topLayer,
-            highRes->topLayer->w/medCut, highRes->topLayer->h/medCut, 
-            blend_average));
+    if(pixelator) {
+      // Initialize Medium Resolution
+      medRes = new GameMap();
+      medRes->setBackgroundLayer(downsample(highRes->backgroundLayer, 
+          highRes->backgroundLayer->w/medCut, highRes->backgroundLayer->h/medCut, 
+          pixelator));
+      medRes->setCollisionLayer(downsample(highRes->collisionLayer,
+          highRes->collisionLayer->w/medCut, highRes->collisionLayer->h/medCut,
+          pixelator));
+      if (top_filename) {
+          medRes->setTopLayer(downsample(highRes->topLayer,
+              highRes->topLayer->w/medCut, highRes->topLayer->h/medCut, 
+              pixelator));
+      }
+
+      // Initialize Low Resolution
+      lowRes = new GameMap();
+      lowRes->setBackgroundLayer(downsample(highRes->backgroundLayer,
+          highRes->backgroundLayer->w/lowCut, highRes->backgroundLayer->h/lowCut,
+          pixelator));
+      lowRes->setCollisionLayer(downsample(highRes->collisionLayer,
+          highRes->collisionLayer->w/lowCut, highRes->collisionLayer->h/lowCut,
+          pixelator));
+      if (top_filename) {
+          lowRes->setTopLayer(downsample(highRes->topLayer,
+              highRes->topLayer->w/lowCut, highRes->topLayer->h/lowCut, 
+              pixelator));
+      }
+
+      // downsampled map image
+      medRes->createMapImage();
+      lowRes->createMapImage();
     }
-
-    // Initialize Low Resolution
-    lowRes = new GameMap();
-    lowRes->setBackgroundLayer(Gfx::downsample(highRes->backgroundLayer,
-        highRes->backgroundLayer->w/lowCut, highRes->backgroundLayer->h/lowCut,
-        blend_average));
-    lowRes->setCollisionLayer(Gfx::downsample(highRes->collisionLayer,
-        highRes->collisionLayer->w/lowCut, highRes->collisionLayer->h/lowCut,
-        blend_average));
-    if (top_filename) {
-        lowRes->setTopLayer(Gfx::downsample(highRes->topLayer,
-            highRes->topLayer->w/lowCut, highRes->topLayer->h/lowCut, 
-            blend_average));
+    else {
+      lowRes = medRes = highRes;
     }
-
-    // Create map images
-    highRes->createMapImage(w,h);
-    medRes->createMapImage(w,h);
-    lowRes->createMapImage(w,h);
+    
+    // set scales
+    scale[0] = lowCut;
+    scale[1] = medCut;
+    scale[2] = 1;
+    
+    this->lowCut = lowCut;
+    this->medCut = medCut;
     
     // Set resolution
-    currentRes = lowRes;
-    currentResLevel = Resolution::LOW;
-
-    // create some random items 
-    for (int i = 0; i < 4; i++) {
-        
-        Item *newItem = new Item(rand() % w, rand() % h, Gfx::loadImage("resources/egg.png"), "hero");
-        
-        while (currentRes->mapImg->collision(newItem->spriteImage, newItem->x, newItem->y)) {
-            newItem->x = rand() % w;
-            newItem->y = rand() % h;
-        }
-
-        items.push_back(newItem);
+    if(pixelator) {
+      currentRes = lowRes;
+      currentResLevel = Resolution::LOW;
+    }
+    else {
+      currentRes = highRes;
+      currentResLevel = Resolution::HIGH;
     }
 
-    // create some enemies (hp, speed, damage, x, y)
-    for (int i = 0; i < 3; i++) {
-        AutoSentry *e = new AutoSentry(50, 2, 25, rand() % w, rand() % h);
-        while (currentRes->mapImg->collision(e->spriteImage, e->x, e->y)) {
-            e->x = rand() % w;
-            e->y = rand() % h;
-        }
-        enemies.push_back(e);
-    }
+    // initialize WorldGrid and set initial state
+    grid.init(lowRes->collisionLayer, hero, &enemies, lowCut);
+    grid.build_wall_grid();
+    grid.build_grid();
 
     return true;
 }
@@ -149,15 +165,17 @@ bool GameWorld::init(const char *background_filename,
  */
 void GameWorld::next_resolution()
 {
+  int numCrystals = hero->crystals.size();
 	switch (currentResLevel) {
-		case Resolution::LOW:
-			currentResLevel = Resolution::MED; 
-            break;
+      case Resolution::LOW:
+			if(numCrystals>=1)
+        set_resolution(Resolution::MED); 
+      break;
 		case Resolution::MED:
-			currentResLevel = Resolution::HIGH; 
-            break;
+			if(numCrystals>=2)
+        set_resolution(Resolution::HIGH);
+      break;
 	}
-	_set_current_res();
 }
 
 /**
@@ -168,13 +186,12 @@ void GameWorld::prev_resolution()
 {
 	switch (currentResLevel) {
 		case Resolution::MED:
-			currentResLevel = Resolution::LOW; 
-            break;
+			set_resolution(Resolution::LOW); 
+      break;
 		case Resolution::HIGH:
-			currentResLevel = Resolution::MED; 
-            break;
+			set_resolution(Resolution::MED);
+      break;
 	}
-	_set_current_res();
 }
 
 /**
@@ -182,8 +199,25 @@ void GameWorld::prev_resolution()
  * passed in.
  */
 void GameWorld::set_resolution(Resolution res) {
-    currentResLevel = res;
-    _set_current_res();
+  if(!pixelator) { // little big mode, need to shuffle things
+    float ratio = scale[res]/scale[currentResLevel];
+    for(auto i = items.begin(); i != items.end(); ++i) {
+      (*i)->x *= ratio;
+      (*i)->y *= ratio;
+    }
+    for(auto i = portals.begin(); i != portals.end(); ++i) {
+      (*i)->x *= ratio;
+      (*i)->y *= ratio;
+    }
+    for(auto i = enemies.begin(); i != enemies.end(); ++i) {
+      (*i)->x *= ratio;
+      (*i)->y *= ratio;
+    }
+    hero->x *= ratio;
+    hero->y *= ratio;
+  }
+  currentResLevel = res;
+  _set_current_res();
 }
 
 /**
@@ -204,4 +238,3 @@ void GameWorld::_set_current_res()
             break;
 	}
 }
-
