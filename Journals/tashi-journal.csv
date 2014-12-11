@@ -28,4 +28,22 @@ Team meeting,10/03/2014,15:00,18:00,03:00
 read siggraph'84 paper on image compositing by Thomas Porter and Tom Duff,10/04/2014,18:00,18:42,00:42
 "finished prototype 2: rewrote gfx routines for speed, clipping, switched to premultiplied alpha, C++ stuff",10/05/2014,15:11,04:42,13:31
 "Update files on GitHub, journal, and sprint report",10/06/2014,04:42,05:12,00:30
-Total time:,,,,120:31
+Presentation 1,10/06/2014,16:30,17:00,00:30
+Team meeting,10/10/2014,15:00,17:00,02:00
+Worked on graphics engine: rotation and triangles,10/10/2014,18:00,23:00,05:00
+Worked on graphics engine: rotation and triangles,10/11/2014,15:00,20:32,05:32
+Helped Steven write API documentation,10/13/2014,17:00,18:30,01:30
+Team meeting,10/17/2014,15:00,17:00,02:00
+Debugged some graphics compatibility issues with Steven,10/17/2014,19:30,00:30,05:00
+Wrote some graphics interoperability code,10/18/2014,00:30,04:30,04:00
+Team meeting,10/24/2014,15:00,17:00,02:00
+Tweaked game engine: collision detection,10/29/2014,16:00,16:30,00:30
+Presentation 2,10/29/2014,16:30,17:00,00:30
+Team meeting,10/31/2014,15:00,17:00,02:00
+Team meeting,11/07/2014,15:00,17:00,02:00
+Restructure graphics engine,11/13/2014,18:00,22:00,04:00
+Add more scaling routines to graphics engine,11/13/2014,23:30,06:42,07:12
+Team meeting,11/14/2014,15:00,17:00,02:00
+Integrated graphics engine changes with game engine,11/14/2014,17:00,20:30,03:30
+Presentation 3,11/17/2014,17:30,17:48,00:18
+Total,,,,170:03
