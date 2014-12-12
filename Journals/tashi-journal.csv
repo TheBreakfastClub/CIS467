@@ -46,4 +46,13 @@ Add more scaling routines to graphics engine,11/13/2014,23:30,06:42,07:12
 Team meeting,11/14/2014,15:00,17:00,02:00
 Integrated graphics engine changes with game engine,11/14/2014,17:00,20:30,03:30
 Presentation 3,11/17/2014,17:30,17:48,00:18
-Total,,,,170:03
+Worked on collision with realtime scaling,11/20/2014,15:30,18:00,02:30
+Team meeting,11/21/2014,15:00,17:00,02:00
+"Added bilinear filtering routines to Image class, added path prefix to configuration parser",11/30/2014,15:00,18:30,03:30
+Little-big world TEST,12/01/2014,17:36,21:13,03:37
+"Onscreen status messages, add path prefix to configuration parser",12/02/2014,12:31,12:51,00:20
+Develop little-bigworld branch,12/05/2014,07:00,19:00,12:00
+"Scrap little-bigworld branch, develop rotation branch",12/06/2014,00:00,12:00,36:00
+"Fix enemy collision code in rotation branch, created dumb sentry for little-big world",12/08/2014,16:00,20:12,04:12
+Tweak config file and corresponding parser,12/09/2014,12:00,15:12,03:12
+Total,,,,237:24
