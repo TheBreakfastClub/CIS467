@@ -1,9 +1,9 @@
 /*********************************************************
-File Name:	    enemy.cpp
-Author:		    The Breakfast Club
-Creation Date:  09-25-2014
-Description:	Defines the different types of enemies in
-		the world.
+File Name:	   enemy.cpp
+Author:		     The Breakfast Club
+Creation Date: 09-25-2014
+Description:	 Defines the different types of enemies in
+               the world.
 ************************************************************/
 
 #include "enemy.h"
@@ -24,11 +24,12 @@ Enemy::Enemy(int x, int y, GameWorld *world, bool solid, bool pushable,
 Enemy::~Enemy() {}
 
 bool Enemy::move(int dx, int dy) {
-  bool touches = overlaps(world->hero, x+dx, y+dy);
+  bool touches = overlaps(world->hero, x + dx, y + dy);
   bool moved = Character::move(dx, dy);
   if(touches) {
     if(moved || !pushes) world->hero->damage(touchDamage);
-    else world->hero->damage(crushDamage);
+    else if(!world->hero->fits(world->hero->x + dx, world->hero->y + dy)) 
+      world->hero->damage(crushDamage);
   }
   return moved;
 }
